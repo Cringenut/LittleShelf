@@ -1,10 +1,11 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GroceriesListActivity extends AppCompatActivity {
