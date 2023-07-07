@@ -3,17 +3,19 @@ package com.example.littleshelf;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 public class GroceriesListFragment extends Fragment {
 
-    ListView lv;
+    RecyclerView lv;
 
     SearchView searchView;
     ArrayAdapter<String> adapter;
@@ -29,9 +31,7 @@ public class GroceriesListFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_groceries_list, container, false);
-        lv = (ListView) view.findViewById(R.id.ListView);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
-        lv.setAdapter(adapter);
+        lv = (RecyclerView) view.findViewById(R.id.ListView);
         return view;
     }
 }
