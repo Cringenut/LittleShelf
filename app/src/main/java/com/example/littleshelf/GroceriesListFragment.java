@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -16,7 +17,7 @@ public class GroceriesListFragment extends Fragment {
     ListView lv;
 
     SearchView searchView;
-    ArrayAdapter<String> adapter;
+    BaseAdapter adapter;
     String[] data = {"item1", "item2", "item3"};
 
     public GroceriesListFragment() {
@@ -30,7 +31,7 @@ public class GroceriesListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_groceries_list, container, false);
         lv = (ListView) view.findViewById(R.id.ListView);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
+        //adapter = new GrociesListViewAdapter<String>();
         lv.setAdapter(adapter);
         return view;
     }
