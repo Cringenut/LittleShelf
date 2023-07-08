@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/ListView"
-        android:name="com.example.littleshelf.GroceriesListFragment"
+        android:name="com.example.littleshelf.ListViewFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
