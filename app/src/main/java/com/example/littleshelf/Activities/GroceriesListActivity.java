@@ -61,19 +61,14 @@ public class GroceriesListActivity extends AppCompatActivity {
         listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);
         listView.setAdapter(groceriesListViewAdapter);
 
+        Intent addItemIntent = new Intent(this, AddGroceryItemActivity.class);
+
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.buttonAdd);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                arrayList.add(new GroceryItem("Cheese"));
-                listView.invalidateViews();
-
-                SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(arrayList);
-                prefsEditor.putString("ArrayList", json);
-                prefsEditor.apply();
+                startActivity(addItemIntent);
+                finish();
             }
         });
 
