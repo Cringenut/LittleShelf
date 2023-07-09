@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.littleshelf.GroceriesListViewAdapter;
-import com.example.littleshelf.GroceryItem;
+import com.example.littleshelf.items.GroceryItem;
 import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -25,7 +24,7 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         loadNavMenu();
 
-        listView = findViewById(R.id.ListView);
+        //listView = findViewById(R.id.ListView);
 
         ArrayList<GroceryItem> arrayList = new ArrayList<>();
 
@@ -35,6 +34,7 @@ public class GroceriesListActivity extends AppCompatActivity {
         arrayList.add(new GroceryItem());
 
         GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, arrayList);
+        listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);
         listView.setAdapter(groceriesListViewAdapter);
 
     }
