@@ -28,10 +28,10 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         ArrayList<GroceryItem> arrayList = new ArrayList<>();
 
-        arrayList.add(new GroceryItem());
-        arrayList.add(new GroceryItem());
-        arrayList.add(new GroceryItem());
-        arrayList.add(new GroceryItem());
+        arrayList.add(new GroceryItem("Cheese"));
+        arrayList.add(new GroceryItem("Banana"));
+        arrayList.add(new GroceryItem("Water"));
+        arrayList.add(new GroceryItem("Ham"));
 
         GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, arrayList);
         listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);

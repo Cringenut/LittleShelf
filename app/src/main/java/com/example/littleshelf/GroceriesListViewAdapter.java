@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,11 +18,13 @@ public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
 
     private Context context;
     private int resource;
+    private ArrayList<GroceryItem> objects;
 
     public GroceriesListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
+        this.objects = objects;
     }
 
     @NonNull
@@ -29,6 +32,8 @@ public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = layoutInflater.inflate(resource, parent, false);
+        TextView textView = (TextView) convertView.findViewById(R.id.textView);
+        textView.setText(objects.get(position).getName());
         return convertView;
     }
 }
