@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -65,6 +66,21 @@ public class GroceriesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 arrayList.add(new GroceryItem("Cheese"));
+                listView.invalidateViews();
+
+                SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(arrayList);
+                prefsEditor.putString("ArrayList", json);
+                prefsEditor.apply();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                arrayList.remove(position);
                 listView.invalidateViews();
 
                 SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
