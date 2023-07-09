@@ -4,36 +4,30 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
-public class GroceriesListViewAdapter extends BaseAdapter {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-    Context context;
-    LayoutInflater inflater;
-    String[] testList;
+import java.util.ArrayList;
 
-    GroceriesListViewAdapter(Context ctx) {
-        this.context = ctx;
-        this.testList = new String[]{"item-1", "item-2", "item-3"};
-        inflater = LayoutInflater.from(ctx);
-    }
-    @Override
-    public int getCount() {
-        return testList.length;
-    }
+public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
 
-    @Override
-    public Object getItem(int position) {
-        return null;
+    private Context context;
+    private int resource;
+
+    public GroceriesListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
+        super(context, resource, objects);
+        this.context = context;
+        this.resource = resource;
     }
 
+    @NonNull
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = layoutInflater.inflate(resource, parent, false);
+        return convertView;
     }
 }

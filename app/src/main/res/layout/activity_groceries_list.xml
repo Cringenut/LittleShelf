@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Activities.GroceriesListActivity">
 
-    <fragment
+    <ListView
         android:id="@+id/ListView"
-        android:name="com.example.littleshelf.ListViewFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
