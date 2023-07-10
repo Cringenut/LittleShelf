@@ -30,13 +30,6 @@ public class AddGroceryItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-
-
-
-
-
-
-
         /*setContentView(R.layout.activity_add_grocery_item);
 
         Gson gson = new GsonBuilder().registerTypeAdapter(ArrayList.class, new JsonDeserializer<ArrayList>() {

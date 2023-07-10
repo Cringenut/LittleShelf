@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.littleshelf.GroceriesListFileManager;
 import com.example.littleshelf.GroceriesListViewAdapter;
 import com.example.littleshelf.items.GroceryItem;
 import com.example.littleshelf.R;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 public class GroceriesListActivity extends AppCompatActivity {
 
     private ListView listView;
+    GroceriesListFileManager groceriesListFileManager = (GroceriesListFileManager)getApplication();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,35 +54,13 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         loadNavMenu();
 
-        Gson gson = new GsonBuilder().registerTypeAdapter(ArrayList.class, new JsonDeserializer<ArrayList>() {
-                    @Override
-                    public ArrayList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                        ArrayList list = new ArrayList();
-                        JsonArray jsonArray = json.getAsJsonArray();
-
-                        for (JsonElement element : jsonArray) {
-                            // Deserialize each element and add it to the list
-                            Object obj = context.deserialize(element, GroceryItem.class);
-                            list.add(obj);
-                        }
-
-                        return list;
-                    }
-                })
-                .create();
-        String json = getPreferences(MODE_PRIVATE).getString("ArrayList", "");
-        ArrayList<GroceryItem> arrayList = gson.fromJson(json, ArrayList.class);
-
-
-        GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, arrayList);
+        GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, groceriesListFileManager.getGroceryItemsArrayList());
         listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);
         listView.setAdapter(groceriesListViewAdapter);
 
 
-        Log.i("json", json.toString());
         Intent addItemIntent = new Intent(this, AddGroceryItemActivity.class);
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.buttonAdd);
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +73,13 @@ public class GroceriesListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                arrayList.remove(position);
+                groceriesListFileManager.getGroceryItemsArrayList().remove(position);
                 listView.invalidateViews();
 
                 SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
                 Gson gson = new Gson();
-                String json = gson.toJson(arrayList);
+                String json = gson.toJson(groceriesListFileManager.getGroceryItemsArrayList());
                 prefsEditor.putString("ArrayList", json);
                 prefsEditor.apply();
             }
