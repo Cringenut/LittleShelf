@@ -72,15 +72,8 @@ public class GroceriesListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                groceriesListFileManager.getGroceryItemsArrayList().remove(position);
+                groceriesListFileManager.removeItemFromGroceryItemsArrayList(position);
                 listView.invalidateViews();
-
-                SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(groceriesListFileManager.getGroceryItemsArrayList());
-                prefsEditor.putString("ArrayList", json);
-                prefsEditor.apply();
             }
         });
     }
