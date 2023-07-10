@@ -44,9 +44,7 @@ import java.util.ArrayList;
 
 
 public class GroceriesListActivity extends AppCompatActivity {
-
     private ListView listView;
-    GroceriesListFileManager groceriesListFileManager = (GroceriesListFileManager)getApplication();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +52,7 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         loadNavMenu();
 
+        GroceriesListFileManager groceriesListFileManager = (GroceriesListFileManager)getApplicationContext();
         GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, groceriesListFileManager.getGroceryItemsArrayList());
         listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);
         listView.setAdapter(groceriesListViewAdapter);

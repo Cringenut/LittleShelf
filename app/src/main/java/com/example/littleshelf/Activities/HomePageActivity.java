@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.littleshelf.GroceriesListFileManager;
 import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,6 +17,9 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         loadNavMenu();
+
+        GroceriesListFileManager groceriesListFileManager = (GroceriesListFileManager)getApplicationContext();
+        Log.e("ListManager", groceriesListFileManager.getGroceryItemsArrayList().get(0).getName());
     }
     private void loadNavMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
