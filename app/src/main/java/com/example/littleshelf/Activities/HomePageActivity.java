@@ -4,13 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.littleshelf.DataBaseHelper;
-import com.example.littleshelf.GroceriesListFileManager;
 import com.example.littleshelf.R;
-import com.example.littleshelf.items.GroceryItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -20,8 +16,6 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         loadNavMenu();
-
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(HomePageActivity.this);
 
         //boolean success = dataBaseHelper.addOne(new GroceryItem(-1, "Cheese"));
         //Toast.makeText(HomePageActivity.this, "Success = " + success, Toast.LENGTH_LONG).show();
