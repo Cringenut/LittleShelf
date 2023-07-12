@@ -16,6 +16,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String ITEM_TABLE = "ITEM_TABLE";
+    public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
 
     public DataBaseHelper(@Nullable Context context) {
@@ -24,7 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ITEM_NAME + " TEXT)";
+        String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ITEM_NAME + " TEXT)";
 
         db.execSQL(createTableStatement);
     }
@@ -40,9 +41,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
 
-        db.insert(ITEM_TABLE, null, cv);
+        long insert = db.insert(ITEM_TABLE, null, cv);
+        return insert != -1;
+    }
 
-        return true;
+    public boolean deleteOne(GroceryItem groceryItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + ITEM_TABLE + " WHERE " + COLUMN_ID + " = " + groceryItem.getId();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        return cursor.moveToFirst();
     }
 
     public List<GroceryItem> getAllItems() {
@@ -64,7 +73,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         else {
-
+            return returnList;
         }
 
         cursor.close();

@@ -16,9 +16,6 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         loadNavMenu();
-
-        //boolean success = dataBaseHelper.addOne(new GroceryItem(-1, "Cheese"));
-        //Toast.makeText(HomePageActivity.this, "Success = " + success, Toast.LENGTH_LONG).show();
     }
     private void loadNavMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

@@ -6,14 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.littleshelf.DataBaseHelper;
 import com.example.littleshelf.GroceriesListViewAdapter;
 import com.example.littleshelf.R;
+import com.example.littleshelf.items.GroceryItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 
 public class GroceriesListActivity extends AppCompatActivity {
@@ -27,7 +31,32 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
 
-        Toast.makeText(GroceriesListActivity.this, dataBaseHelper.getAllItems().toString(), Toast.LENGTH_LONG).show();
+        listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);
+        showGroceriesItemsOnListView(dataBaseHelper);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GroceryItem clickedGroceryItem = (GroceryItem) parent.getItemAtPosition(position);
+                dataBaseHelper.deleteOne(clickedGroceryItem);
+                showGroceriesItemsOnListView(dataBaseHelper);
+            }
+        });
+
+        ((FloatingActionButton) findViewById(R.id.buttonCheese)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataBaseHelper.addOne(new GroceryItem(-1, "Cheese"));
+                showGroceriesItemsOnListView(dataBaseHelper);
+            }
+        });
+    }
+
+    private void showGroceriesItemsOnListView(DataBaseHelper dataBaseHelper) {
+        if (listView != null) {
+            GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, (ArrayList<GroceryItem>) dataBaseHelper.getAllItems());
+            listView.setAdapter(groceriesListViewAdapter);
+        }
     }
     private void loadNavMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
