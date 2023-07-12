@@ -31,7 +31,7 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
 
-        listView = getSupportFragmentManager().findFragmentById(R.id.ListView).getView().findViewById(R.id.idListView);
+        listView = getSupportFragmentManager().findFragmentById(R.id.listView).getView().findViewById(R.id.idListView);
         showGroceriesItemsOnListView(dataBaseHelper);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,8 +46,7 @@ public class GroceriesListActivity extends AppCompatActivity {
         ((FloatingActionButton) findViewById(R.id.buttonCheese)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataBaseHelper.addOne(new GroceryItem(-1, "Cheese"));
-                showGroceriesItemsOnListView(dataBaseHelper);
+
             }
         });
     }

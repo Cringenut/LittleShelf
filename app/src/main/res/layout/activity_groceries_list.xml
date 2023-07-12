@@ -7,17 +7,29 @@
     tools:context=".Activities.GroceriesListActivity">
 
     <fragment
-        android:id="@+id/ListView"
+        android:id="@+id/listView"
         android:name="com.example.littleshelf.GroceriesListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         tools:layout_editor_absoluteX="0dp" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/addItem"
+        android:name="com.example.littleshelf.AddGroceryItemFragment"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/ListView"
+        app:layout_constraintStart_toStartOf="@+id/listView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.98" />
 
