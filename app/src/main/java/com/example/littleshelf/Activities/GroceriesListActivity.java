@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.littleshelf.DataBaseHelper;
 import com.example.littleshelf.GroceriesListViewAdapter;
@@ -25,6 +26,8 @@ public class GroceriesListActivity extends AppCompatActivity {
         loadNavMenu();
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
+
+        Toast.makeText(GroceriesListActivity.this, dataBaseHelper.getAllItems().toString(), Toast.LENGTH_LONG).show();
     }
     private void loadNavMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

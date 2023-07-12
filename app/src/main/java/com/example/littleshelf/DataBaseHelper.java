@@ -2,12 +2,16 @@ package com.example.littleshelf;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 import com.example.littleshelf.items.GroceryItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -39,5 +43,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(ITEM_TABLE, null, cv);
 
         return true;
+    }
+
+    public List<GroceryItem> getAllItems() {
+
+        List<GroceryItem> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + ITEM_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int itemID = cursor.getInt(0);
+                String itemName = cursor.getString(1);
+
+                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName);
+                returnList.add(newGroceryItem);
+            } while (cursor.moveToNext());
+        }
+        else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
     }
 }
