@@ -1,13 +1,17 @@
 package com.example.littleshelf.items;
 
+import java.text.SimpleDateFormat;
+
 public class GroceryItem {
 
     private int id;
     private String name;
+    private SimpleDateFormat expirationDate;
 
-    public GroceryItem(int id, String name) {
+    public GroceryItem(int id, String name, SimpleDateFormat expirationDate) {
         this.id = id;
         this.name = name;
+        this.expirationDate = expirationDate;
     }
 
     @Override
@@ -15,6 +19,7 @@ public class GroceryItem {
         return "GroceryItem{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", expirationDate=" + expirationDate +
                 '}';
     }
 
@@ -32,5 +37,13 @@ public class GroceryItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public SimpleDateFormat getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(SimpleDateFormat expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }

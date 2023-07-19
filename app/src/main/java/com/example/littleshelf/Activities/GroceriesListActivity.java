@@ -66,6 +66,7 @@ public class GroceriesListActivity extends AppCompatActivity {
                 }
                 else {
                     fragmentTransaction.show(getSupportFragmentManager().findFragmentById(R.id.addItem));
+
                     ((Button) getSupportFragmentManager().findFragmentById(R.id.addItem).getView().findViewById(R.id.buttonAdd))
                             .setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -75,7 +76,7 @@ public class GroceriesListActivity extends AppCompatActivity {
                                             .findViewById(R.id.textInputField)).getText().toString();
 
                                     if (addGroceryItemName.length() > 0) {
-                                        dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName));
+                                        dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, null));
                                         showGroceriesItemsOnListView(dataBaseHelper);
 
                                         ((TextInputEditText) getSupportFragmentManager()
@@ -91,6 +92,14 @@ public class GroceriesListActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
+                    ((Button) getSupportFragmentManager().findFragmentById(R.id.addItem).getView().findViewById(R.id.buttonDate))
+                            .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
                 }
                 fragmentTransaction.commit();
             }

@@ -25,7 +25,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ITEM_NAME + " TEXT)";
+        String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " "
+                + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_ITEM_NAME + " TEXT)";
 
         db.execSQL(createTableStatement);
     }
@@ -55,9 +57,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public List<GroceryItem> getAllItems() {
-
         List<GroceryItem> returnList = new ArrayList<>();
-
         String queryString = "SELECT * FROM " + ITEM_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -68,7 +68,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 int itemID = cursor.getInt(0);
                 String itemName = cursor.getString(1);
 
-                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName);
+                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName, null);
                 returnList.add(newGroceryItem);
             } while (cursor.moveToNext());
         }
