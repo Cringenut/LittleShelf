@@ -18,6 +18,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String ITEM_TABLE = "ITEM_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
+    public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
     public DataBaseHelper(@Nullable Context context) {
         super(context, "items.db", null, 1);
@@ -27,7 +28,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " "
                 + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_ITEM_NAME + " TEXT)";
+                + COLUMN_ITEM_NAME + " TEXT,"
+                + COLUMN_ITEM_EXPIRATION_DATE + " TEXT)";
 
         db.execSQL(createTableStatement);
     }
@@ -42,6 +44,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
+        cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
 
         long insert = db.insert(ITEM_TABLE, null, cv);
         return insert != -1;
@@ -67,8 +70,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 int itemID = cursor.getInt(0);
                 String itemName = cursor.getString(1);
+                String itemExpirationDate = cursor.getString(2);
 
-                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName, null);
+                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName, itemExpirationDate);
                 returnList.add(newGroceryItem);
             } while (cursor.moveToNext());
         }

@@ -6,9 +6,9 @@ public class GroceryItem {
 
     private int id;
     private String name;
-    private SimpleDateFormat expirationDate;
+    private String expirationDate;
 
-    public GroceryItem(int id, String name, SimpleDateFormat expirationDate) {
+    public GroceryItem(int id, String name, String expirationDate) {
         this.id = id;
         this.name = name;
         this.expirationDate = expirationDate;
@@ -39,11 +39,11 @@ public class GroceryItem {
         this.name = name;
     }
 
-    public SimpleDateFormat getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(SimpleDateFormat expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 }

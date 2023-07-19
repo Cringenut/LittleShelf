@@ -1,22 +1,19 @@
 package com.example.littleshelf.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.littleshelf.DataBaseHelper;
 import com.example.littleshelf.GroceriesListViewAdapter;
@@ -25,9 +22,11 @@ import com.example.littleshelf.items.GroceryItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class GroceriesListActivity extends AppCompatActivity {
@@ -76,7 +75,8 @@ public class GroceriesListActivity extends AppCompatActivity {
                                             .findViewById(R.id.textInputField)).getText().toString();
 
                                     if (addGroceryItemName.length() > 0) {
-                                        dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, null));
+                                        String date = ((Button) getSupportFragmentManager().findFragmentById(R.id.addItem).getView().findViewById(R.id.buttonDate)).getText().toString();
+                                        dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, date));
                                         showGroceriesItemsOnListView(dataBaseHelper);
 
                                         ((TextInputEditText) getSupportFragmentManager()
@@ -97,6 +97,23 @@ public class GroceriesListActivity extends AppCompatActivity {
                             .setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                    String date = dayOfMonth + " " + month + " " + year;
+                                    ((Button) getSupportFragmentManager().findFragmentById(R.id.addItem).getView().findViewById(R.id.buttonDate)).setText(date);
+                                }
+                            };
+
+                            Calendar calendar = Calendar.getInstance();
+                            int year = calendar.get(Calendar.YEAR);
+                            int month = calendar.get(Calendar.MONTH);
+                            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                            int style = AlertDialog.THEME_HOLO_LIGHT;
+                            DatePickerDialog datePickerDialog = new DatePickerDialog(GroceriesListActivity.this, style, dateSetListener, year, month, day);
+
+                            datePickerDialog.show();
 
                         }
                     });
@@ -108,7 +125,7 @@ public class GroceriesListActivity extends AppCompatActivity {
 
     private void showGroceriesItemsOnListView(DataBaseHelper dataBaseHelper) {
         if (listView != null) {
-            GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.list_item, (ArrayList<GroceryItem>) dataBaseHelper.getAllItems());
+            GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.fragment_list_item, (ArrayList<GroceryItem>) dataBaseHelper.getAllItems());
             listView.setAdapter(groceriesListViewAdapter);
         }
     }

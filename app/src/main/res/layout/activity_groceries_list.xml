@@ -18,7 +18,7 @@
         android:id="@+id/addItem"
         android:name="com.example.littleshelf.AddGroceryItemFragment"
         android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
