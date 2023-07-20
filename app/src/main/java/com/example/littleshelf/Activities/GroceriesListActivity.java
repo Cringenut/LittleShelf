@@ -44,17 +44,10 @@ public class GroceriesListActivity extends AppCompatActivity {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
 
-        listView = getSupportFragmentManager().findFragmentById(R.id.listView).getView().findViewById(R.id.idListView);
+        /*listView = getSupportFragmentManager().findFragmentById(R.id.listView).getView().findViewById(R.id.idListView);
         showGroceriesItemsOnListView(dataBaseHelper);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GroceryItem clickedGroceryItem = (GroceryItem) parent.getItemAtPosition(position);
-                dataBaseHelper.deleteOne(clickedGroceryItem);
-                showGroceriesItemsOnListView(dataBaseHelper);
-            }
-        });
+        */
 
         ((FloatingActionButton) findViewById(R.id.buttonCheese)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,8 +118,7 @@ public class GroceriesListActivity extends AppCompatActivity {
 
     private void showGroceriesItemsOnListView(DataBaseHelper dataBaseHelper) {
         if (listView != null) {
-            GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(this, R.layout.fragment_list_item, (ArrayList<GroceryItem>) dataBaseHelper.getAllItems());
-            listView.setAdapter(groceriesListViewAdapter);
+
         }
     }
     private void loadNavMenu() {
