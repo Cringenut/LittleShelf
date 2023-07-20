@@ -26,6 +26,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Create database or open if exists
         String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " "
                 + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_ITEM_NAME + " TEXT,"
@@ -40,12 +41,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addOne(GroceryItem groceryItem) {
+        // Get writable database, so we can add data to it, and create empty value for data
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        // Place data inside columns
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
 
+        // Add value to database
         long insert = db.insert(ITEM_TABLE, null, cv);
         return insert != -1;
     }
@@ -60,18 +64,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public List<GroceryItem> getAllItems() {
+        // Create empty list to put items inside it
         List<GroceryItem> returnList = new ArrayList<>();
+        // Query to get all rows from database
         String queryString = "SELECT * FROM " + ITEM_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
+        // Check if database is not empty
         if (cursor.moveToFirst()) {
             do {
+                //
                 int itemID = cursor.getInt(0);
                 String itemName = cursor.getString(1);
                 String itemExpirationDate = cursor.getString(2);
 
+                // Create item from received data
                 GroceryItem newGroceryItem = new GroceryItem(itemID, itemName, itemExpirationDate);
                 returnList.add(newGroceryItem);
             } while (cursor.moveToNext());
@@ -80,6 +89,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return returnList;
         }
 
+        // Closing cursor and db for optimization
         cursor.close();
         db.close();
         return returnList;

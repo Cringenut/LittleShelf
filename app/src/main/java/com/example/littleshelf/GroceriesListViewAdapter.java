@@ -32,10 +32,10 @@ public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = layoutInflater.inflate(resource, parent, false);
-        TextView textView = (TextView) convertView.findViewById(R.id.itemName);
-        textView.setText(objects.get(position).getName());
-        textView = (TextView) convertView.findViewById(R.id.itemDate);
-        textView.setText(objects.get(position).getExpirationDate());
+
+        // Change data in list item fragment
+        ((TextView) convertView.findViewById(R.id.itemName)).setText(objects.get(position).getName());
+        ((TextView) convertView.findViewById(R.id.itemDate)).setText(objects.get(position).getExpirationDate());
 
         return convertView;
     }
