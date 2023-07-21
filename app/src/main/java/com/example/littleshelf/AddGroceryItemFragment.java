@@ -3,30 +3,53 @@ package com.example.littleshelf;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class AddGroceryItemFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    TextInputEditText textInputItemNameField;
+    Button buttonDate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.fragment_add_grocery_item, container, false);
-        ((Button) v.findViewById(R.id.buttonAdd)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    textInputItemNameField = ((TextInputEditText) v.findViewById(R.id.textInputItemNameField));
+    buttonDate = ((Button) v.findViewById(R.id.buttonDate));
 
+    textInputItemNameField.setText("");
+    buttonDate.setText("");
+
+    ((Button) v.findViewById(R.id.buttonAddItem)).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String addGroceryItemName = textInputItemNameField.getText().toString();
+
+            System.out.println(v.findViewById(R.id.textInputItemName));
+            if (addGroceryItemName.length() > 0) {
+                String date = buttonDate.getText().toString();
+                //dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, date));
+                //showGroceriesItemsOnListView(dataBaseHelper);
+
+                FragmentTransaction fragmentTransaction = requireFragmentManager().beginTransaction();
+
+                // Hide the current fragment
+                fragmentTransaction.hide(AddGroceryItemFragment.this);
+                fragmentTransaction.commit();
+
+                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
-        });
+        }
+    });
         /*((Button) getSupportFragmentManager().findFragmentById(R.id.addItem).getView().findViewById(R.id.buttonAdd))
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
