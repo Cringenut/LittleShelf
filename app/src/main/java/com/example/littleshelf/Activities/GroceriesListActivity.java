@@ -2,36 +2,18 @@ package com.example.littleshelf.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.ListView;
-
 import com.example.littleshelf.DataBaseHelper;
-import com.example.littleshelf.GroceriesListViewAdapter;
 import com.example.littleshelf.R;
-import com.example.littleshelf.items.GroceryItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class GroceriesListActivity extends AppCompatActivity {
-    private ListView listView;
 
+    public DataBaseHelper dataBaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +24,7 @@ public class GroceriesListActivity extends AppCompatActivity {
         fragmentTransaction.hide(getSupportFragmentManager().findFragmentById(R.id.addItem));
         fragmentTransaction.commit();
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
+        //dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
 
         ((FloatingActionButton) findViewById(R.id.buttonCheese)).setOnClickListener(new View.OnClickListener() {
             @Override

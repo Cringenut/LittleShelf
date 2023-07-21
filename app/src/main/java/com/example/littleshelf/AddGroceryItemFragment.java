@@ -31,23 +31,7 @@ public class AddGroceryItemFragment extends Fragment {
     ((Button) v.findViewById(R.id.buttonAddItem)).setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String addGroceryItemName = textInputItemNameField.getText().toString();
-
-            System.out.println(v.findViewById(R.id.textInputItemName));
-            if (addGroceryItemName.length() > 0) {
-                String date = buttonDate.getText().toString();
-                //dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, date));
-                //showGroceriesItemsOnListView(dataBaseHelper);
-
-                FragmentTransaction fragmentTransaction = requireFragmentManager().beginTransaction();
-
-                // Hide the current fragment
-                fragmentTransaction.hide(AddGroceryItemFragment.this);
-                fragmentTransaction.commit();
-
-                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-            }
+            addNewItemToList(v);
         }
     });
         /*((Button) getSupportFragmentManager().findFragmentById(R.id.addItem).getView().findViewById(R.id.buttonAdd))
@@ -103,7 +87,26 @@ public class AddGroceryItemFragment extends Fragment {
                 });
     }*/
 
-
         return v;
+    }
+
+    private void addNewItemToList(View v) {
+        String addGroceryItemName = textInputItemNameField.getText().toString();
+
+        System.out.println(v.findViewById(R.id.textInputItemName));
+        if (addGroceryItemName.length() > 0) {
+            String date = buttonDate.getText().toString();
+            //dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, date));
+            //showGroceriesItemsOnListView(dataBaseHelper);
+
+            FragmentTransaction fragmentTransaction = requireFragmentManager().beginTransaction();
+
+            // Hide the current fragment
+            fragmentTransaction.hide(AddGroceryItemFragment.this);
+            fragmentTransaction.commit();
+
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
     }
 }

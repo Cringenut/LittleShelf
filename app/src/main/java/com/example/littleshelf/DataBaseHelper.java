@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.littleshelf.items.GroceryItem;
@@ -15,13 +17,17 @@ import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
+    private Context context;
+    private ListView listView;
     public static final String ITEM_TABLE = "ITEM_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
-    public DataBaseHelper(@Nullable Context context) {
+    public DataBaseHelper(@Nullable Context context, @NonNull ListView listView) {
         super(context, "items.db", null, 1);
+        this.context = context;
+        this.listView = listView;
     }
 
     @Override
@@ -93,5 +99,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    public void showListViewItems() {
+        GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(context, R.layout.fragment_list_item, (ArrayList<GroceryItem>) getAllItems());
+        listView.setAdapter(groceriesListViewAdapter);
+    }
+
+    public ListView getListView() {
+        return listView;
+    }
+
+    public void setListView(ListView listView) {
+        this.listView = listView;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }
