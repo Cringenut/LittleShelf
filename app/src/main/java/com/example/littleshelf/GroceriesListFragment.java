@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class GroceriesListFragment extends Fragment {
 
-    ListView listView;
-    DataBaseHelper dataBaseHelper;
+    private ListView listView;
+    private DataBaseHelper dataBaseHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
