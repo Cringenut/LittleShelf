@@ -53,8 +53,8 @@ public class GroceriesListActivity extends AppCompatActivity {
                 }
                 else {
                     fragmentTransaction.show(getSupportFragmentManager().findFragmentById(R.id.addItem));
-                    fragmentTransaction.commit();
                 }
+                fragmentTransaction.commit();
             }
         });
     }
