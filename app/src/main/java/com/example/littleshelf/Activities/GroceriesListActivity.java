@@ -5,15 +5,18 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
+
 import com.example.littleshelf.DataBaseHelper;
 import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 
 public class GroceriesListActivity extends AppCompatActivity {
 
-    public DataBaseHelper dataBaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +26,6 @@ public class GroceriesListActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.hide(getSupportFragmentManager().findFragmentById(R.id.addItem));
         fragmentTransaction.commit();
-
-        //dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
 
         ((FloatingActionButton) findViewById(R.id.buttonCheese)).setOnClickListener(new View.OnClickListener() {
             @Override

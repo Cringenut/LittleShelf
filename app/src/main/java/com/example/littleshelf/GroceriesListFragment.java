@@ -25,24 +25,19 @@ public class GroceriesListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_groceries_list, container, false);
 
-        dataBaseHelper = new DataBaseHelper(getActivity());
         listView = v.findViewById(R.id.idListView);
+        dataBaseHelper = new DataBaseHelper(getActivity(), listView);
 
-        showListItems();
+        dataBaseHelper.showListViewItems();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GroceryItem clickedGroceryItem = (GroceryItem) parent.getItemAtPosition(position);
                 dataBaseHelper.deleteOne(clickedGroceryItem);
-                showListItems();
+                dataBaseHelper.showListViewItems();
             }
         });
 
         return v;
-    }
-
-    private void showListItems() {
-        GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(getActivity(), R.layout.fragment_list_item, (ArrayList<GroceryItem>) dataBaseHelper.getAllItems());
-        listView.setAdapter(groceriesListViewAdapter);
     }
 }
