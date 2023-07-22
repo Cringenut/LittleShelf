@@ -19,7 +19,6 @@ public class GroceriesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groceries_list);
 
-        loadNavMenu();
         // Hide add item fragment
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.hide(getSupportFragmentManager().findFragmentById(R.id.addItem));
@@ -38,10 +37,6 @@ public class GroceriesListActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
-    }
-
-    private void loadNavMenu() {
-
     }
 
     public DataBaseHelper getDataBaseHelper() {

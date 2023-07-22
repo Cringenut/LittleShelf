@@ -15,28 +15,5 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        loadNavMenu();
-    }
-    private void loadNavMenu() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.HomePage);
-
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.HomePage)
-            {
-                return true;
-            }
-            else if (item.getItemId() == R.id.GroceriesList)
-            {
-                startActivity(new Intent(this, GroceriesListActivity.class));
-                finish();
-            }
-            else if (item.getItemId() == R.id.ReceiptsList)
-            {
-                startActivity(new Intent(this, ReceiptsListActivity.class));
-                finish();
-            }
-            return false;
-        });
     }
 }
