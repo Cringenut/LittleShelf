@@ -24,10 +24,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
-    public DataBaseHelper(@Nullable Context context, @Nullable ListView listView) {
+    public DataBaseHelper(@Nullable Context context) {
         super(context, "items.db", null, 1);
         this.context = context;
-        this.listView = listView;
     }
 
     @Override

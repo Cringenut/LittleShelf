@@ -3,10 +3,8 @@ package com.example.littleshelf;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +26,13 @@ public class AddGroceryItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.fragment_add_grocery_item, container, false);
-    textInputItemNameField = ((TextInputEditText) v.findViewById(R.id.textInputItemNameField));
-    buttonDate = ((Button) v.findViewById(R.id.buttonDate));
+    textInputItemNameField = v.findViewById(R.id.textInputItemNameField);
+    buttonDate = v.findViewById(R.id.buttonDate);
 
     textInputItemNameField.setText("");
     buttonDate.setText("");
 
-    ((Button) v.findViewById(R.id.buttonAddItem)).setOnClickListener(new View.OnClickListener() {
+    v.findViewById(R.id.buttonAddItem).setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             addNewItemToList(v);
@@ -72,7 +70,7 @@ public class AddGroceryItemFragment extends Fragment {
 
         if (addGroceryItemName.length() > 0) {
             String date = buttonDate.getText().toString();
-            DataBaseHelper dataBaseHelper = new DataBaseHelper(v.getContext(), null);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(v.getContext());
             dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, date));
             dataBaseHelper.showListViewItems();
 

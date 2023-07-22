@@ -18,23 +18,24 @@ import java.util.ArrayList;
 public class GroceriesListFragment extends Fragment {
 
     private ListView listView;
-    private DataBaseHelper dataBaseHelper;
+    private GroceriesListActivity groceriesListActivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_groceries_list, container, false);
 
+        groceriesListActivity = (GroceriesListActivity) getActivity();
         listView = v.findViewById(R.id.idListView);
-        dataBaseHelper = new DataBaseHelper(getActivity(), listView);
 
-        dataBaseHelper.showListViewItems();
+        groceriesListActivity.getDataBaseHelper().showListViewItems();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GroceryItem clickedGroceryItem = (GroceryItem) parent.getItemAtPosition(position);
-                dataBaseHelper.deleteOne(clickedGroceryItem);
-                dataBaseHelper.showListViewItems();
+                groceriesListActivity.getDataBaseHelper().deleteOne(clickedGroceryItem);
+                groceriesListActivity.getDataBaseHelper().showListViewItems();
             }
         });
 

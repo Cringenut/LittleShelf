@@ -17,6 +17,7 @@ import java.util.List;
 
 public class GroceriesListActivity extends AppCompatActivity {
 
+    private DataBaseHelper dataBaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,5 +64,9 @@ public class GroceriesListActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    public DataBaseHelper getDataBaseHelper() {
+        return dataBaseHelper;
     }
 }
