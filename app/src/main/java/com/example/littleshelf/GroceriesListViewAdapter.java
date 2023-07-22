@@ -1,6 +1,7 @@
 package com.example.littleshelf;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.example.littleshelf.items.GroceryItem;
 
@@ -27,6 +29,7 @@ public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
         this.objects = objects;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -36,7 +39,14 @@ public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
 
         // Change data in list item fragment
         ((TextView) convertView.findViewById(R.id.itemName)).setText(objects.get(position).getName());
+
         ((TextView) convertView.findViewById(R.id.itemDate)).setText(objects.get(position).getExpirationDate());
+        if (objects.get(position).isFresh(null)) {
+            ((TextView) convertView.findViewById(R.id.itemDate)).setTextColor(context.getResources().getColor(R.color.green));
+        }
+        else {
+            ((TextView) convertView.findViewById(R.id.itemDate)).setTextColor(context.getResources().getColor(R.color.red));
+        }
 
         return convertView;
     }

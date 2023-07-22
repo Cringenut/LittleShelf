@@ -1,6 +1,13 @@
 package com.example.littleshelf.items;
 
+import android.os.Build;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class GroceryItem {
 
@@ -12,6 +19,16 @@ public class GroceryItem {
         this.id = id;
         this.name = name;
         this.expirationDate = expirationDate;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean isFresh(@Nullable Integer additionalDays) {
+        if (additionalDays == null) {
+            return true;
+        }
+
+        LocalDate localDate = LocalDate.parse(expirationDate, DateTimeFormatter.BASIC_ISO_DATE);
+        return false;
     }
 
     @Override
