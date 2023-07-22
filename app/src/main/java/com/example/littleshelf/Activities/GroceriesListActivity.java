@@ -41,26 +41,7 @@ public class GroceriesListActivity extends AppCompatActivity {
     }
 
     private void loadNavMenu() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.GroceriesList);
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.HomePage)
-            {
-                startActivity(new Intent(this, HomePageActivity.class));
-                finish();
-            }
-            else if (item.getItemId() == R.id.GroceriesList)
-            {
-                return true;
-            }
-            else if (item.getItemId() == R.id.ReceiptsList)
-            {
-                startActivity(new Intent(this, ReceiptsListActivity.class));
-                finish();
-            }
-            return false;
-        });
     }
 
     public DataBaseHelper getDataBaseHelper() {
