@@ -23,12 +23,18 @@ public class GroceryItem {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean isFresh(@Nullable Integer additionalDays) {
-        if (additionalDays == null) {
+        if (expirationDate.isEmpty()) {
             return true;
         }
 
-        LocalDate localDate = LocalDate.parse(expirationDate, DateTimeFormatter.BASIC_ISO_DATE);
-        return false;
+        LocalDate localDate;
+        if (additionalDays == null) {
+            localDate = LocalDate.parse(expirationDate, DateTimeFormatter.ofPattern("dd M yyyy"));
+        }
+        else {
+            localDate = LocalDate.parse(expirationDate, DateTimeFormatter.ofPattern("dd M yyyy")).plusDays(additionalDays);
+        }
+        return localDate.isAfter(LocalDate.now());
     }
 
     @Override
