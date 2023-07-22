@@ -60,11 +60,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean deleteOne(GroceryItem groceryItem) {
+        // Get database and create delete query
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + ITEM_TABLE + " WHERE " + COLUMN_ID + " = " + groceryItem.getId();
 
+        // Call query in cursor, if found delete and return true, otherwise if empty return false
         Cursor cursor = db.rawQuery(queryString, null);
-
         return cursor.moveToFirst();
     }
 
@@ -74,13 +75,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // Query to get all rows from database
         String queryString = "SELECT * FROM " + ITEM_TABLE;
 
+        // Get database and create cursor for iteration
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
         // Check if database is not empty
         if (cursor.moveToFirst()) {
             do {
-                //
+                // Get data from columns at passe numbers from database
                 int itemID = cursor.getInt(0);
                 String itemName = cursor.getString(1);
                 String itemExpirationDate = cursor.getString(2);
@@ -91,6 +93,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         else {
+            // Return empty list
             return returnList;
         }
 
@@ -101,6 +104,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void showListViewItems() {
+        // Creating new adapter and passing it to the list view
         GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(context, R.layout.fragment_list_item, (ArrayList<GroceryItem>) getAllItems());
         listView.setAdapter(groceriesListViewAdapter);
     }
@@ -111,13 +115,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void setListView(ListView listView) {
         this.listView = listView;
-    }
-
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
     }
 }

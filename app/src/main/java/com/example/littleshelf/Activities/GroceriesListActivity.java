@@ -5,15 +5,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
-
 import com.example.littleshelf.DataBaseHelper;
 import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
-
 
 public class GroceriesListActivity extends AppCompatActivity {
 
@@ -25,6 +20,7 @@ public class GroceriesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_groceries_list);
 
         loadNavMenu();
+        // Hide add item fragment
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.hide(getSupportFragmentManager().findFragmentById(R.id.addItem));
         fragmentTransaction.commit();
