@@ -20,6 +20,7 @@ public class GroceriesListActivity extends AppCompatActivity {
     private DataBaseHelper dataBaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        dataBaseHelper = new DataBaseHelper(GroceriesListActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groceries_list);
 

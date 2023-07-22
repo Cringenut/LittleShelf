@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class GroceriesListFragment extends Fragment {
 
-    private ListView listView;
     private GroceriesListActivity groceriesListActivity;
 
     @Override
@@ -27,7 +26,8 @@ public class GroceriesListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_groceries_list, container, false);
 
         groceriesListActivity = (GroceriesListActivity) getActivity();
-        listView = v.findViewById(R.id.idListView);
+        ListView listView = v.findViewById(R.id.idListView);
+        groceriesListActivity.getDataBaseHelper().setListView(listView);
 
         groceriesListActivity.getDataBaseHelper().showListViewItems();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 
+import com.example.littleshelf.Activities.GroceriesListActivity;
 import com.example.littleshelf.items.GroceryItem;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -19,13 +20,16 @@ import java.util.Calendar;
 
 public class AddGroceryItemFragment extends Fragment {
 
-    TextInputEditText textInputItemNameField;
-    Button buttonDate;
+    private TextInputEditText textInputItemNameField;
+    private Button buttonDate;
+    private GroceriesListActivity groceriesListActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.fragment_add_grocery_item, container, false);
+
+    groceriesListActivity = (GroceriesListActivity) getActivity();
     textInputItemNameField = v.findViewById(R.id.textInputItemNameField);
     buttonDate = v.findViewById(R.id.buttonDate);
 
@@ -70,9 +74,8 @@ public class AddGroceryItemFragment extends Fragment {
 
         if (addGroceryItemName.length() > 0) {
             String date = buttonDate.getText().toString();
-            DataBaseHelper dataBaseHelper = new DataBaseHelper(v.getContext());
-            dataBaseHelper.addOne(new GroceryItem(-1, addGroceryItemName, date));
-            dataBaseHelper.showListViewItems();
+            groceriesListActivity.getDataBaseHelper().addOne(new GroceryItem(-1, addGroceryItemName, date));
+            groceriesListActivity.getDataBaseHelper().showListViewItems();
 
             FragmentTransaction fragmentTransaction = requireFragmentManager().beginTransaction();
 
