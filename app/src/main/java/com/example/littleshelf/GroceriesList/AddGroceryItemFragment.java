@@ -57,7 +57,7 @@ public class AddGroceryItemFragment extends Fragment {
         super.onHiddenChanged(hidden);
         // Clear the fields when fragment becomes invisible, otherwise the user can see the fields getting cleared
         if (hidden) {
-            textInputItemNameField.setText("");
+            textInputItemNameField.setText("Cheese");
             buttonDate.setText("");
         }
     }
@@ -87,7 +87,8 @@ public class AddGroceryItemFragment extends Fragment {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String date = dayOfMonth + " " + month + " " + year;
+                // Incrementing month to display the real value
+                String date = dayOfMonth + " " + ++month + " " + year;
                 buttonDate.setText(date);
             }
         };

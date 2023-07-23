@@ -36,8 +36,9 @@ public class GroceryItem {
         else {
             localDate = LocalDate.parse(expirationDate, DateTimeFormatter.ofPattern("dd M yyyy")).plusDays(additionalDays);
         }
+
         // Return if date is after tomorrow
-        return localDate.isAfter(LocalDate.now().plusDays(1));
+        return localDate.isAfter(LocalDate.now());
     }
 
     @Override
