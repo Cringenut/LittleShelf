@@ -16,10 +16,10 @@
             android:name=".ReceiptsList.ReceiptsListActivity"
             android:exported="false" />
         <activity
-            android:name=".HomePage.HomePageActivity"
+            android:name=".GroceriesList.GroceriesListActivity"
             android:exported="false" />
         <activity
-            android:name=".GroceriesList.GroceriesListActivity"
+            android:name=".HomePage.HomePageActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

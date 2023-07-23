@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.littleshelf.R;
 
-public class HomePageAlert extends Fragment {
+public class HomePageAlertFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

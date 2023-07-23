@@ -6,19 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".HomePage.HomePageActivity">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#FF0000"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationMenu"
+    <fragment
+        android:id="@+id/alert"
+        android:name="com.example.littleshelf.HomePage.HomePageAlertFragment"
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
         android:id="@+id/bottomNavigationMenu"
