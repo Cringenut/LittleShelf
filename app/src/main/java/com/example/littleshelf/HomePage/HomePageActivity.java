@@ -1,13 +1,10 @@
-package com.example.littleshelf.Activities;
+package com.example.littleshelf.HomePage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.littleshelf.DataBaseHelper;
 import com.example.littleshelf.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageActivity extends AppCompatActivity {
     @Override

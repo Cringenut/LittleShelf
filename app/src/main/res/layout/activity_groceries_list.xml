@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.GroceriesListActivity">
+    tools:context=".GroceriesList.GroceriesListActivity">
 
     <fragment
         android:id="@+id/listView"
-        android:name="com.example.littleshelf.GroceriesListFragment"
+        android:name="com.example.littleshelf.GroceriesList.GroceriesListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp" />
@@ -23,7 +23,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/addItem"
-        android:name="com.example.littleshelf.AddGroceryItemFragment"
+        android:name="com.example.littleshelf.GroceriesList.AddGroceryItemFragment"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:visibility="visible"

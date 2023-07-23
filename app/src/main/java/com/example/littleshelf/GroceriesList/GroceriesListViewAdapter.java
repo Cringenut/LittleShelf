@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.GroceriesList;
 
 import android.content.Context;
 import android.os.Build;
@@ -12,7 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.example.littleshelf.items.GroceryItem;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Objects;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,15 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.littleshelf.items.GroceryItem;
+import com.example.littleshelf.GroceriesList.GroceriesListViewAdapter;
+import com.example.littleshelf.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private ListView listView;
@@ -24,7 +24,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
-    public DataBaseHelper(@Nullable Context context) {
+    public GroceriesDataBaseHelper(@Nullable Context context) {
         super(context, "items.db", null, 1);
         this.context = context;
     }

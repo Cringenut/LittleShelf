@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.GroceriesList;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -12,8 +12,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import com.example.littleshelf.Activities.GroceriesListActivity;
-import com.example.littleshelf.items.GroceryItem;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Objects.GroceryItem;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;

@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.Activities.GroceriesListActivity;
-import com.example.littleshelf.Activities.HomePageActivity;
-import com.example.littleshelf.Activities.ReceiptsListActivity;
+import com.example.littleshelf.GroceriesList.GroceriesListActivity;
+import com.example.littleshelf.HomePage.HomePageActivity;
+import com.example.littleshelf.ReceiptsList.ReceiptsListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

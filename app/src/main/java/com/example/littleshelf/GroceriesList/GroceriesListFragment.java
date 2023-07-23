@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.GroceriesList;
 
 import android.os.Bundle;
 
@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.littleshelf.Activities.GroceriesListActivity;
-import com.example.littleshelf.items.GroceryItem;
-
-import java.util.ArrayList;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Objects.GroceryItem;
 
 public class GroceriesListFragment extends Fragment {
 
