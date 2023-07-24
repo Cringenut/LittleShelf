@@ -54,8 +54,7 @@ public class HomePageAlertFragment extends Fragment {
             fragmentTransaction.commit();
         }
         else {
-            String text = "You have: " + count + " expired items.";
-            ((TextView) v.findViewById(R.id.textAlert)).setText(text);
+            ((TextView) v.findViewById(R.id.textAlert)).setText("You have: " + count + " expired items.");
 
             // Show the current fragment
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

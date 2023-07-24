@@ -7,10 +7,18 @@
     android:background="#F4E801"
     tools:context=".GroceriesList.AddGroceryItemFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="300dp"
+        android:layout_height="139dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputItemName" />
+
     <Button
         android:id="@+id/buttonDate"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAddItem"
@@ -18,6 +26,17 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputItemName" />
+
+    <Button
+        android:id="@+id/buttonAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDate" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputItemName"
@@ -36,17 +55,7 @@
             android:layout_height="wrap_content"
             android:background="#FFAA00"
             android:hint="Cheese" />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonAddItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDate" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
