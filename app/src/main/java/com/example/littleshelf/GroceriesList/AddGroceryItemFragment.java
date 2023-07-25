@@ -5,12 +5,16 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 
 import com.example.littleshelf.R;
 import com.example.littleshelf.Objects.GroceryItem;
@@ -23,6 +27,8 @@ public class AddGroceryItemFragment extends Fragment {
     private TextInputEditText textInputItemNameField;
     private Button buttonDate;
     private GroceriesListActivity groceriesListActivity;
+    private RecyclerView itemOptions;
+    private GroceryItem itemToAdd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +39,21 @@ public class AddGroceryItemFragment extends Fragment {
     groceriesListActivity = (GroceriesListActivity) getActivity();
     textInputItemNameField = v.findViewById(R.id.textInputItemNameField);
     buttonDate = v.findViewById(R.id.buttonDate);
+    itemOptions = v.findViewById(R.id.itemOptions);
+
+    // TEST
+
+    textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                itemOptions.setVisibility(View.VISIBLE);
+            }
+            else {
+                itemOptions.setVisibility(View.INVISIBLE);
+            }
+        }
+    });
 
     // Button add item listener
     v.findViewById(R.id.buttonAddItem).setOnClickListener(new View.OnClickListener() {
@@ -49,6 +70,28 @@ public class AddGroceryItemFragment extends Fragment {
             pickDate(v);
         }
     });
+
+        // Set the OnTouchListener to the parent layout
+        View parentLayout = v.findViewById(R.id.parentLayout);
+        parentLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // Check if the touch event is outside of the EditText
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (textInputItemNameField.isFocused()) {
+                        // Clear focus from the EditText to make it lose focus
+                        textInputItemNameField.clearFocus();
+
+                        // Hide the keyboard
+                        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }
+                }
+                return false; // Return false to pass the touch event to other views if needed
+            }
+        });
+
+
         return v;
     }
 
@@ -59,6 +102,7 @@ public class AddGroceryItemFragment extends Fragment {
         if (hidden) {
             textInputItemNameField.setText("Cheese");
             buttonDate.setText("");
+            itemToAdd = null;
         }
     }
 
