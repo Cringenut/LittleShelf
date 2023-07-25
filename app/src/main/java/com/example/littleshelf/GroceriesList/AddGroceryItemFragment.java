@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -54,6 +55,21 @@ public class AddGroceryItemFragment extends Fragment {
         DatabaseItemsListViewAdapter databaseItemsListViewAdapter = new DatabaseItemsListViewAdapter(getContext(), R.layout.fragment_database_item, testList);
         itemOptions.setAdapter(databaseItemsListViewAdapter);
 
+        itemOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                itemToAdd = (GroceryItem) parent.getItemAtPosition(position);
+                textInputItemNameField.setText(itemToAdd.getName());
+
+                // Hide the keyboard
+                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                textInputItemNameField.clearFocus();
+            }
+        });
+
     // TEST
 
     textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -72,6 +88,8 @@ public class AddGroceryItemFragment extends Fragment {
             }
         }
     });
+
+
 
     // Button add item listener
     v.findViewById(R.id.buttonAddItem).setOnClickListener(new View.OnClickListener() {
@@ -128,24 +146,18 @@ public class AddGroceryItemFragment extends Fragment {
         String addGroceryItemName = textInputItemNameField.getText().toString();
 
         // If name field is not empty create new item (temporary)
-        if (addGroceryItemName.length() > 0) {
-
-
-
-
-
-            /*String date = buttonDate.getText().toString();
-            groceriesListActivity.getDataBaseHelper().addOne(new GroceryItem(-1, addGroceryItemName, date));
+        if (itemToAdd != null) {
+            itemToAdd.setExpirationDate(buttonDate.getText().toString());
+            groceriesListActivity.getDataBaseHelper().addOne(itemToAdd);
             groceriesListActivity.getDataBaseHelper().showListViewItems();
 
-            // Hide the current fragment
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.hide(AddGroceryItemFragment.this);
             fragmentTransaction.commit();
 
             // Hide the keyboard
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);*/
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
     }
 
