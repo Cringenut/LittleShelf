@@ -38,6 +38,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = layoutInflater.inflate(resource, parent, false);
 
+        ((TextView) convertView.findViewById(R.id.itemName)).setText(objects.get(position).getName());
 
         return convertView;
     }

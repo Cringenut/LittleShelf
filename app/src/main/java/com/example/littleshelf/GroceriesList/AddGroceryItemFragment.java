@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
@@ -20,14 +21,16 @@ import com.example.littleshelf.R;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddGroceryItemFragment extends Fragment {
 
     private TextInputEditText textInputItemNameField;
     private Button buttonDate;
     private GroceriesListActivity groceriesListActivity;
-    private RecyclerView itemOptions;
+    private ListView itemOptions;
     private GroceryItem itemToAdd;
 
     @Override
@@ -42,11 +45,26 @@ public class AddGroceryItemFragment extends Fragment {
     itemOptions = v.findViewById(R.id.itemOptions);
 
     // TEST
+        ArrayList<GroceryItem> testList = new ArrayList<>();
+        testList.add(new GroceryItem(-1, "Cheese", null));
+        testList.add(new GroceryItem(-1, "Ham", null));
+        testList.add(new GroceryItem(-1, "Water", null));
+
+
+        DatabaseItemsListViewAdapter databaseItemsListViewAdapter = new DatabaseItemsListViewAdapter(getContext(), R.layout.fragment_database_item, testList);
+        itemOptions.setAdapter(databaseItemsListViewAdapter);
+
+    // TEST
 
     textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if (hasFocus) {
+                if (itemToAdd != null) {
+                    itemToAdd = null;
+                    textInputItemNameField.setText("");
+                }
+
                 itemOptions.setVisibility(View.VISIBLE);
             }
             else {
@@ -111,7 +129,12 @@ public class AddGroceryItemFragment extends Fragment {
 
         // If name field is not empty create new item (temporary)
         if (addGroceryItemName.length() > 0) {
-            String date = buttonDate.getText().toString();
+
+
+
+
+
+            /*String date = buttonDate.getText().toString();
             groceriesListActivity.getDataBaseHelper().addOne(new GroceryItem(-1, addGroceryItemName, date));
             groceriesListActivity.getDataBaseHelper().showListViewItems();
 
@@ -122,7 +145,7 @@ public class AddGroceryItemFragment extends Fragment {
 
             // Hide the keyboard
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);*/
         }
     }
 
