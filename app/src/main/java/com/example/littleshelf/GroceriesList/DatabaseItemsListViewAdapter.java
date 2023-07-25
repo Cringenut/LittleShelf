@@ -34,7 +34,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        // Inflate resource fragmento
+        // Inflate resource fragment
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = layoutInflater.inflate(resource, parent, false);
 

@@ -31,6 +31,7 @@ public class AddGroceryItemFragment extends Fragment {
     private TextInputEditText textInputItemNameField;
     private Button buttonDate;
     private GroceriesListActivity groceriesListActivity;
+    private AddItemDataBaseHelper addItemDataBaseHelper;
     private ListView itemOptions;
     private GroceryItem itemToAdd;
 
@@ -44,6 +45,7 @@ public class AddGroceryItemFragment extends Fragment {
     textInputItemNameField = v.findViewById(R.id.textInputItemNameField);
     buttonDate = v.findViewById(R.id.buttonDate);
     itemOptions = v.findViewById(R.id.itemOptions);
+    addItemDataBaseHelper = new AddItemDataBaseHelper(getContext());
 
     // TEST
         ArrayList<GroceryItem> testList = new ArrayList<>();
@@ -52,7 +54,8 @@ public class AddGroceryItemFragment extends Fragment {
         testList.add(new GroceryItem(-1, "Water", null));
 
 
-        DatabaseItemsListViewAdapter databaseItemsListViewAdapter = new DatabaseItemsListViewAdapter(getContext(), R.layout.fragment_database_item, testList);
+        DatabaseItemsListViewAdapter databaseItemsListViewAdapter =
+        new DatabaseItemsListViewAdapter(getContext(), R.layout.fragment_database_item, (ArrayList<GroceryItem>) addItemDataBaseHelper.getAllItems());
         itemOptions.setAdapter(databaseItemsListViewAdapter);
 
         itemOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
