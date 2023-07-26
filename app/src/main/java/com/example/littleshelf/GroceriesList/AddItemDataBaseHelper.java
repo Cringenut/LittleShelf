@@ -15,8 +15,6 @@ import java.util.List;
 public class AddItemDataBaseHelper extends SQLiteOpenHelper  {
 
     public static final String ITEM_TABLE = "ITEM_TABLE";
-    public static final String COLUMN_ID = "ID";
-    public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
 
     public AddItemDataBaseHelper(@Nullable Context context) {
         super(context, "ItemsListDatabase.db", null, 1);

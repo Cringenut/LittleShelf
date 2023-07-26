@@ -5,23 +5,21 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
-
 import com.example.littleshelf.R;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,6 +32,8 @@ public class AddGroceryItemFragment extends Fragment {
     private AddItemDataBaseHelper addItemDataBaseHelper;
     private ListView itemOptions;
     private GroceryItem itemToAdd;
+    private List<GroceryItem> unSearchedItems;
+    private List<GroceryItem> SearchedItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,11 +48,6 @@ public class AddGroceryItemFragment extends Fragment {
     addItemDataBaseHelper = new AddItemDataBaseHelper(getContext());
 
     // TEST
-        ArrayList<GroceryItem> testList = new ArrayList<>();
-        testList.add(new GroceryItem(-1, "Cheese", null));
-        testList.add(new GroceryItem(-1, "Ham", null));
-        testList.add(new GroceryItem(-1, "Water", null));
-
 
         DatabaseItemsListViewAdapter databaseItemsListViewAdapter =
         new DatabaseItemsListViewAdapter(getContext(), R.layout.fragment_database_item, (ArrayList<GroceryItem>) addItemDataBaseHelper.getAllItems());
@@ -75,6 +70,25 @@ public class AddGroceryItemFragment extends Fragment {
 
     // TEST
 
+        textInputItemNameField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    // TEST
+
     textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -91,8 +105,6 @@ public class AddGroceryItemFragment extends Fragment {
             }
         }
     });
-
-
 
     // Button add item listener
     v.findViewById(R.id.buttonAddItem).setOnClickListener(new View.OnClickListener() {

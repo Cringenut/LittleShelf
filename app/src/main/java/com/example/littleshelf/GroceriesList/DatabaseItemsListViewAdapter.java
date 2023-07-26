@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.littleshelf.Objects.GroceryItem;
 import com.example.littleshelf.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
 
@@ -30,14 +32,60 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
         this.objects = objects;
     }
 
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        return itemsFilter;
+    }
+
+    private Filter itemsFilter = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            List<GroceryItem> suggestions = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                suggestions.addAll(objects);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (GroceryItem item : objects) {
+                    if (item.getName().toLowerCase().contains(constraint)) {
+                        suggestions.add(item);
+                    }
+                }
+            }
+
+            results.values = suggestions;
+            results.count = suggestions.size();
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            clear();
+            addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            return ((GroceryItem) resultValue).getName();
+        }
+    };
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // Inflate resource fragment
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = layoutInflater.inflate(resource, parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(resource, parent, false);
+        }
 
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ((TextView) convertView.findViewById(R.id.itemName)).setText(objects.get(position).getName());
 
         return convertView;
