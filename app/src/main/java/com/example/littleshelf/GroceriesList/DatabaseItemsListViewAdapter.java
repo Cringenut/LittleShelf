@@ -19,19 +19,19 @@ import com.example.littleshelf.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
+public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
 
     private Context context;
     private int resource;
-    private ArrayList<GroceryItem> objects;
-    private ArrayList<GroceryItem> filteredObjects;
+    private ArrayList<GroceryItem> originalObjects; // Original unfiltered list
+    private ArrayList<GroceryItem> filteredObjects; // Filtered list
 
     public DatabaseItemsListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
-        this.objects = objects;
-        this.filteredObjects = new ArrayList<>(objects);
+        this.originalObjects = objects;
+        this.filteredObjects = new ArrayList<>(objects); // Initialize filtered list with original data
     }
 
     @NonNull
@@ -40,7 +40,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
         return itemsFilter;
     }
 
-    public Filter itemsFilter = new Filter() {
+    private Filter itemsFilter = new Filter() {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -48,11 +48,11 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
             List<GroceryItem> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(objects);
+                suggestions.addAll(originalObjects); // Use the original list when the constraint is empty
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (GroceryItem item : objects) {
+                for (GroceryItem item : originalObjects) {
                     if (item.getName().toLowerCase().contains(filterPattern)) {
                         suggestions.add(item);
                     }
@@ -67,8 +67,8 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            objects.clear();
-            addAll((List<GroceryItem>) results.values);
+            filteredObjects.clear(); // Clear the filtered list before adding new filtered items
+            filteredObjects.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
             notifyDataSetChanged();
         }
 
@@ -87,8 +87,14 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
             convertView = LayoutInflater.from(getContext()).inflate(resource, parent, false);
         }
 
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ((TextView) convertView.findViewById(R.id.itemName)).setText(objects.get(position).getName());
+        GroceryItem groceryItem = null;
+        if (position < filteredObjects.size()) {
+            groceryItem = filteredObjects.get(position); // Use the filtered list for displaying items
+        }
+
+        if (groceryItem != null) {
+            ((TextView) convertView.findViewById(R.id.itemName)).setText(groceryItem.getName());
+        }
 
         return convertView;
     }

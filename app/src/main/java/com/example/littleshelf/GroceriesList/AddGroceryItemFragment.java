@@ -81,7 +81,7 @@ public class AddGroceryItemFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                databaseItemsListViewAdapter.itemsFilter.filter(s.toString().trim());
+                databaseItemsListViewAdapter.getFilter().filter(s.toString().trim());
             }
         });
 
