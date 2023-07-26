@@ -24,12 +24,14 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
     private Context context;
     private int resource;
     private ArrayList<GroceryItem> objects;
+    private ArrayList<GroceryItem> filteredObjects;
 
     public DatabaseItemsListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
         this.objects = objects;
+        this.filteredObjects = new ArrayList<>(objects);
     }
 
     @NonNull
@@ -38,7 +40,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
         return itemsFilter;
     }
 
-    private Filter itemsFilter = new Filter() {
+    public Filter itemsFilter = new Filter() {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -51,7 +53,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for (GroceryItem item : objects) {
-                    if (item.getName().toLowerCase().contains(constraint)) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
                         suggestions.add(item);
                     }
                 }
@@ -65,8 +67,8 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem>  {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            clear();
-            addAll((List) results.values);
+            objects.clear();
+            addAll((List<GroceryItem>) results.values);
             notifyDataSetChanged();
         }
 

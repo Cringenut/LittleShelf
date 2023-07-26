@@ -32,8 +32,6 @@ public class AddGroceryItemFragment extends Fragment {
     private AddItemDataBaseHelper addItemDataBaseHelper;
     private ListView itemOptions;
     private GroceryItem itemToAdd;
-    private List<GroceryItem> unSearchedItems;
-    private List<GroceryItem> SearchedItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +81,7 @@ public class AddGroceryItemFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                databaseItemsListViewAdapter.itemsFilter.filter(s.toString().trim());
             }
         });
 
@@ -151,7 +149,7 @@ public class AddGroceryItemFragment extends Fragment {
         super.onHiddenChanged(hidden);
         // Clear the fields when fragment becomes invisible, otherwise the user can see the fields getting cleared
         if (hidden) {
-            textInputItemNameField.setText("Cheese");
+            textInputItemNameField.setText("");
             buttonDate.setText("");
             itemToAdd = null;
         }
