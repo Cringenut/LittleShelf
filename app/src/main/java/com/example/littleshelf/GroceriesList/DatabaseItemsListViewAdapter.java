@@ -23,15 +23,15 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
 
     private Context context;
     private int resource;
-    private ArrayList<GroceryItem> originalObjects; // Original unfiltered list
-    private ArrayList<GroceryItem> filteredObjects; // Filtered list
+    private ArrayList<GroceryItem> objects; // Original unfiltered list
+    private ArrayList<GroceryItem> allObjects; // Filtered list
 
     public DatabaseItemsListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
-        this.originalObjects = objects;
-        this.filteredObjects = new ArrayList<>(objects); // Initialize filtered list with original data
+        this.objects = objects;
+        this.allObjects = new ArrayList<>(objects); // Initialize filtered list with original data
     }
 
     @NonNull
@@ -48,11 +48,11 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
             List<GroceryItem> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(originalObjects); // Use the original list when the constraint is empty
+                suggestions.addAll(allObjects); // Use the original list when the constraint is empty
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (GroceryItem item : originalObjects) {
+                for (GroceryItem item : allObjects) {
                     if (item.getName().toLowerCase().contains(filterPattern)) {
                         suggestions.add(item);
                     }
@@ -67,8 +67,8 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filteredObjects.clear(); // Clear the filtered list before adding new filtered items
-            filteredObjects.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
+            clear(); // Clear the filtered list before adding new filtered items
+            addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
             notifyDataSetChanged();
         }
 
@@ -88,8 +88,8 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
         }
 
         GroceryItem groceryItem = null;
-        if (position < filteredObjects.size()) {
-            groceryItem = filteredObjects.get(position); // Use the filtered list for displaying items
+        if (position < objects.size()) {
+            groceryItem = objects.get(position); // Use the filtered list for displaying items
         }
 
         if (groceryItem != null) {
