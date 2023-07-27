@@ -51,7 +51,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
             if (constraint == null || constraint.length() == 0) {
                 suggestions.addAll(allObjects); // Use the original list when the constraint is empty
             } else {
-
+                // Change to lambda later
                 String filterPattern = constraint.toString().toLowerCase();
                     for (GroceryItem item : filterPattern.startsWith(currentConstraint) ? allObjects : objects) {
                         if (item.getName().toLowerCase().startsWith(filterPattern))
@@ -59,6 +59,20 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
                     }
 
                 currentConstraint = filterPattern;
+
+                if (suggestions.size() == 0) {
+                    // Change to lambda later
+                    for (GroceryItem item : allObjects) {
+                        for (String filterPatternWord : filterPattern.split(" ")) {
+                            for (String itemName : item.getName().split(" ")) {
+                                if (itemName.toLowerCase().startsWith(filterPatternWord)) {
+                                    suggestions.add(item);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             results.values = suggestions;

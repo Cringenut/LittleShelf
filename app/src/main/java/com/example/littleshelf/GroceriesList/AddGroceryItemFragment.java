@@ -66,12 +66,9 @@ public class AddGroceryItemFragment extends Fragment {
             }
         });
 
-    // TEST
-
         textInputItemNameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -83,8 +80,6 @@ public class AddGroceryItemFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-
-    // TEST
 
     textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
         @Override
@@ -161,7 +156,6 @@ public class AddGroceryItemFragment extends Fragment {
         if (itemToAdd != null) {
             itemToAdd.setExpirationDate(buttonDate.getText().toString());
             groceriesListActivity.getDataBaseHelper().addOne(itemToAdd);
-            groceriesListActivity.getDataBaseHelper().showListViewItems();
 
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.hide(AddGroceryItemFragment.this);

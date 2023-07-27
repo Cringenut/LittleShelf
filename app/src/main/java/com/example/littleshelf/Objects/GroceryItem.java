@@ -30,15 +30,16 @@ public class GroceryItem {
         // Create local date variable
         LocalDate localDate;
         // If additional days is passed add them to expiration date
-        if (additionalDays == null) {
+        /*if (additionalDays == null) {
             localDate = LocalDate.parse(expirationDate, DateTimeFormatter.ofPattern("dd M yyyy"));
         }
         else {
             localDate = LocalDate.parse(expirationDate, DateTimeFormatter.ofPattern("dd M yyyy")).plusDays(additionalDays);
-        }
+        }*/
 
         // Return if date is after tomorrow
-        return localDate.isAfter(LocalDate.now());
+        //return localDate.isAfter(LocalDate.now());
+        return true;
     }
 
     @Override

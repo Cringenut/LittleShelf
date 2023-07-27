@@ -16,7 +16,6 @@ public class HomePageActivity extends AppCompatActivity {
         groceriesDataBaseHelper = new GroceriesDataBaseHelper(HomePageActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
     }
 
     public GroceriesDataBaseHelper getDataBaseHelper() {

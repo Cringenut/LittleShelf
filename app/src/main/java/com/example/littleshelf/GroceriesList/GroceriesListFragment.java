@@ -13,6 +13,8 @@ import android.widget.ListView;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Objects.GroceryItem;
 
+import java.util.ArrayList;
+
 public class GroceriesListFragment extends Fragment {
 
     private GroceriesListActivity groceriesListActivity;
@@ -29,7 +31,11 @@ public class GroceriesListFragment extends Fragment {
         groceriesListActivity.getDataBaseHelper().setListView(listView);
 
         // Show list items
-        groceriesListActivity.getDataBaseHelper().showListViewItems();
+        GroceriesListViewAdapter groceriesListViewAdapter =
+        new GroceriesListViewAdapter(getContext(), R.layout.fragment_list_item, (ArrayList<GroceryItem>) groceriesListActivity
+                .getDataBaseHelper().getAllItems());
+        groceriesListActivity.getDataBaseHelper().getListView().setAdapter(groceriesListViewAdapter);
+
         // Set on item click listener to delete item (temporary)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -37,8 +43,6 @@ public class GroceriesListFragment extends Fragment {
                 // Cast to item at position and delete it from database
                 GroceryItem clickedGroceryItem = (GroceryItem) parent.getItemAtPosition(position);
                 groceriesListActivity.getDataBaseHelper().deleteOne(clickedGroceryItem);
-                // Update list view after deleting item
-                groceriesListActivity.getDataBaseHelper().showListViewItems();
             }
         });
 

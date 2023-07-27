@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -50,6 +51,10 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
+        adapter.add(groceryItem);
+        adapter.notifyDataSetChanged();
+
         // Place data inside columns
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
@@ -63,6 +68,10 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         // Get database and create delete query
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + ITEM_TABLE + " WHERE " + COLUMN_ID + " = " + groceryItem.getId();
+
+        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
+        adapter.remove(groceryItem);
+        adapter.notifyDataSetChanged();
 
         // Call query in cursor, if found delete and return true, otherwise if empty return false
         Cursor cursor = db.rawQuery(queryString, null);
@@ -103,11 +112,11 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public void showListViewItems() {
+    /*public void showListViewItems() {
         // Creating new adapter and passing it to the list view
         GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(context, R.layout.fragment_list_item, (ArrayList<GroceryItem>) getAllItems());
         listView.setAdapter(groceriesListViewAdapter);
-    }
+    }*/
 
     public ListView getListView() {
         return listView;
