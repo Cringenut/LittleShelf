@@ -50,11 +50,18 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
             if (constraint == null || constraint.length() == 0) {
                 suggestions.addAll(allObjects); // Use the original list when the constraint is empty
             } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                String filterPattern = constraint.toString().toLowerCase();
 
                 for (GroceryItem item : allObjects) {
-                    if (item.getName().toLowerCase().contains(filterPattern)) {
-                        suggestions.add(item);
+                    if (item.getName().length() >= filterPattern.length()) {
+                        if (
+                                item.getName()
+                                        .toLowerCase()
+                                        .substring(0, filterPattern.length())
+                                        .equals(filterPattern.toLowerCase())) {
+                            suggestions.add(item);
+                        }
                     }
                 }
             }
