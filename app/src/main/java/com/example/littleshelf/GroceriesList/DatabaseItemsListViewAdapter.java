@@ -64,6 +64,24 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
                         }
                     }
                 }
+
+                if (suggestions.size() == 0) {
+                    for (String filterWord : filterPattern.split(" ")) {
+                        for (GroceryItem item : allObjects) {
+                            if (!suggestions.contains(item)) {
+                                for (String itemWord : item.getName().split(" ")) {
+                                    if (itemWord.length() >= filterWord.length()) {
+                                        if (itemWord.toLowerCase()
+                                                .substring(0, filterWord.length())
+                                                .equals(filterWord.toLowerCase())) {
+                                            suggestions.add(item);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             results.values = suggestions;
