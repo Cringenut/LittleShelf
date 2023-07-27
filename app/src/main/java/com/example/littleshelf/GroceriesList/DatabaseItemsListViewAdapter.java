@@ -40,8 +40,9 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
         return itemsFilter;
     }
 
-    private Filter itemsFilter = new Filter() {
+    private final Filter itemsFilter = new Filter() {
 
+        String currentConstraint = "";
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -52,36 +53,12 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
             } else {
 
                 String filterPattern = constraint.toString().toLowerCase();
-
-                for (GroceryItem item : allObjects) {
-                    if (item.getName().length() >= filterPattern.length()) {
-                        if (
-                                item.getName()
-                                        .toLowerCase()
-                                        .substring(0, filterPattern.length())
-                                        .equals(filterPattern.toLowerCase())) {
+                    for (GroceryItem item : filterPattern.startsWith(currentConstraint) ? allObjects : objects) {
+                        if (item.getName().toLowerCase().startsWith(filterPattern))
                             suggestions.add(item);
-                        }
                     }
-                }
 
-                if (suggestions.size() == 0) {
-                    for (String filterWord : filterPattern.split(" ")) {
-                        for (GroceryItem item : allObjects) {
-                            if (!suggestions.contains(item)) {
-                                for (String itemWord : item.getName().split(" ")) {
-                                    if (itemWord.length() >= filterWord.length()) {
-                                        if (itemWord.toLowerCase()
-                                                .substring(0, filterWord.length())
-                                                .equals(filterWord.toLowerCase())) {
-                                            suggestions.add(item);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                currentConstraint = filterPattern;
             }
 
             results.values = suggestions;
@@ -112,10 +89,7 @@ public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
             convertView = LayoutInflater.from(getContext()).inflate(resource, parent, false);
         }
 
-        GroceryItem groceryItem = null;
-        if (position < objects.size()) {
-            groceryItem = objects.get(position); // Use the filtered list for displaying items
-        }
+        GroceryItem groceryItem = objects.get(position);
 
         if (groceryItem != null) {
             ((TextView) convertView.findViewById(R.id.itemName)).setText(groceryItem.getName());
