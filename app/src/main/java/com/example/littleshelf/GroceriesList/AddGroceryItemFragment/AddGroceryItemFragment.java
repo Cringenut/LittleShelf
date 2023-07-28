@@ -1,5 +1,6 @@
 package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -31,10 +32,10 @@ public class AddGroceryItemFragment extends Fragment {
     private TextInputEditText textInputItemNameField;
     private Button buttonDate;
     private GroceriesListActivity groceriesListActivity;
-    private AddGroceryItemDataBaseHelper addGroceryItemDataBaseHelper;
     private ListView itemOptions;
     private GroceryItem itemToAdd;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,38 +46,26 @@ public class AddGroceryItemFragment extends Fragment {
     textInputItemNameField = v.findViewById(R.id.textInputItemNameField);
     buttonDate = v.findViewById(R.id.buttonDate);
     itemOptions = v.findViewById(R.id.itemOptions);
-    addGroceryItemDataBaseHelper = new AddGroceryItemDataBaseHelper(getContext());
+        AddGroceryItemDataBaseHelper addGroceryItemDataBaseHelper = new AddGroceryItemDataBaseHelper(getContext());
 
-    // TEST
+    AddGroceryItemListViewAdapter addGroceryItemListViewAdapter =
+        new AddGroceryItemListViewAdapter
+            (this, R.layout.fragment_database_item, (ArrayList<GroceryItem>) addGroceryItemDataBaseHelper.getAllItems());
+    itemOptions.setAdapter(addGroceryItemListViewAdapter);
 
-        AddGroceryItemListViewAdapter addGroceryItemListViewAdapter =
-        new AddGroceryItemListViewAdapter(this, R.layout.fragment_database_item, (ArrayList<GroceryItem>) addGroceryItemDataBaseHelper.getAllItems());
-        itemOptions.setAdapter(addGroceryItemListViewAdapter);
-
-        itemOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                itemToAdd = (GroceryItem) parent.getItemAtPosition(position);
-                textInputItemNameField.setText(itemToAdd.getName());
-
-                // Hide the keyboard
-                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-                textInputItemNameField.clearFocus();
-            }
-        });
+    // Set the OnTouchListener to the parent layout
+    @SuppressLint("ClickableViewAccessibility")
+    View parentLayout = v.findViewById(R.id.parentLayout); //
+    parentLayout.setOnTouchListener((View view, MotionEvent motionEvent) -> {
+        clearFocusOnFragmentTouch(v, motionEvent);
+        return false; // Return false to pass the touch event to other views if needed
+    });
 
         textInputItemNameField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -87,56 +76,42 @@ public class AddGroceryItemFragment extends Fragment {
             }
         });
 
-    textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
+        itemOptions.setOnItemClickListener((parent, view, position, id) -> createItemToAdd(parent, v, position));
+
+        textInputItemNameField.setOnFocusChangeListener((view, hasFocus) -> {
             if (itemToAdd != null && hasFocus) {
                 itemToAdd = null;
                 textInputItemNameField.setText("");
             }
 
             itemOptions.setVisibility(hasFocus ? View.VISIBLE : View.INVISIBLE);
-        }
-    });
-
-    // Button add item listener
-    v.findViewById(R.id.buttonAddItem).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            addNewItemToList(v);
-        }
-    });
-
-    // Button date listener
-    buttonDate.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            pickDate(v);
-        }
-    });
-
-        // Set the OnTouchListener to the parent layout
-        View parentLayout = v.findViewById(R.id.parentLayout);
-        parentLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                // Check if the touch event is outside of the EditText
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (textInputItemNameField.isFocused()) {
-                        // Clear focus from the EditText to make it lose focus
-                        textInputItemNameField.clearFocus();
-
-                        // Hide the keyboard
-                        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    }
-                }
-                return false; // Return false to pass the touch event to other views if needed
-            }
         });
 
+        // Button add item listener
+        v.findViewById(R.id.buttonAddItem).setOnClickListener(this::addNewItemToList);
+        // Button date listener
+        buttonDate.setOnClickListener(this::pickDate);
 
         return v;
+    }
+
+    private void createItemToAdd(AdapterView<?> parent, View v, int position) {
+        itemToAdd = (GroceryItem) parent.getItemAtPosition(position);
+        textInputItemNameField.setText(itemToAdd.getName());
+
+        hideKeyboard(v);
+        textInputItemNameField.clearFocus();
+    }
+
+    private void clearFocusOnFragmentTouch(View v, MotionEvent motionEvent) {
+        // Check if the touch event is outside of the EditText
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            if (textInputItemNameField.isFocused()) {
+                // Clear focus from the EditText to make it lose focus
+                textInputItemNameField.clearFocus();
+                hideKeyboard(v);
+            }
+        }
     }
 
     @Override
