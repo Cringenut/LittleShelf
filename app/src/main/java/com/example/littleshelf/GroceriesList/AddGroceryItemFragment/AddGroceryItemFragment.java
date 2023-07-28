@@ -2,6 +2,7 @@ package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -49,7 +50,7 @@ public class AddGroceryItemFragment extends Fragment {
     // TEST
 
         AddGroceryItemListViewAdapter addGroceryItemListViewAdapter =
-        new AddGroceryItemListViewAdapter(getContext(), R.layout.fragment_database_item, (ArrayList<GroceryItem>) addGroceryItemDataBaseHelper.getAllItems());
+        new AddGroceryItemListViewAdapter(this, R.layout.fragment_database_item, (ArrayList<GroceryItem>) addGroceryItemDataBaseHelper.getAllItems());
         itemOptions.setAdapter(addGroceryItemListViewAdapter);
 
         itemOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,7 +61,7 @@ public class AddGroceryItemFragment extends Fragment {
                 textInputItemNameField.setText(itemToAdd.getName());
 
                 // Hide the keyboard
-                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                 textInputItemNameField.clearFocus();
@@ -74,28 +75,27 @@ public class AddGroceryItemFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                addGroceryItemListViewAdapter.getFilter().filter(s.toString());
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                addGroceryItemListViewAdapter.getFilter().filter(s.toString());
+
+                // Update the tag with the current sequence for the next comparison
+                textInputItemNameField.setTag(s.toString());
             }
         });
 
     textInputItemNameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus) {
-                if (itemToAdd != null) {
-                    itemToAdd = null;
-                    textInputItemNameField.setText("");
-                }
+            if (itemToAdd != null && hasFocus) {
+                itemToAdd = null;
+                textInputItemNameField.setText("");
+            }
 
-                itemOptions.setVisibility(View.VISIBLE);
-            }
-            else {
-                itemOptions.setVisibility(View.INVISIBLE);
-            }
+            itemOptions.setVisibility(hasFocus ? View.VISIBLE : View.INVISIBLE);
         }
     });
 
@@ -142,6 +142,10 @@ public class AddGroceryItemFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        clearDataOnHidden(hidden);
+    }
+
+    private void clearDataOnHidden(boolean hidden) {
         // Clear the fields when fragment becomes invisible, otherwise the user can see the fields getting cleared
         if (hidden) {
             textInputItemNameField.setText("");
@@ -151,9 +155,7 @@ public class AddGroceryItemFragment extends Fragment {
     }
 
     private void addNewItemToList(View v) {
-        String addGroceryItemName = textInputItemNameField.getText().toString();
-
-        // If name field is not empty create new item (temporary)
+        // Add item if selected
         if (itemToAdd != null) {
             itemToAdd.setExpirationDate(buttonDate.getText().toString());
             groceriesListActivity.getDataBaseHelper().addOne(itemToAdd);
@@ -162,9 +164,7 @@ public class AddGroceryItemFragment extends Fragment {
             fragmentTransaction.hide(AddGroceryItemFragment.this);
             fragmentTransaction.commit();
 
-            // Hide the keyboard
-            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            hideKeyboard(v);
         }
     }
 
@@ -185,9 +185,18 @@ public class AddGroceryItemFragment extends Fragment {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int style = AlertDialog.THEME_HOLO_LIGHT;
+        int style = AlertDialog.THEME_HOLO_DARK;
         DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(), style, dateSetListener, year, month, day);
 
         datePickerDialog.show();
+    }
+
+    private void hideKeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    public String getTextInputItemNameFieldTag() {
+        return textInputItemNameField.getTag().toString();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.example.littleshelf.GroceriesList.Main.GroceriesListActivity;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.example.littleshelf.R;
 
@@ -21,14 +23,14 @@ import java.util.List;
 
 public class AddGroceryItemListViewAdapter extends ArrayAdapter<GroceryItem> {
 
-    private Context context;
+    private AddGroceryItemFragment parent;
     private int resource;
     private ArrayList<GroceryItem> objects; // Original unfiltered list
     private ArrayList<GroceryItem> allObjects; // Filtered list
 
-    public AddGroceryItemListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
-        super(context, resource, objects);
-        this.context = context;
+    public AddGroceryItemListViewAdapter(@NonNull AddGroceryItemFragment parent, int resource, @NonNull ArrayList<GroceryItem> objects) {
+        super(parent.getContext(), resource, objects);
+        this.parent = parent;
         this.resource = resource;
         this.objects = objects;
         this.allObjects = new ArrayList<>(objects); // Initialize filtered list with original data
@@ -42,7 +44,6 @@ public class AddGroceryItemListViewAdapter extends ArrayAdapter<GroceryItem> {
 
     private final Filter itemsFilter = new Filter() {
 
-        String currentConstraint = "";
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -52,13 +53,12 @@ public class AddGroceryItemListViewAdapter extends ArrayAdapter<GroceryItem> {
                 suggestions.addAll(allObjects); // Use the original list when the constraint is empty
             } else {
                 // Change to lambda later
+                String previousConstraint = parent.getTextInputItemNameFieldTag();
                 String filterPattern = constraint.toString().toLowerCase();
-                    for (GroceryItem item : filterPattern.startsWith(currentConstraint) ? allObjects : objects) {
+                    for (GroceryItem item : filterPattern.startsWith(previousConstraint) ? allObjects : objects) {
                         if (item.getName().toLowerCase().startsWith(filterPattern))
                             suggestions.add(item);
                     }
-
-                currentConstraint = filterPattern;
 
                 if (suggestions.size() == 0) {
                     // Change to lambda later
