@@ -19,7 +19,7 @@
             android:name=".HomePage.HomePageActivity"
             android:exported="false" />
         <activity
-                android:name=".GroceriesList.GroceriesListActivity"
+                android:name=".GroceriesList.Main.GroceriesListActivity"
                 android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

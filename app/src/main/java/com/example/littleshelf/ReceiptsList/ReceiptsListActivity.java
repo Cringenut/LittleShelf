@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.littleshelf.GroceriesList.GroceriesListActivity;
+import com.example.littleshelf.GroceriesList.Main.GroceriesListActivity;
 import com.example.littleshelf.HomePage.HomePageActivity;
 import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

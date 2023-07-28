@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList;
+package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,11 +12,11 @@ import com.example.littleshelf.Objects.GroceryItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddItemDataBaseHelper extends SQLiteOpenHelper  {
+public class AddGroceryItemDataBaseHelper extends SQLiteOpenHelper  {
 
     public static final String ITEM_TABLE = "ITEM_TABLE";
 
-    public AddItemDataBaseHelper(@Nullable Context context) {
+    public AddGroceryItemDataBaseHelper(@Nullable Context context) {
         super(context, "ItemsListDatabase.db", null, 1);
     }
 

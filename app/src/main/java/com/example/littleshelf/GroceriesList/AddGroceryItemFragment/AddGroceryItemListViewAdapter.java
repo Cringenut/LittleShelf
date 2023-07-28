@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList;
+package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
 
 import android.content.Context;
 import android.os.Build;
@@ -19,14 +19,14 @@ import com.example.littleshelf.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseItemsListViewAdapter extends ArrayAdapter<GroceryItem> {
+public class AddGroceryItemListViewAdapter extends ArrayAdapter<GroceryItem> {
 
     private Context context;
     private int resource;
     private ArrayList<GroceryItem> objects; // Original unfiltered list
     private ArrayList<GroceryItem> allObjects; // Filtered list
 
-    public DatabaseItemsListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
+    public AddGroceryItemListViewAdapter(@NonNull Context context, int resource, @NonNull ArrayList<GroceryItem> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;

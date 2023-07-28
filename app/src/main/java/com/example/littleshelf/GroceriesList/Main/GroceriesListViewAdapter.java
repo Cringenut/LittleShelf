@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList;
+package com.example.littleshelf.GroceriesList.Main;
 
 import android.content.Context;
 import android.os.Build;

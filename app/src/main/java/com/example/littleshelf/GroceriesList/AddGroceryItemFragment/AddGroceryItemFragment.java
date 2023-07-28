@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList;
+package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -17,19 +17,20 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+
+import com.example.littleshelf.GroceriesList.Main.GroceriesListActivity;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class AddGroceryItemFragment extends Fragment {
 
     private TextInputEditText textInputItemNameField;
     private Button buttonDate;
     private GroceriesListActivity groceriesListActivity;
-    private AddItemDataBaseHelper addItemDataBaseHelper;
+    private AddGroceryItemDataBaseHelper addGroceryItemDataBaseHelper;
     private ListView itemOptions;
     private GroceryItem itemToAdd;
 
@@ -43,13 +44,13 @@ public class AddGroceryItemFragment extends Fragment {
     textInputItemNameField = v.findViewById(R.id.textInputItemNameField);
     buttonDate = v.findViewById(R.id.buttonDate);
     itemOptions = v.findViewById(R.id.itemOptions);
-    addItemDataBaseHelper = new AddItemDataBaseHelper(getContext());
+    addGroceryItemDataBaseHelper = new AddGroceryItemDataBaseHelper(getContext());
 
     // TEST
 
-        DatabaseItemsListViewAdapter databaseItemsListViewAdapter =
-        new DatabaseItemsListViewAdapter(getContext(), R.layout.fragment_database_item, (ArrayList<GroceryItem>) addItemDataBaseHelper.getAllItems());
-        itemOptions.setAdapter(databaseItemsListViewAdapter);
+        AddGroceryItemListViewAdapter addGroceryItemListViewAdapter =
+        new AddGroceryItemListViewAdapter(getContext(), R.layout.fragment_database_item, (ArrayList<GroceryItem>) addGroceryItemDataBaseHelper.getAllItems());
+        itemOptions.setAdapter(addGroceryItemListViewAdapter);
 
         itemOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,7 +74,7 @@ public class AddGroceryItemFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                databaseItemsListViewAdapter.getFilter().filter(s.toString());
+                addGroceryItemListViewAdapter.getFilter().filter(s.toString());
             }
 
             @Override

@@ -12,12 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
-import com.example.littleshelf.GroceriesList.GroceriesListActivity;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.example.littleshelf.R;
-
-import org.w3c.dom.Text;
 
 public class HomePageAlertFragment extends Fragment {
 

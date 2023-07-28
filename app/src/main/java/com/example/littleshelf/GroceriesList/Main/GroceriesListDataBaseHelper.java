@@ -1,4 +1,4 @@
-package com.example.littleshelf.Objects;
+package com.example.littleshelf.GroceriesList.Main;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,13 +10,12 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
-import com.example.littleshelf.GroceriesList.GroceriesListViewAdapter;
-import com.example.littleshelf.R;
+import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
+public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private ListView listView;
@@ -25,7 +24,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
-    public GroceriesDataBaseHelper(@Nullable Context context) {
+    public GroceriesListDataBaseHelper(@Nullable Context context) {
         super(context, "items.db", null, 1);
         this.context = context;
     }
@@ -51,16 +50,17 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
-        adapter.add(groceryItem);
-        adapter.notifyDataSetChanged();
-
         // Place data inside columns
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
 
-        // Add value to database
-        long insert = db.insert(ITEM_TABLE, null, cv);
+        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
+        adapter.add(groceryItem);
+        adapter.notifyDataSetChanged();
+
+        long insert = db.insert(ITEM_TABLE, null, cv); // Add value to database
+        groceryItem.setId(insert); // Set item id from database
+
         return insert != -1;
     }
 
@@ -69,20 +69,19 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + ITEM_TABLE + " WHERE " + COLUMN_ID + " = " + groceryItem.getId();
 
-        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
-        adapter.remove(groceryItem);
-        adapter.notifyDataSetChanged();
-
-        // Call query in cursor, if found delete and return true, otherwise if empty return false
+        // Call query in cursor
         Cursor cursor = db.rawQuery(queryString, null);
-        return cursor.moveToFirst();
+
+        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
+        adapter.remove(groceryItem); // Deleting item from adapter
+        adapter.notifyDataSetChanged(); // Calling notify to update list
+
+        return cursor.moveToFirst(); // If we found item from query return true
     }
 
     public List<GroceryItem> getAllItems() {
-        // Create empty list to put items inside it
-        List<GroceryItem> returnList = new ArrayList<>();
-        // Query to get all rows from database
-        String queryString = "SELECT * FROM " + ITEM_TABLE;
+        List<GroceryItem> returnList = new ArrayList<>(); // Create empty list for items
+        String queryString = "SELECT * FROM " + ITEM_TABLE; // Query to get all rows from database
 
         // Get database and create cursor for iteration
         SQLiteDatabase db = this.getReadableDatabase();
@@ -91,7 +90,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         // Check if database is not empty
         if (cursor.moveToFirst()) {
             do {
-                // Get data from columns at passe numbers from database
+                // Get data from columns at passed numbers from database
                 int itemID = cursor.getInt(0);
                 String itemName = cursor.getString(1);
                 String itemExpirationDate = cursor.getString(2);
@@ -102,8 +101,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         else {
-            // Return empty list
-            return returnList;
+            return returnList; // Return empty list if database is empty
         }
 
         // Closing cursor and db for optimization
@@ -111,12 +109,6 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
-
-    /*public void showListViewItems() {
-        // Creating new adapter and passing it to the list view
-        GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(context, R.layout.fragment_list_item, (ArrayList<GroceryItem>) getAllItems());
-        listView.setAdapter(groceriesListViewAdapter);
-    }*/
 
     public ListView getListView() {
         return listView;

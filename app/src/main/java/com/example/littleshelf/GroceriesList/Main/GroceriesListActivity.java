@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList;
+package com.example.littleshelf.GroceriesList.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -6,16 +6,15 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.littleshelf.Objects.GroceriesDataBaseHelper;
 import com.example.littleshelf.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GroceriesListActivity extends AppCompatActivity {
 
-    private GroceriesDataBaseHelper groceriesDataBaseHelper;
+    private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        groceriesDataBaseHelper = new GroceriesDataBaseHelper(GroceriesListActivity.this);
+        groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(GroceriesListActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groceries_list);
 
@@ -39,7 +38,7 @@ public class GroceriesListActivity extends AppCompatActivity {
         });
     }
 
-    public GroceriesDataBaseHelper getDataBaseHelper() {
-        return groceriesDataBaseHelper;
+    public GroceriesListDataBaseHelper getDataBaseHelper() {
+        return groceriesListDataBaseHelper;
     }
 }

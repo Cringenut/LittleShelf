@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList;
+package com.example.littleshelf.GroceriesList.Main;
 
 import android.os.Bundle;
 
@@ -26,15 +26,19 @@ public class GroceriesListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_groceries_list, container, false);
 
         // Set default values and list view for database helper
-        groceriesListActivity = (GroceriesListActivity) getActivity();
         ListView listView = v.findViewById(R.id.idListView);
+        groceriesListActivity = (GroceriesListActivity) getActivity();
         groceriesListActivity.getDataBaseHelper().setListView(listView);
 
         // Show list items
-        GroceriesListViewAdapter groceriesListViewAdapter =
-        new GroceriesListViewAdapter(getContext(), R.layout.fragment_list_item, (ArrayList<GroceryItem>) groceriesListActivity
-                .getDataBaseHelper().getAllItems());
-        groceriesListActivity.getDataBaseHelper().getListView().setAdapter(groceriesListViewAdapter);
+        ArrayList<GroceryItem> groceryItems = (ArrayList<GroceryItem>) groceriesListActivity
+                                              .getDataBaseHelper()
+                                              .getAllItems();
+
+        GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(groceriesListActivity, R.layout.fragment_list_item, groceryItems);
+        groceriesListActivity.getDataBaseHelper()
+                .getListView()
+                .setAdapter(groceriesListViewAdapter);
 
         // Set on item click listener to delete item (temporary)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
