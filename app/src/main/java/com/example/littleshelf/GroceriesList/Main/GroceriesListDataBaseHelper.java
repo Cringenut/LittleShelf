@@ -54,11 +54,13 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
 
+        // Add item to adapter
         ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
         adapter.add(groceryItem);
         adapter.notifyDataSetChanged();
 
-        long insert = db.insert(ITEM_TABLE, null, cv); // Add value to database
+
+        long insert = db.insert(ITEM_TABLE, null, cv); // Insert value to database
         groceryItem.setId(insert); // Set item id from database
 
         return insert != -1;

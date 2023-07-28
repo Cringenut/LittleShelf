@@ -9,6 +9,8 @@ import android.view.View;
 import com.example.littleshelf.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Objects;
+
 public class GroceriesListActivity extends AppCompatActivity {
 
     private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
@@ -26,10 +28,10 @@ public class GroceriesListActivity extends AppCompatActivity {
         ((FloatingActionButton) findViewById(R.id.buttonCheese)).setOnClickListener(v -> {
             FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
             if (getSupportFragmentManager().findFragmentById(R.id.addItem).isVisible()) {
-                fragmentTransaction1.hide(getSupportFragmentManager().findFragmentById(R.id.addItem));
+                fragmentTransaction1.hide(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.addItem)));
             }
             else {
-                fragmentTransaction1.show(getSupportFragmentManager().findFragmentById(R.id.addItem));
+                fragmentTransaction1.show(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.addItem)));
             }
             fragmentTransaction1.commit();
         });

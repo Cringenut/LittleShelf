@@ -69,6 +69,7 @@ public class AddGroceryItemFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                // Filter list items
                 addGroceryItemListViewAdapter.getFilter().filter(s.toString());
 
                 // Update the tag with the current sequence for the next comparison
