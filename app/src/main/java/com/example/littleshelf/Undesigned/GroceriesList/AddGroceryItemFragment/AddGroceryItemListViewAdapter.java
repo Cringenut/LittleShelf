@@ -1,7 +1,5 @@
-package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
+package com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.example.littleshelf.GroceriesList.Main.GroceriesListActivity;
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 import com.example.littleshelf.R;
 
 import java.util.ArrayList;

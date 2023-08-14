@@ -1,10 +1,10 @@
-package com.example.littleshelf.HomePage;
+package com.example.littleshelf.Undesigned.HomePage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.littleshelf.GroceriesList.Main.GroceriesListDataBaseHelper;
+import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListDataBaseHelper;
 import com.example.littleshelf.R;
 
 public class HomePageActivity extends AppCompatActivity {

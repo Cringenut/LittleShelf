@@ -1,4 +1,4 @@
-package com.example.littleshelf.HomePage;
+package com.example.littleshelf.Undesigned.HomePage;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 import com.example.littleshelf.R;
 
 public class HomePageAlertFragment extends Fragment {

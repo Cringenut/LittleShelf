@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesList.AddGroceryItemFragment;
+package com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:background="#F4E801"
-    tools:context=".GroceriesList.AddGroceryItemFragment.AddGroceryItemFragment">
+    tools:context=".Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemFragment">
 
     <ListView
         android:id="@+id/itemOptions"

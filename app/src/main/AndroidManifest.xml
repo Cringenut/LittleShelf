@@ -13,13 +13,13 @@
         android:theme="@style/Theme.LittleShelf"
         tools:targetApi="31" >
         <activity
-            android:name=".ReceiptsList.ReceiptsListActivity"
+            android:name=".Undesigned.ReceiptsList.ReceiptsListActivity"
             android:exported="false" />
         <activity
-            android:name=".HomePage.HomePageActivity"
+            android:name=".Undesigned.HomePage.HomePageActivity"
             android:exported="false" />
         <activity
-                android:name=".GroceriesList.Main.GroceriesListActivity"
+                android:name=".Undesigned.GroceriesList.Main.GroceriesListActivity"
                 android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

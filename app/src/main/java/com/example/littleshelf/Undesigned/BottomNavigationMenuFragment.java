@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Undesigned;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.GroceriesList.Main.GroceriesListActivity;
-import com.example.littleshelf.HomePage.HomePageActivity;
-import com.example.littleshelf.ReceiptsList.ReceiptsListActivity;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListActivity;
+import com.example.littleshelf.Undesigned.HomePage.HomePageActivity;
+import com.example.littleshelf.Undesigned.ReceiptsList.ReceiptsListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

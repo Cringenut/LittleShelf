@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage.HomePageActivity">
+    tools:context=".Undesigned.HomePage.HomePageActivity">
 
     <fragment
         android:id="@+id/alert"
-        android:name="com.example.littleshelf.HomePage.HomePageAlertFragment"
+        android:name="com.example.littleshelf.Undesigned.HomePage.HomePageAlertFragment"
         android:layout_width="380dp"
         android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/bottomNavigationMenu"
-        android:name="com.example.littleshelf.BottomNavigationMenuFragment"
+        android:name="com.example.littleshelf.Undesigned.BottomNavigationMenuFragment"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"

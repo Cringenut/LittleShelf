@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroceriesList.Main.GroceriesListActivity">
+    tools:context=".Undesigned.GroceriesList.Main.GroceriesListActivity">
 
     <fragment
         android:id="@+id/listView"
-        android:name="com.example.littleshelf.GroceriesList.Main.GroceriesListFragment"
+        android:name="com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp" />
 
     <fragment
         android:id="@+id/bottomNavigationMenu"
-        android:name="com.example.littleshelf.BottomNavigationMenuFragment"
+        android:name="com.example.littleshelf.Undesigned.BottomNavigationMenuFragment"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +23,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/addItem"
-        android:name="com.example.littleshelf.GroceriesList.AddGroceryItemFragment.AddGroceryItemFragment"
+        android:name="com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemFragment"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:visibility="visible"
