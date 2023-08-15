@@ -61,13 +61,10 @@ public class GroceriesActivity extends AppCompatActivity {
 
                 if (groceryItems.get(position).getExpirationDate() == null) {
                     holder.itemExpirationDate.setVisibility(View.GONE);
+                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
+                    layoutParams.setMargins(0, 0, 0, 0);
                 }
                 else {
-                    /*holder.itemName.setPadding(
-                            holder.itemName.getPaddingLeft(),
-                            holder.itemName.getPaddingTop(),
-                            holder.itemName.getPaddingRight(),
-                            getResources().getDimensionPixelSize(com.intuit.ssp.R.dimen._12ssp));*/
                     ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
                     layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
                     holder.itemExpirationDate.setText(groceryItems.get(position).getExpirationDate());

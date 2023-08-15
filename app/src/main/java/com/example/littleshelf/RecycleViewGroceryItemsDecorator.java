@@ -11,7 +11,7 @@ public class RecycleViewGroceryItemsDecorator extends RecyclerView.ItemDecoratio
     private int space;
 
     public RecycleViewGroceryItemsDecorator(Context context) {
-        this.space = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp);
+        this.space = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._4sdp);
     }
 
     @Override
