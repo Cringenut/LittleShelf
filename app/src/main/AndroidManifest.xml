@@ -19,8 +19,8 @@
             android:name=".Undesigned.HomePage.HomePageActivity"
             android:exported="false" />
         <activity
-                android:name=".Undesigned.GroceriesList.Main.GroceriesListActivity"
-                android:exported="true" >
+            android:name=".Undesigned.GroceriesList.Main.GroceriesListActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
