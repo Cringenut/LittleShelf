@@ -19,7 +19,7 @@
 
     <FrameLayout
         android:id="@+id/frameLayoutSearchBar"
-        android:background="@drawable/searchroundstyle"
+        android:background="@drawable/style_search_round"
         android:backgroundTint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_32sdp"
@@ -61,5 +61,15 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:background="@drawable/style_btn_round"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
