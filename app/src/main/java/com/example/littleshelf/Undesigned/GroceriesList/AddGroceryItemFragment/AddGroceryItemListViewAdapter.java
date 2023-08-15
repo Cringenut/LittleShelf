@@ -103,7 +103,7 @@ public class AddGroceryItemListViewAdapter extends ArrayAdapter<GroceryItem> {
         GroceryItem groceryItem = objects.get(position);
 
         if (groceryItem != null) {
-            ((TextView) convertView.findViewById(R.id.itemName)).setText(groceryItem.getName());
+            ((TextView) convertView.findViewById(R.id.textViewItemName)).setText(groceryItem.getName());
         }
 
         return convertView;

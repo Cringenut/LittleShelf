@@ -39,7 +39,7 @@ public class GroceriesListViewAdapter extends ArrayAdapter<GroceryItem> {
         convertView = layoutInflater.inflate(resource, parent, false);
 
         // Change data in list item fragment
-        ((TextView) convertView.findViewById(R.id.itemName)).setText(objects.get(position).getName());
+        ((TextView) convertView.findViewById(R.id.textViewItemName)).setText(objects.get(position).getName());
 
         ((TextView) convertView.findViewById(R.id.itemDate)).setText(objects.get(position).getExpirationDate());
         if (objects.get(position).isFresh(null)) {
