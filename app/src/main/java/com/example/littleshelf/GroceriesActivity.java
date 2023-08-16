@@ -2,14 +2,19 @@ package com.example.littleshelf;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListActivity;
@@ -25,6 +30,28 @@ public class GroceriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.d_activity_groceries);
+
+        // Obtain an instance of the FragmentManager
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Button buttonAdd = findViewById(R.id.btnAddItem);
+
+        buttonAdd.setOnClickListener(v -> {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            AddItemListFragment addItemListFragment = new AddItemListFragment();
+            fragmentTransaction.replace(R.id.fragmentAddItemList, addItemListFragment);
+            fragmentTransaction.commit();
+            Runnable delayedTask = new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.remove(addItemListFragment); // Remove the fragment from the container
+                    fragmentTransaction.commit();
+                }
+            };
+
+            new Handler().postDelayed(delayedTask, 1000);
+        });
+
 
 
         class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {

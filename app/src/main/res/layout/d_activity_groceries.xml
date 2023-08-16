@@ -64,22 +64,25 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button"
-        android:background="@drawable/style_btn_round"
+        android:id="@+id/btnAddItem"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/style_btn_round"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/addItemListFragment"
+    <FrameLayout
+        android:id="@+id/fragmentAddItemList"
         android:name="com.example.littleshelf.AddItemListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
