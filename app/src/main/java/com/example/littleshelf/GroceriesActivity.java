@@ -35,21 +35,13 @@ public class GroceriesActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Button buttonAdd = findViewById(R.id.btnAddItem);
 
-        buttonAdd.setOnClickListener(v -> {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        buttonAdd.setOnClickListener(vAdd -> {
+            FragmentTransaction fragmentAddTransaction = fragmentManager.beginTransaction();
             AddItemListFragment addItemListFragment = new AddItemListFragment();
-            fragmentTransaction.replace(R.id.fragmentAddItemList, addItemListFragment);
-            fragmentTransaction.commit();
-            Runnable delayedTask = new Runnable() {
-                @Override
-                public void run() {
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.remove(addItemListFragment); // Remove the fragment from the container
-                    fragmentTransaction.commit();
-                }
-            };
+            addItemListFragment.setFragmentManager(fragmentManager); // Temp
+            fragmentAddTransaction.replace(R.id.fragmentAddItemList, addItemListFragment);
+            fragmentAddTransaction.commit();
 
-            new Handler().postDelayed(delayedTask, 1000);
         });
 
 
