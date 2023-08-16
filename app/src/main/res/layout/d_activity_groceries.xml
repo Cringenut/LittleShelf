@@ -73,4 +73,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/addItemListFragment"
+        android:name="com.example.littleshelf.AddItemListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
