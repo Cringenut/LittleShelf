@@ -20,8 +20,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayoutSearchBar" />
 
-    <FrameLayout
+    <fragment
         android:id="@+id/frameLayoutSearchBar"
+        android:name="com.example.littleshelf.SearchBarFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_32sdp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -32,17 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayoutTitle">
-
-        <EditText
-            android:id="@+id/searchBarText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Search..."
-            android:textColor="@color/white" />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutTitle"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayoutTitle"

@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_32sdp"
-    android:background="#000000"
+    android:background="@drawable/style_search_round"
+    android:backgroundTint="@color/black"
     tools:context=".SearchBarFragment" >
 
     <FrameLayout
         android:id="@+id/frameLayout2"
-        android:layout_width="@dimen/_16sdp"
-        android:layout_height="@dimen/_16sdp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_8sdp"
-        android:background="#FF0000"
+        android:background="@drawable/search"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,10 +28,13 @@
         android:ems="10"
         android:fontFamily="sans-serif"
         android:inputType="text"
-        android:text="Search..."
+        android:hint="Search..."
+        android:textColorHint="@drawable/style_selector_search"
+        android:textCursorDrawable="@drawable/style_cursor_search"
         android:textColor="@color/white"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/frameLayout2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,6 @@ public class AddItemListFragment extends Fragment {
 
     private Button btnBack;
     private FragmentManager fragmentManager;
-    private TextView searchBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,33 +36,7 @@ public class AddItemListFragment extends Fragment {
             fragmentBackTransaction.commit();
         });
 
-        searchBar = view.findViewById(R.id.searchBarText);
-        searchBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         return view;
-    }
-
-    public void closeFragment() {
-
-    }
-
-    public Button getBtnBack() {
-        return btnBack;
     }
 
     public void setFragmentManager(FragmentManager fragmentManager) {

@@ -44,58 +44,6 @@ public class GroceriesActivity extends AppCompatActivity {
 
         });
 
-
-
-        class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
-
-            Context context;
-            List<GroceryItem> groceryItems;
-
-            class RecycleViewHolder extends RecyclerView.ViewHolder {
-
-                TextView itemName;
-                TextView itemExpirationDate;
-                public RecycleViewHolder(@NonNull View itemView) {
-                    super(itemView);
-
-                    itemName = itemView.findViewById(R.id.textViewItemName);
-                    itemExpirationDate = itemView.findViewById(R.id.textViewItemExpirationDate);
-                }
-            }
-
-            public RecycleViewAdapter(Context context, List<GroceryItem> groceryItems) {
-                this.context = context;
-                this.groceryItems = groceryItems;
-            }
-
-            @NonNull
-            @Override
-            public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new RecycleViewHolder(LayoutInflater.from(context).inflate(R.layout.d_fragment_grocery_item, parent, false));
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-                holder.itemName.setText(groceryItems.get(position).getName());
-
-                if (groceryItems.get(position).getExpirationDate() == null) {
-                    holder.itemExpirationDate.setVisibility(View.GONE);
-                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
-                    layoutParams.setMargins(0, 0, 0, 0);
-                }
-                else {
-                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
-                    layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
-                    holder.itemExpirationDate.setText(groceryItems.get(position).getExpirationDate());
-                }
-            }
-
-            @Override
-            public int getItemCount() {
-                return groceryItems.size();
-            }
-        }
-
         List<GroceryItem> groceryItems = new ArrayList<GroceryItem>();
         GroceriesListDataBaseHelper groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(GroceriesActivity.this);
         groceryItems = groceriesListDataBaseHelper.getAllItems();
@@ -103,7 +51,7 @@ public class GroceriesActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewGroceries);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator(this));
-        recyclerView.setAdapter(new RecycleViewAdapter(this, groceryItems));
+        recyclerView.setAdapter(new AddItemListRecycleViewAdapter(this, groceryItems));
 
     }
 }
