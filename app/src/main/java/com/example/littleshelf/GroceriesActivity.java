@@ -49,9 +49,5 @@ public class GroceriesActivity extends AppCompatActivity {
         groceryItems = groceriesListDataBaseHelper.getAllItems();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewGroceries);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator(this));
-        recyclerView.setAdapter(new AddItemListRecycleViewAdapter(this, groceryItems));
-
     }
 }
