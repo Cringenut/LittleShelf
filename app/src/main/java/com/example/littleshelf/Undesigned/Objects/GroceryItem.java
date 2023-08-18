@@ -20,6 +20,10 @@ public class GroceryItem {
         this.expirationDate = expirationDate;
     }
 
+    public GroceryItem(String name) {
+        this.name = name;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean isFresh(@Nullable Integer additionalDays) {
         if (expirationDate.isEmpty()) {
