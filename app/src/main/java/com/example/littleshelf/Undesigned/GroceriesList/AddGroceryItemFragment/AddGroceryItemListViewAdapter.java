@@ -74,7 +74,6 @@ public class AddGroceryItemListViewAdapter extends ArrayAdapter<GroceryItem> {
 
             results.values = suggestions;
             results.count = suggestions.size();
-
             return results;
         }
 

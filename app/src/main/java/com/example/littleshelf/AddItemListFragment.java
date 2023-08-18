@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,8 @@ public class AddItemListFragment extends Fragment {
 
     private Button btnBack;
     private FragmentManager fragmentManager;
+    private RecyclerView recyclerView;
+    private SearchBarFragment searchBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

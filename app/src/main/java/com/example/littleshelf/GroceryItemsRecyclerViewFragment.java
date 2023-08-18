@@ -21,8 +21,9 @@ import java.util.List;
 public class GroceryItemsRecyclerViewFragment extends RecyclerView {
 
     private final AddItemListRecycleViewAdapter recycleViewAdapter;
-    private Context context;
-    public GroceryItemsRecyclerViewFragment(@NonNull Context context) {
+    private final Context context;
+    private Filter filter;
+    public GroceryItemsRecyclerViewFragment(@NonNull Context context, Filter filter) {
         super(context);
         this.context = context;
         addItemDecoration(new RecycleViewGroceryItemsDecorator());
@@ -30,7 +31,16 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
         recycleViewAdapter = new AddItemListRecycleViewAdapter(getContext(), null);
     }
 
-    // Decorator to create space between recycled view items
+    public Filter getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Filter filter) {
+        this.filter = filter;
+    }
+
+    /* Decorator */
+    // Decorator to create space between recycler view items
     private class RecycleViewGroceryItemsDecorator extends RecyclerView.ItemDecoration {
         @Override
         public void getItemOffsets(Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -38,10 +48,10 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
         }
     }
 
-    // Adapter
+    /* Adapter */
     private class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemListRecycleViewAdapter.RecycleViewHolder> {
-        private ArrayList<GroceryItem> groceryItems; // Original unfiltered list
-        private ArrayList<GroceryItem> allGroceryItems; // Filtered list
+        private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
+        private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
 
         private class RecycleViewHolder extends RecyclerView.ViewHolder {
             TextView itemName;
@@ -53,10 +63,7 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
             }
         }
 
-        // Filters
-
-        private ItemListFilter itemListFilter;
-        private AddItemListFilter addItemListFilter;
+        /* Filters */
 
         // Filter used for groceries list items
         private class ItemListFilter extends Filter {
@@ -64,12 +71,22 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
             protected List<GroceryItem> suggestions = new ArrayList<>();
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+
+                results.values = suggestions;
+                results.count = suggestions.size();
+                return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredGroceryItems.clear(); // Clear the filtered list before adding new filtered items
+                filteredGroceryItems.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
+                notifyDataSetChanged();
+            }
 
+            @Override
+            public CharSequence convertResultToString(Object resultValue) {
+                return ((GroceryItem) resultValue).getName();
             }
         }
 
@@ -86,10 +103,10 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
         }
 
         public AddItemListRecycleViewAdapter(Context context, ArrayList<GroceryItem> groceryItems) {
-            this.groceryItems = groceryItems;
+            this.filteredGroceryItems = groceryItems;
         }
 
-        // Create grocery item fragment for recycled view
+        // Create grocery item fragment for recycler view
         @NonNull
         @Override
         public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -99,9 +116,9 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
 
         @Override
         public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-            holder.itemName.setText(groceryItems.get(position).getName());
+            holder.itemName.setText(filteredGroceryItems.get(position).getName());
 
-            if (groceryItems.get(position).getExpirationDate() == null) {
+            if (filteredGroceryItems.get(position).getExpirationDate() == null) {
                 createNonExpirableItem(holder);
             }
             else {
@@ -120,12 +137,12 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
         private void createExpirableItem(@NonNull RecycleViewHolder holder, int position) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
             layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
-            holder.itemExpirationDate.setText(groceryItems.get(position).getExpirationDate());
+            holder.itemExpirationDate.setText(filteredGroceryItems.get(position).getExpirationDate());
         }
 
         @Override
         public int getItemCount() {
-            return groceryItems.size();
+            return filteredGroceryItems.size();
         }
     }
 
