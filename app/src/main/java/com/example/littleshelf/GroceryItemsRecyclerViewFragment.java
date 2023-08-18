@@ -24,8 +24,8 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
     private AddItemListRecycleViewAdapter recycleViewAdapter;
     public GroceryItemsRecyclerViewFragment(@NonNull Context context) {
         super(context);
-        addItemDecoration(null);
-        setLayoutManager(null);
+        addItemDecoration(new RecycleViewGroceryItemsDecorator(getContext()));
+        setLayoutManager(new LinearLayoutManager(getContext()));
         recycleViewAdapter = new AddItemListRecycleViewAdapter(getContext(), null);
     }
 
@@ -45,22 +45,11 @@ public class GroceryItemsRecyclerViewFragment extends RecyclerView {
         }
     }
 
-    @Override
-    public void addItemDecoration(@Nullable ItemDecoration decor) {
-        super.addItemDecoration(new RecycleViewGroceryItemsDecorator(getContext()));
-    }
-
-    @Override
-    public void setLayoutManager(@Nullable LayoutManager layout) {
-        super.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
-
     private static class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemListRecycleViewAdapter.RecycleViewHolder> {
         Context context;
         List<GroceryItem> groceryItems;
 
-        private class RecycleViewHolder extends RecyclerView.ViewHolder {
+        private static class RecycleViewHolder extends RecyclerView.ViewHolder {
             TextView itemName;
             TextView itemExpirationDate;
             public RecycleViewHolder(@NonNull View itemView) {
