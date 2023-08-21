@@ -2,14 +2,17 @@ package com.example.littleshelf;
 
 import android.content.Context;
 import android.graphics.Rect;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.translation.ViewTranslationRequest;
 import android.widget.Filter;
 import android.widget.TextView;
 
@@ -17,18 +20,26 @@ import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class GroceryItemsRecyclerViewFragment extends RecyclerView {
+public class GroceryItemsRecyclerViewFragment extends Fragment {
 
-    private final AddItemListRecycleViewAdapter recycleViewAdapter;
-    private final Context context;
+    private RecyclerView recyclerView;
+    private AddItemListRecycleViewAdapter recycleViewAdapter;
+    private Context context;
     private Filter filter;
-    public GroceryItemsRecyclerViewFragment(@NonNull Context context, Filter filter) {
-        super(context);
-        this.context = context;
-        addItemDecoration(new RecycleViewGroceryItemsDecorator());
-        setLayoutManager(new LinearLayoutManager(getContext()));
-        recycleViewAdapter = new AddItemListRecycleViewAdapter(getContext(), null);
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.d_fragment_grocery_items_recycler_view, container, false);
+        this.context = rootView.getContext();
+
+        recyclerView = rootView.findViewById(R.id.recyclerViewGroceries);
+        recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     public Filter getFilter() {

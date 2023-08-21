@@ -38,10 +38,9 @@ public class GroceriesActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(vAdd -> {
             FragmentTransaction fragmentAddTransaction = fragmentManager.beginTransaction();
             AddItemListFragment addItemListFragment = new AddItemListFragment();
-            addItemListFragment.setFragmentManager(fragmentManager); // Temp
-            fragmentAddTransaction.replace(R.id.fragmentAddItemList, addItemListFragment);
-            fragmentAddTransaction.commit();
-
+            fragmentAddTransaction
+                    .replace(R.id.fragmentAddItemList, addItemListFragment)
+                    .commit();
         });
 
         List<GroceryItem> groceryItems = new ArrayList<GroceryItem>();

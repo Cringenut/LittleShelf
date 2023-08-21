@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class AddItemListFragment extends Fragment {
@@ -32,6 +33,10 @@ public class AddItemListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.d_fragment_add_item_list, container, false);
 
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        getChildFragmentManager().beginTransaction();
+
+
         btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> {
             FragmentTransaction fragmentBackTransaction = fragmentManager.beginTransaction();
@@ -39,10 +44,13 @@ public class AddItemListFragment extends Fragment {
             fragmentBackTransaction.commit();
         });
 
+        searchBar = new SearchBarFragment();
+        getChildFragmentManager().beginTransaction()
+                .replace(view.findViewById(R.id.containerSearchBar).getId(), searchBar)
+                .commit();
+
+
         return view;
     }
 
-    public void setFragmentManager(FragmentManager fragmentManager) {
-        this.fragmentManager = fragmentManager;
-    }
 }

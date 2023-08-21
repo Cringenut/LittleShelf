@@ -9,6 +9,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewGroceries"
+        android:name="com.example.littleshelf.GroceryItemsRecyclerViewFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -18,10 +19,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayoutSearchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentSearchBar" />
 
-    <fragment
-        android:id="@+id/frameLayoutSearchBar"
+    <FrameLayout
+        android:id="@+id/containerSearchBar"
         android:name="com.example.littleshelf.SearchBarFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_32sdp"

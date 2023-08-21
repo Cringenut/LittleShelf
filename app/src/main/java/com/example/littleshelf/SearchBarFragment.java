@@ -11,23 +11,27 @@ import android.widget.TextView;
 
 public class SearchBarFragment extends Fragment {
 
-    private TextView searchBar;
+    private TextView searchField;
 
     public SearchBarFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.d_fragment_search_bar, container, false);
+        View v = inflater.inflate(R.layout.d_fragment_search_bar, container, false);
+        searchField = v.findViewById(R.id.editTexSearchBar);
+        return v;
+    }
+
+    public TextView getSearchField() {
+        return searchField;
     }
 }
