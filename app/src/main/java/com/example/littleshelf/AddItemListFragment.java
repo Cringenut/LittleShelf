@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+
 public class AddItemListFragment extends Fragment {
 
     private Button btnBack;
@@ -49,7 +51,6 @@ public class AddItemListFragment extends Fragment {
         getChildFragmentManager().beginTransaction()
                 .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), searchBar)
                 .commit();
-
 
         return view;
     }
