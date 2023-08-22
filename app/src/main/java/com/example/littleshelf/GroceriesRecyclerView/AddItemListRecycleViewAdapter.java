@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,13 +14,16 @@ import com.example.littleshelf.R;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /* Adapter */
 public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemListRecycleViewAdapter.RecycleViewHolder> {
+
     private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
     private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
+    private Context context;
 
-    private class RecycleViewHolder extends RecyclerView.ViewHolder {
+    protected class RecycleViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemExpirationDate;
         public RecycleViewHolder(@NonNull View itemView) {
@@ -77,4 +81,43 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
     public int getItemCount() {
         return filteredGroceryItems.size();
     }
+
+    private class AddGroceryItemsListFilter extends Filter {
+
+        protected ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
+        protected ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
+        protected FilterResults results = new FilterResults();
+        protected List<GroceryItem> suggestions = new ArrayList<>();
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            results.values = suggestions;
+            results.count = suggestions.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredGroceryItems.clear(); // Clear the filtered list before adding new filtered items
+            filteredGroceryItems.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            return ((GroceryItem) resultValue).getName();
+        }
+    }
+
+    public class GroceryItemsListFilter extends AddGroceryItemsListFilter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            if (constraint.length() > 0) {
+                suggestions.add(new GroceryItem(constraint.toString()));
+            }
+            super.performFiltering(constraint);
+            return null;
+        }
+    }
+
 }

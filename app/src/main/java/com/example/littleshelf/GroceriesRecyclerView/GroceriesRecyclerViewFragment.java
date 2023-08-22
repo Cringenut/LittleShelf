@@ -57,9 +57,6 @@ public class GroceriesRecyclerViewFragment extends Fragment {
             outRect.bottom = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._4sdp);
         }
     }
-
-
-
     public AddItemListRecycleViewAdapter getRecycleViewAdapter() {
         return recycleViewAdapter;
     }
