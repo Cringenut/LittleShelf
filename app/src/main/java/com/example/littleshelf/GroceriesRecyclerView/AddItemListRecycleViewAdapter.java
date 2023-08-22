@@ -8,6 +8,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
@@ -21,6 +22,8 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
 
     private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
     private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
+
+    private Filter currentFilter;
     private Context context;
 
     protected class RecycleViewHolder extends RecyclerView.ViewHolder {
@@ -33,13 +36,8 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
         }
     }
 
-    /* Filters */
-
-    // Filter used for groceries list items
-
-    // Filter user for searching existing item names or creating one from search field
-
-    public AddItemListRecycleViewAdapter(Context context, ArrayList<GroceryItem> groceryItems) {
+    public AddItemListRecycleViewAdapter(Context context, @Nullable ArrayList<GroceryItem> groceryItems) {
+        this.context = context;
         this.filteredGroceryItems = groceryItems;
     }
 
@@ -49,7 +47,6 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
     public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new RecycleViewHolder(LayoutInflater.from(context).inflate(R.layout.d_fragment_grocery_item, parent, false));
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
@@ -82,7 +79,8 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
         return filteredGroceryItems.size();
     }
 
-    private class AddGroceryItemsListFilter extends Filter {
+    // Filter used for groceries list items
+    private class GroceryItemsListFilter extends Filter {
 
         protected ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
         protected ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
@@ -90,7 +88,6 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
         protected List<GroceryItem> suggestions = new ArrayList<>();
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-
             results.values = suggestions;
             results.count = suggestions.size();
             return results;
@@ -109,7 +106,8 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
         }
     }
 
-    public class GroceryItemsListFilter extends AddGroceryItemsListFilter {
+    // Filter user for searching existing item names or creating one from search field
+    private class AddGroceryItemsListFilter extends GroceryItemsListFilter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             if (constraint.length() > 0) {
@@ -118,6 +116,18 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
             super.performFiltering(constraint);
             return null;
         }
+    }
+
+    public void setGroceryItemsListFilter() {
+        currentFilter = new GroceryItemsListFilter();
+    }
+
+    public void setAddGroceryItemsListFilter() {
+        currentFilter = new AddGroceryItemsListFilter();
+    }
+
+    public Filter getCurrentFilter() {
+        return currentFilter;
     }
 
 }

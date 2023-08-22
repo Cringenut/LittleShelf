@@ -37,16 +37,9 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerViewGroceries);
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new AddItemListRecycleViewAdapter(context, null));
 
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    public Filter getFilter() {
-        return filter;
-    }
-
-    public void setFilter(Filter filter) {
-        this.filter = filter;
     }
 
     /* Decorator */
