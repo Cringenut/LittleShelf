@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 
 public class AddItemListFragment extends Fragment {
@@ -47,20 +48,19 @@ public class AddItemListFragment extends Fragment {
         getChildFragmentManager().beginTransaction()
                 .replace(view.findViewById(R.id.containerSearchBar).getId(), searchBar)
                 .commit();
-        searchBar.setParentFragment(this);
 
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         getChildFragmentManager().beginTransaction()
-                .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), searchBar)
+                .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
-        groceriesRecyclerView.getRecycleViewAdapter().setAddGroceryItemsListFilter();
+        searchBar.setParentFragment(this);
 
         return view;
     }
 
     public void setupSearchBarField(EditText searchBarField) {
-        searchBarField.getText();
-
+        groceriesRecyclerView.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter(getContext(), null));
+        groceriesRecyclerView.getRecyclerViewAdapter();
         searchBarField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,7 +69,7 @@ public class AddItemListFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                groceriesRecyclerView.getRecycleViewAdapter().getCurrentFilter().filter(s);
+                groceriesRecyclerView.getRecyclerViewAdapter().getCurrentFilter().filter(s);
             }
 
             @Override

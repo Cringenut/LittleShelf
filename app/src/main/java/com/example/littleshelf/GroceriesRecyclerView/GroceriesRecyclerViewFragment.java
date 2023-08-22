@@ -11,21 +11,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.TextView;
 
 import com.example.littleshelf.R;
-import com.example.littleshelf.Undesigned.Objects.GroceryItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GroceriesRecyclerViewFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private AddItemListRecycleViewAdapter recycleViewAdapter;
+    private GroceriesListRecyclerViewAdapter recyclerViewAdapter;
     private Context context;
-    private Filter filter;
 
     @Nullable
     @Override
@@ -37,7 +30,6 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerViewGroceries);
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new AddItemListRecycleViewAdapter(context, null));
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -50,8 +42,12 @@ public class GroceriesRecyclerViewFragment extends Fragment {
             outRect.bottom = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._4sdp);
         }
     }
-    public AddItemListRecycleViewAdapter getRecycleViewAdapter() {
-        return recycleViewAdapter;
+    public GroceriesListRecyclerViewAdapter getRecyclerViewAdapter() {
+        return recyclerViewAdapter;
     }
 
+    public void setRecyclerViewAdapter(GroceriesListRecyclerViewAdapter recyclerViewAdapter) {
+        this.recyclerViewAdapter = recyclerViewAdapter;
+        recyclerView.setAdapter(recyclerViewAdapter);
+    }
 }

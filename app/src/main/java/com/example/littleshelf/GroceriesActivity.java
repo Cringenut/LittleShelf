@@ -43,10 +43,7 @@ public class GroceriesActivity extends AppCompatActivity {
                     .commit();
         });
 
-        List<GroceryItem> groceryItems = new ArrayList<GroceryItem>();
-        GroceriesListDataBaseHelper groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(GroceriesActivity.this);
-        groceryItems = groceriesListDataBaseHelper.getAllItems();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewGroceries);
+
     }
 }

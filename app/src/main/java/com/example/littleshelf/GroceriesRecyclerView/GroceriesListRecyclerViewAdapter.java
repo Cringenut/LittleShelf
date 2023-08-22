@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* Adapter */
-public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemListRecycleViewAdapter.RecycleViewHolder> {
+public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesListRecyclerViewAdapter.RecycleViewHolder> {
 
     private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
     private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
@@ -36,7 +36,7 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
         }
     }
 
-    public AddItemListRecycleViewAdapter(Context context, @Nullable ArrayList<GroceryItem> groceryItems) {
+    public GroceriesListRecyclerViewAdapter(Context context, @Nullable ArrayList<GroceryItem> groceryItems) {
         this.context = context;
         this.filteredGroceryItems = groceryItems;
     }
@@ -86,6 +86,7 @@ public class AddItemListRecycleViewAdapter extends RecyclerView.Adapter<AddItemL
         protected ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
         protected FilterResults results = new FilterResults();
         protected List<GroceryItem> suggestions = new ArrayList<>();
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             results.values = suggestions;
