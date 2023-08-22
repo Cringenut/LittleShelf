@@ -7,8 +7,8 @@
     android:background="#1E1919"
     tools:context=".AddItemListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGroceries"
+    <FrameLayout
+        android:id="@+id/containerRecyclerViewGroceries"
         android:name="com.example.littleshelf.GroceryItemsRecyclerViewFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

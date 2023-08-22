@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.translation.ViewTranslationRequest;
 import android.widget.Filter;
 import android.widget.TextView;
 
@@ -20,9 +18,8 @@ import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
-public class GroceryItemsRecyclerViewFragment extends Fragment {
+public class GroceriesRecyclerViewFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AddItemListRecycleViewAdapter recycleViewAdapter;
