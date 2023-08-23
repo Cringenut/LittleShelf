@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListActivity;
 import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListDataBaseHelper;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
@@ -43,7 +45,16 @@ public class GroceriesActivity extends AppCompatActivity {
                     .commit();
         });
 
+        GroceriesRecyclerViewFragment groceriesRecyclerViewFragment = new GroceriesRecyclerViewFragment();
+        groceriesRecyclerViewFragment.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter(GroceriesActivity.this, (ArrayList<GroceryItem>) (new GroceriesListDataBaseHelper(GroceriesActivity.this).getAllItems())));
+        //RecyclerView recyclerView = findViewById(R.id.containerRecyclerViewGroceries);
 
+        GroceriesRecyclerViewFragment groceriesRecyclerView = new GroceriesRecyclerViewFragment();
+        groceriesRecyclerView.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter
+                (GroceriesActivity.this, (ArrayList<GroceryItem>)(new GroceriesListDataBaseHelper(GroceriesActivity.this).getAllItems())));
+        fragmentManager.beginTransaction()
+                .replace(findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerViewFragment)
+                .commit();
 
     }
 }

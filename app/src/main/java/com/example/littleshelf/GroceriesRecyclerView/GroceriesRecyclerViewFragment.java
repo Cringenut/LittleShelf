@@ -13,15 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.littleshelf.R;
-import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemDataBaseHelper;
-import com.example.littleshelf.Undesigned.Objects.GroceryItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GroceriesRecyclerViewFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private GroceriesListRecyclerViewAdapter recyclerViewAdapter;
     private Context context;
 
@@ -32,7 +26,7 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.d_fragment_grocery_items_recycler_view, container, false);
         this.context = rootView.getContext();
 
-        recyclerView = rootView.findViewById(R.id.recyclerViewGroceries);
+        RecyclerView recyclerView = rootView.findViewById(R.id.containerRecyclerViewGroceries);
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -54,9 +48,5 @@ public class GroceriesRecyclerViewFragment extends Fragment {
 
     public void setRecyclerViewAdapter(GroceriesListRecyclerViewAdapter recyclerViewAdapter) {
         this.recyclerViewAdapter = recyclerViewAdapter;
-    }
-
-    public RecyclerView getRecyclerView() {
-        return recyclerView;
     }
 }

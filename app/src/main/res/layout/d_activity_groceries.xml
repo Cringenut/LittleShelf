@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGroceries"
+    <FrameLayout
+        android:id="@+id/containerRecyclerViewGroceries"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -71,7 +71,7 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/style_btn_round"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewGroceries"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <FrameLayout
@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewGroceries"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewGroceries"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
