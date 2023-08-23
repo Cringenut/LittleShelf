@@ -1,8 +1,10 @@
 package com.example.littleshelf;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +15,10 @@ import android.widget.EditText;
 
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemDataBaseHelper;
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+
+import java.util.ArrayList;
 
 public class SearchBarFragment extends Fragment {
 
@@ -34,23 +40,18 @@ public class SearchBarFragment extends Fragment {
         View v = inflater.inflate(R.layout.d_fragment_search_bar, container, false);
 
         EditText searchBarField = v.findViewById(R.id.editTexSearchBar);
-        groceriesRecyclerView.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter(getContext(), null));
-        groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
+        //groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
         searchBarField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                groceriesRecyclerView.getRecyclerView().getAdapter();
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) { }
         });
 
         return v;

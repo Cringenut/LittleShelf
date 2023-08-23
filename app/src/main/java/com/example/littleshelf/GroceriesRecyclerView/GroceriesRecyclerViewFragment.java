@@ -13,6 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.littleshelf.R;
+import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemDataBaseHelper;
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+
+import java.util.ArrayList;
 
 public class GroceriesRecyclerViewFragment extends Fragment {
 
@@ -30,6 +34,9 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerViewGroceries);
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(
+                new GroceriesListRecyclerViewAdapter(context, (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(context).getAllItems())));
+        recyclerViewAdapter = (GroceriesListRecyclerViewAdapter) recyclerView.getAdapter();
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -48,6 +55,9 @@ public class GroceriesRecyclerViewFragment extends Fragment {
 
     public void setRecyclerViewAdapter(GroceriesListRecyclerViewAdapter recyclerViewAdapter) {
         this.recyclerViewAdapter = recyclerViewAdapter;
-        recyclerView.setAdapter(recyclerViewAdapter);
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 }

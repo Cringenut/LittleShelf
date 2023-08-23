@@ -53,30 +53,9 @@ public class AddItemListFragment extends Fragment {
         getChildFragmentManager().beginTransaction()
                 .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
-        searchBar.setParentFragment(this);
+        //searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
 
         return view;
-    }
-
-    public void setupSearchBarField(EditText searchBarField) {
-        groceriesRecyclerView.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter(getContext(), null));
-        groceriesRecyclerView.getRecyclerViewAdapter();
-        searchBarField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                groceriesRecyclerView.getRecyclerViewAdapter().getCurrentFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
 }
