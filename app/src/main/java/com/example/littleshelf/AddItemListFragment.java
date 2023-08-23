@@ -17,6 +17,8 @@ import android.widget.EditText;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 
+import java.util.ArrayList;
+
 public class AddItemListFragment extends Fragment {
 
     private Button btnBack;
@@ -53,7 +55,9 @@ public class AddItemListFragment extends Fragment {
         getChildFragmentManager().beginTransaction()
                 .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
-        //searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
+        groceriesRecyclerView.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter(view.getContext(), new ArrayList<>()));
+        groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
+        searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
 
         return view;
     }

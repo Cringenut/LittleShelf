@@ -96,6 +96,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
+            suggestions = new ArrayList<>();
             suggestions.addAll(allGroceryItems);
 
             results.values = suggestions;
@@ -121,10 +122,10 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     private class AddGroceryItemsListFilter extends GroceryItemsListFilter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            if (constraint.length() > 0) {
-                suggestions.add(new GroceryItem(constraint.toString()));
-            }
             super.performFiltering(constraint);
+            if (constraint.length() > 0) {
+                suggestions.add(0, new GroceryItem(constraint.toString()));
+            }
             return results;
         }
     }

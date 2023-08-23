@@ -17,6 +17,7 @@ import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.A
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GroceriesRecyclerViewFragment extends Fragment {
 
@@ -34,11 +35,9 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerViewGroceries);
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(
-                new GroceriesListRecyclerViewAdapter(context, (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(context).getAllItems())));
-        recyclerViewAdapter = (GroceriesListRecyclerViewAdapter) recyclerView.getAdapter();
+        recyclerView.setAdapter(recyclerViewAdapter);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return rootView;
     }
 
     /* Decorator */

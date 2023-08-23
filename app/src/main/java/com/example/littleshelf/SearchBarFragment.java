@@ -40,14 +40,13 @@ public class SearchBarFragment extends Fragment {
         View v = inflater.inflate(R.layout.d_fragment_search_bar, container, false);
 
         EditText searchBarField = v.findViewById(R.id.editTexSearchBar);
-        //groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
         searchBarField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                groceriesRecyclerView.getRecyclerView().getAdapter();
+                groceriesRecyclerView.getRecyclerViewAdapter().getFilter().filter(s);
             }
 
             @Override
@@ -59,5 +58,9 @@ public class SearchBarFragment extends Fragment {
 
     public void setGroceriesRecyclerView(GroceriesRecyclerViewFragment groceriesRecyclerView) {
         this.groceriesRecyclerView = groceriesRecyclerView;
+    }
+
+    public GroceriesRecyclerViewFragment getGroceriesRecyclerView() {
+        return this.groceriesRecyclerView;
     }
 }
