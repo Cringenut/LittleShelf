@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
+import com.example.littleshelf.SearchBarFragment;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
@@ -26,10 +27,11 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
 
     private Filter currentFilter;
     private Context context;
+    private SearchBarFragment searchBarFragment;
 
-    public GroceriesListRecyclerViewAdapter(Context context, @Nullable ArrayList<GroceryItem> groceryItems) {
+    public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems) {
         this.context = context;
-
+        this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
 
@@ -91,13 +93,39 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
 
     // Filter used for groceries list items
     private class GroceryItemsListFilter extends Filter {
-        protected FilterResults results = new FilterResults();
-        protected List<GroceryItem> suggestions = new ArrayList<>();
 
+        FilterResults results;
+        List<GroceryItem> suggestions;
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
+            results = new FilterResults();
             suggestions = new ArrayList<>();
-            suggestions.addAll(allGroceryItems);
+
+            if (constraint == null || constraint.length() == 0) {
+                suggestions.addAll(allGroceryItems); // Use the original list when the constraint is empty
+            } else {
+                // Change to lambda later
+                String previousConstraint = searchBarFragment.getSearchBarFieldTag();
+                String filterPattern = constraint.toString().toLowerCase();
+                for (GroceryItem item : filterPattern.startsWith(previousConstraint) ? allGroceryItems : filteredGroceryItems) {
+                    if (item.getName().toLowerCase().startsWith(filterPattern))
+                        suggestions.add(item);
+                }
+
+                if (suggestions.size() == 0) {
+                    // Change to lambda later
+                    for (GroceryItem item : allGroceryItems) {
+                        for (String filterPatternWord : filterPattern.split(" ")) {
+                            for (String itemName : item.getName().split(" ")) {
+                                if (itemName.toLowerCase().startsWith(filterPatternWord) && !suggestions.contains(item)) {
+                                    suggestions.add(item);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             results.values = suggestions;
             results.count = suggestions.size();

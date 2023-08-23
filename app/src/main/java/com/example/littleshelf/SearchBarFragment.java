@@ -19,15 +19,16 @@ import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.A
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SearchBarFragment extends Fragment {
 
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
+    private EditText searchBarField;
 
     public SearchBarFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class SearchBarFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.d_fragment_search_bar, container, false);
 
-        EditText searchBarField = v.findViewById(R.id.editTexSearchBar);
+        searchBarField = v.findViewById(R.id.editTexSearchBar);
         searchBarField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -47,6 +48,7 @@ public class SearchBarFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 groceriesRecyclerView.getRecyclerViewAdapter().getFilter().filter(s);
+                searchBarField.setTag(s);
             }
 
             @Override
@@ -62,5 +64,9 @@ public class SearchBarFragment extends Fragment {
 
     public GroceriesRecyclerViewFragment getGroceriesRecyclerView() {
         return this.groceriesRecyclerView;
+    }
+
+    public String getSearchBarFieldTag() {
+        return searchBarField.getTag().toString();
     }
 }

@@ -14,11 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemDataBaseHelper;
 import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListActivity;
 import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListDataBaseHelper;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
@@ -45,16 +44,19 @@ public class GroceriesActivity extends AppCompatActivity {
                     .commit();
         });
 
-        GroceriesRecyclerViewFragment groceriesRecyclerViewFragment = new GroceriesRecyclerViewFragment();
-        groceriesRecyclerViewFragment.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter(GroceriesActivity.this, (ArrayList<GroceryItem>) (new GroceriesListDataBaseHelper(GroceriesActivity.this).getAllItems())));
-        //RecyclerView recyclerView = findViewById(R.id.containerRecyclerViewGroceries);
+        SearchBarFragment searchBar = new SearchBarFragment();
+        fragmentManager.beginTransaction()
+                .replace(findViewById(R.id.containerSearchBar).getId(), searchBar)
+                .commit();
 
         GroceriesRecyclerViewFragment groceriesRecyclerView = new GroceriesRecyclerViewFragment();
-        groceriesRecyclerView.setRecyclerViewAdapter(new GroceriesListRecyclerViewAdapter
-                (GroceriesActivity.this, (ArrayList<GroceryItem>)(new GroceriesListDataBaseHelper(GroceriesActivity.this).getAllItems())));
         fragmentManager.beginTransaction()
-                .replace(findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerViewFragment)
+                .replace(findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
+        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(new GroceriesListDataBaseHelper(this).getAllItems()));
+        groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
+        groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
+        searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
 
     }
 }
