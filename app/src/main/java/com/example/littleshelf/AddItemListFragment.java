@@ -22,6 +22,7 @@ import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.A
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddItemListFragment extends Fragment implements RecyclerViewOnItemClickInterface {
 
@@ -40,15 +41,11 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.d_fragment_add_item_list, container, false);
 
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        getChildFragmentManager().beginTransaction();
-
-
         btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> {
-            FragmentTransaction fragmentBackTransaction = fragmentManager.beginTransaction();
-            fragmentBackTransaction.remove(this);
-            fragmentBackTransaction.commit();
+        btnBack.setOnClickListener(btn -> {
+            getChildFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
         });
 
         searchBar = new SearchBarFragment();
@@ -70,6 +67,22 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
 
     @Override
     public void onItemClicked(GroceryItem groceryItem) {
+        GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
 
+        /*groceriesActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .remove(this)
+                .commit();*/
+        groceriesActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .remove(this)
+                .commit();
+
+        groceriesActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .show(Objects.requireNonNull(groceriesActivity.getSupportFragmentManager()
+                        .findFragmentById(R.id.containerAddItem)))
+                .commit();
     }
 }

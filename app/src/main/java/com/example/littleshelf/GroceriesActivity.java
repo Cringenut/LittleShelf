@@ -21,12 +21,18 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         FragmentManager fragmentManager = getSupportFragmentManager();
         Button buttonAdd = findViewById(R.id.btnAddItem);
 
-        buttonAdd.setOnClickListener(vAdd -> {
-            FragmentTransaction fragmentAddTransaction = fragmentManager.beginTransaction();
+        buttonAdd.setOnClickListener(btn -> {
             AddItemListFragment addItemListFragment = new AddItemListFragment();
-            fragmentAddTransaction
-                    .replace(R.id.fragmentAddItemList, addItemListFragment)
+            fragmentManager.beginTransaction()
+                    .replace(R.id.containerAddItemList, addItemListFragment)
                     .commit();
+
+            AddItemFragment addItemFragment = new AddItemFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.containerAddItem, addItemFragment)
+                    .hide(addItemFragment)
+                    .commit();
+
         });
 
         SearchBarFragment searchBar = new SearchBarFragment();
@@ -47,6 +53,10 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
     @Override
     public void onItemClicked(GroceryItem groceryItem) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
+        /*fragmentManager.beginTransaction()
+                .remove(addItemFragment)
+                .commit();*/
     }
 }
