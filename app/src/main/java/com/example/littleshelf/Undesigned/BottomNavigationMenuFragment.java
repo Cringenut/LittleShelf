@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListActivity;
 import com.example.littleshelf.Undesigned.HomePage.HomePageActivity;
-import com.example.littleshelf.Undesigned.ReceiptsList.ReceiptsListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -33,9 +32,6 @@ public class BottomNavigationMenuFragment extends Fragment {
         else if (getActivity().getClass() == GroceriesListActivity.class) {
             bottomNavigationView.setSelectedItemId(R.id.GroceriesList);
         }
-        else if (getActivity().getClass() == ReceiptsListActivity.class) {
-            bottomNavigationView.setSelectedItemId(R.id.ReceiptsList);
-        }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.HomePage && getActivity().getClass() != HomePageActivity.class)
@@ -46,11 +42,6 @@ public class BottomNavigationMenuFragment extends Fragment {
             else if (item.getItemId() == R.id.GroceriesList && getActivity().getClass() != GroceriesListActivity.class)
             {
                 startActivity(new Intent(v.getContext(), GroceriesListActivity.class));
-                return true;
-            }
-            else if (item.getItemId() == R.id.ReceiptsList && getActivity().getClass() != ReceiptsListActivity.class)
-            {
-                startActivity(new Intent(v.getContext(), ReceiptsListActivity.class));
                 return true;
             }
             

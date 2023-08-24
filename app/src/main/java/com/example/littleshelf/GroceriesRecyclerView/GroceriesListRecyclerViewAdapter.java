@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
+import com.example.littleshelf.RecyclerViewOnItemClickInterface;
 import com.example.littleshelf.SearchBarFragment;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
@@ -28,6 +29,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     private Filter currentFilter;
     private Context context;
     private SearchBarFragment searchBarFragment;
+    public RecyclerView recyclerView;
 
     public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems) {
         this.context = context;
@@ -43,6 +45,14 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         return currentFilter;
     }
 
+    // Create grocery item fragment for recycler view
+    @NonNull
+    @Override
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        recyclerView = (RecyclerView) parent;
+        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.d_fragment_grocery_item, parent, false));
+    }
+
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemExpirationDate;
@@ -51,13 +61,6 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
             itemName = itemView.findViewById(R.id.textViewItemName);
             itemExpirationDate = itemView.findViewById(R.id.textViewItemExpirationDate);
         }
-    }
-
-    // Create grocery item fragment for recycler view
-    @NonNull
-    @Override
-    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.d_fragment_grocery_item, parent, false));
     }
 
     @Override
