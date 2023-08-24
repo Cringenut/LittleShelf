@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
@@ -28,14 +29,16 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
 
     private Filter currentFilter;
     private Context context;
+    private RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface;
     private SearchBarFragment searchBarFragment;
     public RecyclerView recyclerView;
 
-    public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems) {
+    public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems, RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface) {
         this.context = context;
         this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
+        this.recyclerViewOnItemClickInterface = recyclerViewOnItemClickInterface;
 
         setGroceryItemsListFilter();
     }
@@ -56,10 +59,12 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemExpirationDate;
+        public CardView cardView;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.textViewItemName);
             itemExpirationDate = itemView.findViewById(R.id.textViewItemExpirationDate);
+            cardView = itemView.findViewById(R.id.containerCardView);
         }
     }
 
@@ -73,6 +78,13 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         else {
             createExpirableItem(holder, position);
         }
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewOnItemClickInterface.onItemClicked(filteredGroceryItems.get(position));
+            }
+        });
     }
 
     // Set default settings for the item's fragment

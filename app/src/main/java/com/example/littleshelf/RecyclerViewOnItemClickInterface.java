@@ -1,5 +1,7 @@
 package com.example.littleshelf;
 
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+
 public interface RecyclerViewOnItemClickInterface {
-    void onItemClick(int position);
+    void onItemClicked(GroceryItem groceryItem);
 }

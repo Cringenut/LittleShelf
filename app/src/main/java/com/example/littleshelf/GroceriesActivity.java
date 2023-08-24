@@ -10,7 +10,7 @@ import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListDataBa
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 import java.util.ArrayList;
 
-public class GroceriesActivity extends AppCompatActivity {
+public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnItemClickInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,15 @@ public class GroceriesActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
-        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(new GroceriesListDataBaseHelper(this).getAllItems()));
+        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(new GroceriesListDataBaseHelper(this).getAllItems()), this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
         searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
+
+    }
+
+    @Override
+    public void onItemClicked(GroceryItem groceryItem) {
 
     }
 }

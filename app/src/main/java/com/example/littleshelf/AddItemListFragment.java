@@ -23,7 +23,7 @@ import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
 
-public class AddItemListFragment extends Fragment {
+public class AddItemListFragment extends Fragment implements RecyclerViewOnItemClickInterface {
 
     private Button btnBack;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
@@ -60,11 +60,16 @@ public class AddItemListFragment extends Fragment {
         getChildFragmentManager().beginTransaction()
                 .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
-        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(view.getContext(), searchBar, (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(getContext()).getAllItems()));
+        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(view.getContext(), searchBar, (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(getContext()).getAllItems()), this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
         searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
 
         return view;
+    }
+
+    @Override
+    public void onItemClicked(GroceryItem groceryItem) {
+
     }
 }
