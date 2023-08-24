@@ -10,8 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+
+import java.util.Objects;
+
 public class AddItemFragment extends Fragment {
 
+    private GroceryItem groceryItem;
+    private Button btnItemName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,15 +37,39 @@ public class AddItemFragment extends Fragment {
                         .remove(this)
                         .commit());
 
-        Button btnItemName = v.findViewById(R.id.btnAddItemName);
-        btnItemName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnItemName = v.findViewById(R.id.btnAddItemName);
+        btnItemName.setOnClickListener(btn -> {
+            GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
 
-            }
+            AddItemListFragment addItemListFragment = new AddItemListFragment();
+            groceriesActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(groceriesActivity.findViewById(R.id.containerAddItemList).getId(), addItemListFragment)
+                    .commit();
+
+            groceriesActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .hide(this)
+                    .commit();
         });
-
+        btnItemName.setText(groceryItem.getName());
 
         return v;
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            btnItemName.setText(groceryItem.getName());
+        }
+    }
+
+    public void setGroceryItem(GroceryItem groceryItem) {
+        this.groceryItem = groceryItem;
+    }
+
+    public GroceryItem getGroceryItem() {
+        return groceryItem;
     }
 }

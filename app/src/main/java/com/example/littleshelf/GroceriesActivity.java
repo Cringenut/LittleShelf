@@ -32,6 +32,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                     .replace(R.id.containerAddItem, addItemFragment)
                     .hide(addItemFragment)
                     .commit();
+            addItemFragment.setGroceryItem(new GroceryItem(""));
 
         });
 

@@ -42,8 +42,9 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
         View view = inflater.inflate(R.layout.d_fragment_add_item_list, container, false);
 
         btnBack = view.findViewById(R.id.btnBack);
+        GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
         btnBack.setOnClickListener(btn -> {
-            getChildFragmentManager().beginTransaction()
+            groceriesActivity.getSupportFragmentManager().beginTransaction()
                     .remove(this)
                     .commit();
         });
@@ -68,7 +69,6 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
     @Override
     public void onItemClicked(GroceryItem groceryItem) {
         GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
-
         /*groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
@@ -79,6 +79,8 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
                 .remove(this)
                 .commit();
 
+        ((AddItemFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerAddItem))
+                .getGroceryItem().setName(groceryItem.getName());
         groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .show(Objects.requireNonNull(groceriesActivity.getSupportFragmentManager()
