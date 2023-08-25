@@ -3,6 +3,7 @@ package com.example.littleshelf;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class AddItemFragment extends Fragment {
 
     private GroceryItem groceryItem;
     private Button btnItemName;
+    private Button btnAddItem;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class AddItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.d_fragment_add_item, container, false);
+        GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
 
         FrameLayout frameLayout = v.findViewById(R.id.frameLayoutRemoveFragment);
         frameLayout.setOnClickListener(frame ->
@@ -38,8 +42,7 @@ public class AddItemFragment extends Fragment {
                         .commit());
 
         btnItemName = v.findViewById(R.id.btnAddItemName);
-        btnItemName.setOnClickListener(btn -> {
-            GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
+        btnItemName.setOnClickListener(btnName -> {
 
             AddItemListFragment addItemListFragment = new AddItemListFragment();
             groceriesActivity.getSupportFragmentManager()
@@ -53,6 +56,17 @@ public class AddItemFragment extends Fragment {
                     .commit();
         });
         btnItemName.setText(groceryItem.getName());
+
+        btnAddItem = v.findViewById(R.id.btnAddItem);
+        btnAddItem.setOnClickListener(btnAdd -> {
+            GroceriesRecyclerViewFragment recyclerView = (GroceriesRecyclerViewFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerRecyclerViewGroceries);
+            groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
+
+            groceriesActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .hide(this)
+                    .commit();
+        });
 
         return v;
     }

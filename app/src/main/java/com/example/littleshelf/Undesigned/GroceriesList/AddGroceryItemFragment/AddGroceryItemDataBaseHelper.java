@@ -15,7 +15,6 @@ import java.util.List;
 public class AddGroceryItemDataBaseHelper extends SQLiteOpenHelper  {
 
     public static final String ITEM_TABLE = "ITEM_TABLE";
-
     public AddGroceryItemDataBaseHelper(@Nullable Context context) {
         super(context, "ItemsListDatabase.db", null, 1);
     }

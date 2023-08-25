@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.List;
 public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private ListView listView;
+    private GroceriesRecyclerViewFragment recyclerView;
     public static final String ITEM_TABLE = "ITEM_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
@@ -55,10 +57,9 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
 
         // Add item to adapter
-        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
-        adapter.add(groceryItem);
-        adapter.notifyDataSetChanged();
-
+        GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
+        adapter.getFilteredGroceryItems().add(groceryItem);
+        adapter.notifyItemChanged(adapter.getItemCount());
 
         long insert = db.insert(ITEM_TABLE, null, cv); // Insert value to database
         groceryItem.setId(insert); // Set item id from database
@@ -74,9 +75,9 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         // Call query in cursor
         Cursor cursor = db.rawQuery(queryString, null);
 
-        ArrayAdapter<GroceryItem> adapter = (GroceriesListViewAdapter) listView.getAdapter();
-        adapter.remove(groceryItem); // Deleting item from adapter
-        adapter.notifyDataSetChanged(); // Calling notify to update list
+        GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
+        adapter.getAllGroceryItems().remove(groceryItem); // Deleting item from adapter
+        adapter.notifyItemChanged(adapter.getItemCount()); // Calling notify to update list
 
         return cursor.moveToFirst(); // If we found item from query return true
     }
@@ -112,11 +113,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public ListView getListView() {
-        return listView;
-    }
-
-    public void setListView(ListView listView) {
-        this.listView = listView;
+    public void setRecyclerView(GroceriesRecyclerViewFragment recyclerView) {
+        this.recyclerView = recyclerView;
     }
 }

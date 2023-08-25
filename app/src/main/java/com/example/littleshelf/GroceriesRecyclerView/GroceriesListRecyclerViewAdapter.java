@@ -25,8 +25,12 @@ import java.util.List;
 public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesListRecyclerViewAdapter.RecyclerViewHolder> implements Filterable {
 
     private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
-    private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
 
+    public ArrayList<GroceryItem> getFilteredGroceryItems() {
+        return filteredGroceryItems;
+    }
+
+    private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
     private Filter currentFilter;
     private Context context;
     private RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface;
@@ -179,6 +183,10 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
 
     public void setAddGroceryItemsListFilter() {
         currentFilter = new AddGroceryItemsListFilter();
+    }
+
+    public ArrayList<GroceryItem> getAllGroceryItems() {
+        return allGroceryItems;
     }
 
 }

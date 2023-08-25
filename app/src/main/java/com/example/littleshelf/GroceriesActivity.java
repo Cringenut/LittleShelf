@@ -12,10 +12,17 @@ import java.util.ArrayList;
 
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnItemClickInterface {
 
+    private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
+    public GroceriesListDataBaseHelper getGroceriesListDataBaseHelper() {
+        return groceriesListDataBaseHelper;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.d_activity_groceries);
+
+        groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(this);
 
         // Obtain an instance of the FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -45,10 +52,11 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         fragmentManager.beginTransaction()
                 .replace(findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
                 .commit();
-        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(new GroceriesListDataBaseHelper(this).getAllItems()), this);
+        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesListDataBaseHelper.getAllItems()), this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
         searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
+        groceriesListDataBaseHelper.setRecyclerView(groceriesRecyclerView);
 
     }
 
@@ -60,4 +68,6 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                 .remove(addItemFragment)
                 .commit();*/
     }
+
+
 }

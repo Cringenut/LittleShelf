@@ -28,7 +28,7 @@ public class GroceriesListFragment extends Fragment {
         // Set default values and list view for database helper
         ListView listView = v.findViewById(R.id.idListView);
         groceriesListActivity = (GroceriesListActivity) getActivity();
-        groceriesListActivity.getDataBaseHelper().setListView(listView);
+        //groceriesListActivity.getDataBaseHelper().setListView(listView);
 
         // Show list items
         ArrayList<GroceryItem> groceryItems = (ArrayList<GroceryItem>) groceriesListActivity
@@ -36,9 +36,9 @@ public class GroceriesListFragment extends Fragment {
                                               .getAllItems();
 
         GroceriesListViewAdapter groceriesListViewAdapter = new GroceriesListViewAdapter(groceriesListActivity, R.layout.fragment_list_item, groceryItems);
-        groceriesListActivity.getDataBaseHelper()
+       /* groceriesListActivity.getDataBaseHelper()
                 .getListView()
-                .setAdapter(groceriesListViewAdapter);
+                .setAdapter(groceriesListViewAdapter);*/
 
         // Set on item click listener to delete item (temporary)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
