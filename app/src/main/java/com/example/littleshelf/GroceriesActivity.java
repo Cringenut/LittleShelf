@@ -88,7 +88,15 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         int position = groceriesRecyclerView.getRecyclerViewAdapter().getFilteredGroceryItems().indexOf(groceryItem);
         View v = groceriesListRecyclerViewAdapter.recyclerView.getLayoutManager().findViewByPosition(position);
         selectedGroceryItem = groceryItem;
-        ((Button) v.findViewById(R.id.btnRemoveItem)).setVisibility(View.VISIBLE);
+
+        Button btnRemoveItem = (Button) v.findViewById(R.id.btnRemoveItem);
+        btnRemoveItem.setOnClickListener(btnRemove -> {
+            groceriesListDataBaseHelper.deleteOne(groceryItem);
+        });
+
+        btnRemoveItem.setVisibility(View.VISIBLE);
+
+
     }
     public void deselectGroceryItem() {
         if (selectedGroceryItem != null) {

@@ -5,11 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
+import com.example.littleshelf.GroceriesActivity;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Undesigned.Objects.GroceryItem;
@@ -59,6 +61,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         // Add item to adapter
         GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
         adapter.getAllGroceryItems().add(groceryItem);
+        adapter.notifyItemInserted(adapter.getItemCount());
         adapter.notifyItemChanged(adapter.getItemCount());
 
         long insert = db.insert(ITEM_TABLE, null, cv); // Insert value to database
@@ -76,8 +79,15 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
 
         GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
-        adapter.getAllGroceryItems().remove(groceryItem); // Deleting item from adapter
-        adapter.notifyItemChanged(adapter.getItemCount()); // Calling notify to update list
+        Log.d("Debug", "itemList size after removal: " + adapter.getAllGroceryItems().size());
+
+        ((GroceriesActivity) context).deselectGroceryItem();
+        int removedItemPosition = adapter.getAllGroceryItems().indexOf(groceryItem);
+        adapter.getFilteredGroceryItems().remove(groceryItem); // Calling notify to update list
+        adapter.getAllGroceryItems().remove(groceryItem);
+        adapter.notifyItemRemoved(removedItemPosition); // Deleting item from adapter
+        adapter.notifyItemRangeChanged(removedItemPosition, adapter.getFilteredGroceryItems().size());
+
 
         return cursor.moveToFirst(); // If we found item from query return true
     }
