@@ -83,12 +83,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
             createExpirableItem(holder, position);
         }
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerViewOnItemClickInterface.onItemClicked(filteredGroceryItems.get(position));
-            }
-        });
+        holder.cardView.setOnClickListener(v -> recyclerViewOnItemClickInterface.onItemClicked(filteredGroceryItems.get(position)));
     }
 
     // Set default settings for the item's fragment

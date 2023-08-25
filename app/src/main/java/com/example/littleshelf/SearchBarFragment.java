@@ -55,7 +55,6 @@ public class SearchBarFragment extends Fragment {
         searchBarField.setText("");
         searchBarField.setTag("");
     }
-
     public void setGroceriesRecyclerView(GroceriesRecyclerViewFragment groceriesRecyclerView) {
         this.groceriesRecyclerView = groceriesRecyclerView;
     }
