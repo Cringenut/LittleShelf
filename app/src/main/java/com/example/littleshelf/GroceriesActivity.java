@@ -13,6 +13,11 @@ import java.util.ArrayList;
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnItemClickInterface {
 
     private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
+    private  SearchBarFragment searchBar;
+    public SearchBarFragment getSearchBar() {
+        return searchBar;
+    }
+
     public GroceriesListDataBaseHelper getGroceriesListDataBaseHelper() {
         return groceriesListDataBaseHelper;
     }
@@ -43,7 +48,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
         });
 
-        SearchBarFragment searchBar = new SearchBarFragment();
+        searchBar = new SearchBarFragment();
         fragmentManager.beginTransaction()
                 .replace(findViewById(R.id.containerSearchBar).getId(), searchBar)
                 .commit();

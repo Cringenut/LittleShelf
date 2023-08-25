@@ -58,6 +58,12 @@ public class SearchBarFragment extends Fragment {
         return v;
     }
 
+    public void clearSearch() {
+        groceriesRecyclerView.getRecyclerViewAdapter().getFilter().filter("");
+        searchBarField.setText("");
+        searchBarField.setTag("");
+    }
+
     public void setGroceriesRecyclerView(GroceriesRecyclerViewFragment groceriesRecyclerView) {
         this.groceriesRecyclerView = groceriesRecyclerView;
     }

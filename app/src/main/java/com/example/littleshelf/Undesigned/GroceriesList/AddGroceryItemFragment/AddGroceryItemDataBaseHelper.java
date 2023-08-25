@@ -15,13 +15,20 @@ import java.util.List;
 public class AddGroceryItemDataBaseHelper extends SQLiteOpenHelper  {
 
     public static final String ITEM_TABLE = "ITEM_TABLE";
+    public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public AddGroceryItemDataBaseHelper(@Nullable Context context) {
-        super(context, "ItemsListDatabase.db", null, 1);
+        super(context, "AddItemsListDatabase.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Create database or open if exists
+        String createTableStatement = "CREATE TABLE " + ITEM_TABLE + " "
+                + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_ITEM_NAME + " TEXT)";
 
+        db.execSQL(createTableStatement);
     }
 
     @Override

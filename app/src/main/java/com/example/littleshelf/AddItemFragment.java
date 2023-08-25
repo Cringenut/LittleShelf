@@ -59,9 +59,8 @@ public class AddItemFragment extends Fragment {
 
         btnAddItem = v.findViewById(R.id.btnAddItem);
         btnAddItem.setOnClickListener(btnAdd -> {
-            GroceriesRecyclerViewFragment recyclerView = (GroceriesRecyclerViewFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerRecyclerViewGroceries);
             groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
-
+            groceriesActivity.getSearchBar().clearSearch();
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .hide(this)
