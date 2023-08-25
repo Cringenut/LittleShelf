@@ -19,7 +19,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
     private SearchBarFragment searchBar;
     private GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
-    private GroceryItemFragment selectedGroceryItem;
+    private GroceryItem selectedGroceryItem;
     public SearchBarFragment getSearchBar() {
         return searchBar;
     }
@@ -73,20 +73,33 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
     @Override
     public void onItemClicked(GroceryItem groceryItem) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        selectGroceryItem(groceryItem);
+    }
+
+    public void selectGroceryItem(GroceryItem groceryItem) {
+        if (groceryItem == selectedGroceryItem){
+            deselectGroceryItem();
+            return;
+        }
+        else if (selectedGroceryItem != null) {
+            deselectGroceryItem();
+        }
 
         int position = groceriesRecyclerView.getRecyclerViewAdapter().getFilteredGroceryItems().indexOf(groceryItem);
         View v = groceriesListRecyclerViewAdapter.recyclerView.getLayoutManager().findViewByPosition(position);
-        ((TextView) v.findViewById(R.id.textViewItemName)).setText("Test");
-
+        selectedGroceryItem = groceryItem;
+        ((Button) v.findViewById(R.id.btnRemoveItem)).setVisibility(View.VISIBLE);
     }
-
-    public void selectGroceryItem() {
-
-    }
-
     public void deselectGroceryItem() {
+        if (selectedGroceryItem != null) {
+            View v = groceriesListRecyclerViewAdapter.recyclerView.getLayoutManager()
+                    .findViewByPosition(groceriesRecyclerView.getRecyclerViewAdapter()
+                            .getFilteredGroceryItems()
+                            .indexOf(selectedGroceryItem));
 
+            ((Button) v.findViewById(R.id.btnRemoveItem)).setVisibility(View.GONE);
+            selectedGroceryItem = null;
+        }
     }
 
 }
