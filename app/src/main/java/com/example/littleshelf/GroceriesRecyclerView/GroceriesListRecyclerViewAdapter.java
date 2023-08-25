@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.littleshelf.R;
 import com.example.littleshelf.RecyclerViewOnItemClickInterface;
 import com.example.littleshelf.SearchBarFragment;
-import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,16 +1,15 @@
 package com.example.littleshelf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Undesigned.GroceriesList.Main.GroceriesListDataBaseHelper;
-import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+import com.example.littleshelf.GroceriesRecyclerView.GroceriesListDataBaseHelper;
+import com.example.littleshelf.Objects.GroceryItem;
 import java.util.ArrayList;
 
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnItemClickInterface {

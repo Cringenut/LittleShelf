@@ -1,4 +1,4 @@
-package com.example.littleshelf.Undesigned.GroceriesList.Main;
+package com.example.littleshelf.GroceriesRecyclerView;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,15 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
 import com.example.littleshelf.GroceriesActivity;
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;

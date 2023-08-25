@@ -3,23 +3,16 @@ package com.example.littleshelf;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Undesigned.GroceriesList.AddGroceryItemFragment.AddGroceryItemDataBaseHelper;
-import com.example.littleshelf.Undesigned.Objects.GroceryItem;
+import com.example.littleshelf.GroceriesRecyclerView.AddGroceryItemDataBaseHelper;
+import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.Objects;
