@@ -57,6 +57,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         // Add item to adapter
         GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
         adapter.getAllGroceryItems().add(groceryItem);
+        adapter.sortGroceryItems();
         adapter.notifyItemInserted(adapter.getItemCount());
         adapter.notifyItemChanged(adapter.getItemCount());
 
@@ -81,6 +82,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         int removedItemPosition = adapter.getFilteredGroceryItems().indexOf(groceryItem);
         adapter.getFilteredGroceryItems().remove(groceryItem); // Calling notify to update list
         adapter.getAllGroceryItems().remove(groceryItem);
+        adapter.getSortedGroceryItems().remove(groceryItem);
         adapter.notifyItemRemoved(removedItemPosition); // Deleting item from adapter
         adapter.notifyItemRangeChanged(removedItemPosition, adapter.getFilteredGroceryItems().size());
 

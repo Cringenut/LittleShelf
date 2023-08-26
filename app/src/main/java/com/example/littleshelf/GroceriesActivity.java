@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.littleshelf.GroceriesRecyclerView.FilterRecyclerViewInterface;
+import com.example.littleshelf.GroceriesRecyclerView.SortRecyclerViewInterface;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListDataBaseHelper;
@@ -47,7 +47,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
             AddItemFragment addItemFragment = new AddItemFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.containerAddItem, addItemFragment)
+                    .replace(R.id.containerBottomFragment, addItemFragment)
                     .hide(addItemFragment)
                     .commit();
             addItemFragment.setGroceryItem(new GroceryItem(""));
@@ -56,19 +56,21 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
         searchBar = new SearchBarFragment();
         fragmentManager.beginTransaction()
-                .replace(findViewById(R.id.containerSearchBar).getId(), searchBar)
+                .replace(R.id.containerSearchBar, searchBar)
                 .commit();
-        searchBar.setBtnFilter(new FilterButtonFragment(new FilterRecyclerViewInterface() {
+        searchBar.setBtnFilter(new SortButtonFragment(new SortRecyclerViewInterface() {
             @Override
-            public void onFilterButtonClicked() {
-                System.out.println("Clicked");
+            public void onSortButtonClicked() {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.containerBottomFragment, new SortGroceriesListFragment())
+                        .commit();
             }
         }));
 
 
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         fragmentManager.beginTransaction()
-                .replace(findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
+                .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
                 .commit();
         groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesListDataBaseHelper.getAllItems()), this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);

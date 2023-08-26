@@ -44,12 +44,12 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
 
         searchBar = new SearchBarFragment();
         getChildFragmentManager().beginTransaction()
-                .replace(view.findViewById(R.id.containerSearchBar).getId(), searchBar)
+                .replace(R.id.containerSearchBar, searchBar)
                 .commit();
 
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         getChildFragmentManager().beginTransaction()
-                .replace(view.findViewById(R.id.containerRecyclerViewGroceries).getId(), groceriesRecyclerView)
+                .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
                 .commit();
         GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(view.getContext(), searchBar, (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(getContext()).getAllItems()), this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
@@ -72,12 +72,12 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
                 .remove(this)
                 .commit();
 
-        ((AddItemFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerAddItem))
+        ((AddItemFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
                 .getGroceryItem().setName(groceryItem.getName());
         groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .show(Objects.requireNonNull(groceriesActivity.getSupportFragmentManager()
-                        .findFragmentById(R.id.containerAddItem)))
+                        .findFragmentById(R.id.containerBottomFragment)))
                 .commit();
     }
 }

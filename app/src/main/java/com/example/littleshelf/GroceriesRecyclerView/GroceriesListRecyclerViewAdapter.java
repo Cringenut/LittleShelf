@@ -32,6 +32,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     }
 
     private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
+    private ArrayList<GroceryItem> sortedGroceryItems; // Filtered list
     private Filter currentFilter;
     private Context context;
     private RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface;
@@ -43,7 +44,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
-        Collections.reverse(this.filteredGroceryItems);
+        this.sortedGroceryItems = new ArrayList<>(filteredGroceryItems);
         this.recyclerViewOnItemClickInterface = recyclerViewOnItemClickInterface;
 
         setGroceryItemsListFilter();
@@ -62,6 +63,10 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.d_fragment_grocery_item, parent, false));
     }
 
+    public ArrayList<GroceryItem> getSortedGroceryItems() {
+        return sortedGroceryItems;
+    }
+
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemExpirationDate;
@@ -74,18 +79,24 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         }
     }
 
+    public void sortGroceryItems() {
+        sortedGroceryItems.clear();
+        sortedGroceryItems.addAll(filteredGroceryItems);
+        Collections.reverse(sortedGroceryItems);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.itemName.setText(filteredGroceryItems.get(position).getName());
+        holder.itemName.setText(sortedGroceryItems.get(position).getName());
 
-        if (filteredGroceryItems.get(position).getExpirationDate() == null) {
+        if (sortedGroceryItems.get(position).getExpirationDate() == null) {
             createNonExpirableItem(holder);
         }
         else {
             createExpirableItem(holder, position);
         }
 
-        holder.cardView.setOnClickListener(v -> recyclerViewOnItemClickInterface.onItemClicked(filteredGroceryItems.get(position)));
+        holder.cardView.setOnClickListener(v -> recyclerViewOnItemClickInterface.onItemClicked(sortedGroceryItems.get(position)));
     }
 
     // Set default settings for the item's fragment
@@ -99,12 +110,12 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     private void createExpirableItem(@NonNull RecyclerViewHolder holder, int position) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
         layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
-        holder.itemExpirationDate.setText(filteredGroceryItems.get(position).getExpirationDate());
+        holder.itemExpirationDate.setText(sortedGroceryItems.get(position).getExpirationDate());
     }
 
     @Override
     public int getItemCount() {
-        return filteredGroceryItems.size();
+        return sortedGroceryItems.size();
     }
 
     // Filter used for groceries list items
@@ -153,7 +164,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         protected void publishResults(CharSequence constraint, FilterResults results) {
             filteredGroceryItems.clear(); // Clear the filtered list before adding new filtered items
             filteredGroceryItems.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
-            Collections.reverse(filteredGroceryItems);
+            sortGroceryItems();
             notifyDataSetChanged();
         }
 
