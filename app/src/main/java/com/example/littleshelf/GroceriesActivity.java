@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.littleshelf.GroceriesRecyclerView.SortByRecyclerViewInterface;
 import com.example.littleshelf.GroceriesRecyclerView.SortRecyclerViewInterface;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
@@ -58,14 +59,30 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         fragmentManager.beginTransaction()
                 .replace(R.id.containerSearchBar, searchBar)
                 .commit();
+
+        SortGroceriesListFragment sortGroceriesListFragment = new SortGroceriesListFragment();
         searchBar.setBtnFilter(new SortButtonFragment(new SortRecyclerViewInterface() {
             @Override
             public void onSortButtonClicked() {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.containerBottomFragment, new SortGroceriesListFragment())
+                        .replace(R.id.containerBottomFragment, sortGroceriesListFragment)
                         .commit();
             }
         }));
+
+        sortGroceriesListFragment.setSortByRecyclerViewInterface(new SortByRecyclerViewInterface() {
+            @Override
+            public void onSortByButtonClicked(SortTypesEnum sortType) {
+                if (groceriesListRecyclerViewAdapter.getCurrentSort() != sortType) {
+                    groceriesListRecyclerViewAdapter.setCurrentSort(sortType);
+                    groceriesListRecyclerViewAdapter.sortGroceryItems();
+                }
+
+                fragmentManager.beginTransaction()
+                        .remove(sortGroceriesListFragment)
+                        .commit();
+            }
+        });
 
 
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();

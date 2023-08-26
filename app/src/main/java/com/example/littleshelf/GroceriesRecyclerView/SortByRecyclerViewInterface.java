@@ -2,7 +2,6 @@ package com.example.littleshelf.GroceriesRecyclerView;
 
 import com.example.littleshelf.SortTypesEnum;
 
-public interface SortRecyclerViewInterface {
-    void onSortButtonClicked();
+public interface SortByRecyclerViewInterface {
+    void onSortByButtonClicked(SortTypesEnum sortType);
 }
-

@@ -75,7 +75,7 @@ public class GroceryItem {
     public static class NameComparator implements Comparator<GroceryItem> {
         @Override
         public int compare(final GroceryItem objectOne, final GroceryItem objectTwo) {
-            return objectOne.getName().compareTo(objectTwo.getName());
+            return objectOne.getName().toLowerCase().compareTo(objectTwo.getName().toLowerCase());
         }
     }
 

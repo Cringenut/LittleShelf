@@ -57,7 +57,6 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         // Add item to adapter
         GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
         adapter.getAllGroceryItems().add(groceryItem);
-        adapter.sortGroceryItems();
         adapter.notifyItemInserted(adapter.getItemCount());
         adapter.notifyItemChanged(adapter.getItemCount());
 

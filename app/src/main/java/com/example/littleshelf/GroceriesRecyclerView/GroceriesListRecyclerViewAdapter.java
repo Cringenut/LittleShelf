@@ -17,7 +17,7 @@ import com.example.littleshelf.R;
 import com.example.littleshelf.RecyclerViewOnItemClickInterface;
 import com.example.littleshelf.SearchBarFragment;
 import com.example.littleshelf.Objects.GroceryItem;
-import com.example.littleshelf.SortingTypesEnum;
+import com.example.littleshelf.SortTypesEnum;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
 
     private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
     private ArrayList<GroceryItem> sortedGroceryItems; // Sorted list
-    private SortingTypesEnum currentSort;
+    private SortTypesEnum currentSort;
     private Filter currentFilter;
     private Context context;
     private RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface;
@@ -48,7 +48,8 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
         this.sortedGroceryItems = new ArrayList<>(filteredGroceryItems);
         this.recyclerViewOnItemClickInterface = recyclerViewOnItemClickInterface;
-        this.currentSort = SortingTypesEnum.unsorted;
+        this.currentSort = SortTypesEnum.unsorted;
+        sortGroceryItems();
 
         setGroceryItemsListFilter();
     }
@@ -70,11 +71,11 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         return sortedGroceryItems;
     }
 
-    public SortingTypesEnum getCurrentSort() {
+    public SortTypesEnum getCurrentSort() {
         return currentSort;
     }
 
-    public void setCurrentSort(SortingTypesEnum currentSort) {
+    public void setCurrentSort(SortTypesEnum currentSort) {
         this.currentSort = currentSort;
     }
 
@@ -96,17 +97,21 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         Collections.reverse(sortedGroceryItems);
 
         switch (currentSort) {
-            case unsorted: break;
+            case unsorted:
+                break;
             case itemNameASC:
             {
                 sortedGroceryItems.sort(new GroceryItem.NameComparator());
+                break;
             }
             case itemNameDESC:
             {
                 sortedGroceryItems.sort(new GroceryItem.NameComparator().reversed());
-                Collections.reverse(sortedGroceryItems);
+                break;
             }
         }
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -189,7 +194,6 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
             filteredGroceryItems.clear(); // Clear the filtered list before adding new filtered items
             filteredGroceryItems.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
             sortGroceryItems();
-            notifyDataSetChanged();
         }
 
         @Override
