@@ -19,6 +19,7 @@ import com.example.littleshelf.SearchBarFragment;
 import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /* Adapter */
@@ -42,6 +43,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
+        Collections.reverse(this.filteredGroceryItems);
         this.recyclerViewOnItemClickInterface = recyclerViewOnItemClickInterface;
 
         setGroceryItemsListFilter();
@@ -151,6 +153,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         protected void publishResults(CharSequence constraint, FilterResults results) {
             filteredGroceryItems.clear(); // Clear the filtered list before adding new filtered items
             filteredGroceryItems.addAll((List<GroceryItem>) results.values); // Add the filtered items to the list
+            Collections.reverse(filteredGroceryItems);
             notifyDataSetChanged();
         }
 

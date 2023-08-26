@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.littleshelf.GroceriesRecyclerView.FilterRecyclerViewInterface;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesListDataBaseHelper;
@@ -57,6 +58,13 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         fragmentManager.beginTransaction()
                 .replace(findViewById(R.id.containerSearchBar).getId(), searchBar)
                 .commit();
+        searchBar.setBtnFilter(new FilterButtonFragment(new FilterRecyclerViewInterface() {
+            @Override
+            public void onFilterButtonClicked() {
+                System.out.println("Clicked");
+            }
+        }));
+
 
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         fragmentManager.beginTransaction()
@@ -88,7 +96,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         View v = groceriesListRecyclerViewAdapter.recyclerView.getLayoutManager().findViewByPosition(position);
         selectedGroceryItem = groceryItem;
 
-        Button btnRemoveItem = (Button) v.findViewById(R.id.btnRemoveItem);
+        Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
         btnRemoveItem.setOnClickListener(btnRemove -> {
             groceriesListDataBaseHelper.deleteOne(groceryItem);
         });
@@ -108,5 +116,4 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
             selectedGroceryItem = null;
         }
     }
-
 }

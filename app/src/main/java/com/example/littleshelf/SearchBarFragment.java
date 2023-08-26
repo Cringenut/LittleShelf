@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
@@ -17,6 +18,7 @@ public class SearchBarFragment extends Fragment {
 
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
     private EditText searchBarField;
+    private FilterButtonFragment btnFilter;
 
     public SearchBarFragment() {
         // Required empty public constructor
@@ -47,6 +49,12 @@ public class SearchBarFragment extends Fragment {
             public void afterTextChanged(Editable s) { }
         });
 
+        if (btnFilter != null) {
+            getChildFragmentManager().beginTransaction()
+                    .replace(v.findViewById(R.id.containerFilterButton).getId(), btnFilter)
+                    .commit();
+        }
+
         return v;
     }
 
@@ -65,5 +73,13 @@ public class SearchBarFragment extends Fragment {
 
     public String getSearchBarFieldTag() {
         return searchBarField.getTag().toString();
+    }
+
+    public FilterButtonFragment getBtnFilter() {
+        return btnFilter;
+    }
+
+    public void setBtnFilter(FilterButtonFragment btnFilter) {
+        this.btnFilter = btnFilter;
     }
 }
