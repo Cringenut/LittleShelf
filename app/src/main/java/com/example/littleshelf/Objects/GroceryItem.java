@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 public class GroceryItem {
 
@@ -70,4 +71,12 @@ public class GroceryItem {
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    public static class NameComparator implements Comparator<GroceryItem> {
+        @Override
+        public int compare(final GroceryItem objectOne, final GroceryItem objectTwo) {
+            return objectOne.getName().compareTo(objectTwo.getName());
+        }
+    }
+
 }
