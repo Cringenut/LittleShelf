@@ -78,10 +78,12 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         Log.d("Debug", "itemList size after removal: " + adapter.getAllGroceryItems().size());
 
         ((GroceriesActivity) context).deselectGroceryItem();
-        int removedItemPosition = adapter.getFilteredGroceryItems().indexOf(groceryItem);
+
+        int removedItemPosition = adapter.getSortedGroceryItems().indexOf(groceryItem);
         adapter.getFilteredGroceryItems().remove(groceryItem); // Calling notify to update list
         adapter.getAllGroceryItems().remove(groceryItem);
         adapter.getSortedGroceryItems().remove(groceryItem);
+
         adapter.notifyItemRemoved(removedItemPosition); // Deleting item from adapter
         adapter.notifyItemRangeChanged(removedItemPosition, adapter.getFilteredGroceryItems().size());
 
