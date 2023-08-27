@@ -5,7 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2C2C2C"
-    tools:context=".SetExpirationDateFragment" >
+    tools:context=".SetExpirationDateFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutTitle"
+        tools:layout_editor_absoluteX="1dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:fontFamily="@font/helveticabold"
+            android:gravity="fill"
+            android:text="August 2023"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintEnd_toStartOf="@+id/button6"
+            app:layout_constraintStart_toEndOf="@+id/button5" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:background="@drawable/style_btn_fill"
+            android:text="<"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/style_btn_fill"
+            android:text=">"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/frameLayoutTitle"
@@ -161,5 +212,108 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_28sdp"
+        android:background="#EFEFEF"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="S"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="M"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="T"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="W"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="F"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="T"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="S"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#EFBA00"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
