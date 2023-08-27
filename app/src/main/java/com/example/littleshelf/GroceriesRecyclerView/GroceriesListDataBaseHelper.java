@@ -75,10 +75,9 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
 
         GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
-        Log.d("Debug", "itemList size after removal: " + adapter.getAllGroceryItems().size());
-
         ((GroceriesActivity) context).deselectGroceryItem();
 
+        // Remove grocery item from all lists
         int removedItemPosition = adapter.getSortedGroceryItems().indexOf(groceryItem);
         adapter.getFilteredGroceryItems().remove(groceryItem); // Calling notify to update list
         adapter.getAllGroceryItems().remove(groceryItem);

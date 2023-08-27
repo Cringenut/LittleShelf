@@ -69,7 +69,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/style_btn_round"
+        android:background="@drawable/style_shape_round"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewGroceries"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -63,6 +63,8 @@ public class AddItemFragment extends Fragment {
                     .commit();
         });
 
+        System.out.println(btnAddItem.getLayoutParams());
+
         return v;
     }
 

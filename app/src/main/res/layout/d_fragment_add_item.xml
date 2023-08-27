@@ -89,20 +89,28 @@
                 android:layout_weight="1"
                 android:background="@drawable/style_btn_fill"
                 android:text="Button" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnAddItem"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_marginStart="@dimen/_80sdp"
-            android:layout_marginEnd="@dimen/_80sdp"
-            android:background="@drawable/style_btn_fill"
-            android:text="Button"
+            android:layout_height="@dimen/_60sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            tools:layout_editor_absoluteX="31dp">
+
+            <Button
+                android:id="@+id/btnAddItem"
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="104dp"
+                android:layout_marginEnd="104dp"
+                android:background="@drawable/style_btn_fill"
+                android:text="Confirm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
