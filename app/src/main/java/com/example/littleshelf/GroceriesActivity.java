@@ -14,7 +14,7 @@ import com.example.littleshelf.GroceriesRecyclerView.GroceriesListDataBaseHelper
 import com.example.littleshelf.Objects.GroceryItem;
 import java.util.ArrayList;
 
-public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnItemClickInterface {
+public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnGroceryItemClickInterface {
 
     private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
     private SearchBarFragment searchBar;
@@ -41,9 +41,9 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         Button buttonAdd = findViewById(R.id.btnAddItem);
 
         buttonAdd.setOnClickListener(btn -> {
-            AddItemListFragment addItemListFragment = new AddItemListFragment();
+            AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.containerAddItemList, addItemListFragment)
+                    .replace(R.id.containerWholeScreenFragment, addItemListFragment)
                     .commit();
 
             AddItemFragment addItemFragment = new AddItemFragment();

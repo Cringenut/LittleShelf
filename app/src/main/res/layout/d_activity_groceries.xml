@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <FrameLayout
-        android:id="@+id/containerAddItemList"
+        android:id="@+id/containerWholeScreenFragment"
         android:name="com.example.littleshelf.AddItemListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

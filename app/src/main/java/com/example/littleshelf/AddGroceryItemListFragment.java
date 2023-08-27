@@ -17,7 +17,7 @@ import com.example.littleshelf.Objects.GroceryItem;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class AddItemListFragment extends Fragment implements RecyclerViewOnItemClickInterface {
+public class AddGroceryItemListFragment extends Fragment implements RecyclerViewOnGroceryItemClickInterface {
 
     private Button btnBack;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
@@ -80,4 +80,5 @@ public class AddItemListFragment extends Fragment implements RecyclerViewOnItemC
                         .findFragmentById(R.id.containerBottomFragment)))
                 .commit();
     }
+
 }

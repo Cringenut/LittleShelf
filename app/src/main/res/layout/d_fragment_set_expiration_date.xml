@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteX="1dp">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textViewMonthYear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -32,26 +32,26 @@
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="@dimen/_44sdp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
             android:background="@drawable/style_btn_fill"
-            android:text="<"
+            android:text="Prev"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button6"
-            android:layout_width="@dimen/_44sdp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:background="@drawable/style_btn_fill"
-            android:text=">"
+            android:text="Next"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -199,15 +199,37 @@
 
             <Button
                 android:id="@+id/btnAddItem"
-                android:layout_width="@dimen/_160sdp"
+                android:layout_width="@dimen/_96sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_marginStart="104dp"
                 android:layout_marginEnd="104dp"
                 android:background="@drawable/style_btn_fill"
-                android:text="Confirm"
+                android:text="Clear"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnAddItem3"
+                android:layout_width="@dimen/_96sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:background="@drawable/style_btn_fill"
+                android:text="Confirm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddItem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnAddItem2"
+                android:layout_width="@dimen/_96sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:background="@drawable/style_btn_fill"
+                android:text="Cancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnAddItem"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -269,23 +291,23 @@
             android:textSize="@dimen/_18ssp" />
 
         <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/helveticabold"
-            android:text="F"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp" />
-
-        <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/helveticabold"
             android:text="T"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helveticabold"
+            android:text="F"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_18ssp" />
@@ -304,10 +326,12 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/frameLayout3"
+        android:id="@+id/recyclerViewCalendar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#EFBA00"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -14,7 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
-import com.example.littleshelf.RecyclerViewOnItemClickInterface;
+import com.example.littleshelf.RecyclerViewOnGroceryItemClickInterface;
 import com.example.littleshelf.SearchBarFragment;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.example.littleshelf.SortTypesEnum;
@@ -37,17 +37,17 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     private SortTypesEnum currentSort;
     private Filter currentFilter;
     private Context context;
-    private RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface;
+    private RecyclerViewOnGroceryItemClickInterface recyclerViewOnGroceryItemClickInterface;
     private SearchBarFragment searchBarFragment;
     public RecyclerView recyclerView;
 
-    public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems, RecyclerViewOnItemClickInterface recyclerViewOnItemClickInterface) {
+    public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems, RecyclerViewOnGroceryItemClickInterface recyclerViewOnGroceryItemClickInterface) {
         this.context = context;
         this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
         this.sortedGroceryItems = new ArrayList<>(filteredGroceryItems);
-        this.recyclerViewOnItemClickInterface = recyclerViewOnItemClickInterface;
+        this.recyclerViewOnGroceryItemClickInterface = recyclerViewOnGroceryItemClickInterface;
         this.currentSort = SortTypesEnum.unsorted;
         sortGroceryItems();
 
@@ -125,7 +125,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
             createExpirableItem(holder, position);
         }
 
-        holder.cardView.setOnClickListener(v -> recyclerViewOnItemClickInterface.onItemClicked(sortedGroceryItems.get(position)));
+        holder.cardView.setOnClickListener(v -> recyclerViewOnGroceryItemClickInterface.onItemClicked(sortedGroceryItems.get(position)));
     }
 
     // Set default settings for the item's fragment

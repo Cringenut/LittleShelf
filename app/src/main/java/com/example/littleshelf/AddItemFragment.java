@@ -16,7 +16,9 @@ public class AddItemFragment extends Fragment {
 
     private GroceryItem groceryItem;
     private Button btnItemName;
+    private Button btnItemExpirationDate;
     private Button btnAddItem;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,10 @@ public class AddItemFragment extends Fragment {
         btnItemName = v.findViewById(R.id.btnAddItemName);
         btnItemName.setOnClickListener(btnName -> {
 
-            AddItemListFragment addItemListFragment = new AddItemListFragment();
+            AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(groceriesActivity.findViewById(R.id.containerAddItemList).getId(), addItemListFragment)
+                    .replace(groceriesActivity.findViewById(R.id.containerWholeScreenFragment).getId(), addItemListFragment)
                     .commit();
 
             groceriesActivity.getSupportFragmentManager()
@@ -52,6 +54,20 @@ public class AddItemFragment extends Fragment {
                     .commit();
         });
         btnItemName.setText(groceryItem.getName());
+
+        btnItemExpirationDate = v.findViewById(R.id.btnItemExpirationDate);
+        btnItemExpirationDate.setOnClickListener(btnExpirationDate -> {
+            SetExpirationDateFragment setExpirationDateFragment = new SetExpirationDateFragment();
+            groceriesActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(groceriesActivity.findViewById(R.id.containerWholeScreenFragment).getId(), setExpirationDateFragment)
+                    .commit();
+
+            groceriesActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .hide(this)
+                    .commit();
+        });
 
         btnAddItem = v.findViewById(R.id.btnAddItem);
         btnAddItem.setOnClickListener(btnAdd -> {
