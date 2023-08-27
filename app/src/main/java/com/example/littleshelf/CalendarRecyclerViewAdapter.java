@@ -30,7 +30,7 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
 
         @Override
         public void onClick(View v) {
-            recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), dayOfMonth.getText().toString(), v);
+            recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), dayOfMonth.getText().toString());
         }
     }
 
@@ -40,7 +40,7 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.d_cell_calendar, parent, false);
         ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
-        layoutParams.height = (int)(parent.getHeight() * 0.2);
+        layoutParams.height = (int)(parent.getHeight() * 0.166666);
         return new CalendarRecyclerViewHolder(v);
     }
 
@@ -55,6 +55,6 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     }
 
     public interface RecyclerViewOnCalendarDayClickInterface {
-        void onItemClicked(int position, String dayText, View v);
+        void onItemClicked(int position, String dayText);
     }
 }

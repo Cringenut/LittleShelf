@@ -99,7 +99,7 @@
             tools:layout_editor_absoluteX="31dp">
 
             <Button
-                android:id="@+id/btnAddItem"
+                android:id="@+id/btnConfirmDate"
                 android:layout_width="@dimen/_160sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:layout_marginStart="104dp"

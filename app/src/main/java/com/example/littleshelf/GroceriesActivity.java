@@ -38,7 +38,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
         // Obtain an instance of the FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Button buttonAdd = findViewById(R.id.btnAddItem);
+        Button buttonAdd = findViewById(R.id.btnConfirmDate);
 
         buttonAdd.setOnClickListener(btn -> {
             AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();

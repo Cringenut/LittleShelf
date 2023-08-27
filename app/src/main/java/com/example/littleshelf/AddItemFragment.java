@@ -57,7 +57,7 @@ public class AddItemFragment extends Fragment {
 
         btnItemExpirationDate = v.findViewById(R.id.btnItemExpirationDate);
         btnItemExpirationDate.setOnClickListener(btnExpirationDate -> {
-            SetExpirationDateFragment setExpirationDateFragment = new SetExpirationDateFragment();
+            SetExpirationDateFragment setExpirationDateFragment = new SetExpirationDateFragment(groceryItem);
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(groceriesActivity.findViewById(R.id.containerWholeScreenFragment).getId(), setExpirationDateFragment)
@@ -69,7 +69,7 @@ public class AddItemFragment extends Fragment {
                     .commit();
         });
 
-        btnAddItem = v.findViewById(R.id.btnAddItem);
+        btnAddItem = v.findViewById(R.id.btnConfirmDate);
         btnAddItem.setOnClickListener(btnAdd -> {
             groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
             groceriesActivity.getSearchBar().clearSearch();

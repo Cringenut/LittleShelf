@@ -64,7 +64,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/btnAddItem"
+        android:id="@+id/btnConfirmDate"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_10sdp"
