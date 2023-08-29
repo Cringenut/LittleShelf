@@ -1,13 +1,14 @@
 package com.example.littleshelf;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,10 +18,11 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     private final ArrayList<String> daysOfMonth;
     private final RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface;
     private View selectedCalendarCell;
-
-    public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface) {
+    private SetExpirationDateFragment parentFragment;
+    public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface, SetExpirationDateFragment parentFragment) {
         this.daysOfMonth = daysOfMonth;
         this.recyclerViewOnCalendarDayClickInterface = recyclerViewOnCalendarDayClickInterface;
+        this.parentFragment = parentFragment;
     }
 
     public View getSelectedCalendarCell() {
@@ -44,9 +46,6 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
             recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), dayOfMonth.getText().toString());
         }
 
-        public void selectCalendarCell() {
-            this.itemView.findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 102, 102));
-        }
     }
 
     @NonNull
@@ -62,6 +61,23 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     @Override
     public void onBindViewHolder(@NonNull CalendarRecyclerViewHolder holder, int position) {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (parentFragment.getSelectedDate().equals(parentFragment.getCurrentSelectedDate(parentFragment.getView()))) {
+                if ( holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
+                    selectCalendarCell(holder);
+                }
+            }
+        }
+    }
+
+    public void selectCalendarCell(@NonNull CalendarRecyclerViewHolder holder) {
+        holder.itemView.findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 102, 102));
+        selectedCalendarCell = holder.itemView;
+    }
+
+    public void deselectCalendarCell() {
+        selectedCalendarCell.findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 255, 255));
     }
 
     @Override
