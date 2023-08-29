@@ -1,5 +1,6 @@
 package com.example.littleshelf;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -31,6 +32,7 @@ public class SetExpirationDateFragment extends Fragment {
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     private final GroceryItem groceryItem;
+    private CalendarRecyclerViewAdapter calendarRecyclerViewAdapter;
     private ConstraintLayout holderDateInfo;
 
     public SetExpirationDateFragment(GroceryItem groceryItem) {
@@ -63,11 +65,8 @@ public class SetExpirationDateFragment extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void selectDateCell(View v, String dayText) {
-        holderDateInfo.setVisibility(View.VISIBLE);
-        ((TextView) v.findViewById(R.id.textViewExpirationDay)).setText(dayText);
-        ((TextView) v.findViewById(R.id.textViewExpirationMonth)).setText(selectedDate.getMonth().toString().toUpperCase());
-        ((TextView) v.findViewById(R.id.textViewExpirationYear)).setText(String.valueOf(selectedDate.getYear()));
+    private void deselectDateCell() {
+        calendarRecyclerViewAdapter.getSelectedCalendarCell().findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 255, 255));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -76,7 +75,7 @@ public class SetExpirationDateFragment extends Fragment {
         String month = ((TextView) v.findViewById(R.id.textViewExpirationMonth)).getText().toString();
         String year = ((TextView) v.findViewById(R.id.textViewExpirationYear)).getText().toString();
 
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd MMMM yyyy").toFormatter();
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMMM yyyy").toFormatter();
         return LocalDate.parse(day + " " + month + " " + year, formatter);
     }
 
@@ -85,9 +84,12 @@ public class SetExpirationDateFragment extends Fragment {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> dayInMonth = daysInMonthArray(selectedDate);
 
-        CalendarRecyclerViewAdapter calendarRecyclerViewAdapter = new CalendarRecyclerViewAdapter(dayInMonth, (position, dayText) -> {
+        calendarRecyclerViewAdapter = new CalendarRecyclerViewAdapter(dayInMonth, (position, dayText) -> {
             if (!dayText.equals("")) {
-                selectDateCell(v, dayText);
+                if (selectedDate.equals(getCurrentSelectedDate(v))) {
+                    deselectDateCell();
+                }
+                selectDateCell(v, position);
                 selectedDate = getCurrentSelectedDate(v);
             }
         });
@@ -95,6 +97,19 @@ public class SetExpirationDateFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(v.getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarRecyclerViewAdapter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void selectDateCell(View v, int position) {
+        holderDateInfo.setVisibility(View.VISIBLE);
+        View selectedCalendarCell = calendarRecyclerView.findViewHolderForAdapterPosition(position).itemView;
+
+        ((TextView) v.findViewById(R.id.textViewExpirationDay)).setText(((TextView) selectedCalendarCell.findViewById(R.id.textViewDayOfMonth)).getText());
+        ((TextView) v.findViewById(R.id.textViewExpirationMonth)).setText(selectedDate.getMonth().toString().toUpperCase());
+        ((TextView) v.findViewById(R.id.textViewExpirationYear)).setText(String.valueOf(selectedDate.getYear()));
+
+        selectedCalendarCell.findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 102, 102));
+        calendarRecyclerViewAdapter.setSelectedCalendarCell(selectedCalendarCell);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -133,13 +148,14 @@ public class SetExpirationDateFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void previousMonthAction(View v) {
         selectedDate = selectedDate.minusMonths(1);
+        calendarRecyclerViewAdapter.setSelectedCalendarCell(null);
         setMonthView(v);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void nextMonthAction(View v) {
         selectedDate = selectedDate.plusMonths(1);
+        calendarRecyclerViewAdapter.setSelectedCalendarCell(null);
         setMonthView(v);
     }
 }

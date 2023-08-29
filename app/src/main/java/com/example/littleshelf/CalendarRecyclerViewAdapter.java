@@ -1,11 +1,13 @@
 package com.example.littleshelf;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -14,10 +16,19 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
 
     private final ArrayList<String> daysOfMonth;
     private final RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface;
+    private View selectedCalendarCell;
 
     public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface) {
         this.daysOfMonth = daysOfMonth;
         this.recyclerViewOnCalendarDayClickInterface = recyclerViewOnCalendarDayClickInterface;
+    }
+
+    public View getSelectedCalendarCell() {
+        return selectedCalendarCell;
+    }
+
+    public void setSelectedCalendarCell(View selectedCalendarCell) {
+        this.selectedCalendarCell = selectedCalendarCell;
     }
 
     public class CalendarRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -31,6 +42,10 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
         @Override
         public void onClick(View v) {
             recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), dayOfMonth.getText().toString());
+        }
+
+        public void selectCalendarCell() {
+            this.itemView.findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 102, 102));
         }
     }
 
