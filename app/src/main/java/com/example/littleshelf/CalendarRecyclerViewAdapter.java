@@ -34,6 +34,10 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     }
 
     public class CalendarRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public String getDayOfMonthText() {
+            return dayOfMonth.getText().toString();
+        }
+
         private final TextView dayOfMonth;
         public CalendarRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,9 +47,8 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
 
         @Override
         public void onClick(View v) {
-            recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), dayOfMonth.getText().toString());
+            recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), this);
         }
-
     }
 
     @NonNull
@@ -64,7 +67,7 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (parentFragment.getSelectedDate().equals(parentFragment.getCurrentSelectedDate(parentFragment.getView()))) {
-                if ( holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
+                if (holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
                     selectCalendarCell(holder);
                 }
             }
@@ -86,6 +89,6 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     }
 
     public interface RecyclerViewOnCalendarDayClickInterface {
-        void onItemClicked(int position, String dayText);
+        void onItemClicked(int position, CalendarRecyclerViewHolder clickedItem);
     }
 }

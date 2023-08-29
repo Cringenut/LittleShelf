@@ -1,6 +1,5 @@
 package com.example.littleshelf;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -32,6 +31,7 @@ public class SetExpirationDateFragment extends Fragment {
     private final GroceryItem groceryItem;
     private CalendarRecyclerViewAdapter calendarRecyclerViewAdapter;
     private ConstraintLayout holderDateInfo;
+    private TextView textViewNotSet;
 
     public SetExpirationDateFragment(GroceryItem groceryItem) {
         this.groceryItem = groceryItem;
@@ -44,14 +44,15 @@ public class SetExpirationDateFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.d_fragment_set_expiration_date, container, false);
 
+        textViewNotSet = v.findViewById(R.id.textViewNotSet);
         holderDateInfo = v.findViewById(R.id.holderDateInfo);
         if (groceryItem.getExpirationDate() == null) {
             selectedDate = LocalDate.now();
         }
         else {
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd MMMM yyyy").toFormatter();
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMMM yyyy").toFormatter();
             selectedDate = LocalDate.parse(groceryItem.getExpirationDate(), formatter);
-            holderDateInfo.setVisibility(View.VISIBLE);
+            v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.VISIBLE);
         }
 
         v.findViewById(R.id.btnPrevMonth).setOnClickListener(btnPrev -> previousMonthAction(v));
@@ -63,16 +64,17 @@ public class SetExpirationDateFragment extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void deselectDateCell() {
-        calendarRecyclerViewAdapter.getSelectedCalendarCell().findViewById(R.id.constraintLayoutMain).setBackgroundColor(Color.argb(255, 255, 255, 255));
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setCurrentSelectedDate(View v, String dayText) {
-        ((TextView) v.findViewById(R.id.textViewExpirationDay)).setText(dayText);
-        ((TextView) v.findViewById(R.id.textViewExpirationMonth)).setText(selectedDate.getMonth().toString().toUpperCase());
-        ((TextView) v.findViewById(R.id.textViewExpirationYear)).setText(String.valueOf(selectedDate.getYear()));
+        textViewNotSet.setVisibility(View.GONE);
+        holderDateInfo.setVisibility(View.VISIBLE);
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationDay)).setText(dayText);
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationMonth)).setText(selectedDate.getMonth().toString().toUpperCase());
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationYear)).setText(String.valueOf(selectedDate.getYear()));
+
+        v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.VISIBLE);
+        v.findViewById(R.id.btnClearDate).setOnClickListener(btnClear -> clearSelectedDate(v));
+
+        selectedDate = getCurrentSelectedDate(v);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -86,18 +88,32 @@ public class SetExpirationDateFragment extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    private void clearSelectedDate(View v) {
+        v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.GONE);
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationDay)).setText("");
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationMonth)).setText("");
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationYear)).setText("");
+
+
+        textViewNotSet.setVisibility(View.VISIBLE);
+        holderDateInfo.setVisibility(View.GONE);
+        selectedDate = LocalDate.now();
+        calendarRecyclerViewAdapter.deselectCalendarCell();
+        setMonthView(v);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView(View v) {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> dayInMonth = daysInMonthArray(selectedDate);
 
-        calendarRecyclerViewAdapter = new CalendarRecyclerViewAdapter(dayInMonth, (position, dayText) -> {
-            if (!dayText.equals("")) {
-                if (calendarRecyclerViewAdapter.getSelectedCalendarCell() != null && calendarRecyclerViewAdapter.getSelectedCalendarCell() != calendarRecyclerView.findViewHolderForAdapterPosition(position).itemView) {
+        calendarRecyclerViewAdapter = new CalendarRecyclerViewAdapter(dayInMonth, (position, recyclerViewHolder) -> {
+            if (!recyclerViewHolder.getDayOfMonthText().equals("")) {
+                if (calendarRecyclerViewAdapter.getSelectedCalendarCell() != null && calendarRecyclerViewAdapter.getSelectedCalendarCell() != recyclerViewHolder.itemView) {
                     calendarRecyclerViewAdapter.deselectCalendarCell();
                 }
-                calendarRecyclerViewAdapter.selectCalendarCell((CalendarRecyclerViewAdapter.CalendarRecyclerViewHolder) calendarRecyclerView.findViewHolderForAdapterPosition(position));
-                setCurrentSelectedDate(v, dayText);
-                selectedDate = getCurrentSelectedDate(v);
+                calendarRecyclerViewAdapter.selectCalendarCell(recyclerViewHolder);
+                setCurrentSelectedDate(v, recyclerViewHolder.getDayOfMonthText());
             }
         }, this);
 
@@ -114,8 +130,9 @@ public class SetExpirationDateFragment extends Fragment {
         int daysInMonth = yearMonth.lengthOfMonth();
 
         LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-        dayOfWeek = dayOfWeek == 7 ? 0 : dayOfWeek;
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue() == 7 ? 0 : firstOfMonth
+                .getDayOfWeek()
+                .getValue();
 
         for (int i = 0; i < 42; i++) {
             if (i < dayOfWeek || i >= daysInMonth + dayOfWeek) {

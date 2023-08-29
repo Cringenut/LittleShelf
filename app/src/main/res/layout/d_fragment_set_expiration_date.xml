@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2C2C2C"
+    android:visibility="visible"
     tools:context=".SetExpirationDateFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,11 +119,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/textViewNotSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helveticabold"
+                android:text="Not set"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_40ssp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/holderDateInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textViewExpirationDay"
@@ -130,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helveticabold"
                     android:gravity="center|fill"
-                    android:text="15"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/_92ssp"
                     android:visibility="visible"
@@ -154,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:fontFamily="@font/helveticabold"
-                        android:text="FEBRUARY"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/helveticabold"
-                        android:text="2023"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -190,20 +205,6 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/helveticabold"
-                android:text="Not set"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_48ssp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,10 +215,12 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
+                android:id="@+id/linearLayoutActionButtons"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -249,6 +252,7 @@
                     android:visibility="visible" />
 
                 <Space
+                    android:id="@+id/Space"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
