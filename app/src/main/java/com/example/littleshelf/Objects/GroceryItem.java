@@ -13,9 +13,9 @@ public class GroceryItem {
 
     private long id;
     private String name;
-    private String expirationDate;
+    private LocalDate expirationDate;
 
-    public GroceryItem(int id, String name, String expirationDate) {
+    public GroceryItem(int id, String name, LocalDate expirationDate) {
         this.id = id;
         this.name = name;
         this.expirationDate = expirationDate;
@@ -27,16 +27,12 @@ public class GroceryItem {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean isFresh(@Nullable Integer additionalDays) {
-        if (expirationDate.isEmpty()) {
+        if (expirationDate == null) {
             return true; // Return true if no expiration date is set
         }
 
-        // If additional days is passed add them to expiration date
-        LocalDate localDate = LocalDate.parse(expirationDate, DateTimeFormatter.ofPattern("d M yyyy"))
-                .plusDays(additionalDays == null ? 0 : additionalDays);
-
-        // Return if date is after tomorrow
-        return localDate.isAfter(LocalDate.now());
+        // Return if date is after tomorrow, if additional days is passed add them to expiration date
+        return expirationDate.plusDays(additionalDays == null ? 0 : additionalDays).isAfter(LocalDate.now());
     }
 
     @Override
@@ -64,11 +60,11 @@ public class GroceryItem {
         this.name = name;
     }
 
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 

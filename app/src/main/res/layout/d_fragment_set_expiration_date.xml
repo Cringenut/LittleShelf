@@ -192,7 +192,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textViewDaysBeforeExpiration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_8sdp"
@@ -232,11 +232,12 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btnConfirmDate"
+                    android:id="@+id/btnClearDate"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="@dimen/_32sdp"
                     android:background="@drawable/style_btn_fill"
-                    android:text="Confirm" />
+                    android:text="Clear"
+                    android:visibility="visible" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -244,12 +245,11 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btnClearDate"
+                    android:id="@+id/btnConfirmDate"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="@dimen/_32sdp"
                     android:background="@drawable/style_btn_fill"
-                    android:text="Clear"
-                    android:visibility="visible" />
+                    android:text="Confirm" />
 
                 <Space
                     android:id="@+id/Space"

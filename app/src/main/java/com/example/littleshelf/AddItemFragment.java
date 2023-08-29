@@ -16,6 +16,11 @@ public class AddItemFragment extends Fragment {
 
     private GroceryItem groceryItem;
     private Button btnItemName;
+
+    public Button getBtnItemExpirationDate() {
+        return btnItemExpirationDate;
+    }
+
     private Button btnItemExpirationDate;
     private Button btnAddItem;
 

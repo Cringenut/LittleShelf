@@ -19,6 +19,7 @@ import com.example.littleshelf.SearchBarFragment;
 import com.example.littleshelf.Objects.GroceryItem;
 import com.example.littleshelf.SortTypesEnum;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -139,7 +140,10 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     private void createExpirableItem(@NonNull RecyclerViewHolder holder, int position) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
         layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
-        holder.itemExpirationDate.setText(sortedGroceryItems.get(position).getExpirationDate());
+        holder.itemExpirationDate.setVisibility(View.VISIBLE);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        holder.itemExpirationDate.setText(
+                sortedGroceryItems.get(position).getExpirationDate().format(formatter));
     }
 
     @Override

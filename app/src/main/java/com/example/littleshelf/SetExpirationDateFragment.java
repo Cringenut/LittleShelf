@@ -20,7 +20,9 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SetExpirationDateFragment extends Fragment {
 
@@ -43,6 +45,7 @@ public class SetExpirationDateFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.d_fragment_set_expiration_date, container, false);
+        v.findViewById(R.id.btnBack).setOnClickListener(btnConfirm -> closeDatePicker());
 
         textViewNotSet = v.findViewById(R.id.textViewNotSet);
         holderDateInfo = v.findViewById(R.id.holderDateInfo);
@@ -50,8 +53,8 @@ public class SetExpirationDateFragment extends Fragment {
             selectedDate = LocalDate.now();
         }
         else {
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMMM yyyy").toFormatter();
-            selectedDate = LocalDate.parse(groceryItem.getExpirationDate(), formatter);
+            selectedDate = groceryItem.getExpirationDate();
+            setTextHolderDateInfo(String.valueOf(selectedDate.getDayOfMonth()), selectedDate.getMonth().toString(), String.valueOf(selectedDate.getYear()));
             v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.VISIBLE);
         }
 
@@ -67,42 +70,84 @@ public class SetExpirationDateFragment extends Fragment {
     public void setCurrentSelectedDate(View v, String dayText) {
         textViewNotSet.setVisibility(View.GONE);
         holderDateInfo.setVisibility(View.VISIBLE);
-        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationDay)).setText(dayText);
-        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationMonth)).setText(selectedDate.getMonth().toString().toUpperCase());
-        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationYear)).setText(String.valueOf(selectedDate.getYear()));
+        setTextHolderDateInfo(dayText, selectedDate.getMonth().toString(), String.valueOf(selectedDate.getYear()));
 
         v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.VISIBLE);
         v.findViewById(R.id.btnClearDate).setOnClickListener(btnClear -> clearSelectedDate(v));
+        v.findViewById(R.id.btnConfirmDate).setOnClickListener(btnConfirm -> acceptSelectedDate(v));
+
+
+        if (getCurrentSelectedDate(v).isBefore(LocalDate.now().plusDays(1))) {
+            ((TextView) holderDateInfo.findViewById(R.id.textViewDaysBeforeExpiration)).setText("Expired");
+        }
+        else {
+            ((TextView) holderDateInfo.findViewById(R.id.textViewDaysBeforeExpiration)).setText(
+                    ChronoUnit.DAYS.between(LocalDate.now(), getCurrentSelectedDate(v)) + " days");
+        }
 
         selectedDate = getCurrentSelectedDate(v);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void acceptSelectedDate(View v) {
+        groceryItem.setExpirationDate(getCurrentSelectedDate(v));
+        closeDatePicker();
+    }
+
+    private void closeDatePicker() {
+        GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
+
+        groceriesActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .remove(this)
+                .commit();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        ((AddItemFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
+                .getBtnItemExpirationDate().setText(
+                        groceryItem.getExpirationDate() != null ? groceryItem.getExpirationDate().format(formatter) : "");
+        groceriesActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .show(Objects.requireNonNull(groceriesActivity.getSupportFragmentManager()
+                        .findFragmentById(R.id.containerBottomFragment)))
+                .commit();
+    }
+
     public LocalDate getCurrentSelectedDate(View v) {
         String day = ((TextView) v.findViewById(R.id.textViewExpirationDay)).getText().toString();
         String month = ((TextView) v.findViewById(R.id.textViewExpirationMonth)).getText().toString();
         String year = ((TextView) v.findViewById(R.id.textViewExpirationYear)).getText().toString();
 
+        if (day.equals("") || month.equals("") || year.equals("")) {
+            return null;
+        }
+
         DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("d MMMM yyyy").toFormatter();
         return LocalDate.parse(day + " " + month + " " + year, formatter);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void clearSelectedDate(View v) {
-        v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.GONE);
+    private void setTextHolderDateInfo() {
         ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationDay)).setText("");
         ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationMonth)).setText("");
         ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationYear)).setText("");
+    }
 
+    private void setTextHolderDateInfo(String dayText, String monthText, String yearText) {
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationDay)).setText(dayText);
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationMonth)).setText(monthText);
+        ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationYear)).setText(yearText);
+    }
 
+    private void clearSelectedDate(View v) {
         textViewNotSet.setVisibility(View.VISIBLE);
         holderDateInfo.setVisibility(View.GONE);
+
+        v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.GONE);
+        setTextHolderDateInfo();
+
         selectedDate = LocalDate.now();
-        calendarRecyclerViewAdapter.deselectCalendarCell();
         setMonthView(v);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView(View v) {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> dayInMonth = daysInMonthArray(selectedDate);

@@ -1,7 +1,9 @@
 package com.example.littleshelf;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         return groceriesListDataBaseHelper;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,9 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                     .replace(R.id.containerBottomFragment, addItemFragment)
                     .hide(addItemFragment)
                     .commit();
+            deselectGroceryItem();
             addItemFragment.setGroceryItem(new GroceryItem(""));
+
 
         });
 

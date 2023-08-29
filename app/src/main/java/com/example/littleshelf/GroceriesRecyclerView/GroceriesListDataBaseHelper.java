@@ -5,13 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
 import androidx.annotation.Nullable;
-
 import com.example.littleshelf.GroceriesActivity;
 import com.example.littleshelf.Objects.GroceryItem;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
 
     public GroceriesListDataBaseHelper(@Nullable Context context) {
         super(context, "items.db", null, 1);
+        //context.deleteDatabase("items.db");
         this.context = context;
     }
 
@@ -51,8 +51,9 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         // Place data inside columns
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
-        cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate());
+        cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate() == null ? "" : groceryItem.getExpirationDate().format(formatter));
 
         // Add item to adapter
         GroceriesListRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
@@ -105,9 +106,11 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
                 int itemID = cursor.getInt(0);
                 String itemName = cursor.getString(1);
                 String itemExpirationDate = cursor.getString(2);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
                 // Create item from received data
-                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName, itemExpirationDate);
+                GroceryItem newGroceryItem = new GroceryItem(itemID, itemName,
+                        itemExpirationDate.equals("") ? null : LocalDate.parse(itemExpirationDate, formatter));
                 returnList.add(newGroceryItem);
             } while (cursor.moveToNext());
         }
