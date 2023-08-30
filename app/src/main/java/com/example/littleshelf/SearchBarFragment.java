@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 
 public class SearchBarFragment extends Fragment {
 
@@ -40,14 +40,15 @@ public class SearchBarFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Sort when changing search bar
                 groceriesRecyclerView.getRecyclerViewAdapter().getFilter().filter(s);
                 searchBarField.setTag(s);
             }
-
             @Override
             public void afterTextChanged(Editable s) { }
         });
 
+        // Replace container
         if (btnSort != null) {
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.containerFilterButton, btnSort)
@@ -72,10 +73,6 @@ public class SearchBarFragment extends Fragment {
 
     public String getSearchBarFieldTag() {
         return searchBarField.getTag().toString();
-    }
-
-    public SortButtonFragment getBtnFilter() {
-        return btnSort;
     }
 
     public void setBtnFilter(SortButtonFragment btnFilter) {

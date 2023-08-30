@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesRecyclerView;
+package com.example.littleshelf.AddGroceryItem;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -18,7 +18,7 @@ public class AddGroceryItemDataBaseHelper extends SQLiteOpenHelper  {
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public AddGroceryItemDataBaseHelper(@Nullable Context context) {
-        super(context, "AddItemsListDatabase.db", null, 1);
+        super(context, "addItemsList.db", null, 1);
     }
 
     @Override

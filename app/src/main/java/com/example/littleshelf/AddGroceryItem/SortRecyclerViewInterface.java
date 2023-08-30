@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesRecyclerView;
+package com.example.littleshelf.AddGroceryItem;
 
 import com.example.littleshelf.SortTypesEnum;
 

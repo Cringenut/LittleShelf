@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.GroceriesRecyclerView.AddGroceryItemDataBaseHelper;
+import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.AddGroceryItem.AddGroceryItemDataBaseHelper;
 import com.example.littleshelf.Objects.GroceryItem;
 
 import java.util.ArrayList;

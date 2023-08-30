@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesRecyclerView;
+package com.example.littleshelf.AddGroceryItem;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,6 @@ import com.example.littleshelf.GroceriesActivity;
 import com.example.littleshelf.Objects.GroceryItem;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
 
     public GroceriesListDataBaseHelper(@Nullable Context context) {
         super(context, "items.db", null, 1);
-        //context.deleteDatabase("items.db");
         this.context = context;
     }
 

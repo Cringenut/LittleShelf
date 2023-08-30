@@ -1,107 +1,113 @@
 package com.example.littleshelf;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.littleshelf.GroceriesRecyclerView.SortByRecyclerViewInterface;
-import com.example.littleshelf.GroceriesRecyclerView.SortRecyclerViewInterface;
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.GroceriesRecyclerView.GroceriesListDataBaseHelper;
+import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.AddGroceryItem.GroceriesListDataBaseHelper;
 import com.example.littleshelf.Objects.GroceryItem;
 import java.util.ArrayList;
 
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnGroceryItemClickInterface {
 
     private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
-    private SearchBarFragment searchBar;
     private GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
+    private SearchBarFragment searchBar;
     private GroceryItem selectedGroceryItem;
-    public SearchBarFragment getSearchBar() {
-        return searchBar;
-    }
 
     public GroceriesListDataBaseHelper getGroceriesListDataBaseHelper() {
         return groceriesListDataBaseHelper;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.d_activity_groceries);
 
+        setContentView(R.layout.d_activity_groceries);
+        // Creating database for current groceries
         groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(this);
 
         // Obtain an instance of the FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Button buttonAdd = findViewById(R.id.btnConfirmDate);
 
-        buttonAdd.setOnClickListener(btn -> {
+        // Main functions
+        createAddButton(fragmentManager);
+        createSearchBarAndSortButton(fragmentManager);
+        createMainGroceriesList(fragmentManager);
+    }
+
+    private void createMainGroceriesList(FragmentManager fragmentManager) {
+        // Create recycler view fragment
+        groceriesRecyclerView = new GroceriesRecyclerViewFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
+                .commit(); // Replacing container
+
+        // Set main recycler view properties
+        groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesListDataBaseHelper.getAllItems()), this);
+        groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
+        groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
+        groceriesListDataBaseHelper.setRecyclerView(groceriesRecyclerView);
+
+        searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
+    }
+
+    private void createAddButton(FragmentManager fragmentManager) {
+        // Creating add button and lambda listener
+        Button buttonAdd = findViewById(R.id.btnConfirmDate);
+        buttonAdd.setOnClickListener(btnAdd -> {
+            // Creating new
             AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.containerWholeScreenFragment, addItemListFragment)
                     .commit();
 
+            // Create final add fragment and empty grocery item,
+            // so we can set it's parameters directly from sub-fragments
             AddItemFragment addItemFragment = new AddItemFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.containerBottomFragment, addItemFragment)
                     .hide(addItemFragment)
                     .commit();
-            deselectGroceryItem();
+            deselectGroceryItem(); // Always deselect, even if not selected,
+                                    // so selection in new list won't be broken
             addItemFragment.setGroceryItem(new GroceryItem(""));
-
-
         });
+    }
 
+    private void createSearchBarAndSortButton(FragmentManager fragmentManager) {
+        // Creating new search bar fragment and replacing container
         searchBar = new SearchBarFragment();
         fragmentManager.beginTransaction()
                 .replace(R.id.containerSearchBar, searchBar)
                 .commit();
 
+        // Create sort button outside the search bar,
+        // so we can assign function inside the search bar when view is initialized
         SortGroceriesListFragment sortGroceriesListFragment = new SortGroceriesListFragment();
-        searchBar.setBtnFilter(new SortButtonFragment(new SortRecyclerViewInterface() {
-            @Override
-            public void onSortButtonClicked() {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.containerBottomFragment, sortGroceriesListFragment)
-                        .commit();
-            }
-        }));
+        searchBar.setBtnFilter(new SortButtonFragment(() -> fragmentManager.beginTransaction()
+                .replace(R.id.containerBottomFragment, sortGroceriesListFragment)
+                .commit()));
 
-        sortGroceriesListFragment.setSortByRecyclerViewInterface(new SortByRecyclerViewInterface() {
-            @Override
-            public void onSortByButtonClicked(SortTypesEnum sortType) {
-                if (groceriesListRecyclerViewAdapter.getCurrentSort() != sortType) {
-                    groceriesListRecyclerViewAdapter.setCurrentSort(sortType);
-                    groceriesListRecyclerViewAdapter.sortGroceryItems();
-                }
-
-                fragmentManager.beginTransaction()
-                        .remove(sortGroceriesListFragment)
-                        .commit();
+        // If clicked on the same sort do nothing, otherwise sort and close the "sort by" fragment
+        sortGroceriesListFragment.setSortByRecyclerViewInterface(sortType -> {
+            if (groceriesListRecyclerViewAdapter.getCurrentSort() != sortType) {
+                groceriesListRecyclerViewAdapter.setCurrentSort(sortType);
+                groceriesListRecyclerViewAdapter.sortGroceryItems();
             }
+
+            fragmentManager.beginTransaction()
+                    .remove(sortGroceriesListFragment)
+                    .commit();
         });
-
-
-        groceriesRecyclerView = new GroceriesRecyclerViewFragment();
-        fragmentManager.beginTransaction()
-                .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
-                .commit();
-        groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesListDataBaseHelper.getAllItems()), this);
-        groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
-        groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
-        searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
-        groceriesListDataBaseHelper.setRecyclerView(groceriesRecyclerView);
-
     }
 
+    /* OPERATIONS WITH GROCERY ITEMS (place to adapter later) */
     @Override
     public void onItemClicked(GroceryItem groceryItem) {
         selectGroceryItem(groceryItem);
@@ -136,8 +142,12 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                             .getSortedGroceryItems()
                             .indexOf(selectedGroceryItem));
 
-            ((Button) v.findViewById(R.id.btnRemoveItem)).setVisibility(View.GONE);
+            v.findViewById(R.id.btnRemoveItem).setVisibility(View.GONE);
             selectedGroceryItem = null;
         }
+    }
+
+    public SearchBarFragment getSearchBar() {
+        return searchBar;
     }
 }

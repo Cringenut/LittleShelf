@@ -1,4 +1,4 @@
-package com.example.littleshelf.GroceriesRecyclerView;
+package com.example.littleshelf.AddGroceryItem;
 
 import android.content.Context;
 import android.graphics.Rect;
