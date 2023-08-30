@@ -34,39 +34,39 @@ public class AddGroceryItemListFragment extends Fragment implements RecyclerView
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.d_fragment_add_item_list, container, false);
 
+        // Create close button
         btnBack = view.findViewById(R.id.btnBack);
         GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
-        btnBack.setOnClickListener(btn -> {
-            groceriesActivity.getSupportFragmentManager().beginTransaction()
-                    .remove(this)
-                    .commit();
-        });
+        btnBack.setOnClickListener(btn -> groceriesActivity.getSupportFragmentManager().beginTransaction()
+                .remove(this)
+                .commit());
 
+        // Create search bar for item names from database
         searchBar = new SearchBarFragment();
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.containerSearchBar, searchBar)
                 .commit();
 
+        // Create recycler view with all item names
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
                 .commit();
-        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(view.getContext(), searchBar, (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(getContext()).getAllItems()), this);
+        GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter =
+                new GroceriesListRecyclerViewAdapter(view.getContext(), searchBar,
+                        (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(getContext()).getAllItems()), // Getting all item names from database to create empty items later
+                        this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
-        searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
+        searchBar.setGroceriesRecyclerView(groceriesRecyclerView); // Set the recycler view to search inside
 
         return view;
     }
 
     @Override
     public void onItemClicked(GroceryItem groceryItem) {
+        // Show final add item menu and set items name from the list
         GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
-        /*groceriesActivity.getSupportFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .remove(this)
-                .commit();*/
         groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .remove(this)

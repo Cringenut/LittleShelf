@@ -23,26 +23,10 @@ public class SortGroceriesListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.d_fragment_sort_groceries_list, container, false);
 
-        v.findViewById(R.id.btnUnsorted).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sortByRecyclerViewInterface.onSortByButtonClicked(SortTypesEnum.unsorted);
-            }
-        });
-
-        v.findViewById(R.id.btnNameASC).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sortByRecyclerViewInterface.onSortByButtonClicked(SortTypesEnum.itemNameASC);
-            }
-        });
-
-        v.findViewById(R.id.btnNameDESC).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sortByRecyclerViewInterface.onSortByButtonClicked(SortTypesEnum.itemNameDESC);
-            }
-        });
+        // Call sort function inside interface
+        v.findViewById(R.id.btnUnsorted).setOnClickListener(btnUnsorted -> sortByRecyclerViewInterface.onSortByButtonClicked(SortTypesEnum.unsorted));
+        v.findViewById(R.id.btnNameASC).setOnClickListener(btnItemNameASC -> sortByRecyclerViewInterface.onSortByButtonClicked(SortTypesEnum.itemNameASC));
+        v.findViewById(R.id.btnNameDESC).setOnClickListener(btnItemNameDESC -> sortByRecyclerViewInterface.onSortByButtonClicked(SortTypesEnum.itemNameDESC));
 
         return v;
     }
