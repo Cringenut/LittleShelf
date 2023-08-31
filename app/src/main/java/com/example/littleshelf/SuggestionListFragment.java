@@ -1,24 +1,19 @@
 package com.example.littleshelf;
-
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Main.Databases.AddGroceryItemDataBaseHelper;
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Databases.GroceriesNameSuggestionsDataBaseHelper;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 import com.example.littleshelf.SearchBar.SearchBarFragment;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class AddGroceryItemListFragment extends Fragment implements RecyclerViewOnGroceryItemClickInterface {
+public class SuggestionListFragment extends Fragment implements RecyclerViewOnGroceryItemClickInterface {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,8 @@ public class AddGroceryItemListFragment extends Fragment implements RecyclerView
                 .commit();
         GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter =
                 new GroceriesListRecyclerViewAdapter(view.getContext(), searchBar,
-                        (ArrayList<GroceryItem>)(new AddGroceryItemDataBaseHelper(getContext()).getAllItems()), // Getting all item names from database to create empty items later
+                        (ArrayList<GroceryItem>)
+                                (new GroceriesNameSuggestionsDataBaseHelper(getContext()).getAllItems()), // Getting all suggestion from database to show them
                         this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
@@ -69,7 +65,7 @@ public class AddGroceryItemListFragment extends Fragment implements RecyclerView
                 .remove(this)
                 .commit();
 
-        ((AddItemMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
+        ((ItemAddMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
                 .getGroceryItem().setName(groceryItem.getName());
         groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()

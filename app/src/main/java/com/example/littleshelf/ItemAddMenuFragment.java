@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 
-public class AddItemMenuFragment extends Fragment {
+public class ItemAddMenuFragment extends Fragment {
 
     private GroceryItem groceryItem;
     private Button btnItemName;
@@ -48,7 +48,7 @@ public class AddItemMenuFragment extends Fragment {
         btnItemName.setText(groceryItem.getName());
         // Show item names
         btnItemName.setOnClickListener(btnName -> {
-            AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();
+            SuggestionListFragment addItemListFragment = new SuggestionListFragment();
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(groceriesActivity.findViewById(R.id.containerWholeScreenFragment).getId(), addItemListFragment)
@@ -63,10 +63,10 @@ public class AddItemMenuFragment extends Fragment {
         // Show date picker
         btnItemExpirationDate = v.findViewById(R.id.btnItemExpirationDate);
         btnItemExpirationDate.setOnClickListener(btnExpirationDate -> {
-            SetExpirationDateFragment setExpirationDateFragment = new SetExpirationDateFragment(groceryItem);
+            DatePickerFragment datePickerFragment = new DatePickerFragment(groceryItem);
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(groceriesActivity.findViewById(R.id.containerWholeScreenFragment).getId(), setExpirationDateFragment)
+                    .replace(groceriesActivity.findViewById(R.id.containerWholeScreenFragment).getId(), datePickerFragment)
                     .commit();
 
             groceriesActivity.getSupportFragmentManager()

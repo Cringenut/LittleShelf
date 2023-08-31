@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.GroceriesActivity;
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 
 import java.time.LocalDate;
@@ -28,7 +28,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
     public GroceriesListDataBaseHelper(@Nullable Context context) {
-        super(context, "items.db", null, 1);
+        super(context, "groceries.db", null, 1);
         this.context = context;
     }
 

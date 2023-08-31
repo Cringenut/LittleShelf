@@ -6,7 +6,7 @@
     android:layout_height="@dimen/_48sdp"
     android:background="@color/green"
     android:backgroundTint="@color/green"
-    tools:context=".GroceryItemFragment"
+    tools:context=".Main.Objects.GroceryItem.GroceryItemFragment"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
@@ -20,7 +20,7 @@
             android:layout_height="@dimen/_48sdp"
             android:background="@color/green"
             android:backgroundTint="@color/green"
-            tools:context=".GroceryItemFragment" >
+            tools:context=".Main.Objects.GroceryItem.GroceryItemFragment" >
             <TextView
                 android:id="@+id/textViewItemName"
                 android:layout_width="@dimen/_210sdp"

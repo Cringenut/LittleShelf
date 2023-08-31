@@ -7,18 +7,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddGroceryItemDataBaseHelper extends SQLiteOpenHelper  {
+public class GroceriesNameSuggestionsDataBaseHelper extends SQLiteOpenHelper  {
 
     public static final String ITEM_TABLE = "ITEM_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
-    public AddGroceryItemDataBaseHelper(@Nullable Context context) {
-        super(context, "addItemsList.db", null, 1);
+    public GroceriesNameSuggestionsDataBaseHelper(@Nullable Context context) {
+        super(context, "SuggestionList.db", null, 1);
     }
 
     @Override

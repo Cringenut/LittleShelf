@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Main.Databases.GroceriesListDataBaseHelper;
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 import com.example.littleshelf.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
 
@@ -65,21 +65,21 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         Button buttonAdd = findViewById(R.id.btnConfirmDate);
         buttonAdd.setOnClickListener(btnAdd -> {
             // Creating new
-            AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();
+            SuggestionListFragment addItemListFragment = new SuggestionListFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.containerWholeScreenFragment, addItemListFragment)
                     .commit();
 
             // Create final add fragment and empty grocery item,
             // so we can set it's parameters directly from sub-fragments
-            AddItemMenuFragment addItemMenuFragment = new AddItemMenuFragment();
+            ItemAddMenuFragment itemAddMenuFragment = new ItemAddMenuFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.containerBottomFragment, addItemMenuFragment)
-                    .hide(addItemMenuFragment)
+                    .replace(R.id.containerBottomFragment, itemAddMenuFragment)
+                    .hide(itemAddMenuFragment)
                     .commit();
             deselectGroceryItem(); // Always deselect, even if not selected,
                                     // so selection in new list won't be broken
-            addItemMenuFragment.setGroceryItem(new GroceryItem(""));
+            itemAddMenuFragment.setGroceryItem(new GroceryItem(""));
         });
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -24,7 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SetExpirationDateFragment extends Fragment {
+public class DatePickerFragment extends Fragment {
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
@@ -35,11 +36,10 @@ public class SetExpirationDateFragment extends Fragment {
     private ConstraintLayout holderDateInfo;
     private TextView textViewNotSet;
 
-    public SetExpirationDateFragment(GroceryItem groceryItem) {
+    public DatePickerFragment(GroceryItem groceryItem) {
         this.groceryItem = groceryItem;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,8 +47,10 @@ public class SetExpirationDateFragment extends Fragment {
         View v = inflater.inflate(R.layout.d_fragment_set_expiration_date, container, false);
         v.findViewById(R.id.btnBack).setOnClickListener(btnConfirm -> closeDatePicker());
 
+        // Set main date info holders
         textViewNotSet = v.findViewById(R.id.textViewNotSet);
         holderDateInfo = v.findViewById(R.id.holderDateInfo);
+
         if (groceryItem.getExpirationDate() == null) {
             selectedDate = LocalDate.now();
         }
@@ -58,11 +60,12 @@ public class SetExpirationDateFragment extends Fragment {
             v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.VISIBLE);
         }
 
+        // Set month changing actions
         v.findViewById(R.id.btnPrevMonth).setOnClickListener(btnPrev -> previousMonthAction(v));
         v.findViewById(R.id.btnNextMonth).setOnClickListener(btnNext -> nextMonthAction(v));
 
         v.findViewById(R.id.btnClearDate).setOnClickListener(btnClear -> clearSelectedDate(v));
-        v.findViewById(R.id.btnConfirmDate).setOnClickListener(btnConfirm -> acceptSelectedDate(v));
+        v.findViewById(R.id.btnConfirmDate).setOnClickListener(btnConfirm -> selectSelectedDate(v));
 
         initWidgets(v);
         setMonthView(v);
@@ -76,6 +79,7 @@ public class SetExpirationDateFragment extends Fragment {
 
         setTextHolderDateInfo(dayText, selectedDate.getMonth().toString(), String.valueOf(selectedDate.getYear()));
 
+        // If day is today or earlier set expired, otherwise show days before expiration
         if (getCurrentSelectedDate(v).isBefore(LocalDate.now().plusDays(1))) {
             ((TextView) holderDateInfo.findViewById(R.id.textViewDaysBeforeExpiration)).setText("Expired");
         }
@@ -87,28 +91,25 @@ public class SetExpirationDateFragment extends Fragment {
         selectedDate = getCurrentSelectedDate(v);
     }
 
-    private void acceptSelectedDate(View v) {
+    private void selectSelectedDate(View v) {
         groceryItem.setExpirationDate(getCurrentSelectedDate(v));
         closeDatePicker();
     }
 
     private void closeDatePicker() {
-        GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
-
-        groceriesActivity.getSupportFragmentManager()
-                .beginTransaction()
-                .remove(this)
-                .commit();
-
+        FragmentManager fragmentManager = ((GroceriesActivity) requireActivity()).getSupportFragmentManager();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        ((AddItemMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
-                .getBtnItemExpirationDate().setText(
-                        groceryItem.getExpirationDate() != null ? groceryItem.getExpirationDate().format(formatter) : "");
-        groceriesActivity.getSupportFragmentManager()
-                .beginTransaction()
-                .show(Objects.requireNonNull(groceriesActivity.getSupportFragmentManager()
-                        .findFragmentById(R.id.containerBottomFragment)))
+        ItemAddMenuFragment itemAddMenuFragment = (ItemAddMenuFragment) fragmentManager.findFragmentById(R.id.containerBottomFragment);
+
+        // Show item add menu and close date picker
+        fragmentManager.beginTransaction()
+                .remove(this)
+                .show(itemAddMenuFragment)
                 .commit();
+
+        // Set text for date picking button inside menu
+        itemAddMenuFragment.getBtnItemExpirationDate().setText(
+                groceryItem.getExpirationDate() != null ? groceryItem.getExpirationDate().format(formatter) : "");
     }
 
     public LocalDate getCurrentSelectedDate(View v) {

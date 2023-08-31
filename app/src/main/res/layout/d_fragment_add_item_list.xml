@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E1919"
-    tools:context=".AddGroceryItemListFragment">
+    tools:context=".SuggestionListFragment">
 
     <FrameLayout
         android:id="@+id/containerRecyclerViewGroceries"

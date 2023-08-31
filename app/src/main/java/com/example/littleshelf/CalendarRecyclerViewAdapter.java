@@ -1,14 +1,12 @@
 package com.example.littleshelf;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,8 +16,8 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     private final ArrayList<String> daysOfMonth;
     private final RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface;
     private View selectedCalendarCell;
-    private final SetExpirationDateFragment parentFragment;
-    public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface, SetExpirationDateFragment parentFragment) {
+    private final DatePickerFragment parentFragment;
+    public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface, DatePickerFragment parentFragment) {
         this.daysOfMonth = daysOfMonth;
         this.recyclerViewOnCalendarDayClickInterface = recyclerViewOnCalendarDayClickInterface;
         this.parentFragment = parentFragment;
@@ -27,10 +25,6 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
 
     public View getSelectedCalendarCell() {
         return selectedCalendarCell;
-    }
-
-    public void setSelectedCalendarCell(View selectedCalendarCell) {
-        this.selectedCalendarCell = selectedCalendarCell;
     }
 
     public class CalendarRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -56,8 +50,7 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     public CalendarRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.d_cell_calendar, parent, false);
-        ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
-        layoutParams.height = (int)(parent.getHeight() * 0.166666);
+        v.getLayoutParams().height = (int)(parent.getHeight() * 0.166666);
         return new CalendarRecyclerViewHolder(v);
     }
 

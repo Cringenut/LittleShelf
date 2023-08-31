@@ -1,4 +1,4 @@
-package com.example.littleshelf.Main.Objects;
+package com.example.littleshelf.Main.Objects.GroceryItem;
 
 import android.os.Build;
 
@@ -24,7 +24,6 @@ public class GroceryItem {
         this.name = name;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean isFresh(@Nullable Integer additionalDays) {
         if (expirationDate == null) {
             return true; // Return true if no expiration date is set

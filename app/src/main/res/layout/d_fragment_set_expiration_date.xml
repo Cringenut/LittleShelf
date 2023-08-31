@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2C2C2C"
     android:visibility="visible"
-    tools:context=".SetExpirationDateFragment">
+    tools:context=".DatePickerFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
@@ -104,7 +104,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:context=".AddItemMenuFragment">
+        tools:context=".ItemAddMenuFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout1"

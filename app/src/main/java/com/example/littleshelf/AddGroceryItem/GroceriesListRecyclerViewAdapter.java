@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.littleshelf.R;
 import com.example.littleshelf.RecyclerViewOnGroceryItemClickInterface;
 import com.example.littleshelf.SearchBar.SearchBarFragment;
-import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 
 import java.time.format.DateTimeFormatter;
