@@ -1,4 +1,4 @@
-package com.example.littleshelf.Groceries;
+package com.example.littleshelf.Groceries.Other;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
 import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
-import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 
 import java.time.format.DateTimeFormatter;
@@ -83,11 +84,13 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
         TextView itemName;
         TextView itemExpirationDate;
         public CardView cardView;
+        public FrameLayout expirationMarker;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.textViewItemName);
             itemExpirationDate = itemView.findViewById(R.id.textViewItemExpirationDate);
             cardView = itemView.findViewById(R.id.containerCardView);
+            expirationMarker = itemView.findViewById(R.id.frameLayoutExpired);
         }
     }
 
@@ -118,28 +121,25 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.itemName.setText(sortedGroceryItems.get(position).getName());
 
-        if (sortedGroceryItems.get(position).getExpirationDate() == null) {
-            createNonExpirableItem(holder);
-        }
-        else {
+        if (sortedGroceryItems.get(position).getExpirationDate() != null) {
             createExpirableItem(holder, position);
+            if (!sortedGroceryItems.get(position).isFresh()) {
+                holder.expirationMarker.setVisibility(View.VISIBLE);
+            }
+            else {
+                holder.expirationMarker.setVisibility(View.INVISIBLE);
+            }
         }
 
         holder.cardView.setOnClickListener(v -> recyclerViewOnGroceryItemClickInterface.onItemClicked(sortedGroceryItems.get(position)));
     }
 
-    // Set default settings for the item's fragment
-    private void createNonExpirableItem(@NonNull RecyclerViewHolder holder) {
-        holder.itemExpirationDate.setVisibility(View.GONE);
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
-        layoutParams.setMargins(0, 0, 0, 0);
-    }
-
     // Add offset so item's name is not centered and doesn't intersect with expiration date
     private void createExpirableItem(@NonNull RecyclerViewHolder holder, int position) {
+        holder.itemExpirationDate.setVisibility(View.VISIBLE);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
         layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
-        holder.itemExpirationDate.setVisibility(View.VISIBLE);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         holder.itemExpirationDate.setText(
                 sortedGroceryItems.get(position).getExpirationDate().format(formatter));
@@ -186,6 +186,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
                 }
             }
 
+            // Set results from suggestions
             results.values = suggestions;
             results.count = suggestions.size();
 

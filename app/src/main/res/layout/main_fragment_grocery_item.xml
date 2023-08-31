@@ -6,7 +6,7 @@
     android:layout_height="@dimen/_48sdp"
     android:background="@color/green"
     android:backgroundTint="@color/green"
-    tools:context=".Main.Objects.GroceryItem.GroceryItemFragment"
+    tools:context=".Main.GroceryItem.GroceryItem"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
@@ -20,7 +20,7 @@
             android:layout_height="@dimen/_48sdp"
             android:background="@color/green"
             android:backgroundTint="@color/green"
-            tools:context=".Main.Objects.GroceryItem.GroceryItemFragment" >
+            tools:context=".Main.GroceryItem.GroceryItemFragment" >
             <TextView
                 android:id="@+id/textViewItemName"
                 android:layout_width="@dimen/_210sdp"
@@ -44,6 +44,7 @@
                 android:text="TextView"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_9ssp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -61,6 +62,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:id="@+id/frameLayoutExpired"
+                android:layout_width="@dimen/_2sdp"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

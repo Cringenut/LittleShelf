@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
-import com.example.littleshelf.Groceries.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.Groceries.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.Other.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.Groceries.Other.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Groceries.GroceriesActivity;
-import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 
 import java.time.LocalDate;

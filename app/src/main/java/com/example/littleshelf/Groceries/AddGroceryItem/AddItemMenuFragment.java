@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.littleshelf.Groceries.GroceriesActivity;
-import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 
 public class AddItemMenuFragment extends Fragment {

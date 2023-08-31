@@ -1,8 +1,10 @@
-package com.example.littleshelf;
+package com.example.littleshelf.HomePage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.littleshelf.R;
 
 public class HomePage extends AppCompatActivity {
 

@@ -1,9 +1,6 @@
-package com.example.littleshelf.Main.Objects.GroceryItem;
-
-import android.os.Build;
+package com.example.littleshelf.Main.GroceryItem;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -24,7 +21,16 @@ public class GroceryItem {
         this.name = name;
     }
 
-    public boolean isFresh(@Nullable Integer additionalDays) {
+    public boolean isFresh() {
+        if (expirationDate == null) {
+            return true; // Return true if no expiration date is set
+        }
+
+        // Return if date is after tomorrow, if additional days is passed add them to expiration date
+        return expirationDate.isAfter(LocalDate.now());
+    }
+
+    public boolean isFresh(Integer additionalDays) {
         if (expirationDate == null) {
             return true; // Return true if no expiration date is set
         }

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage">
+    tools:context=".HomePage.HomePage">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_52sdp"
@@ -14,6 +14,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:background="#510000"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,16 +27,35 @@
         android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_4sdp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayoutBottomMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" >
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_600sdp"
+            android:layout_weight="1"
+            android:background="#555555">
+
+            <FrameLayout
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_180sdp"
+                android:background="#FF0000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#555555">
+            android:layout_height="@dimen/_80sdp"
+            android:layout_weight="0"
+            android:background="#EFFF00"
+            android:orientation="horizontal">
 
         </FrameLayout>
 
@@ -51,5 +71,16 @@
 
         </FrameLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayoutBottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_48sdp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,7 +55,7 @@
     <FrameLayout
         android:id="@+id/frameLayoutBottomMenu"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="@dimen/_48sdp"
         android:background="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

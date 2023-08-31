@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.littleshelf.Groceries.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.Other.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
 

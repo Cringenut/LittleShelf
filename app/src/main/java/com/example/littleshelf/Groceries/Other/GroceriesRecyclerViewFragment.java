@@ -1,4 +1,4 @@
-package com.example.littleshelf.Groceries;
+package com.example.littleshelf.Groceries.Other;
 
 import android.content.Context;
 import android.graphics.Rect;
