@@ -12,17 +12,13 @@ import android.widget.Button;
 import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.AddGroceryItem.AddGroceryItemDataBaseHelper;
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem;
 import com.example.littleshelf.SearchBar.SearchBarFragment;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class AddGroceryItemListFragment extends Fragment implements RecyclerViewOnGroceryItemClickInterface {
-
-    private Button btnBack;
-    private GroceriesRecyclerViewFragment groceriesRecyclerView;
-    private SearchBarFragment searchBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,20 +32,20 @@ public class AddGroceryItemListFragment extends Fragment implements RecyclerView
         View view = inflater.inflate(R.layout.d_fragment_add_item_list, container, false);
 
         // Create close button
-        btnBack = view.findViewById(R.id.btnBack);
+        Button btnBack = view.findViewById(R.id.btnBack);
         GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
         btnBack.setOnClickListener(btn -> groceriesActivity.getSupportFragmentManager().beginTransaction()
                 .remove(this)
                 .commit());
 
         // Create search bar for item names from database
-        searchBar = new SearchBarFragment();
+        SearchBarFragment searchBar = new SearchBarFragment();
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.containerSearchBar, searchBar)
                 .commit();
 
         // Create recycler view with all item names
-        groceriesRecyclerView = new GroceriesRecyclerViewFragment();
+        GroceriesRecyclerViewFragment groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
                 .commit();

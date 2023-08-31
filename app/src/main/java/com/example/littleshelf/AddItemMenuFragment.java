@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem;
 
 public class AddItemMenuFragment extends Fragment {
 
@@ -82,8 +82,6 @@ public class AddItemMenuFragment extends Fragment {
                     .hide(this)
                     .commit();
         });
-
-        System.out.println(btnAddItem.getLayoutParams());
 
         return v;
     }

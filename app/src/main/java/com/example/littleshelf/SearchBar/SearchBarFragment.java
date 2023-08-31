@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.R;
-import com.example.littleshelf.Sort.SortButtonFragment;
+import com.example.littleshelf.Main.Sort.SortButtonFragment;
 
 public class SearchBarFragment extends Fragment {
 

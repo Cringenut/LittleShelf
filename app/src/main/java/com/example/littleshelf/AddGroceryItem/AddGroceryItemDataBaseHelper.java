@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem;
 
 import java.util.ArrayList;
 import java.util.List;

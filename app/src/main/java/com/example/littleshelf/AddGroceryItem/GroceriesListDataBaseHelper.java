@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 import com.example.littleshelf.GroceriesActivity;
-import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.Main.Objects.GroceryItem;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

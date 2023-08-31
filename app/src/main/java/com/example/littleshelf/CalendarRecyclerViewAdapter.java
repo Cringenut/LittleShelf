@@ -18,7 +18,7 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     private final ArrayList<String> daysOfMonth;
     private final RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface;
     private View selectedCalendarCell;
-    private SetExpirationDateFragment parentFragment;
+    private final SetExpirationDateFragment parentFragment;
     public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface, SetExpirationDateFragment parentFragment) {
         this.daysOfMonth = daysOfMonth;
         this.recyclerViewOnCalendarDayClickInterface = recyclerViewOnCalendarDayClickInterface;
@@ -64,12 +64,9 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     @Override
     public void onBindViewHolder(@NonNull CalendarRecyclerViewHolder holder, int position) {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (parentFragment.getSelectedDate().equals(parentFragment.getCurrentSelectedDate(parentFragment.getView()))) {
-                if (holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
-                    selectCalendarCell(holder);
-                }
+        if (parentFragment.getSelectedDate().equals(parentFragment.getCurrentSelectedDate(parentFragment.getView()))) {
+            if (holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
+                selectCalendarCell(holder);
             }
         }
     }
