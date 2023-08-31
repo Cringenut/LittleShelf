@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
+public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private GroceriesRecyclerViewFragment recyclerView;
@@ -27,7 +27,7 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
     public static final String COLUMN_ITEM_EXPIRATION_DATE = "ITEM_EXPIRATION_DATE";
 
-    public GroceriesListDataBaseHelper(@Nullable Context context) {
+    public GroceriesDataBaseHelper(@Nullable Context context) {
         super(context, "groceries.db", null, 1);
         this.context = context;
     }

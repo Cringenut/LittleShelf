@@ -39,8 +39,8 @@
             android:background="#555555">
 
             <FrameLayout
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_200sdp"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_180sdp"
                 android:background="@drawable/style_shape_round"
                 android:backgroundTint="@color/red"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
+            android:layout_height="@dimen/_60sdp"
             android:layout_weight="0"
             android:background="#EFFF00"
             android:orientation="horizontal">
@@ -67,23 +67,23 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:fontFamily="@font/helvetica"
                     android:text="Fresh"
-                    android:textAlignment="center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical" >
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textViewFresh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Stale"
-                    android:textAlignment="center" />
+                    android:fontFamily="@font/helvetica"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -95,9 +95,23 @@
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:fontFamily="@font/helvetica"
                     android:text="Expired"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:id="@+id/textViewExpired"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
             </LinearLayout>
         </LinearLayout>
 

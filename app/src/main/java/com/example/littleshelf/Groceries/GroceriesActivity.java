@@ -11,7 +11,7 @@ import com.example.littleshelf.Groceries.Other.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.Groceries.Other.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Groceries.Other.RecyclerViewOnGroceryItemClickInterface;
 import com.example.littleshelf.Groceries.Other.SortGroceriesListFragment;
-import com.example.littleshelf.Main.Databases.GroceriesListDataBaseHelper;
+import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
@@ -22,23 +22,23 @@ import java.util.ArrayList;
 
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnGroceryItemClickInterface {
 
-    private GroceriesListDataBaseHelper groceriesListDataBaseHelper;
+    private GroceriesDataBaseHelper groceriesDataBaseHelper;
     private GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
     private SearchBarFragment searchBar;
     private GroceryItem selectedGroceryItem;
 
-    public GroceriesListDataBaseHelper getGroceriesListDataBaseHelper() {
-        return groceriesListDataBaseHelper;
+    public GroceriesDataBaseHelper getGroceriesListDataBaseHelper() {
+        return groceriesDataBaseHelper;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.g_activity_groceries);
+
         // Creating database for current groceries
-        groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(this);
+        groceriesDataBaseHelper = new GroceriesDataBaseHelper(this);
 
         // Obtain an instance of the FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -57,10 +57,10 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                 .commit(); // Replacing container
 
         // Set main recycler view properties
-        groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesListDataBaseHelper.getAllItems()), this);
+        groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()), this);
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
-        groceriesListDataBaseHelper.setRecyclerView(groceriesRecyclerView);
+        groceriesDataBaseHelper.setRecyclerView(groceriesRecyclerView);
 
         searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
     }
@@ -136,7 +136,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
         Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
         btnRemoveItem.setOnClickListener(btnRemove -> {
-            groceriesListDataBaseHelper.deleteOne(groceryItem);
+            groceriesDataBaseHelper.deleteOne(groceryItem);
         });
 
         btnRemoveItem.setVisibility(View.VISIBLE);
