@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Groceries;
 
 import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 

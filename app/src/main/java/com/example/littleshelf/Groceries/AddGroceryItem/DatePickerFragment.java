@@ -1,9 +1,7 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Groceries.AddGroceryItem;
 
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.littleshelf.Groceries.GroceriesActivity;
 import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
+import com.example.littleshelf.R;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -23,7 +23,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class DatePickerFragment extends Fragment {
 
@@ -44,7 +43,7 @@ public class DatePickerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.d_fragment_set_expiration_date, container, false);
+        View v = inflater.inflate(R.layout.g_fragment_date_picker, container, false);
         v.findViewById(R.id.btnBack).setOnClickListener(btnConfirm -> closeDatePicker());
 
         // Set main date info holders
@@ -99,16 +98,16 @@ public class DatePickerFragment extends Fragment {
     private void closeDatePicker() {
         FragmentManager fragmentManager = ((GroceriesActivity) requireActivity()).getSupportFragmentManager();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        ItemAddMenuFragment itemAddMenuFragment = (ItemAddMenuFragment) fragmentManager.findFragmentById(R.id.containerBottomFragment);
+        AddItemMenuFragment addItemMenuFragment = (AddItemMenuFragment) fragmentManager.findFragmentById(R.id.containerBottomFragment);
 
         // Show item add menu and close date picker
         fragmentManager.beginTransaction()
                 .remove(this)
-                .show(itemAddMenuFragment)
+                .show(addItemMenuFragment)
                 .commit();
 
         // Set text for date picking button inside menu
-        itemAddMenuFragment.getBtnItemExpirationDate().setText(
+        addItemMenuFragment.getBtnItemExpirationDate().setText(
                 groceryItem.getExpirationDate() != null ? groceryItem.getExpirationDate().format(formatter) : "");
     }
 

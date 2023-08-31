@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Groceries;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.AddGroceryItem.AddItemMenuFragment;
 import com.example.littleshelf.Main.Databases.GroceriesListDataBaseHelper;
 import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
-import com.example.littleshelf.SearchBar.SearchBarFragment;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
+import com.example.littleshelf.Groceries.AddGroceryItem.SuggestionListFragment;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.d_activity_groceries);
+        setContentView(R.layout.g_activity_groceries);
         // Creating database for current groceries
         groceriesListDataBaseHelper = new GroceriesListDataBaseHelper(this);
 
@@ -72,14 +73,14 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
             // Create final add fragment and empty grocery item,
             // so we can set it's parameters directly from sub-fragments
-            ItemAddMenuFragment itemAddMenuFragment = new ItemAddMenuFragment();
+            AddItemMenuFragment addItemMenuFragment = new AddItemMenuFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.containerBottomFragment, itemAddMenuFragment)
-                    .hide(itemAddMenuFragment)
+                    .replace(R.id.containerBottomFragment, addItemMenuFragment)
+                    .hide(addItemMenuFragment)
                     .commit();
             deselectGroceryItem(); // Always deselect, even if not selected,
                                     // so selection in new list won't be broken
-            itemAddMenuFragment.setGroceryItem(new GroceryItem(""));
+            addItemMenuFragment.setGroceryItem(new GroceryItem(""));
         });
     }
 

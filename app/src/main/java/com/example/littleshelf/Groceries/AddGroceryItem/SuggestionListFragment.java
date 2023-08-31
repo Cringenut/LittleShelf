@@ -1,15 +1,18 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Groceries.AddGroceryItem;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.Groceries.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.GroceriesActivity;
 import com.example.littleshelf.Main.Databases.GroceriesNameSuggestionsDataBaseHelper;
 import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
-import com.example.littleshelf.SearchBar.SearchBarFragment;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Groceries.RecyclerViewOnGroceryItemClickInterface;
+import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,7 +27,7 @@ public class SuggestionListFragment extends Fragment implements RecyclerViewOnGr
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.d_fragment_add_item_list, container, false);
+        View view = inflater.inflate(R.layout.g_fragment_suggestion_list, container, false);
 
         // Create close button
         Button btnBack = view.findViewById(R.id.btnBack);
@@ -65,7 +68,7 @@ public class SuggestionListFragment extends Fragment implements RecyclerViewOnGr
                 .remove(this)
                 .commit();
 
-        ((ItemAddMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
+        ((AddItemMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
                 .getGroceryItem().setName(groceryItem.getName());
         groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()

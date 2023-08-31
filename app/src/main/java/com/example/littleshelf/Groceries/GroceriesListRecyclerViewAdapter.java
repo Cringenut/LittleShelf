@@ -1,4 +1,4 @@
-package com.example.littleshelf.AddGroceryItem;
+package com.example.littleshelf.Groceries;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,8 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
-import com.example.littleshelf.RecyclerViewOnGroceryItemClickInterface;
-import com.example.littleshelf.SearchBar.SearchBarFragment;
+import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 
@@ -65,7 +64,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         recyclerView = (RecyclerView) parent;
-        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.d_fragment_grocery_item, parent, false));
+        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.main_fragment_grocery_item, parent, false));
     }
 
     public ArrayList<GroceryItem> getSortedGroceryItems() {

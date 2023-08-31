@@ -6,7 +6,7 @@
     android:layout_height="@dimen/_32sdp"
     android:background="@drawable/style_search_round"
     android:backgroundTint="@color/black"
-    tools:context=".SearchBar.SearchBarFragment" >
+    tools:context=".Groceries.SearchBar.SearchBarFragment" >
 
     <FrameLayout
         android:id="@+id/frameLayout2"

@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Groceries.AddGroceryItem;
 
 import android.os.Bundle;
 
@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.example.littleshelf.Groceries.GroceriesActivity;
 import com.example.littleshelf.Main.Objects.GroceryItem.GroceryItem;
+import com.example.littleshelf.R;
 
-public class ItemAddMenuFragment extends Fragment {
+public class AddItemMenuFragment extends Fragment {
 
     private GroceryItem groceryItem;
     private Button btnItemName;
@@ -33,7 +35,7 @@ public class ItemAddMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.d_fragment_add_item, container, false);
+        View v = inflater.inflate(R.layout.g_fragment_add_item_menu, container, false);
         GroceriesActivity groceriesActivity = (GroceriesActivity) requireActivity();
 
         FrameLayout frameLayout = v.findViewById(R.id.frameLayoutRemoveFragment);

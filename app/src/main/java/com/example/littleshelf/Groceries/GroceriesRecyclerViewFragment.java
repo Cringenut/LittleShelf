@@ -1,4 +1,4 @@
-package com.example.littleshelf.AddGroceryItem;
+package com.example.littleshelf.Groceries;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -23,7 +23,7 @@ public class GroceriesRecyclerViewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.d_fragment_grocery_items_recycler_view, container, false);
+        View rootView = inflater.inflate(R.layout.g_fragment_groceries_recycler_view, container, false);
         this.context = rootView.getContext();
 
         RecyclerView recyclerView = rootView.findViewById(R.id.containerRecyclerViewGroceries);

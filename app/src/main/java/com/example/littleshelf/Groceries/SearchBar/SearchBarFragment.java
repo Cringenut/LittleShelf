@@ -1,4 +1,4 @@
-package com.example.littleshelf.SearchBar;
+package com.example.littleshelf.Groceries.SearchBar;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
 
@@ -33,7 +33,7 @@ public class SearchBarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.d_fragment_search_bar, container, false);
+        View v = inflater.inflate(R.layout.g_fragment_search_bar, container, false);
 
         searchBarField = v.findViewById(R.id.editTexSearchBar);
         searchBarField.addTextChangedListener(new TextWatcher() {
