@@ -66,7 +66,6 @@ public class SetExpirationDateFragment extends Fragment {
         return v;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setCurrentSelectedDate(View v, String dayText) {
         textViewNotSet.setVisibility(View.GONE);
         holderDateInfo.setVisibility(View.VISIBLE);
@@ -102,7 +101,7 @@ public class SetExpirationDateFragment extends Fragment {
                 .commit();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        ((AddItemFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
+        ((AddItemMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
                 .getBtnItemExpirationDate().setText(
                         groceryItem.getExpirationDate() != null ? groceryItem.getExpirationDate().format(formatter) : "");
         groceriesActivity.getSupportFragmentManager()
@@ -125,7 +124,7 @@ public class SetExpirationDateFragment extends Fragment {
         return LocalDate.parse(day + " " + month + " " + year, formatter);
     }
 
-    private void setTextHolderDateInfo() {
+    private void clearTextHolderDateInfo() {
         ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationDay)).setText("");
         ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationMonth)).setText("");
         ((TextView) holderDateInfo.findViewById(R.id.textViewExpirationYear)).setText("");
@@ -142,7 +141,7 @@ public class SetExpirationDateFragment extends Fragment {
         holderDateInfo.setVisibility(View.GONE);
 
         v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.GONE);
-        setTextHolderDateInfo();
+        clearTextHolderDateInfo();
 
         selectedDate = LocalDate.now();
         setMonthView(v);
@@ -167,7 +166,6 @@ public class SetExpirationDateFragment extends Fragment {
         calendarRecyclerView.setAdapter(calendarRecyclerViewAdapter);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
@@ -190,7 +188,6 @@ public class SetExpirationDateFragment extends Fragment {
         return daysInMonthArray;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private String monthYearFromDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return date.format(formatter);
@@ -201,17 +198,13 @@ public class SetExpirationDateFragment extends Fragment {
         monthYearText = v.findViewById(R.id.textViewMonthYear);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void previousMonthAction(View v) {
         selectedDate = selectedDate.minusMonths(1);
-        calendarRecyclerViewAdapter.setSelectedCalendarCell(null);
         setMonthView(v);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void nextMonthAction(View v) {
         selectedDate = selectedDate.plusMonths(1);
-        calendarRecyclerViewAdapter.setSelectedCalendarCell(null);
         setMonthView(v);
     }
 

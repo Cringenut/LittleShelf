@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.SearchBar;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.R;
+import com.example.littleshelf.Sort.SortButtonFragment;
 
 public class SearchBarFragment extends Fragment {
 
@@ -65,10 +67,6 @@ public class SearchBarFragment extends Fragment {
     }
     public void setGroceriesRecyclerView(GroceriesRecyclerViewFragment groceriesRecyclerView) {
         this.groceriesRecyclerView = groceriesRecyclerView;
-    }
-
-    public GroceriesRecyclerViewFragment getGroceriesRecyclerView() {
-        return this.groceriesRecyclerView;
     }
 
     public String getSearchBarFieldTag() {

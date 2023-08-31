@@ -13,6 +13,7 @@ import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.AddGroceryItem.AddGroceryItemDataBaseHelper;
 import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.SearchBar.SearchBarFragment;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -72,7 +73,7 @@ public class AddGroceryItemListFragment extends Fragment implements RecyclerView
                 .remove(this)
                 .commit();
 
-        ((AddItemFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
+        ((AddItemMenuFragment) groceriesActivity.getSupportFragmentManager().findFragmentById(R.id.containerBottomFragment))
                 .getGroceryItem().setName(groceryItem.getName());
         groceriesActivity.getSupportFragmentManager()
                 .beginTransaction()

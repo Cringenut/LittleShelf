@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.AddGroceryItem.SortByRecyclerViewInterface;
+import com.example.littleshelf.Sort.SortByRecyclerViewInterface;
+import com.example.littleshelf.Sort.SortTypesEnum;
 
 public class SortGroceriesListFragment extends Fragment {
 

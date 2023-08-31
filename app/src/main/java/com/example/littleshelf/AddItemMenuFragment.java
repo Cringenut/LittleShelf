@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 
 import com.example.littleshelf.Objects.GroceryItem;
 
-public class AddItemFragment extends Fragment {
+public class AddItemMenuFragment extends Fragment {
 
     private GroceryItem groceryItem;
     private Button btnItemName;
@@ -22,7 +22,6 @@ public class AddItemFragment extends Fragment {
     }
 
     private Button btnItemExpirationDate;
-    private Button btnAddItem;
 
 
     @Override
@@ -74,7 +73,7 @@ public class AddItemFragment extends Fragment {
                     .commit();
         });
 
-        btnAddItem = v.findViewById(R.id.btnConfirmDate);
+        Button btnAddItem = v.findViewById(R.id.btnConfirmDate);
         btnAddItem.setOnClickListener(btnAdd -> {
             groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
             groceriesActivity.getSearchBar().clearSearch();

@@ -1,6 +1,4 @@
-package com.example.littleshelf.AddGroceryItem;
-
-import com.example.littleshelf.SortTypesEnum;
+package com.example.littleshelf.Sort;
 
 public interface SortByRecyclerViewInterface {
     void onSortByButtonClicked(SortTypesEnum sortType);

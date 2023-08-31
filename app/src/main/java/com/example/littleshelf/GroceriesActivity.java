@@ -10,6 +10,9 @@ import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.AddGroceryItem.GroceriesListDataBaseHelper;
 import com.example.littleshelf.Objects.GroceryItem;
+import com.example.littleshelf.SearchBar.SearchBarFragment;
+import com.example.littleshelf.Sort.SortButtonFragment;
+
 import java.util.ArrayList;
 
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnGroceryItemClickInterface {
@@ -69,14 +72,14 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
             // Create final add fragment and empty grocery item,
             // so we can set it's parameters directly from sub-fragments
-            AddItemFragment addItemFragment = new AddItemFragment();
+            AddItemMenuFragment addItemMenuFragment = new AddItemMenuFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.containerBottomFragment, addItemFragment)
-                    .hide(addItemFragment)
+                    .replace(R.id.containerBottomFragment, addItemMenuFragment)
+                    .hide(addItemMenuFragment)
                     .commit();
             deselectGroceryItem(); // Always deselect, even if not selected,
                                     // so selection in new list won't be broken
-            addItemFragment.setGroceryItem(new GroceryItem(""));
+            addItemMenuFragment.setGroceryItem(new GroceryItem(""));
         });
     }
 
