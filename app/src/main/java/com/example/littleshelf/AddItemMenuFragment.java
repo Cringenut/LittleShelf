@@ -44,8 +44,10 @@ public class AddItemMenuFragment extends Fragment {
                         .commit());
 
         btnItemName = v.findViewById(R.id.btnAddItemName);
-        btnItemName.setOnClickListener(btnName -> {
 
+        btnItemName.setText(groceryItem.getName());
+        // Show item names
+        btnItemName.setOnClickListener(btnName -> {
             AddGroceryItemListFragment addItemListFragment = new AddGroceryItemListFragment();
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
@@ -57,8 +59,8 @@ public class AddItemMenuFragment extends Fragment {
                     .hide(this)
                     .commit();
         });
-        btnItemName.setText(groceryItem.getName());
 
+        // Show date picker
         btnItemExpirationDate = v.findViewById(R.id.btnItemExpirationDate);
         btnItemExpirationDate.setOnClickListener(btnExpirationDate -> {
             SetExpirationDateFragment setExpirationDateFragment = new SetExpirationDateFragment(groceryItem);
@@ -73,10 +75,10 @@ public class AddItemMenuFragment extends Fragment {
                     .commit();
         });
 
+        // Add item after clicking confirming button
         Button btnAddItem = v.findViewById(R.id.btnConfirmDate);
         btnAddItem.setOnClickListener(btnAdd -> {
             groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
-            groceriesActivity.getSearchBar().clearSearch();
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .hide(this)

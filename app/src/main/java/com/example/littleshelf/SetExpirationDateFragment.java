@@ -61,6 +61,9 @@ public class SetExpirationDateFragment extends Fragment {
         v.findViewById(R.id.btnPrevMonth).setOnClickListener(btnPrev -> previousMonthAction(v));
         v.findViewById(R.id.btnNextMonth).setOnClickListener(btnNext -> nextMonthAction(v));
 
+        v.findViewById(R.id.btnClearDate).setOnClickListener(btnClear -> clearSelectedDate(v));
+        v.findViewById(R.id.btnConfirmDate).setOnClickListener(btnConfirm -> acceptSelectedDate(v));
+
         initWidgets(v);
         setMonthView(v);
         return v;
@@ -69,12 +72,9 @@ public class SetExpirationDateFragment extends Fragment {
     public void setCurrentSelectedDate(View v, String dayText) {
         textViewNotSet.setVisibility(View.GONE);
         holderDateInfo.setVisibility(View.VISIBLE);
-        setTextHolderDateInfo(dayText, selectedDate.getMonth().toString(), String.valueOf(selectedDate.getYear()));
-
         v.findViewById(R.id.linearLayoutActionButtons).setVisibility(View.VISIBLE);
-        v.findViewById(R.id.btnClearDate).setOnClickListener(btnClear -> clearSelectedDate(v));
-        v.findViewById(R.id.btnConfirmDate).setOnClickListener(btnConfirm -> acceptSelectedDate(v));
 
+        setTextHolderDateInfo(dayText, selectedDate.getMonth().toString(), String.valueOf(selectedDate.getYear()));
 
         if (getCurrentSelectedDate(v).isBefore(LocalDate.now().plusDays(1))) {
             ((TextView) holderDateInfo.findViewById(R.id.textViewDaysBeforeExpiration)).setText("Expired");

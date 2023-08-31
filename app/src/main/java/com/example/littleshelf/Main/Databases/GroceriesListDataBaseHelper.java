@@ -1,4 +1,4 @@
-package com.example.littleshelf.AddGroceryItem;
+package com.example.littleshelf.Main.Databases;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
+
+import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
+import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.GroceriesActivity;
 import com.example.littleshelf.Main.Objects.GroceryItem;
+import com.example.littleshelf.Main.Sort.SortTypesEnum;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -58,6 +63,11 @@ public class GroceriesListDataBaseHelper extends SQLiteOpenHelper {
         adapter.getAllGroceryItems().add(groceryItem);
         adapter.notifyItemInserted(adapter.getItemCount());
         adapter.notifyItemChanged(adapter.getItemCount());
+
+        // Clear the search bar and unsort items to show new item on the top
+        ((GroceriesActivity)recyclerView.getActivity()).getSearchBar().clearSearch();
+        adapter.setCurrentSort(SortTypesEnum.unsorted);
+        adapter.sortGroceryItems();
 
         long insert = db.insert(ITEM_TABLE, null, cv); // Insert value to database
         groceryItem.setId(insert); // Set item id from database

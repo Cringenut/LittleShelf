@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.littleshelf.AddGroceryItem.GroceriesListRecyclerViewAdapter;
 import com.example.littleshelf.AddGroceryItem.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.AddGroceryItem.GroceriesListDataBaseHelper;
+import com.example.littleshelf.Main.Databases.GroceriesListDataBaseHelper;
 import com.example.littleshelf.Main.Objects.GroceryItem;
 import com.example.littleshelf.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
