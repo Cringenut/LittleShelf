@@ -61,8 +61,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         // Add item to adapter
         GroceriesRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
         adapter.getAllGroceryItems().add(groceryItem);
-        adapter.notifyItemInserted(adapter.getItemCount());
-        adapter.notifyItemChanged(adapter.getItemCount());
+        adapter.getFilteredGroceryItems().addAll(adapter.getAllGroceryItems()); // Used to sort items correctly
 
         // Clear the search bar and unsort items to show new item on the top
         ((GroceriesActivity)recyclerView.getActivity()).getSearchBar().clearSearch();

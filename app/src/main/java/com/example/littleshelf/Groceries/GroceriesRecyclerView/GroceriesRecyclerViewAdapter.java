@@ -121,25 +121,28 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.itemName.setText(sortedGroceryItems.get(position).getName());
 
-        if (sortedGroceryItems.get(position).getExpirationDate() != null) {
+        if (sortedGroceryItems.get(position).getExpirationDate() == null) {
+            createNonExpirableItem(holder);
+        }
+        else {
             createExpirableItem(holder, position);
-            if (!sortedGroceryItems.get(position).isFresh()) {
-                holder.expirationMarker.setVisibility(View.VISIBLE);
-            }
-            else {
-                holder.expirationMarker.setVisibility(View.INVISIBLE);
-            }
         }
 
         holder.cardView.setOnClickListener(v -> recyclerViewOnGroceryItemClickInterface.onItemClicked(sortedGroceryItems.get(position)));
     }
 
+    // Set default settings for the item's fragment
+    private void createNonExpirableItem(@NonNull RecyclerViewHolder holder) {
+        holder.itemExpirationDate.setVisibility(View.GONE);
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
+        layoutParams.setMargins(0, 0, 0, 0);
+    }
+
     // Add offset so item's name is not centered and doesn't intersect with expiration date
     private void createExpirableItem(@NonNull RecyclerViewHolder holder, int position) {
-        holder.itemExpirationDate.setVisibility(View.VISIBLE);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
         layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
-
+        holder.itemExpirationDate.setVisibility(View.VISIBLE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         holder.itemExpirationDate.setText(
                 sortedGroceryItems.get(position).getExpirationDate().format(formatter));
