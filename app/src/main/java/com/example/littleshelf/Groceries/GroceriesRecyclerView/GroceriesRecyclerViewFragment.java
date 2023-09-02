@@ -1,4 +1,4 @@
-package com.example.littleshelf.Groceries.Other;
+package com.example.littleshelf.Groceries.GroceriesRecyclerView;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -16,7 +16,7 @@ import com.example.littleshelf.R;
 
 public class GroceriesRecyclerViewFragment extends Fragment {
 
-    private GroceriesListRecyclerViewAdapter recyclerViewAdapter;
+    private GroceriesRecyclerViewAdapter recyclerViewAdapter;
     private Context context;
 
     @Nullable
@@ -42,11 +42,11 @@ public class GroceriesRecyclerViewFragment extends Fragment {
             outRect.bottom = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._4sdp);
         }
     }
-    public GroceriesListRecyclerViewAdapter getRecyclerViewAdapter() {
+    public GroceriesRecyclerViewAdapter getRecyclerViewAdapter() {
         return recyclerViewAdapter;
     }
 
-    public void setRecyclerViewAdapter(GroceriesListRecyclerViewAdapter recyclerViewAdapter) {
+    public void setRecyclerViewAdapter(GroceriesRecyclerViewAdapter recyclerViewAdapter) {
         this.recyclerViewAdapter = recyclerViewAdapter;
     }
 }

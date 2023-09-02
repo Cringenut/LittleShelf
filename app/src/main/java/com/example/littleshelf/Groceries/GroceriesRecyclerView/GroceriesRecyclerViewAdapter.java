@@ -1,4 +1,4 @@
-package com.example.littleshelf.Groceries.Other;
+package com.example.littleshelf.Groceries.GroceriesRecyclerView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 /* Adapter */
-public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesListRecyclerViewAdapter.RecyclerViewHolder> implements Filterable {
+public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.RecyclerViewHolder> implements Filterable {
 
     private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
 
@@ -42,7 +42,7 @@ public class GroceriesListRecyclerViewAdapter extends RecyclerView.Adapter<Groce
     private SearchBarFragment searchBarFragment;
     public RecyclerView recyclerView;
 
-    public GroceriesListRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems, RecyclerViewOnGroceryItemClickInterface recyclerViewOnGroceryItemClickInterface) {
+    public GroceriesRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems, RecyclerViewOnGroceryItemClickInterface recyclerViewOnGroceryItemClickInterface) {
         this.context = context;
         this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;

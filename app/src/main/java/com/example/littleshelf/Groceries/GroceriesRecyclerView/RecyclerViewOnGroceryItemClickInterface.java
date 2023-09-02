@@ -1,4 +1,4 @@
-package com.example.littleshelf.Groceries.Other;
+package com.example.littleshelf.Groceries.GroceriesRecyclerView;
 
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 

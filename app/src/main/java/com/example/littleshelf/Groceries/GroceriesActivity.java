@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.littleshelf.Groceries.AddGroceryItem.AddItemMenuFragment;
-import com.example.littleshelf.Groceries.Other.GroceriesListRecyclerViewAdapter;
-import com.example.littleshelf.Groceries.Other.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Groceries.Other.RecyclerViewOnGroceryItemClickInterface;
-import com.example.littleshelf.Groceries.Other.SortGroceriesListFragment;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.RecyclerViewOnGroceryItemClickInterface;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.SortGroceriesListFragment;
 import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnGroceryItemClickInterface {
 
     private GroceriesDataBaseHelper groceriesDataBaseHelper;
-    private GroceriesListRecyclerViewAdapter groceriesListRecyclerViewAdapter;
+    private GroceriesRecyclerViewAdapter groceriesRecyclerViewAdapter;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
     private SearchBarFragment searchBar;
     private GroceryItem selectedGroceryItem;
@@ -57,8 +57,8 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                 .commit(); // Replacing container
 
         // Set main recycler view properties
-        groceriesListRecyclerViewAdapter = new GroceriesListRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()), this);
-        groceriesRecyclerView.setRecyclerViewAdapter(groceriesListRecyclerViewAdapter);
+        groceriesRecyclerViewAdapter = new GroceriesRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()), this);
+        groceriesRecyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
         groceriesDataBaseHelper.setRecyclerView(groceriesRecyclerView);
 
@@ -104,9 +104,9 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
         // If clicked on the same sort do nothing, otherwise sort and close the "sort by" fragment
         sortGroceriesListFragment.setSortByRecyclerViewInterface(sortType -> {
-            if (groceriesListRecyclerViewAdapter.getCurrentSort() != sortType) {
-                groceriesListRecyclerViewAdapter.setCurrentSort(sortType);
-                groceriesListRecyclerViewAdapter.sortGroceryItems();
+            if (groceriesRecyclerViewAdapter.getCurrentSort() != sortType) {
+                groceriesRecyclerViewAdapter.setCurrentSort(sortType);
+                groceriesRecyclerViewAdapter.sortGroceryItems();
             }
 
             fragmentManager.beginTransaction()
@@ -131,7 +131,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         }
 
         int position = groceriesRecyclerView.getRecyclerViewAdapter().getSortedGroceryItems().indexOf(groceryItem);
-        View v = groceriesListRecyclerViewAdapter.recyclerView.getLayoutManager().findViewByPosition(position);
+        View v = groceriesRecyclerViewAdapter.recyclerView.getLayoutManager().findViewByPosition(position);
         selectedGroceryItem = groceryItem;
 
         Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
@@ -145,7 +145,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
     }
     public void deselectGroceryItem() {
         if (selectedGroceryItem != null) {
-            View v = groceriesListRecyclerViewAdapter.recyclerView.getLayoutManager()
+            View v = groceriesRecyclerViewAdapter.recyclerView.getLayoutManager()
                     .findViewByPosition(groceriesRecyclerView.getRecyclerViewAdapter()
                             .getSortedGroceryItems()
                             .indexOf(selectedGroceryItem));

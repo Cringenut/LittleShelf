@@ -61,7 +61,7 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     @Override
     public void onBindViewHolder(@NonNull CalendarRecyclerViewHolder holder, int position) {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
-        // Select cell if
+
         if (parentFragment.getSelectedDate().equals(parentFragment.getCurrentSelectedDate(parentFragment.getView()))) {
             if (holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
                 selectCalendarCell(holder);
