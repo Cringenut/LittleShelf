@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="HomePage"
-        android:id="@+id/HomePage"/>
-    <item android:title="GroceriesList"
-        android:id="@+id/GroceriesList"/>
-    <item android:title="ReceiptsList"
-        android:id="@+id/ReceiptsList"/>
+    <item
+        android:title="Homepage"
+        android:id="@+id/Homepage"
+        android:icon="@drawable/baseline_home_24"/>
+    <item
+        android:title="Groceries"
+        android:id="@+id/Groceries"
+        android:icon="@drawable/baseline_list_alt_24"/>
+    <item
+        android:title="Receipts"
+        android:id="@+id/Receipts"
+        android:icon="@drawable/baseline_receipt_long_24"/>
+    <item
+        android:title="Profile"
+        android:id="@+id/Profile"
+        android:icon="@drawable/baseline_person_outline_24"/>
 </menu>

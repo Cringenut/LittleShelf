@@ -52,16 +52,15 @@
             android:textSize="@dimen/_16ssp" />
     </FrameLayout>
 
-    <FrameLayout
+    <fragment
         android:id="@+id/frameLayoutBottomMenu"
+        android:name="com.example.littleshelf.Main.BottomNavMenuFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_48sdp"
-        android:background="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-    </FrameLayout>
+    </fragment>
 
     <Button
         android:id="@+id/btnConfirmDate"
