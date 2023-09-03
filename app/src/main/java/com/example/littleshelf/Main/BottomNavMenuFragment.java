@@ -1,5 +1,6 @@
 package com.example.littleshelf.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,23 +33,26 @@ public class BottomNavMenuFragment extends Fragment {
 
         BottomNavigationView bottomNavigationView = v.findViewById(R.id.bottomNawMenu);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-
             int id = item.getItemId();
-            if (id == R.id.Homepage && requireActivity().getClass() != HomePage.class) {
 
+            if (id == R.id.Homepage && requireActivity().getClass() != HomePage.class) {
+                startActivity(new Intent(v.getContext(), HomePage.class));
+                return true;
             }
             else if (id == R.id.Groceries && requireActivity().getClass() != GroceriesActivity.class) {
-
-            }
-            else if (id == R.id.Receipts) {
-
-            }
-            else if (id == R.id.Profile) {
-
+                startActivity(new Intent(v.getContext(), GroceriesActivity.class));
+                return true;
             }
 
             return true;
         });
+
+        if (requireActivity().getClass() == HomePage.class) {
+            bottomNavigationView.setSelectedItemId(R.id.Homepage);
+        }
+        else if (requireActivity().getClass() == GroceriesActivity.class) {
+            bottomNavigationView.setSelectedItemId(R.id.Groceries);
+        }
 
 
 
