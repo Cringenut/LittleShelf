@@ -11,23 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRecyclerViewAdapter.CalendarRecyclerViewHolder> {
 
     private final ArrayList<String> daysOfMonth;
     private final RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface;
-    private View selectedCalendarCell;
+    private CalendarRecyclerViewHolder selectedCalendarCell;
     private final DatePickerFragment parentFragment;
-    private final int defaultColor = Color.argb(255, 255, 255, 255);
-    private final int selectionColor = Color.argb(255, 255, 102, 102);
     public CalendarRecyclerViewAdapter(ArrayList<String> daysOfMonth, RecyclerViewOnCalendarDayClickInterface recyclerViewOnCalendarDayClickInterface, DatePickerFragment parentFragment) {
         this.daysOfMonth = daysOfMonth;
         this.recyclerViewOnCalendarDayClickInterface = recyclerViewOnCalendarDayClickInterface;
         this.parentFragment = parentFragment;
     }
 
-    public View getSelectedCalendarCell() {
+    public CalendarRecyclerViewHolder getSelectedCalendarCell() {
         return selectedCalendarCell;
     }
 
@@ -35,6 +34,11 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
         public String getDayOfMonthText() {
             return dayOfMonth.getText().toString();
         }
+
+        private final int todayColor = Color.argb(255, 255, 216, 177);
+        private int defaultColor = Color.argb(255, 255, 255, 255);
+        private final int selectionColor = Color.argb(255, 255, 102, 102);
+
 
         private final TextView dayOfMonth;
         public CalendarRecyclerViewHolder(@NonNull View itemView) {
@@ -46,6 +50,18 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
         @Override
         public void onClick(View v) {
             recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), this);
+        }
+
+        public int getTodayColor() {
+            return todayColor;
+        }
+
+        public int getDefaultColor() {
+            return defaultColor;
+        }
+
+        public int getSelectionColor() {
+            return selectionColor;
         }
     }
 
@@ -62,6 +78,13 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     public void onBindViewHolder(@NonNull CalendarRecyclerViewHolder holder, int position) {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
 
+        if (parentFragment.getSelectedDate().equals(LocalDate.now())) {
+            if (holder.dayOfMonth.getText() == String.valueOf(LocalDate.now().getDayOfMonth())) {
+                holder.defaultColor = holder.todayColor;
+                holder.itemView.setBackgroundColor(holder.defaultColor);
+            }
+        }
+
         if (parentFragment.getSelectedDate().equals(parentFragment.getCurrentSelectedDate(parentFragment.getView()))) {
             if (holder.dayOfMonth.getText().equals(String.valueOf(parentFragment.getSelectedDate().getDayOfMonth()))) {
                 selectCalendarCell(holder);
@@ -70,12 +93,12 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
     }
 
     public void selectCalendarCell(@NonNull CalendarRecyclerViewHolder holder) {
-        holder.itemView.findViewById(R.id.constraintLayoutMain).setBackgroundColor(selectionColor); // Set background of this view
-        selectedCalendarCell = holder.itemView; // Set it as selected, so can be deselected
+        holder.itemView.findViewById(R.id.constraintLayoutMain).setBackgroundColor(holder.getSelectionColor()); // Set background of this view
+        selectedCalendarCell = holder; // Set it as selected, so can be deselected
     }
 
     public void deselectCalendarCell() {
-        selectedCalendarCell.findViewById(R.id.constraintLayoutMain).setBackgroundColor(defaultColor); // set default background
+        selectedCalendarCell.itemView.findViewById(R.id.constraintLayoutMain).setBackgroundColor(selectedCalendarCell.getDefaultColor()); // set default background
     }
 
     @Override

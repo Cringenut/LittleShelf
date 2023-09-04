@@ -153,7 +153,7 @@ public class DatePickerFragment extends Fragment {
 
         calendarRecyclerViewAdapter = new CalendarRecyclerViewAdapter(dayInMonth, (position, recyclerViewHolder) -> {
             if (!recyclerViewHolder.getDayOfMonthText().equals("")) {
-                if (calendarRecyclerViewAdapter.getSelectedCalendarCell() != null && calendarRecyclerViewAdapter.getSelectedCalendarCell() != recyclerViewHolder.itemView) {
+                if (calendarRecyclerViewAdapter.getSelectedCalendarCell() != null && calendarRecyclerViewAdapter.getSelectedCalendarCell() != recyclerViewHolder) {
                     calendarRecyclerViewAdapter.deselectCalendarCell();
                 }
                 calendarRecyclerViewAdapter.selectCalendarCell(recyclerViewHolder);
