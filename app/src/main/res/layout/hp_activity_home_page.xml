@@ -38,7 +38,8 @@
             android:layout_weight="1"
             android:background="#555555">
 
-            <FrameLayout
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_180sdp"
                 android:background="@drawable/style_shape_round"
@@ -48,7 +49,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            </FrameLayout>
+            </com.github.mikephil.charting.charts.PieChart>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
