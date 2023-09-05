@@ -43,6 +43,14 @@ public class HomePage extends AppCompatActivity {
             }
         }
 
+        createPieChart(freshAmount, expiredAmount);
+
+        ((TextView)findViewById(R.id.textViewFresh)).setText(String.valueOf(freshAmount));
+        ((TextView)findViewById(R.id.textViewExpired)).setText(String.valueOf(expiredAmount));
+
+    }
+
+    private void createPieChart(int freshAmount, int expiredAmount) {
         ArrayList<PieEntry> items = new ArrayList<>();
         items.add(new PieEntry(freshAmount));
         items.add(new PieEntry(expiredAmount));
@@ -77,10 +85,6 @@ public class HomePage extends AppCompatActivity {
         pieChart.setHoleRadius(80f);
         pieChart.setHoleColor(android.R.color.transparent);
         pieChart.setTransparentCircleRadius(0f);
-
-        ((TextView)findViewById(R.id.textViewFresh)).setText(String.valueOf(freshAmount));
-        ((TextView)findViewById(R.id.textViewExpired)).setText(String.valueOf(expiredAmount));
-
     }
 
 }
