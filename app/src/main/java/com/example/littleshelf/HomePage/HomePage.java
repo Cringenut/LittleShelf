@@ -3,6 +3,8 @@ package com.example.littleshelf.HomePage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
@@ -17,6 +19,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.w3c.dom.Text;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
@@ -41,6 +46,17 @@ public class HomePage extends AppCompatActivity {
             else {
                 ++expiredAmount;
             }
+        }
+
+        LinearLayout weekCalendar = findViewById(R.id.linearLayoutWeekCalendar);
+        LocalDate date = LocalDate.of(2023, 9, 29);
+
+        for (int i = 0; i < weekCalendar.getChildCount(); i++) {
+            LinearLayout linearLayout = ((LinearLayout)weekCalendar.getChildAt(i));
+
+            ((TextView)linearLayout.getChildAt(0)).setText(date.getDayOfWeek().toString().substring(0, 1));
+            ((TextView)linearLayout.getChildAt(2)).setText(String.valueOf(date.getDayOfMonth()));
+            date = date.plusDays(1);
         }
 
         createPieChart(freshAmount, expiredAmount);

@@ -52,10 +52,6 @@ public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRe
             recyclerViewOnCalendarDayClickInterface.onItemClicked(getAdapterPosition(), this);
         }
 
-        public int getTodayColor() {
-            return todayColor;
-        }
-
         public int getDefaultColor() {
             return defaultColor;
         }
