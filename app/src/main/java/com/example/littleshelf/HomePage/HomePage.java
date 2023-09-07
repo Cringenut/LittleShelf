@@ -49,7 +49,7 @@ public class HomePage extends AppCompatActivity {
         }
 
         LinearLayout weekCalendar = findViewById(R.id.linearLayoutWeekCalendar);
-        LocalDate date = LocalDate.of(2023, 9, 29);
+        LocalDate date = LocalDate.now();
 
         for (int i = 0; i < weekCalendar.getChildCount(); i++) {
             LinearLayout linearLayout = ((LinearLayout)weekCalendar.getChildAt(i));
