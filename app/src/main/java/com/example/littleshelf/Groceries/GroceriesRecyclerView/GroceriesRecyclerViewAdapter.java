@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.FrameLayout;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littleshelf.Groceries.GroceriesActivity;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
@@ -25,34 +27,74 @@ import java.util.Collections;
 import java.util.List;
 
 /* Adapter */
-public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.RecyclerViewHolder> implements Filterable {
+public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.RecyclerViewHolder> implements Filterable, RecyclerViewOnGroceryItemClickInterface {
 
+    private RecyclerView recyclerView;
     private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
-
     public ArrayList<GroceryItem> getFilteredGroceryItems() {
         return filteredGroceryItems;
     }
-
     private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
     private ArrayList<GroceryItem> sortedGroceryItems; // Sorted list
     private SortTypesEnum currentSort;
     private Filter currentFilter;
     private Context context;
-    private RecyclerViewOnGroceryItemClickInterface recyclerViewOnGroceryItemClickInterface;
     private SearchBarFragment searchBarFragment;
-    public RecyclerView recyclerView;
+    private GroceryItem selectedGroceryItem;
 
-    public GroceriesRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems, RecyclerViewOnGroceryItemClickInterface recyclerViewOnGroceryItemClickInterface) {
+    public GroceriesRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems) {
         this.context = context;
         this.searchBarFragment = searchBarFragment;
         this.allGroceryItems = groceryItems;
         this.filteredGroceryItems = new ArrayList<>(groceryItems);
         this.sortedGroceryItems = new ArrayList<>(filteredGroceryItems);
-        this.recyclerViewOnGroceryItemClickInterface = recyclerViewOnGroceryItemClickInterface;
         this.currentSort = SortTypesEnum.unsorted;
         sortGroceryItems();
 
         setGroceryItemsListFilter();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recyclerView = recyclerView;
+    }
+
+    @Override
+    public void onItemClicked(GroceryItem groceryItem) {
+        selectGroceryItem(groceryItem);
+    }
+
+    public void selectGroceryItem(GroceryItem groceryItem) {
+        if (groceryItem == selectedGroceryItem){
+            deselectGroceryItem();
+            return;
+        }
+        else if (selectedGroceryItem != null) {
+            deselectGroceryItem();
+        }
+
+        int position = getSortedGroceryItems().indexOf(groceryItem);
+        View v = recyclerView.getLayoutManager().findViewByPosition(position);
+        selectedGroceryItem = groceryItem;
+
+        Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
+        btnRemoveItem.setOnClickListener(btnRemove -> {
+            ((GroceriesActivity)context).getGroceriesListDataBaseHelper().deleteOne(groceryItem);
+        });
+
+        btnRemoveItem.setVisibility(View.VISIBLE);
+
+
+    }
+    public void deselectGroceryItem() {
+        if (selectedGroceryItem != null) {
+            View v = recyclerView.getLayoutManager()
+                    .findViewByPosition(getSortedGroceryItems().indexOf(selectedGroceryItem));
+
+            v.findViewById(R.id.btnRemoveItem).setVisibility(View.GONE);
+            selectedGroceryItem = null;
+        }
     }
 
     @Override
@@ -64,7 +106,6 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        recyclerView = (RecyclerView) parent;
         return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.main_fragment_grocery_item, parent, false));
     }
 
@@ -128,7 +169,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
             createExpirableItem(holder, position);
         }
 
-        holder.cardView.setOnClickListener(v -> recyclerViewOnGroceryItemClickInterface.onItemClicked(sortedGroceryItems.get(position)));
+        holder.cardView.setOnClickListener(v -> this.onItemClicked(sortedGroceryItems.get(position)));
     }
 
     // Set default settings for the item's fragment

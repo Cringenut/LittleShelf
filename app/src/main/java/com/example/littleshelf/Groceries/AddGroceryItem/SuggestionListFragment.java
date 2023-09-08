@@ -50,8 +50,8 @@ public class SuggestionListFragment extends Fragment implements RecyclerViewOnGr
         GroceriesRecyclerViewAdapter groceriesRecyclerViewAdapter =
                 new GroceriesRecyclerViewAdapter(view.getContext(), searchBar,
                         (ArrayList<GroceryItem>)
-                                (new GroceriesNameSuggestionsDataBaseHelper(getContext()).getAllItems()), // Getting all suggestion from database to show them
-                        this);
+                                (new GroceriesNameSuggestionsDataBaseHelper(getContext()).getAllItems()) // Getting all suggestion from database to show them
+                        );
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
         searchBar.setGroceriesRecyclerView(groceriesRecyclerView); // Set the recycler view to search inside

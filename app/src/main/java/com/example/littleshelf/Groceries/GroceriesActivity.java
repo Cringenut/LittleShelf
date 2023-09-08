@@ -20,13 +20,12 @@ import com.example.littleshelf.Groceries.AddGroceryItem.SuggestionListFragment;
 
 import java.util.ArrayList;
 
-public class GroceriesActivity extends AppCompatActivity implements RecyclerViewOnGroceryItemClickInterface {
+public class GroceriesActivity extends AppCompatActivity {
 
     private GroceriesDataBaseHelper groceriesDataBaseHelper;
     private GroceriesRecyclerViewAdapter groceriesRecyclerViewAdapter;
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
     private SearchBarFragment searchBar;
-    private GroceryItem selectedGroceryItem;
 
     public GroceriesDataBaseHelper getGroceriesListDataBaseHelper() {
         return groceriesDataBaseHelper;
@@ -57,7 +56,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                 .commit(); // Replacing container
 
         // Set main recycler view properties
-        groceriesRecyclerViewAdapter = new GroceriesRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()), this);
+        groceriesRecyclerViewAdapter = new GroceriesRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()));
         groceriesRecyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
         groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
         groceriesDataBaseHelper.setRecyclerView(groceriesRecyclerView);
@@ -82,7 +81,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
                     .replace(R.id.containerBottomFragment, addItemMenuFragment)
                     .hide(addItemMenuFragment)
                     .commit();
-            deselectGroceryItem(); // Always deselect, even if not selected,
+            groceriesRecyclerViewAdapter.deselectGroceryItem(); // Always deselect, even if not selected,
                                     // so selection in new list won't be broken
             addItemMenuFragment.setGroceryItem(new GroceryItem(""));
         });
@@ -116,44 +115,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
     }
 
     /* OPERATIONS WITH GROCERY ITEMS (place to adapter later) */
-    @Override
-    public void onItemClicked(GroceryItem groceryItem) {
-        selectGroceryItem(groceryItem);
-    }
 
-    public void selectGroceryItem(GroceryItem groceryItem) {
-        if (groceryItem == selectedGroceryItem){
-            deselectGroceryItem();
-            return;
-        }
-        else if (selectedGroceryItem != null) {
-            deselectGroceryItem();
-        }
-
-        int position = groceriesRecyclerView.getRecyclerViewAdapter().getSortedGroceryItems().indexOf(groceryItem);
-        View v = groceriesRecyclerViewAdapter.recyclerView.getLayoutManager().findViewByPosition(position);
-        selectedGroceryItem = groceryItem;
-
-        Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
-        btnRemoveItem.setOnClickListener(btnRemove -> {
-            groceriesDataBaseHelper.deleteOne(groceryItem);
-        });
-
-        btnRemoveItem.setVisibility(View.VISIBLE);
-
-
-    }
-    public void deselectGroceryItem() {
-        if (selectedGroceryItem != null) {
-            View v = groceriesRecyclerViewAdapter.recyclerView.getLayoutManager()
-                    .findViewByPosition(groceriesRecyclerView.getRecyclerViewAdapter()
-                            .getSortedGroceryItems()
-                            .indexOf(selectedGroceryItem));
-
-            v.findViewById(R.id.btnRemoveItem).setVisibility(View.GONE);
-            selectedGroceryItem = null;
-        }
-    }
 
     public SearchBarFragment getSearchBar() {
         return searchBar;
