@@ -6,4 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".Receipts.ReceiptsActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/containerRecyclerViewReceipts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayoutBottomMenu"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutTitle" />
+
+    <FrameLayout
+        android:id="@+id/frameLayoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/robotoregular"
+            android:gravity="fill"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="Receipts"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+    </FrameLayout>
+
+    <fragment
+        android:id="@+id/frameLayoutBottomMenu"
+        android:name="com.example.littleshelf.Main.BottomNavMenuFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_48sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </fragment>
+
+    <Button
+        android:id="@+id/btnAddNewItem"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/style_shape_round"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

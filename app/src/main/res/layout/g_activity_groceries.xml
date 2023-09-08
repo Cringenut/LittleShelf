@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/containerRecyclerViewGroceries"
+        android:id="@+id/containerRecyclerViewReceipts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -45,6 +45,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/robotoregular"
             android:gravity="fill"
             android:paddingLeft="@dimen/_8sdp"
             android:text="Groceries"
@@ -63,14 +64,14 @@
     </fragment>
 
     <Button
-        android:id="@+id/btnConfirmDate"
+        android:id="@+id/btnAddNewItem"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/style_shape_round"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewGroceries"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <FrameLayout
@@ -79,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewGroceries"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
@@ -90,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewGroceries"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />

@@ -45,7 +45,7 @@ public class SuggestionListFragment extends Fragment implements RecyclerViewOnGr
         // Create recycler view with all item names
         GroceriesRecyclerViewFragment groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         getChildFragmentManager().beginTransaction()
-                .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
+                .replace(R.id.containerRecyclerViewReceipts, groceriesRecyclerView)
                 .commit();
         GroceriesRecyclerViewAdapter groceriesRecyclerViewAdapter =
                 new GroceriesRecyclerViewAdapter(view.getContext(), searchBar,

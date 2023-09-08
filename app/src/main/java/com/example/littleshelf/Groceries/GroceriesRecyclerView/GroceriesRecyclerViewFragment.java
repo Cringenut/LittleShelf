@@ -26,7 +26,7 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.g_fragment_groceries_recycler_view, container, false);
         this.context = rootView.getContext();
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.containerRecyclerViewGroceries);
+        RecyclerView recyclerView = rootView.findViewById(R.id.containerRecyclerViewReceipts);
         recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(recyclerViewAdapter);

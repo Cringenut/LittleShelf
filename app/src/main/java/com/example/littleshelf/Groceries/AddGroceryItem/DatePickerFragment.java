@@ -64,7 +64,7 @@ public class DatePickerFragment extends Fragment {
         v.findViewById(R.id.btnNextMonth).setOnClickListener(btnNext -> nextMonthAction(v));
 
         v.findViewById(R.id.btnClearDate).setOnClickListener(btnClear -> clearSelectedDate(v));
-        v.findViewById(R.id.btnConfirmDate).setOnClickListener(btnConfirm -> selectSelectedDate(v));
+        v.findViewById(R.id.btnAddNewItem).setOnClickListener(btnConfirm -> selectSelectedDate(v));
 
         initWidgets(v);
         setMonthView(v);

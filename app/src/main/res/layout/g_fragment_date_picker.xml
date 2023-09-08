@@ -245,7 +245,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btnConfirmDate"
+                    android:id="@+id/btnAddNewItem"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="@dimen/_32sdp"
                     android:background="@drawable/style_btn_fill"

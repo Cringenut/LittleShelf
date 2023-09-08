@@ -53,7 +53,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
         // Create recycler view fragment
         groceriesRecyclerView = new GroceriesRecyclerViewFragment();
         fragmentManager.beginTransaction()
-                .replace(R.id.containerRecyclerViewGroceries, groceriesRecyclerView)
+                .replace(R.id.containerRecyclerViewReceipts, groceriesRecyclerView)
                 .commit(); // Replacing container
 
         // Set main recycler view properties
@@ -67,7 +67,7 @@ public class GroceriesActivity extends AppCompatActivity implements RecyclerView
 
     private void createAddButton(FragmentManager fragmentManager) {
         // Creating add button and lambda listener
-        Button buttonAdd = findViewById(R.id.btnConfirmDate);
+        Button buttonAdd = findViewById(R.id.btnAddNewItem);
         buttonAdd.setOnClickListener(btnAdd -> {
             // Creating new
             SuggestionListFragment addItemListFragment = new SuggestionListFragment();

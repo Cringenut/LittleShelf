@@ -78,7 +78,7 @@ public class AddItemMenuFragment extends Fragment {
         });
 
         // Add item after clicking confirming button
-        Button btnAddItem = v.findViewById(R.id.btnConfirmDate);
+        Button btnAddItem = v.findViewById(R.id.btnAddNewItem);
         btnAddItem.setOnClickListener(btnAdd -> {
             groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
             groceriesActivity.getSupportFragmentManager()

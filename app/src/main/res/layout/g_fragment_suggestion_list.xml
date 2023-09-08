@@ -9,7 +9,7 @@
     tools:context=".Groceries.AddGroceryItem.SuggestionListFragment">
 
     <FrameLayout
-        android:id="@+id/containerRecyclerViewGroceries"
+        android:id="@+id/containerRecyclerViewReceipts"
         android:name="com.example.littleshelf.GroceryItemsRecyclerViewFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
