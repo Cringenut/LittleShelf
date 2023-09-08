@@ -3,19 +3,16 @@ package com.example.littleshelf.Main;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.littleshelf.Groceries.GroceriesActivity;
-import com.example.littleshelf.HomePage.HomePage;
+import com.example.littleshelf.HomePage.HomePageActivity;
 import com.example.littleshelf.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 
 public class BottomNavMenuFragment extends Fragment {
@@ -35,8 +32,8 @@ public class BottomNavMenuFragment extends Fragment {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if (id == R.id.Homepage && requireActivity().getClass() != HomePage.class) {
-                startActivity(new Intent(v.getContext(), HomePage.class));
+            if (id == R.id.Homepage && requireActivity().getClass() != HomePageActivity.class) {
+                startActivity(new Intent(v.getContext(), HomePageActivity.class));
                 return true;
             }
             else if (id == R.id.Groceries && requireActivity().getClass() != GroceriesActivity.class) {
@@ -47,7 +44,7 @@ public class BottomNavMenuFragment extends Fragment {
             return true;
         });
 
-        if (requireActivity().getClass() == HomePage.class) {
+        if (requireActivity().getClass() == HomePageActivity.class) {
             bottomNavigationView.setSelectedItemId(R.id.Homepage);
         }
         else if (requireActivity().getClass() == GroceriesActivity.class) {
