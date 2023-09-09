@@ -1,4 +1,4 @@
-package com.example.littleshelf.Main;
+package com.example.littleshelf.BottomNavMenu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.littleshelf.Groceries.GroceriesActivity;
 import com.example.littleshelf.HomePage.HomePageActivity;
 import com.example.littleshelf.R;
+import com.example.littleshelf.Receipts.ReceiptsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -38,6 +39,10 @@ public class BottomNavMenuFragment extends Fragment {
             }
             else if (id == R.id.Groceries && requireActivity().getClass() != GroceriesActivity.class) {
                 startActivity(new Intent(v.getContext(), GroceriesActivity.class));
+                return true;
+            }
+            else if (id == R.id.Receipts && requireActivity().getClass() != ReceiptsActivity.class) {
+                startActivity(new Intent(v.getContext(), ReceiptsActivity.class));
                 return true;
             }
 

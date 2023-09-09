@@ -8,7 +8,7 @@
     app:menu="@menu/bottom_nav_menu"
     app:labelVisibilityMode="labeled"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Main.BottomNavMenuFragment">
+    tools:context=".BottomNavMenu.BottomNavMenuFragment">
 
 </com.google.android.material.bottomnavigation.BottomNavigationView>
 

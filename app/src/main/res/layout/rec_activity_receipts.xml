@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/frameLayoutBottomMenu"
-        android:name="com.example.littleshelf.Main.BottomNavMenuFragment"
+        android:name="com.example.littleshelf.BottomNavMenu.BottomNavMenuFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_48sdp"
         app:layout_constraintBottom_toBottomOf="parent"
