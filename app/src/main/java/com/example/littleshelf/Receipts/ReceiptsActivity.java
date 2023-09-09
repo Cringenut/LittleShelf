@@ -1,12 +1,16 @@
 package com.example.littleshelf.Receipts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 
 import java.util.ArrayList;
@@ -18,17 +22,24 @@ public class ReceiptsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rec_activity_receipts);
 
-        RecyclerView recyclerView = findViewById(R.id.containerRecyclerViewReceipts);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Create recycler view fragment
+        ReceiptsRecyclerViewFragment receiptsRecyclerViewFragment = new ReceiptsRecyclerViewFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.containerRecyclerViewReceipts, receiptsRecyclerViewFragment)
+                .commit(); // Replacing container
+
+        // Set main recycler view properties
         ReceiptsRecyclerViewAdapter receiptsRecyclerViewAdapter = new ReceiptsRecyclerViewAdapter();
-
-        receiptsRecyclerViewAdapter.receipts.add(new Receipt());
-        recyclerView.setAdapter(receiptsRecyclerViewAdapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        receiptsRecyclerViewFragment.setRecyclerViewAdapter(receiptsRecyclerViewAdapter);
 
         findViewById(R.id.btnAddNewReceipt).setOnClickListener(view -> {
             receiptsRecyclerViewAdapter.receipts.add(new Receipt());
             receiptsRecyclerViewAdapter.notifyDataSetChanged();
         });
+
+
+
     }
 }
