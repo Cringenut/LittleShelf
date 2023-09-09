@@ -124,7 +124,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         CardView cardView;
         FrameLayout expirationMarker;
 
-        public RecyclerViewHolder(@NonNull View itemView) {
+        private RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.textViewItemName);
             itemExpirationDate = itemView.findViewById(R.id.textViewItemExpirationDate);
