@@ -31,6 +31,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     private RecyclerView recyclerView;
     private final ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
+
     private final ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
     private final ArrayList<GroceryItem> sortedGroceryItems; // Sorted list
     private SortTypesEnum currentSort;
@@ -266,5 +267,9 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     public ArrayList<GroceryItem> getAllGroceryItems() {
         return allGroceryItems;
+    }
+
+    public ArrayList<GroceryItem> getFilteredGroceryItems() {
+        return filteredGroceryItems;
     }
 }
