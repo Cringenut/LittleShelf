@@ -26,5 +26,9 @@ public class ReceiptsActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        findViewById(R.id.btnAddNewReceipt).setOnClickListener(view -> {
+            receiptsRecyclerViewAdapter.receipts.add(new Receipt());
+            receiptsRecyclerViewAdapter.notifyDataSetChanged();
+        });
     }
 }
