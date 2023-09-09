@@ -113,10 +113,6 @@ public class GroceriesActivity extends AppCompatActivity {
                     .commit();
         });
     }
-
-    /* OPERATIONS WITH GROCERY ITEMS (place to adapter later) */
-
-
     public SearchBarFragment getSearchBar() {
         return searchBar;
     }

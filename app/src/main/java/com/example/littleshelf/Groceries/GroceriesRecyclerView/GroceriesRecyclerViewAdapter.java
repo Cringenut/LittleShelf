@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,35 +26,32 @@ import java.util.Collections;
 import java.util.List;
 
 /* Adapter */
-public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.RecyclerViewHolder> implements Filterable, RecyclerViewOnGroceryItemClickInterface {
+public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.RecyclerViewHolder>
+        implements Filterable, RecyclerViewOnGroceryItemClickInterface {
 
     private RecyclerView recyclerView;
-    private ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
-    public ArrayList<GroceryItem> getFilteredGroceryItems() {
-        return filteredGroceryItems;
-    }
-    private ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
-    private ArrayList<GroceryItem> sortedGroceryItems; // Sorted list
+    private final ArrayList<GroceryItem> allGroceryItems; // Original unfiltered list
+    private final ArrayList<GroceryItem> filteredGroceryItems; // Filtered list
+    private final ArrayList<GroceryItem> sortedGroceryItems; // Sorted list
     private SortTypesEnum currentSort;
     private Filter currentFilter;
-    private Context context;
-    private SearchBarFragment searchBarFragment;
+    private final Context context;
+    private final SearchBarFragment searchBarFragment;
     private GroceryItem selectedGroceryItem;
 
-    public GroceriesRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, @Nullable ArrayList<GroceryItem> groceryItems) {
+    public GroceriesRecyclerViewAdapter(Context context, SearchBarFragment searchBarFragment, ArrayList<GroceryItem> groceryItems) {
         this.context = context;
         this.searchBarFragment = searchBarFragment;
-        this.allGroceryItems = groceryItems;
-        this.filteredGroceryItems = new ArrayList<>(groceryItems);
+        this.allGroceryItems = new ArrayList<>(groceryItems);
+        this.filteredGroceryItems = new ArrayList<>(allGroceryItems);
         this.sortedGroceryItems = new ArrayList<>(filteredGroceryItems);
         this.currentSort = SortTypesEnum.unsorted;
         sortGroceryItems();
-
         setGroceryItemsListFilter();
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         this.recyclerView = recyclerView;
     }
@@ -66,11 +62,10 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     }
 
     public void selectGroceryItem(GroceryItem groceryItem) {
-        if (groceryItem == selectedGroceryItem){
+        if (groceryItem == selectedGroceryItem) {
             deselectGroceryItem();
             return;
-        }
-        else if (selectedGroceryItem != null) {
+        } else if (selectedGroceryItem != null) {
             deselectGroceryItem();
         }
 
@@ -80,19 +75,21 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
         Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
         btnRemoveItem.setOnClickListener(btnRemove -> {
-            ((GroceriesActivity)context).getGroceriesListDataBaseHelper().deleteOne(groceryItem);
+            ((GroceriesActivity) context).getGroceriesListDataBaseHelper().deleteOne(groceryItem);
         });
 
         btnRemoveItem.setVisibility(View.VISIBLE);
-
-
     }
+
     public void deselectGroceryItem() {
         if (selectedGroceryItem != null) {
-            View v = recyclerView.getLayoutManager()
-                    .findViewByPosition(getSortedGroceryItems().indexOf(selectedGroceryItem));
+            int position = getSortedGroceryItems().indexOf(selectedGroceryItem);
+            View v = recyclerView.getLayoutManager().findViewByPosition(position);
 
-            v.findViewById(R.id.btnRemoveItem).setVisibility(View.GONE);
+            if (v != null) {
+                v.findViewById(R.id.btnRemoveItem).setVisibility(View.GONE);
+            }
+
             selectedGroceryItem = null;
         }
     }
@@ -124,8 +121,9 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemExpirationDate;
-        public CardView cardView;
-        public FrameLayout expirationMarker;
+        CardView cardView;
+        FrameLayout expirationMarker;
+
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.textViewItemName);
@@ -144,15 +142,11 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
             case unsorted:
                 break;
             case itemNameASC:
-            {
                 sortedGroceryItems.sort(new GroceryItem.NameComparator());
                 break;
-            }
             case itemNameDESC:
-            {
                 sortedGroceryItems.sort(new GroceryItem.NameComparator().reversed());
                 break;
-            }
         }
 
         notifyDataSetChanged();
@@ -160,16 +154,17 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.itemName.setText(sortedGroceryItems.get(position).getName());
+        GroceryItem groceryItem = sortedGroceryItems.get(position);
 
-        if (sortedGroceryItems.get(position).getExpirationDate() == null) {
+        holder.itemName.setText(groceryItem.getName());
+
+        if (groceryItem.getExpirationDate() == null) {
             createNonExpirableItem(holder);
-        }
-        else {
-            createExpirableItem(holder, position);
+        } else {
+            createExpirableItem(holder, groceryItem);
         }
 
-        holder.cardView.setOnClickListener(v -> this.onItemClicked(sortedGroceryItems.get(position)));
+        holder.cardView.setOnClickListener(v -> onItemClicked(groceryItem));
     }
 
     // Set default settings for the item's fragment
@@ -180,13 +175,12 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     }
 
     // Add offset so item's name is not centered and doesn't intersect with expiration date
-    private void createExpirableItem(@NonNull RecyclerViewHolder holder, int position) {
+    private void createExpirableItem(@NonNull RecyclerViewHolder holder, GroceryItem groceryItem) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemName.getLayoutParams();
         layoutParams.setMargins(layoutParams.getMarginStart(), 0, 0, context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._12sdp));
         holder.itemExpirationDate.setVisibility(View.VISIBLE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        holder.itemExpirationDate.setText(
-                sortedGroceryItems.get(position).getExpirationDate().format(formatter));
+        holder.itemExpirationDate.setText(groceryItem.getExpirationDate().format(formatter));
     }
 
     @Override
@@ -199,6 +193,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
         FilterResults results;
         List<GroceryItem> suggestions;
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             results = new FilterResults();
@@ -207,16 +202,15 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
             if (constraint == null || constraint.length() == 0) {
                 suggestions.addAll(allGroceryItems); // Use the original list when the constraint is empty
             } else {
-                // Change to lambda later
                 String previousConstraint = searchBarFragment.getSearchBarFieldTag();
                 String filterPattern = constraint.toString().toLowerCase();
                 for (GroceryItem item : filterPattern.startsWith(previousConstraint) ? allGroceryItems : filteredGroceryItems) {
-                    if (item.getName().toLowerCase().startsWith(filterPattern))
+                    if (item.getName().toLowerCase().startsWith(filterPattern)) {
                         suggestions.add(item);
+                    }
                 }
 
                 if (suggestions.size() == 0) {
-                    // Change to lambda later
                     for (GroceryItem item : allGroceryItems) {
                         for (String filterPatternWord : filterPattern.split(" ")) {
                             for (String itemName : item.getName().split(" ")) {
@@ -273,5 +267,4 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     public ArrayList<GroceryItem> getAllGroceryItems() {
         return allGroceryItems;
     }
-
 }

@@ -55,6 +55,9 @@ public class BottomNavMenuFragment extends Fragment {
         else if (requireActivity().getClass() == GroceriesActivity.class) {
             bottomNavigationView.setSelectedItemId(R.id.Groceries);
         }
+        else if (requireActivity().getClass() == ReceiptsActivity.class) {
+            bottomNavigationView.setSelectedItemId(R.id.Receipts);
+        }
 
 
 

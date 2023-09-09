@@ -14,5 +14,6 @@ public class ReceiptsActivity extends AppCompatActivity {
         setContentView(R.layout.rec_activity_receipts);
 
 
+
     }
 }
