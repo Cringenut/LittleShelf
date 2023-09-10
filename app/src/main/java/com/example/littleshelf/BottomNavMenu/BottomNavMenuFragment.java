@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.Groceries.GroceriesActivity;
+import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
 import com.example.littleshelf.HomePage.HomePageActivity;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Receipts.ReceiptsActivity;

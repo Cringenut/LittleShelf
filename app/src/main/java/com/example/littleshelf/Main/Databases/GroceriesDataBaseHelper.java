@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Groceries.GroceriesActivity;
+import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 

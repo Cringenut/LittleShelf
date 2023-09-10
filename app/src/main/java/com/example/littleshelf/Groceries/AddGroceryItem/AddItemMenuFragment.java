@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.example.littleshelf.Groceries.GroceriesActivity;
+import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 

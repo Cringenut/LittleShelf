@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.littleshelf.Groceries.GroceriesActivity;
+import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 

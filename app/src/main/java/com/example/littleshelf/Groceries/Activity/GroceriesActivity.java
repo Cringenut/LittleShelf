@@ -1,4 +1,4 @@
-package com.example.littleshelf.Groceries;
+package com.example.littleshelf.Groceries.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 

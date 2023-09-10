@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littleshelf.Groceries.GroceriesActivity;
+import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
@@ -182,6 +182,10 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         holder.itemExpirationDate.setVisibility(View.VISIBLE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         holder.itemExpirationDate.setText(groceryItem.getExpirationDate().format(formatter));
+
+        if (!groceryItem.isFresh()) {
+            holder.expirationMarker.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

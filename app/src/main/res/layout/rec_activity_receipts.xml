@@ -60,4 +60,24 @@
         app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <FrameLayout
+        android:id="@+id/containerWholeScreenFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
+
+    <FrameLayout
+        android:id="@+id/containerBottomFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

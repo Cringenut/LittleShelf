@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Groceries.GroceriesActivity"
+            android:name=".Groceries.Activity.GroceriesActivity"
             android:exported="true" >
         </activity>
     </application>
