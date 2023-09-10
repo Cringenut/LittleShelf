@@ -12,7 +12,7 @@ import com.example.littleshelf.Main.Sort.SortByRecyclerViewInterface;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 import com.example.littleshelf.R;
 
-public class SortGroceriesListFragment extends Fragment {
+public class SortByGroceriesListFragment extends Fragment {
 
     private SortByRecyclerViewInterface sortByRecyclerViewInterface;
 

@@ -1,5 +1,5 @@
 package com.example.littleshelf.Receipts;
 
 public interface AddReceiptOptionInterface {
-    void OnAddReceiptOptionClicked();
+    void onAddReceiptOptionClicked(AddReceiptOptionTypesEnum addReceiptOptionTypesEnum);
 }

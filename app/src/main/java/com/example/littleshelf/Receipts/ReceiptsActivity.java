@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.SortByGroceriesListFragment;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.Sort.SortButtonFragment;
 import com.example.littleshelf.R;
 
 import java.util.ArrayList;
@@ -35,11 +38,18 @@ public class ReceiptsActivity extends AppCompatActivity {
         receiptsRecyclerViewFragment.setRecyclerViewAdapter(receiptsRecyclerViewAdapter);
 
         findViewById(R.id.btnAddNewReceipt).setOnClickListener(view -> {
-            receiptsRecyclerViewAdapter.receipts.add(new Receipt());
-            receiptsRecyclerViewAdapter.notifyDataSetChanged();
+            AddReceiptOptionFragment addReceiptOptionFragment = new AddReceiptOptionFragment();
+
+            addReceiptOptionFragment.setAddReceiptOptionInterface(addReceiptOptionTypesEnum -> {
+                fragmentManager.beginTransaction()
+                        .remove(addReceiptOptionFragment)
+                        .commit();
+            });
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.containerBottomFragment, addReceiptOptionFragment)
+                    .commit();
         });
-
-
 
     }
 }

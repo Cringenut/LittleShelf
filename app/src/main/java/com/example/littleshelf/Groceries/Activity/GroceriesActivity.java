@@ -3,14 +3,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.littleshelf.Groceries.AddGroceryItem.AddItemMenuFragment;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
-import com.example.littleshelf.Groceries.GroceriesRecyclerView.RecyclerViewOnGroceryItemClickInterface;
-import com.example.littleshelf.Groceries.GroceriesRecyclerView.SortGroceriesListFragment;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.SortByGroceriesListFragment;
 import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
@@ -96,20 +94,20 @@ public class GroceriesActivity extends AppCompatActivity {
 
         // Create sort button outside the search bar,
         // so we can assign function inside the search bar when view is initialized
-        SortGroceriesListFragment sortGroceriesListFragment = new SortGroceriesListFragment();
+        SortByGroceriesListFragment sortByGroceriesListFragment = new SortByGroceriesListFragment();
         searchBar.setBtnFilter(new SortButtonFragment(() -> fragmentManager.beginTransaction()
-                .replace(R.id.containerBottomFragment, sortGroceriesListFragment)
+                .replace(R.id.containerBottomFragment, sortByGroceriesListFragment)
                 .commit()));
 
         // If clicked on the same sort do nothing, otherwise sort and close the "sort by" fragment
-        sortGroceriesListFragment.setSortByRecyclerViewInterface(sortType -> {
+        sortByGroceriesListFragment.setSortByRecyclerViewInterface(sortType -> {
             if (groceriesRecyclerViewAdapter.getCurrentSort() != sortType) {
                 groceriesRecyclerViewAdapter.setCurrentSort(sortType);
                 groceriesRecyclerViewAdapter.sortGroceryItems();
             }
 
             fragmentManager.beginTransaction()
-                    .remove(sortGroceriesListFragment)
+                    .remove(sortByGroceriesListFragment)
                     .commit();
         });
     }
