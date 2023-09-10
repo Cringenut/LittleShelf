@@ -16,7 +16,7 @@ import com.example.littleshelf.R;
 
 public class AddItemMenuFragment extends Fragment {
 
-    private GroceryItem groceryItem;
+    private GroceryItem groceryItem; // Created and assigned to menu inside suggestion list
     private Button btnItemName;
 
     public Button getBtnItemExpirationDate() {

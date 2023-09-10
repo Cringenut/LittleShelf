@@ -25,10 +25,6 @@ public class GroceriesActivity extends AppCompatActivity {
     private GroceriesRecyclerViewFragment groceriesRecyclerView;
     private SearchBarFragment searchBar;
 
-    public GroceriesDataBaseHelper getGroceriesListDataBaseHelper() {
-        return groceriesDataBaseHelper;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,5 +109,9 @@ public class GroceriesActivity extends AppCompatActivity {
     }
     public SearchBarFragment getSearchBar() {
         return searchBar;
+    }
+
+    public GroceriesDataBaseHelper getGroceriesListDataBaseHelper() {
+        return groceriesDataBaseHelper;
     }
 }
