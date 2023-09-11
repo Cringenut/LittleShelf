@@ -1,23 +1,21 @@
-package com.example.littleshelf.Groceries.GroceriesRecyclerView;
+package com.example.littleshelf.Main.RecyclerView;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.littleshelf.R;
 
-public class GroceriesRecyclerViewFragment extends Fragment {
-
-    private GroceriesRecyclerViewAdapter recyclerViewAdapter;
-    private Context context;
+public class RecyclerViewFragment extends Fragment {
+    protected RecyclerView.Adapter recyclerViewAdapter;
+    protected Context context;
 
     @Nullable
     @Override
@@ -26,7 +24,7 @@ public class GroceriesRecyclerViewFragment extends Fragment {
         this.context = rootView.getContext();
 
         RecyclerView recyclerView = rootView.findViewById(R.id.containerRecyclerViewReceipts);
-        recyclerView.addItemDecoration(new RecycleViewGroceryItemsDecorator());
+        recyclerView.addItemDecoration(new RecyclerViewDecorator());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(recyclerViewAdapter);
 
@@ -35,17 +33,17 @@ public class GroceriesRecyclerViewFragment extends Fragment {
 
     /* Decorator */
     // Decorator to create space between recycler view items
-    private class RecycleViewGroceryItemsDecorator extends RecyclerView.ItemDecoration {
+    private class RecyclerViewDecorator extends RecyclerView.ItemDecoration {
         @Override
         public void getItemOffsets(Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
             outRect.bottom = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._4sdp);
         }
     }
-    public GroceriesRecyclerViewAdapter getRecyclerViewAdapter() {
+    public RecyclerView.Adapter getRecyclerViewAdapter() {
         return recyclerViewAdapter;
     }
 
-    public void setRecyclerViewAdapter(GroceriesRecyclerViewAdapter recyclerViewAdapter) {
+    public void setRecyclerViewAdapter(RecyclerView.Adapter recyclerViewAdapter) {
         this.recyclerViewAdapter = recyclerViewAdapter;
     }
 }

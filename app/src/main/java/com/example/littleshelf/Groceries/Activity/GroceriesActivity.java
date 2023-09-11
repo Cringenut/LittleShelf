@@ -7,10 +7,10 @@ import android.widget.Button;
 
 import com.example.littleshelf.Groceries.AddGroceryItem.AddItemMenuFragment;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
-import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.SortByGroceriesListFragment;
 import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
@@ -22,7 +22,7 @@ public class GroceriesActivity extends AppCompatActivity {
 
     private GroceriesDataBaseHelper groceriesDataBaseHelper;
     private GroceriesRecyclerViewAdapter groceriesRecyclerViewAdapter;
-    private GroceriesRecyclerViewFragment groceriesRecyclerView;
+    private RecyclerViewFragment recyclerView;
     private SearchBarFragment searchBar;
 
     @Override
@@ -44,18 +44,18 @@ public class GroceriesActivity extends AppCompatActivity {
 
     private void createMainGroceriesList(FragmentManager fragmentManager) {
         // Create recycler view fragment
-        groceriesRecyclerView = new GroceriesRecyclerViewFragment();
+        recyclerView = new RecyclerViewFragment();
         fragmentManager.beginTransaction()
-                .replace(R.id.containerRecyclerViewReceipts, groceriesRecyclerView)
+                .replace(R.id.containerRecyclerViewReceipts, recyclerView)
                 .commit(); // Replacing container
 
         // Set main recycler view properties
         groceriesRecyclerViewAdapter = new GroceriesRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()));
-        groceriesRecyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
-        groceriesRecyclerView.getRecyclerViewAdapter().setGroceryItemsListFilter();
-        groceriesDataBaseHelper.setRecyclerView(groceriesRecyclerView);
+        recyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
+        ((GroceriesRecyclerViewAdapter)recyclerView.getRecyclerViewAdapter()).setGroceryItemsListFilter();
+        groceriesDataBaseHelper.setRecyclerView(recyclerView);
 
-        searchBar.setGroceriesRecyclerView(groceriesRecyclerView);
+        searchBar.setRecyclerView(recyclerView);
     }
 
     private void createAddButton(FragmentManager fragmentManager) {

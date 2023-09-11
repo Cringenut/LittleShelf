@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
-import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
+import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
 import com.example.littleshelf.Main.Databases.GroceriesNameSuggestionsDataBaseHelper;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.RecyclerViewOnGroceryItemClickInterface;
 import com.example.littleshelf.Groceries.SearchBar.SearchBarFragment;
@@ -43,18 +44,18 @@ public class SuggestionListFragment extends Fragment implements RecyclerViewOnGr
                 .commit();
 
         // Create recycler view with all item names
-        GroceriesRecyclerViewFragment groceriesRecyclerView = new GroceriesRecyclerViewFragment();
+        RecyclerViewFragment recyclerView = new RecyclerViewFragment();
         getChildFragmentManager().beginTransaction()
-                .replace(R.id.containerRecyclerViewReceipts, groceriesRecyclerView)
+                .replace(R.id.containerRecyclerViewReceipts, recyclerView)
                 .commit();
         GroceriesRecyclerViewAdapter groceriesRecyclerViewAdapter =
                 new GroceriesRecyclerViewAdapter(view.getContext(), searchBar,
                         (ArrayList<GroceryItem>)
                                 (new GroceriesNameSuggestionsDataBaseHelper(getContext()).getAllItems()) // Getting all suggestion from database to show them
                         );
-        groceriesRecyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
-        groceriesRecyclerView.getRecyclerViewAdapter().setAddGroceryItemsListFilter();
-        searchBar.setGroceriesRecyclerView(groceriesRecyclerView); // Set the recycler view to search inside
+        recyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
+        ((GroceriesRecyclerViewAdapter)recyclerView.getRecyclerViewAdapter()).setAddGroceryItemsListFilter();
+        searchBar.setRecyclerView(recyclerView); // Set the recycler view to search inside
 
         return view;
     }

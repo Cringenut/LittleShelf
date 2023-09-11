@@ -8,6 +8,6 @@ public class Receipt {
 
     private ArrayList<GroceryItem> receiptItems = new ArrayList<>();
         public ArrayList<GroceryItem> getReceiptItems() {
-        return receiptItems;
+            return receiptItems;
     }
 }

@@ -1,23 +1,21 @@
 package com.example.littleshelf.Groceries.SearchBar;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
-import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Main.Sort.SortButtonFragment;
 
 public class SearchBarFragment extends Fragment {
 
-    private GroceriesRecyclerViewFragment groceriesRecyclerView;
+    private RecyclerViewFragment recyclerView;
     private EditText searchBarField;
     private SortButtonFragment btnSort;
 
@@ -43,7 +41,7 @@ public class SearchBarFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Sort when changing search bar
-                groceriesRecyclerView.getRecyclerViewAdapter().getFilter().filter(s);
+                ((GroceriesRecyclerViewAdapter)recyclerView.getRecyclerViewAdapter()).getFilter().filter(s);
                 searchBarField.setTag(s);
             }
             @Override
@@ -61,12 +59,12 @@ public class SearchBarFragment extends Fragment {
     }
 
     public void clearSearch() {
-        groceriesRecyclerView.getRecyclerViewAdapter().getFilter().filter("");
+        ((GroceriesRecyclerViewAdapter)recyclerView.getRecyclerViewAdapter()).getFilter().filter("");
         searchBarField.setText("");
         searchBarField.setTag("");
     }
-    public void setGroceriesRecyclerView(GroceriesRecyclerViewFragment groceriesRecyclerView) {
-        this.groceriesRecyclerView = groceriesRecyclerView;
+    public void setRecyclerView(RecyclerViewFragment recyclerView) {
+        this.recyclerView = recyclerView;
     }
 
     public String getSearchBarFieldTag() {

@@ -6,11 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
-
 import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
-import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewFragment;
 import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
 import com.example.littleshelf.Main.Sort.SortTypesEnum;
 
 import java.time.LocalDate;
@@ -21,7 +20,7 @@ import java.util.List;
 public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private GroceriesRecyclerViewFragment recyclerView;
+    private RecyclerViewFragment recyclerView;
     public static final String ITEM_TABLE = "ITEM_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
@@ -59,7 +58,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate() == null ? "" : groceryItem.getExpirationDate().format(formatter));
 
         // Add item to adapter
-        GroceriesRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
+        GroceriesRecyclerViewAdapter adapter = (GroceriesRecyclerViewAdapter) recyclerView.getRecyclerViewAdapter();
         adapter.getAllGroceryItems().add(groceryItem);
         adapter.getFilteredGroceryItems().addAll(adapter.getAllGroceryItems()); // Used to sort items correctly
 
@@ -82,7 +81,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         // Call query in cursor
         Cursor cursor = db.rawQuery(queryString, null);
 
-        GroceriesRecyclerViewAdapter adapter = recyclerView.getRecyclerViewAdapter();
+        GroceriesRecyclerViewAdapter adapter = (GroceriesRecyclerViewAdapter) recyclerView.getRecyclerViewAdapter();
         adapter.deselectGroceryItem();
 
         // Remove grocery item from all lists
@@ -131,7 +130,7 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public void setRecyclerView(GroceriesRecyclerViewFragment recyclerView) {
+    public void setRecyclerView(RecyclerViewFragment recyclerView) {
         this.recyclerView = recyclerView;
     }
 }
