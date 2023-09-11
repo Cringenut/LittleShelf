@@ -3,6 +3,8 @@ package com.example.littleshelf.Receipts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
+
+import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
 import com.example.littleshelf.R;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 public class ReceiptsActivity extends AppCompatActivity {
 
     private ReceiptsRecyclerViewAdapter receiptsRecyclerViewAdapter;
-    private ReceiptsRecyclerViewFragment receiptsRecyclerViewFragment;
+    private RecyclerViewFragment recyclerViewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +22,14 @@ public class ReceiptsActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Create recycler view fragment
-        receiptsRecyclerViewFragment = new ReceiptsRecyclerViewFragment();
+        recyclerViewFragment = new RecyclerViewFragment();
         fragmentManager.beginTransaction()
-                .replace(R.id.containerRecyclerViewReceipts, receiptsRecyclerViewFragment)
+                .replace(R.id.containerRecyclerViewReceipts, recyclerViewFragment)
                 .commit(); // Replacing container
 
         // Set main recycler view properties
         receiptsRecyclerViewAdapter = new ReceiptsRecyclerViewAdapter();
-        receiptsRecyclerViewFragment.setRecyclerViewAdapter(receiptsRecyclerViewAdapter);
+        recyclerViewFragment.setRecyclerViewAdapter(receiptsRecyclerViewAdapter);
 
         findViewById(R.id.btnAddNewReceipt).setOnClickListener(view -> {
             AddReceiptOptionFragment addReceiptOptionFragment = new AddReceiptOptionFragment();
