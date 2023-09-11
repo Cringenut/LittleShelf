@@ -44,7 +44,6 @@ public class AddReceiptItemRecyclerViewAdapter extends RecyclerView.Adapter<AddR
         }
     }
 
-
     @Override
     public int getItemViewType(int position) {
         return  (position == receipt.getReceiptItems().size()) ? 1 : 0;

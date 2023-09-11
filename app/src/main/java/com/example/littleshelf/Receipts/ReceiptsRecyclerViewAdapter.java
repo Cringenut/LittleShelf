@@ -43,6 +43,6 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<ReceiptsRe
 
     @Override
     public int getItemCount() {
-        return receipts.size() + 1;
+        return receipts.size();
     }
 }
