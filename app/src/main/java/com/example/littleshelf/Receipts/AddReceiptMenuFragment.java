@@ -27,6 +27,18 @@ public class AddReceiptMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.rec_fragment_add_receipt_menu, container, false);
 
+
+        v.findViewById(R.id.btnAddReceiptItems).setOnClickListener(view -> {
+
+            AddReceiptItemsFragment addReceiptItemsFragment = new AddReceiptItemsFragment(receipt);
+
+            parentActivity.getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.containerWholeScreenFragment, addReceiptItemsFragment).
+                    commit();
+        });
+
+
         v.findViewById(R.id.btnAddNewReceiptConfirm).setOnClickListener(view -> {
 
         /* CHANGE TO DATABASE LATER */

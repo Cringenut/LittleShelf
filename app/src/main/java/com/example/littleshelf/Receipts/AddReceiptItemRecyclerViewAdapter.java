@@ -31,7 +31,7 @@ public class AddReceiptItemRecyclerViewAdapter extends RecyclerView.Adapter<AddR
     @Override
     public AddReceiptItemRecyclerViewAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                if (viewType == 0) {
+        if (viewType == 0) {
             return new AddReceiptItemRecyclerViewAdapter.RecyclerViewHolder(inflater.inflate(R.layout.main_fragment_grocery_item, parent, false));
         }
         return new AddReceiptItemRecyclerViewAdapter.RecyclerViewHolder(inflater.inflate(R.layout.rec_button_add_receipt_item, parent, false));
@@ -51,6 +51,6 @@ public class AddReceiptItemRecyclerViewAdapter extends RecyclerView.Adapter<AddR
 
     @Override
     public int getItemCount() {
-        return receipt.getReceiptItems().size();
+        return receipt.getReceiptItems().size() + 1;
     }
 }

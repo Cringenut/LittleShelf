@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EEFF00"
     tools:context=".Receipts.AddReceiptItemsFragment">
 
     <FrameLayout
-        android:id="@+id/containerRecyclerViewReceipts"
+        android:id="@+id/containerRecyclerViewReceiptItems"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayoutBottomMenu"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayoutTitle"
-        tools:layout_editor_absoluteX="5dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutTitle" />
 
     <FrameLayout
         android:id="@+id/frameLayoutTitle"
@@ -23,61 +26,6 @@
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/robotoregular"
-            android:gravity="fill"
-            android:paddingLeft="@dimen/_8sdp"
-            android:text="Add receipt item"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp" />
-    </FrameLayout>
-
-    <fragment
-        android:id="@+id/frameLayoutBottomMenu"
-        android:name="com.example.littleshelf.BottomNavMenu.BottomNavMenuFragment"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_48sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </fragment>
-
-    <Button
-        android:id="@+id/btnAddNewItem"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/style_shape_round"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/containerWholeScreenFragment"
-        android:name="com.example.littleshelf.AddItemListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
-
-    <FrameLayout
-        android:id="@+id/containerBottomFragment"
-        android:name="com.example.littleshelf.AddItemListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/containerRecyclerViewReceipts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameLayoutTitle" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
