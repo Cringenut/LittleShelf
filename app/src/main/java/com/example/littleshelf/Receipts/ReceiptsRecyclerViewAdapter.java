@@ -23,7 +23,8 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<ReceiptsRe
 
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        TextView additionDateItemAmount;        private RecyclerViewHolder(@NonNull View itemView) {
+        TextView additionDateItemAmount;
+        private RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             additionDateItemAmount = itemView.findViewById(R.id.textViewAdditionDateItemAmount);
         }
@@ -33,12 +34,13 @@ public class ReceiptsRecyclerViewAdapter extends RecyclerView.Adapter<ReceiptsRe
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new ReceiptsRecyclerViewAdapter.RecyclerViewHolder(inflater.inflate(R.layout.rec_button_add_receipt_item, parent, false));
+        return new ReceiptsRecyclerViewAdapter.RecyclerViewHolder(inflater.inflate(R.layout.rec_fragment_receipt, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ReceiptsRecyclerViewAdapter.RecyclerViewHolder holder, int position) {
-        holder.additionDateItemAmount.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+        String dateAndAmount = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")) + " • " + receipts.get(position).getReceiptItems().size() + " items ";
+        holder.additionDateItemAmount.setText(dateAndAmount);
     }
 
     @Override

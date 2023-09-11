@@ -39,7 +39,6 @@ public class AddReceiptMenuFragment extends Fragment {
                 beginTransaction().
                 remove(this).
                 commit();
-
         });
 
         return v;
