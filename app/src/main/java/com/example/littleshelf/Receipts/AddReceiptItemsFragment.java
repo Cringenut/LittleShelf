@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
 import com.example.littleshelf.R;
 
@@ -28,6 +30,16 @@ public class AddReceiptItemsFragment extends Fragment {
                 .replace(v.findViewById(R.id.containerRecyclerViewReceiptItems).getId(), recyclerViewFragment)
                 .commit();
         recyclerViewFragment.setRecyclerViewAdapter(new AddReceiptItemRecyclerViewAdapter(receipt));
+
+        v.findViewById(R.id.btnClose).setOnClickListener(view -> {
+            ((ReceiptsActivity)requireActivity())
+                    .getSupportFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
+
+        });
+
+
 
         return v;
     }

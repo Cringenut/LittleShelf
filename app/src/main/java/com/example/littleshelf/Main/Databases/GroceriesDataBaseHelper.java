@@ -20,7 +20,6 @@ import java.util.List;
 public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private RecyclerViewFragment recyclerView;
     public static final String ITEM_TABLE = "ITEM_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ITEM_NAME = "ITEM_NAME";
@@ -57,16 +56,6 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ITEM_NAME, groceryItem.getName());
         cv.put(COLUMN_ITEM_EXPIRATION_DATE, groceryItem.getExpirationDate() == null ? "" : groceryItem.getExpirationDate().format(formatter));
 
-        // Add item to adapter
-        GroceriesRecyclerViewAdapter adapter = (GroceriesRecyclerViewAdapter) recyclerView.getRecyclerViewAdapter();
-        adapter.getAllGroceryItems().add(groceryItem);
-        adapter.getFilteredGroceryItems().addAll(adapter.getAllGroceryItems()); // Used to sort items correctly
-
-        // Clear the search bar and unsort items to show new item on the top
-        ((GroceriesActivity)recyclerView.getActivity()).getSearchBar().clearSearch();
-        adapter.setCurrentSort(SortTypesEnum.unsorted);
-        adapter.sortGroceryItems();
-
         long insert = db.insert(ITEM_TABLE, null, cv); // Insert value to database
         groceryItem.setId(insert); // Set item id from database
 
@@ -80,20 +69,6 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
 
         // Call query in cursor
         Cursor cursor = db.rawQuery(queryString, null);
-
-        GroceriesRecyclerViewAdapter adapter = (GroceriesRecyclerViewAdapter) recyclerView.getRecyclerViewAdapter();
-        adapter.deselectGroceryItem();
-
-        // Remove grocery item from all lists
-        int removedItemPosition = adapter.getSortedGroceryItems().indexOf(groceryItem);
-        adapter.getFilteredGroceryItems().remove(groceryItem); // Calling notify to update list
-        adapter.getAllGroceryItems().remove(groceryItem);
-        adapter.getSortedGroceryItems().remove(groceryItem);
-
-        adapter.notifyItemRemoved(removedItemPosition); // Deleting item from adapter
-        adapter.notifyItemRangeChanged(removedItemPosition, adapter.getFilteredGroceryItems().size());
-
-
         return cursor.moveToFirst(); // If we found item from query return true
     }
 
@@ -128,9 +103,5 @@ public class GroceriesDataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
-    }
-
-    public void setRecyclerView(RecyclerViewFragment recyclerView) {
-        this.recyclerView = recyclerView;
     }
 }

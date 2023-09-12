@@ -3,6 +3,7 @@ package com.example.littleshelf.Groceries.AddGroceryItem;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +12,16 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.littleshelf.Groceries.Activity.GroceriesActivity;
+import com.example.littleshelf.Groceries.GroceriesRecyclerView.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.Main.GroceryItem.GroceryItem;
+import com.example.littleshelf.Main.RecyclerView.RecyclerViewFragment;
+import com.example.littleshelf.Main.Sort.SortTypesEnum;
 import com.example.littleshelf.R;
 
 public class AddItemMenuFragment extends Fragment {
 
     private GroceryItem groceryItem; // Created and assigned to menu inside suggestion list
     private Button btnItemName;
-
-    public Button getBtnItemExpirationDate() {
-        return btnItemExpirationDate;
-    }
 
     private Button btnItemExpirationDate;
 
@@ -81,6 +81,18 @@ public class AddItemMenuFragment extends Fragment {
         Button btnAddItem = v.findViewById(R.id.btnAddNewItem);
         btnAddItem.setOnClickListener(btnAdd -> {
             groceriesActivity.getGroceriesListDataBaseHelper().addOne(groceryItem);
+
+            // Add item to adapter
+            RecyclerView recyclerView = groceriesActivity.findViewById(R.id.containerBottomFragment);
+            GroceriesRecyclerViewAdapter adapter = (GroceriesRecyclerViewAdapter) recyclerView.getAdapter();
+            adapter.getAllGroceryItems().add(groceryItem);
+            adapter.getFilteredGroceryItems().addAll(adapter.getAllGroceryItems()); // Used to sort items correctly
+
+            // Clear the search bar and unsort items to show new item on the top
+            groceriesActivity.getSearchBar().clearSearch();
+            adapter.setCurrentSort(SortTypesEnum.unsorted);
+            adapter.sortGroceryItems();
+
             groceriesActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .hide(this)
@@ -96,6 +108,10 @@ public class AddItemMenuFragment extends Fragment {
         if (!hidden) {
             btnItemName.setText(groceryItem.getName());
         }
+    }
+
+    public Button getBtnItemExpirationDate() {
+        return btnItemExpirationDate;
     }
 
     public void setGroceryItem(GroceryItem groceryItem) {

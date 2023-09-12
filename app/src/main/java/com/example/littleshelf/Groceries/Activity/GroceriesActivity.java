@@ -53,7 +53,6 @@ public class GroceriesActivity extends AppCompatActivity {
         groceriesRecyclerViewAdapter = new GroceriesRecyclerViewAdapter(this, searchBar, (ArrayList<GroceryItem>)(groceriesDataBaseHelper.getAllItems()));
         recyclerView.setRecyclerViewAdapter(groceriesRecyclerViewAdapter);
         ((GroceriesRecyclerViewAdapter)recyclerView.getRecyclerViewAdapter()).setGroceryItemsListFilter();
-        groceriesDataBaseHelper.setRecyclerView(recyclerView);
 
         searchBar.setRecyclerView(recyclerView);
     }

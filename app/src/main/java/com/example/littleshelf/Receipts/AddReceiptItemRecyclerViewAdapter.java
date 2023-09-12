@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 
 public class AddReceiptItemRecyclerViewAdapter extends RecyclerView.Adapter<AddReceiptItemRecyclerViewAdapter.RecyclerViewHolder> {
@@ -20,10 +21,10 @@ public class AddReceiptItemRecyclerViewAdapter extends RecyclerView.Adapter<AddR
 
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        TextView additionDateItemAmount;
+        TextView itemName;
         private RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            additionDateItemAmount = itemView.findViewById(R.id.textViewAdditionDateItemAmount);
+            itemName = itemView.findViewById(R.id.textViewItemName);
         }
     }
 
@@ -40,8 +41,13 @@ public class AddReceiptItemRecyclerViewAdapter extends RecyclerView.Adapter<AddR
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         if (position == receipt.getReceiptItems().size()) {
+            holder.itemView.setOnClickListener(view -> {
+                receipt.getReceiptItems().add(new GroceryItem("Item"));
+                notifyDataSetChanged();
+            });
             return;
         }
+        holder.itemName.setText(receipt.getReceiptItems().get(position).getName());
     }
 
     @Override

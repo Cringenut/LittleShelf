@@ -77,6 +77,18 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         Button btnRemoveItem = v.findViewById(R.id.btnRemoveItem);
         btnRemoveItem.setOnClickListener(btnRemove -> {
             ((GroceriesActivity) context).getGroceriesListDataBaseHelper().deleteOne(groceryItem);
+
+            GroceriesRecyclerViewAdapter adapter = (GroceriesRecyclerViewAdapter) recyclerView.getAdapter();
+            adapter.deselectGroceryItem();
+
+            // Remove grocery item from all lists
+            int removedItemPosition = adapter.getSortedGroceryItems().indexOf(groceryItem);
+            adapter.getFilteredGroceryItems().remove(groceryItem); // Calling notify to update list
+            adapter.getAllGroceryItems().remove(groceryItem);
+            adapter.getSortedGroceryItems().remove(groceryItem);
+
+            adapter.notifyItemRemoved(removedItemPosition); // Deleting item from adapter
+            adapter.notifyItemRangeChanged(removedItemPosition, adapter.getFilteredGroceryItems().size());
         });
 
         btnRemoveItem.setVisibility(View.VISIBLE);
@@ -100,13 +112,6 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         return currentFilter;
     }
 
-    // Create grocery item fragment for recycler view
-    @NonNull
-    @Override
-    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.main_fragment_grocery_item, parent, false));
-    }
-
     public ArrayList<GroceryItem> getSortedGroceryItems() {
         return sortedGroceryItems;
     }
@@ -117,6 +122,13 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     public void setCurrentSort(SortTypesEnum currentSort) {
         this.currentSort = currentSort;
+    }
+
+    // Create grocery item fragment for recycler view
+    @NonNull
+    @Override
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.main_fragment_grocery_item, parent, false));
     }
 
     protected class RecyclerViewHolder extends RecyclerView.ViewHolder {

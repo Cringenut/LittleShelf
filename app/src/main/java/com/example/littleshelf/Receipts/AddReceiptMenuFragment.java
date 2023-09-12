@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.littleshelf.Main.Databases.GroceriesDataBaseHelper;
+import com.example.littleshelf.Main.GroceryItem.GroceryItem;
 import com.example.littleshelf.R;
 
 public class AddReceiptMenuFragment extends Fragment {
@@ -45,6 +47,9 @@ public class AddReceiptMenuFragment extends Fragment {
         parentActivity.getReceiptsRecyclerViewAdapter().receipts.add(this.receipt);
         parentActivity.getReceiptsRecyclerViewAdapter().notifyDataSetChanged();
 
+        for (GroceryItem item : receipt.getReceiptItems()) {
+            //(new GroceriesDataBaseHelper(getContext())).addOne(item);
+        }
 
         /* TEST */
         parentActivity.getSupportFragmentManager().
