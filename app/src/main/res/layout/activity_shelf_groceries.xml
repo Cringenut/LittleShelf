@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/material_dynamic_neutral_variant60"
-    tools:context=".ShelfGroceriesActivity"
+    tools:context=".ShelfGroceriesViewActivity"
     android:orientation="vertical">
 
     <include layout="@layout/default_top_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/GroceriesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
