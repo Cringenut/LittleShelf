@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class GroceriesListActivity extends AppCompatActivity {
+public class ShelfGroceriesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_groceries_list);
+        setContentView(R.layout.activity_shelf_groceries);
     }
 }
