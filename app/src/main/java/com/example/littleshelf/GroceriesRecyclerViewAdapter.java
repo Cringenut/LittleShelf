@@ -21,7 +21,9 @@ class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
 
 public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewHolder> {
 
-    List<Grocery> testList = Arrays.asList(new Grocery[]{new Grocery.GroceryBuilder().build(), new Grocery.GroceryBuilder().build()});
+    List<Grocery> testList = Arrays.asList(new Grocery[]{new Grocery.GroceryBuilder("Grocery")
+            .build(), new Grocery.GroceryBuilder("Grocery")
+            .build()});
 
     public GroceriesRecyclerViewAdapter(Context context) {
         this.context = context;
