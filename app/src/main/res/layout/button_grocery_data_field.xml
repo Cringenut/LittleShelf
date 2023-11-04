@@ -4,6 +4,8 @@
     android:id="@+id/btnField"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_48sdp"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_8sdp"
     android:background="@drawable/style_rounded_corners_grocery_add_field"
     android:orientation="horizontal" >
 

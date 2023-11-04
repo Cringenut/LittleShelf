@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/darker_gray"
     tools:context=".AddGroceryMenuFragment">
 
     <include layout="@layout/back_button_top_bar" />
 
-    <!-- TODO: Update blank fragment layout -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_8sdp" />
 
-</FrameLayout>
+    <include layout="@layout/button_grocery_data_field" />
+
+</LinearLayout>

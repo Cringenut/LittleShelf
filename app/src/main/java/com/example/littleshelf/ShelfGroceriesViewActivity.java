@@ -43,7 +43,6 @@ public class ShelfGroceriesViewActivity extends LittleShelfActivity {
         btnAddGroceryMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction
