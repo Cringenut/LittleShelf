@@ -1,6 +1,6 @@
 package com.example.littleshelf;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,13 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class ShelfGroceriesViewActivity extends AppCompatActivity {
+public class ShelfGroceriesViewActivity extends LittleShelfActivity {
 
     Button btnAddGroceryMenu;
     ViewGroup rootView;
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            if (count == 1) {
+                showRootElements();
+            }
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +43,30 @@ public class ShelfGroceriesViewActivity extends AppCompatActivity {
         btnAddGroceryMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < rootView.getChildCount(); i++) {
-                    rootView.getChildAt(i)
-                            .setVisibility(View.GONE);
-                }
+
+                AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction
+                        .replace(rootView.getId(), addGroceryMenuFragment)
+                        .addToBackStack("Menu")
+                        .commit();
+
+                hideRootElements();
             }
         });
+    }
 
+    private void hideRootElements() {
+        for (int i = 0; i < rootView.getChildCount(); i++) {
+            rootView.getChildAt(i)
+                    .setVisibility(View.GONE);
+        }
+    }
 
+    private void showRootElements() {
+        for (int i = 0; i < rootView.getChildCount(); i++) {
+            rootView.getChildAt(i)
+                    .setVisibility(View.VISIBLE);
+        }
     }
 }
