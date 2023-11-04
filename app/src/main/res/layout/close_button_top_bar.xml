@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     android:id="@+id/topBar">
 
-
     <Space
         android:layout_width="@dimen/_12sdp"
         android:layout_height="match_parent"
