@@ -4,17 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/darker_gray"
-    tools:context=".AddGroceryMenuFragment">
+    tools:context=".PickGroceryNameFragment">
 
     <include layout="@layout/back_button_top_bar" />
 
-    <Space
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_8sdp" />
-
-    <include
-        android:id="@+id/btnNameField"
-        layout="@layout/button_grocery_data_field" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
+

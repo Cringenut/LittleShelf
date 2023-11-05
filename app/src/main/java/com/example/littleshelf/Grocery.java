@@ -5,7 +5,7 @@ public class Grocery {
     private String name;
 
     Grocery(GroceryBuilder builder) {
-
+        this.name = builder.name;
     }
 
     public static class GroceryBuilder {
