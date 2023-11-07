@@ -9,24 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class ShelfGroceriesViewActivity extends LittleShelfActivity {
+public class ShelfGroceriesViewActivity extends BaseActivity {
 
     Button btnAddGroceryMenu;
     ViewGroup rootView;
-
-    @Override
-    public void onBackPressed() {
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-
-        if (count == 0) {
-            super.onBackPressed();
-        } else {
-            if (count == 1) {
-                showRootElements();
-            }
-            getSupportFragmentManager().popBackStack();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +39,20 @@ public class ShelfGroceriesViewActivity extends LittleShelfActivity {
                 hideRootElements();
             }
         });
+    }
+
+    @Override
+    protected void handleOnBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            this.finish();
+        } else {
+            if (count == 1) {
+                showRootElements();
+            }
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     private void hideRootElements() {
