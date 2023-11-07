@@ -9,35 +9,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
+
 public class ShelfGroceriesViewActivity extends BaseActivity {
 
-    Button btnAddGroceryMenu;
-    ViewGroup rootView;
-
+    private ActivityShelfGroceriesBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shelf_groceries);
+        binding = ActivityShelfGroceriesBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        rootView = findViewById(R.id.root);
 
-        RecyclerView recyclerView = findViewById(R.id.GroceriesRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new GroceriesRecyclerViewAdapter(this));
+        binding.GroceriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.GroceriesRecyclerView.setAdapter(new GroceriesRecyclerViewAdapter(this));
 
-        btnAddGroceryMenu = findViewById(R.id.btnAddGroceryMenu);
-        btnAddGroceryMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction
-                        .replace(rootView.getId(), addGroceryMenuFragment)
-                        .addToBackStack("Menu")
-                        .commit();
+        binding.btnAddGroceryMenu.setOnClickListener(v -> {
+            AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction
+                    .replace(binding.rootLayout.getId(), addGroceryMenuFragment)
+                    .addToBackStack("Menu")
+                    .commit();
 
-                hideRootElements();
-            }
+            hideRootElements();
         });
     }
 
@@ -56,15 +52,15 @@ public class ShelfGroceriesViewActivity extends BaseActivity {
     }
 
     private void hideRootElements() {
-        for (int i = 0; i < rootView.getChildCount(); i++) {
-            rootView.getChildAt(i)
+        for (int i = 0; i < binding.rootLayout.getChildCount(); i++) {
+            binding.rootLayout.getChildAt(i)
                     .setVisibility(View.GONE);
         }
     }
 
     private void showRootElements() {
-        for (int i = 0; i < rootView.getChildCount(); i++) {
-            rootView.getChildAt(i)
+        for (int i = 0; i < binding.rootLayout.getChildCount(); i++) {
+            binding.rootLayout.getChildAt(i)
                     .setVisibility(View.VISIBLE);
         }
     }
