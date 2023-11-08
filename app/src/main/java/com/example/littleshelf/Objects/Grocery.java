@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Objects;
 
 public class Grocery {
 
@@ -11,7 +11,7 @@ public class Grocery {
     public static class GroceryBuilder {
         private String name;
 
-        GroceryBuilder(String name) {
+        public GroceryBuilder(String name) {
             this.name = name;
         }
         

@@ -1,14 +1,10 @@
-package com.example.littleshelf;
+package com.example.littleshelf.ShelfGroceriesActivity;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
 import com.example.littleshelf.databinding.FragmentPickGroceryNameBinding;
 
 public class PickGroceryNameFragment extends Fragment {

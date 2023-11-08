@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.ShelfGroceriesActivity;
 
 import android.os.Bundle;
 

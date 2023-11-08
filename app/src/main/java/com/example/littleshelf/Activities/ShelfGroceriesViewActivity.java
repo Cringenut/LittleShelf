@@ -1,14 +1,14 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Activities;
 
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
+import com.example.littleshelf.Activities.Base.BaseActivity;
+import com.example.littleshelf.ShelfGroceriesActivity.AddGroceryMenuFragment;
+import com.example.littleshelf.ShelfGroceriesActivity.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
 public class ShelfGroceriesViewActivity extends BaseActivity {
@@ -23,7 +23,7 @@ public class ShelfGroceriesViewActivity extends BaseActivity {
 
 
         binding.GroceriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.GroceriesRecyclerView.setAdapter(new GroceriesRecyclerViewAdapter(this));
+        binding.GroceriesRecyclerView.setAdapter(new GroceriesRecyclerViewAdapter());
 
         binding.btnAddGroceryMenu.setOnClickListener(v -> {
             AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();

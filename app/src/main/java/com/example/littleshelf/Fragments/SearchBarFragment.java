@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.littleshelf.R;
 
 public class SearchBarFragment extends Fragment {
     @Override
