@@ -8,11 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
+import com.example.littleshelf.databinding.FragmentPickGroceryNameBinding;
+
 public class PickGroceryNameFragment extends Fragment {
+    private FragmentPickGroceryNameBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pick_grocery_name, container, false);
+        binding = FragmentPickGroceryNameBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        return view;
     }
 }

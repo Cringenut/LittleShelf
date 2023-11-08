@@ -26,8 +26,15 @@ public class AddGroceryMenuFragment extends Fragment {
         View view = binding.getRoot();
 
         dataFieldBinding = ButtonGroceryDataFieldBinding.bind(binding.btnNameField.getRoot());
-        dataFieldBinding.textFieldValue.setText("65");
-        dataFieldBinding.textFieldName.setText("Grocery:");
+        dataFieldBinding.textFieldValue.setText("Grocery:");
+        dataFieldBinding.textFieldName.setText("Name:");
+
+        binding.btnNameField.btnField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
