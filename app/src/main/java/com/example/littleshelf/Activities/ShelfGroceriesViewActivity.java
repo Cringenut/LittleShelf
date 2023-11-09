@@ -1,15 +1,20 @@
 package com.example.littleshelf.Activities;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.littleshelf.Activities.Base.BaseActivity;
+import com.example.littleshelf.R;
 import com.example.littleshelf.ShelfGroceriesActivity.AddGroceryMenuFragment;
 import com.example.littleshelf.ShelfGroceriesActivity.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
+
+import java.util.Objects;
 
 public class ShelfGroceriesViewActivity extends BaseActivity {
 
@@ -21,9 +26,7 @@ public class ShelfGroceriesViewActivity extends BaseActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
-        binding.GroceriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.GroceriesRecyclerView.setAdapter(new GroceriesRecyclerViewAdapter());
+        initRecyclerView();
 
         binding.btnAddGroceryMenu.setOnClickListener(v -> {
             AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
@@ -35,6 +38,18 @@ public class ShelfGroceriesViewActivity extends BaseActivity {
 
             hideRootElements();
         });
+    }
+
+    private void initRecyclerView() {
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GroceriesRecyclerViewAdapter adapter = new GroceriesRecyclerViewAdapter();
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.divider_line)));
+
+        binding.GroceriesRecyclerView.setLayoutManager(layoutManager);
+        binding.GroceriesRecyclerView.setAdapter(adapter);
+        binding.GroceriesRecyclerView.addItemDecoration(decoration);
     }
 
     @Override

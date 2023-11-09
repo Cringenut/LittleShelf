@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.Objects.Grocery;
-import com.example.littleshelf.databinding.GroceryItemViewBinding;
+import com.example.littleshelf.databinding.ViewGroceryBinding;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +25,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     @NonNull
     @Override
     public GroceriesRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new GroceriesRecyclerViewHolder(GroceryItemViewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new GroceriesRecyclerViewHolder(ViewGroceryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
         // Variables from grocery item view
-        public GroceriesRecyclerViewHolder(@NonNull GroceryItemViewBinding binding) {
+        public GroceriesRecyclerViewHolder(@NonNull ViewGroceryBinding binding) {
             super(binding.getRoot());
         }
     }
