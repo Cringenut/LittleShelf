@@ -4,8 +4,16 @@ public class Grocery {
 
     private String name;
 
-    Grocery(GroceryBuilder builder) {
+    public Grocery(GroceryBuilder builder) {
         this.name = builder.name;
+    }
+
+    public String getGroceryName() {
+        return name;
+    }
+
+    public void setGroceryName(String name) {
+        this.name = name;
     }
 
     public static class GroceryBuilder {
