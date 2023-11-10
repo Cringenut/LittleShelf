@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.littleshelf.databinding.FragmentPickGroceryNameBinding;
 
-public class PickGroceryNameFragment extends Fragment {
+public class SelectGroceryNameFragment extends Fragment {
     private FragmentPickGroceryNameBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -1,4 +1,4 @@
-package com.example.littleshelf;
+package com.example.littleshelf.Models;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -11,7 +11,7 @@ public class AddGroceryMenuModel {
     private Grocery newGrocery;
     private MutableLiveData<String> groceryName;
 
-    private void AddGroceryMenuViewModel() {
+    public AddGroceryMenuModel() {
         this.newGrocery = new Grocery.GroceryBuilder("Test").build();
         this.groceryName = new MutableLiveData<>(newGrocery.getGroceryName());
     }

@@ -16,7 +16,7 @@ import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
 import java.util.Objects;
 
-public class ShelfGroceriesViewActivity extends BaseActivity {
+public class ShelfGroceriesActivity extends BaseActivity {
 
     private ActivityShelfGroceriesBinding binding;
     @Override

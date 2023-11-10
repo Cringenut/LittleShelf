@@ -1,8 +1,10 @@
-package com.example.littleshelf;
+package com.example.littleshelf.ViewModels;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.littleshelf.Models.AddGroceryMenuModel;
 
 public class AddGroceryMenuViewModel extends ViewModel {
     private final AddGroceryMenuModel model;

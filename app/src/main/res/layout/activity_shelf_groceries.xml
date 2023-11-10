@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/material_dynamic_neutral_variant60"
     android:id="@+id/rootLayout"
-    tools:context=".Activities.ShelfGroceriesViewActivity"
+    tools:context=".Activities.ShelfGroceriesActivity"
     android:orientation="vertical">
 
     <include layout="@layout/default_top_bar" />
