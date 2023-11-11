@@ -17,8 +17,6 @@ import java.util.List;
 public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.GroceriesRecyclerViewHolder> {
 
     List<Grocery> testList = Arrays.asList(
-            new Grocery.GroceryBuilder("Grocery")
-            .build(),
             new Grocery.GroceryBuilder("NewGrocery")
             .build());
 

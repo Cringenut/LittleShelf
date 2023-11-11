@@ -17,7 +17,7 @@ public class Grocery {
     }
 
     public static class GroceryBuilder {
-        private String name;
+        private final String name;
 
         public GroceryBuilder(String name) {
             this.name = name;

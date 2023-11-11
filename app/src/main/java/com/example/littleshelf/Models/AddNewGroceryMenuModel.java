@@ -16,7 +16,7 @@ public class AddNewGroceryMenuModel {
     private final ArrayList<String> suggestions = new ArrayList<>();
 
     public AddNewGroceryMenuModel() {
-        this.newGrocery = new Grocery.GroceryBuilder("Grocery").build();
+        this.newGrocery = new Grocery.GroceryBuilder("Test").build();
         this.groceryName = new MutableLiveData<>(newGrocery.getGroceryName());
     }
 

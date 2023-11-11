@@ -6,11 +6,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littleshelf.Models.AddNewGroceryMenuModel;
 import com.example.littleshelf.ViewModels.AddNewGroceryMenuViewModel;
 import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
-public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<SuggestionsRecyclerViewAdapter.GroceriesRecyclerViewHolder> {
+public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<SuggestionsRecyclerViewAdapter.SuggestionsRecyclerViewHolder> {
 
     private AddNewGroceryMenuViewModel addNewGroceryMenuViewModel;
 
@@ -20,12 +19,12 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
 
     @NonNull
     @Override
-    public GroceriesRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new GroceriesRecyclerViewHolder(ViewGroceryNameBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    public SuggestionsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new SuggestionsRecyclerViewHolder(ViewGroceryNameBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SuggestionsRecyclerViewHolder holder, int position) {
         ViewGroceryNameBinding binding = holder.binding;
         binding.textViewSuggestion.setText(addNewGroceryMenuViewModel.getSuggestions().get(position));
     }
@@ -35,11 +34,11 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
         return addNewGroceryMenuViewModel.getSuggestions().size();
     }
 
-    static class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
+    static class SuggestionsRecyclerViewHolder extends RecyclerView.ViewHolder {
         // Variables from grocery item view
         ViewGroceryNameBinding binding;
 
-        public GroceriesRecyclerViewHolder(@NonNull ViewGroceryNameBinding binding) {
+        public SuggestionsRecyclerViewHolder(@NonNull ViewGroceryNameBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

@@ -33,11 +33,11 @@ public class ShelfGroceriesActivity extends BaseActivity {
             AddNewGroceryMenuFragment addNewGroceryMenuFragment = new AddNewGroceryMenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .replace(binding.rootLayout.getId(), addNewGroceryMenuFragment)
+                    .replace(binding.getRoot().getId(), addNewGroceryMenuFragment)
                     .addToBackStack("Menu")
                     .commit();
 
-            ViewUtils.disableViewGroup(binding.getRoot());
+            ViewUtils.disableChildren(binding);
         });
     }
 
@@ -61,7 +61,7 @@ public class ShelfGroceriesActivity extends BaseActivity {
             this.finish();
         } else {
             if (count == 1) {
-                ViewUtils.enableViewGroup(binding.getRoot());
+                ViewUtils.enableChildren(binding);
             }
             getSupportFragmentManager().popBackStack();
         }

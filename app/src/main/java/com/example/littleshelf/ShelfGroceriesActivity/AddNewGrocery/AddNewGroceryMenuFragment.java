@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.ViewModels.AddNewGroceryMenuViewModel;
 import com.example.littleshelf.databinding.ButtonGroceryDataFieldBinding;
 import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
 
-public class AddNewGroceryMenuFragment extends Fragment implements ISetChildrenClickability {
+public class AddNewGroceryMenuFragment extends Fragment {
     private FragmentAddGroceryMenuBinding binding;
     private ButtonGroceryDataFieldBinding nameFieldBinding;
 
@@ -28,6 +29,7 @@ public class AddNewGroceryMenuFragment extends Fragment implements ISetChildrenC
                              Bundle savedInstanceState) {
         binding = FragmentAddGroceryMenuBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        ViewUtils.enableChildren(binding);
 
         nameFieldBinding = ButtonGroceryDataFieldBinding.bind(binding.btnNameField.getRoot());
         initNameField();
@@ -44,15 +46,15 @@ public class AddNewGroceryMenuFragment extends Fragment implements ISetChildrenC
             public void onClick(View view) {
                 SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
                 selectGroceryNameFragment.setAddNewGroceryMenuViewModel(addNewGroceryMenuViewModel);
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(android.R.id.content, selectGroceryNameFragment)
+                FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+                fragmentTransaction.replace(binding.getRoot().getId(), selectGroceryNameFragment)
                         .addToBackStack("SelectName")
                         .commit();
-                ViewUtils.enableViewGroup(binding.getRoot());
+                ViewUtils.disableChildren(binding);
             }
         });
 
-        getParentFragmentManager().addOnBackStackChangedListener(() -> ViewUtils.disableViewGroup(binding.getRoot()));
+        getParentFragmentManager().addOnBackStackChangedListener(() -> ViewUtils.enableChildren(binding));
 
         return view;
     }
@@ -60,9 +62,5 @@ public class AddNewGroceryMenuFragment extends Fragment implements ISetChildrenC
     private void initNameField() {
         nameFieldBinding.textFieldValue.setText(addNewGroceryMenuViewModel.getGroceryName().getValue());
         nameFieldBinding.textFieldName.setText("Name:");
-    }
-
-    public AddNewGroceryMenuViewModel getAddNewGroceryMenuViewModel() {
-        return addNewGroceryMenuViewModel;
     }
 }

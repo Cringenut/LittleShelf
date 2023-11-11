@@ -3,28 +3,48 @@ package com.example.littleshelf.Objects;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.viewbinding.ViewBinding;
+
 public class ViewUtils {
 
-    public static void disableViewGroup(ViewGroup viewGroup) {
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            View child = viewGroup.getChildAt(i);
-            child.setEnabled(false);
-            if (child instanceof ViewGroup) {
-                disableViewGroup((ViewGroup) child);
-            }
+    public static void disableChildren(ViewBinding binding) {
+        View rootView = binding.getRoot();
+        if (rootView instanceof ViewGroup) {
+            disableAllChildren((ViewGroup) rootView);
         }
-        viewGroup.setVisibility(View.GONE);
     }
 
-    public static void enableViewGroup(ViewGroup viewGroup) {
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+    private static void disableAllChildren(ViewGroup viewGroup) {
+        int childCount = viewGroup.getChildCount();
+        for (int i = 0; i < childCount; i++) {
             View child = viewGroup.getChildAt(i);
-            child.setEnabled(true);
+            child.setEnabled(false);
+            child.setClickable(false);
+            child.setVisibility(View.GONE);
             if (child instanceof ViewGroup) {
-                enableViewGroup((ViewGroup) child);
+                disableAllChildren((ViewGroup) child);
             }
         }
-        viewGroup.setVisibility(View.VISIBLE);
+    }
+
+    public static void enableChildren(ViewBinding binding) {
+        View rootView = binding.getRoot();
+        if (rootView instanceof ViewGroup) {
+            enableAllChildren((ViewGroup) rootView);
+        }
+    }
+
+    private static void enableAllChildren(ViewGroup viewGroup) {
+        int childCount = viewGroup.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View child = viewGroup.getChildAt(i);
+            child.setEnabled(true);
+            child.setClickable(true);
+            child.setVisibility(View.VISIBLE);
+            if (child instanceof ViewGroup) {
+                enableAllChildren((ViewGroup) child);
+            }
+        }
     }
 }
 
