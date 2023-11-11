@@ -35,7 +35,6 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
     }
 
     static class SuggestionsRecyclerViewHolder extends RecyclerView.ViewHolder {
-        // Variables from grocery item view
         ViewGroceryNameBinding binding;
 
         public SuggestionsRecyclerViewHolder(@NonNull ViewGroceryNameBinding binding) {

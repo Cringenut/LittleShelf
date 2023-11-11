@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.databinding.ViewGroceryBinding;
+import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +18,10 @@ import java.util.List;
 public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.GroceriesRecyclerViewHolder> {
 
     List<Grocery> testList = Arrays.asList(
+            new Grocery.GroceryBuilder("Grocery")
+                    .build(),
             new Grocery.GroceryBuilder("NewGrocery")
-            .build());
+                    .build());
 
     @NonNull
     @Override
@@ -28,7 +31,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     @Override
     public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
-
+        holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName());
     }
 
     @Override
@@ -38,8 +41,10 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     static class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
         // Variables from grocery item view
+        ViewGroceryBinding binding;
         public GroceriesRecyclerViewHolder(@NonNull ViewGroceryBinding binding) {
             super(binding.getRoot());
+            this.binding = binding;
         }
     }
 

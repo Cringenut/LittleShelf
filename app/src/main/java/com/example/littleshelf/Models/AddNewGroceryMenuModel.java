@@ -30,6 +30,7 @@ public class AddNewGroceryMenuModel {
     }
 
     public List<String> makeSuggestions() {
+        suggestions.clear();
         suggestions.add(newGrocery.getGroceryName());
         return suggestions;
     }

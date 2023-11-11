@@ -6,11 +6,7 @@
     android:orientation="vertical"
     tools:context=".ShelfGroceriesActivity.AddNewGrocery.SelectGroceryNameFragment">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_32sdp">
-
-    </FrameLayout>
+    <include layout="@layout/back_button_top_bar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,7 +17,8 @@
         android:id="@+id/suggestionsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:overScrollMode="never"/>
 
 </LinearLayout>
 
