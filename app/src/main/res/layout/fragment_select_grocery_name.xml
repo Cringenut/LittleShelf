@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShelfGroceriesActivity.SelectGroceryNameFragment">
+    tools:context=".ShelfGroceriesActivity.AddNewGrocery.SelectGroceryNameFragment">
 
     <include layout="@layout/back_button_top_bar" />
 
@@ -18,8 +18,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/suggestionsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/white" />
 
 </LinearLayout>
 

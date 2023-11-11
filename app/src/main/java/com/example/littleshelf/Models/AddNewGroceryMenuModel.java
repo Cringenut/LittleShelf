@@ -6,13 +6,17 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.littleshelf.Objects.Grocery;
 
-public class AddGroceryMenuModel {
+import java.util.ArrayList;
+import java.util.List;
+
+public class AddNewGroceryMenuModel {
 
     private Grocery newGrocery;
     private MutableLiveData<String> groceryName;
+    private final ArrayList<String> suggestions = new ArrayList<>();
 
-    public AddGroceryMenuModel() {
-        this.newGrocery = new Grocery.GroceryBuilder("Test").build();
+    public AddNewGroceryMenuModel() {
+        this.newGrocery = new Grocery.GroceryBuilder("Grocery").build();
         this.groceryName = new MutableLiveData<>(newGrocery.getGroceryName());
     }
 
@@ -24,4 +28,11 @@ public class AddGroceryMenuModel {
     public LiveData<String> getName() {
         return groceryName;
     }
+
+    public List<String> makeSuggestions() {
+        suggestions.add(newGrocery.getGroceryName());
+        return suggestions;
+    }
+
+
 }

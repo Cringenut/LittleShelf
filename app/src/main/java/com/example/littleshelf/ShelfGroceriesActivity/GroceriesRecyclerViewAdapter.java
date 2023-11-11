@@ -38,7 +38,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         return testList.size();
     }
 
-    class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
+    static class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
         // Variables from grocery item view
         public GroceriesRecyclerViewHolder(@NonNull ViewGroceryBinding binding) {
             super(binding.getRoot());

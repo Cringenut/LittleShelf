@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.littleshelf.Activities.Base.BaseActivity;
+import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
-import com.example.littleshelf.ShelfGroceriesActivity.AddGroceryMenuFragment;
+import com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery.AddNewGroceryMenuFragment;
 import com.example.littleshelf.ShelfGroceriesActivity.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
@@ -29,14 +30,14 @@ public class ShelfGroceriesActivity extends BaseActivity {
         initRecyclerView();
 
         binding.btnAddGroceryMenu.setOnClickListener(v -> {
-            AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
+            AddNewGroceryMenuFragment addNewGroceryMenuFragment = new AddNewGroceryMenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .replace(binding.rootLayout.getId(), addGroceryMenuFragment)
+                    .replace(binding.rootLayout.getId(), addNewGroceryMenuFragment)
                     .addToBackStack("Menu")
                     .commit();
 
-            hideRootElements();
+            ViewUtils.disableViewGroup(binding.getRoot());
         });
     }
 
@@ -47,9 +48,9 @@ public class ShelfGroceriesActivity extends BaseActivity {
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         decoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.divider_line)));
 
-        binding.GroceriesRecyclerView.setLayoutManager(layoutManager);
-        binding.GroceriesRecyclerView.setAdapter(adapter);
-        binding.GroceriesRecyclerView.addItemDecoration(decoration);
+        binding.groceriesRecyclerView.setLayoutManager(layoutManager);
+        binding.groceriesRecyclerView.setAdapter(adapter);
+        binding.groceriesRecyclerView.addItemDecoration(decoration);
     }
 
     @Override
@@ -60,23 +61,9 @@ public class ShelfGroceriesActivity extends BaseActivity {
             this.finish();
         } else {
             if (count == 1) {
-                showRootElements();
+                ViewUtils.enableViewGroup(binding.getRoot());
             }
             getSupportFragmentManager().popBackStack();
-        }
-    }
-
-    private void hideRootElements() {
-        for (int i = 0; i < binding.rootLayout.getChildCount(); i++) {
-            binding.rootLayout.getChildAt(i)
-                    .setVisibility(View.GONE);
-        }
-    }
-
-    private void showRootElements() {
-        for (int i = 0; i < binding.rootLayout.getChildCount(); i++) {
-            binding.rootLayout.getChildAt(i)
-                    .setVisibility(View.VISIBLE);
         }
     }
 }
