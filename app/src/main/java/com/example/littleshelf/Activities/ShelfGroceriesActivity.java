@@ -58,7 +58,7 @@ public class ShelfGroceriesActivity extends BaseActivity {
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            this.finish();
+            super.finish();
         } else {
             if (count == 1) {
                 ViewUtils.enableChildren(binding);

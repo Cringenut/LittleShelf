@@ -11,7 +11,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /* enabled by default */
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -23,5 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    protected abstract void handleOnBackPressed();
+    protected void handleOnBackPressed() {
+        System.out.println("handle");
+    }
 }

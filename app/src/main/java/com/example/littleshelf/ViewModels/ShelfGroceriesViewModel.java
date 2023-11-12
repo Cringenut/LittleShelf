@@ -4,15 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.littleshelf.Models.AddNewGroceryMenuModel;
+import com.example.littleshelf.Repositories.AddNewGroceryMenuRepository;
 
 import java.util.List;
 
-public class AddNewGroceryMenuViewModel extends ViewModel {
-    private final AddNewGroceryMenuModel model;
+public class ShelfGroceriesViewModel extends ViewModel {
+    private final AddNewGroceryMenuRepository model;
 
-    public AddNewGroceryMenuViewModel() {
-        this.model = new AddNewGroceryMenuModel();
+    public ShelfGroceriesViewModel() {
+        this.model = new AddNewGroceryMenuRepository();
     }
 
     public LiveData<String> getGroceryName() {

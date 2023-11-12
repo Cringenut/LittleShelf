@@ -1,4 +1,4 @@
-package com.example.littleshelf.Models;
+package com.example.littleshelf.Repositories;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -9,13 +9,12 @@ import com.example.littleshelf.Objects.Grocery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddNewGroceryMenuModel {
-
-    private Grocery newGrocery;
+public class AddNewGroceryMenuRepository {
+    private final Grocery newGrocery;
     private MutableLiveData<String> groceryName;
     private final ArrayList<String> suggestions = new ArrayList<>();
 
-    public AddNewGroceryMenuModel() {
+    public AddNewGroceryMenuRepository() {
         this.newGrocery = new Grocery.GroceryBuilder("Test").build();
         this.groceryName = new MutableLiveData<>(newGrocery.getGroceryName());
     }
@@ -34,6 +33,4 @@ public class AddNewGroceryMenuModel {
         suggestions.add(newGrocery.getGroceryName());
         return suggestions;
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,7 +14,7 @@ import android.view.ViewGroup;
 
 
 import com.example.littleshelf.Objects.ViewUtils;
-import com.example.littleshelf.ViewModels.AddNewGroceryMenuViewModel;
+import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
 import com.example.littleshelf.databinding.ButtonGroceryDataFieldBinding;
 import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
 
@@ -21,15 +22,14 @@ public class AddNewGroceryMenuFragment extends Fragment {
     private FragmentAddGroceryMenuBinding binding;
     private ButtonGroceryDataFieldBinding nameFieldBinding;
 
-    private final AddNewGroceryMenuViewModel addNewGroceryMenuViewModel =
-            new AddNewGroceryMenuViewModel();
+    private final ShelfGroceriesViewModel addNewGroceryMenuViewModel =
+            new ShelfGroceriesViewModel();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAddGroceryMenuBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        ViewUtils.enableChildren(binding);
 
         nameFieldBinding = ButtonGroceryDataFieldBinding.bind(binding.btnNameField.getRoot());
         initNameField();
@@ -54,7 +54,20 @@ public class AddNewGroceryMenuFragment extends Fragment {
             }
         });
 
-        getParentFragmentManager().addOnBackStackChangedListener(() -> ViewUtils.enableChildren(binding));
+        OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                ViewUtils.enableChildren(binding);
+                System.out.println("CALL");
+                if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+                    getParentFragmentManager().popBackStack();
+                }
+            }
+        };
+        requireActivity()
+                .getOnBackPressedDispatcher()
+                .addCallback(getViewLifecycleOwner(), onBackPressedCallback);
+
 
         return view;
     }
