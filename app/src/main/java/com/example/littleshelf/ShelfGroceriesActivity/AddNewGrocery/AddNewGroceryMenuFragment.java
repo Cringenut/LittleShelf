@@ -41,20 +41,17 @@ public class AddNewGroceryMenuFragment extends Fragment {
             }
         });
 
-        binding.btnNameField.btnField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
-                selectGroceryNameFragment.setAddNewGroceryMenuViewModel(addNewGroceryMenuViewModel);
-                FragmentTransaction fragmentTransaction = requireActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction();
-                fragmentTransaction
-                        .add(binding.getRoot().getId(), selectGroceryNameFragment, "SelectName")
-                        .addToBackStack("SelectName")
-                        .commit();
-                ViewUtils.disableChildren(binding);
-            }
+        binding.btnNameField.btnField.setOnClickListener(v -> {
+            SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
+            selectGroceryNameFragment.setAddNewGroceryMenuViewModel(addNewGroceryMenuViewModel);
+            FragmentTransaction fragmentTransaction = requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction();
+            fragmentTransaction
+                    .add(binding.getRoot().getId(), selectGroceryNameFragment, "SelectName")
+                    .addToBackStack("SelectName")
+                    .commit();
+            ViewUtils.disableChildren(binding);
         });
 
         return view;
