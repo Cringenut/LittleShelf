@@ -36,7 +36,7 @@ public class ShelfGroceriesActivity extends BaseActivity {
             AddNewGroceryMenuFragment addNewGroceryMenuFragment = new AddNewGroceryMenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .add(binding.getRoot().getId(), addNewGroceryMenuFragment)
+                    .add(binding.getRoot().getId(), addNewGroceryMenuFragment, "Menu")
                     .addToBackStack("Menu")
                     .commit();
 
@@ -63,17 +63,23 @@ public class ShelfGroceriesActivity extends BaseActivity {
         if (count == 0) {
             super.finish();
         } else {
-            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
-            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
-            String tag = backEntry.getName();
-            Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+            if (count == 1) {
+                ViewUtils.enableChildren(binding);
+            }
+            else {
+                int index = getSupportFragmentManager().getBackStackEntryCount() - 2;
+                FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+                String tag = backEntry.getName();
+                Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
 
-            if (fragment != null) {
-                View fragmentView = fragment.getView();
-                if (fragmentView instanceof ViewGroup) {
-                    ViewGroup fragmentViewGroup = (ViewGroup) fragmentView;
-                    ViewUtils.enableChildren(fragmentViewGroup);
+                if (fragment != null) {
+                    View fragmentView = fragment.getView();
+                    if (fragmentView instanceof ViewGroup) {
+                        ViewGroup fragmentViewGroup = (ViewGroup) fragmentView;
+                        ViewUtils.enableChildren(fragmentViewGroup);
+                    }
                 }
+                System.out.println(fragment);
             }
 
             getSupportFragmentManager().popBackStack();

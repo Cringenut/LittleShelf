@@ -50,7 +50,7 @@ public class AddNewGroceryMenuFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction();
                 fragmentTransaction
-                        .add(binding.getRoot().getId(), selectGroceryNameFragment)
+                        .add(binding.getRoot().getId(), selectGroceryNameFragment, "SelectName")
                         .addToBackStack("SelectName")
                         .commit();
                 ViewUtils.disableChildren(binding);
