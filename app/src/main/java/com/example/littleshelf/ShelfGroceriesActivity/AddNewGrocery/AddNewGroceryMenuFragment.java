@@ -44,9 +44,7 @@ public class AddNewGroceryMenuFragment extends Fragment {
         binding.btnNameField.btnField.setOnClickListener(v -> {
             SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
             selectGroceryNameFragment.setAddNewGroceryMenuViewModel(addNewGroceryMenuViewModel);
-            FragmentTransaction fragmentTransaction = requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction();
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction
                     .add(binding.getRoot().getId(), selectGroceryNameFragment, "SelectName")
                     .addToBackStack("SelectName")

@@ -7,12 +7,6 @@
     android:orientation="vertical"
     tools:context=".ShelfGroceriesActivity.AddNewGrocery.SelectGroceryNameFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_140sdp"
-        android:text="TextView" />
-
     <include layout="@layout/back_button_top_bar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +15,7 @@
         android:background="@color/default_gray" >
 
         <include
+            android:id="@+id/searchBar"
             layout="@layout/view_search_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

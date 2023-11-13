@@ -9,12 +9,12 @@ import com.example.littleshelf.Objects.Grocery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddNewGroceryMenuRepository {
+public class AddNewGroceryRepository {
     private final Grocery newGrocery;
     private MutableLiveData<String> groceryName;
-    private final ArrayList<String> suggestions = new ArrayList<>();
+    private final MutableLiveData<List<String>>  suggestions = new MutableLiveData<>();
 
-    public AddNewGroceryMenuRepository() {
+    public AddNewGroceryRepository() {
         this.newGrocery = new Grocery.GroceryBuilder("Test").build();
         this.groceryName = new MutableLiveData<>(newGrocery.getGroceryName());
     }
@@ -28,9 +28,14 @@ public class AddNewGroceryMenuRepository {
         return groceryName;
     }
 
-    public List<String> makeSuggestions() {
-        suggestions.clear();
-        suggestions.add(newGrocery.getGroceryName());
+    public LiveData<List<String>> getSuggestions() {
         return suggestions;
+    }
+
+    public void changeSuggestions(CharSequence charSequence, int i, int i1, int i2) {
+        List<String> newSuggestions = new ArrayList<>();
+        newSuggestions.add(0, charSequence.toString());
+
+        suggestions.setValue(newSuggestions);
     }
 }

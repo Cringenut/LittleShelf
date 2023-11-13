@@ -11,7 +11,7 @@ import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
 public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<SuggestionsRecyclerViewAdapter.SuggestionsRecyclerViewHolder> {
 
-    private ShelfGroceriesViewModel addNewGroceryMenuViewModel;
+    private final ShelfGroceriesViewModel addNewGroceryMenuViewModel;
 
     public SuggestionsRecyclerViewAdapter(ShelfGroceriesViewModel addNewGroceryMenuViewModel) {
         this.addNewGroceryMenuViewModel = addNewGroceryMenuViewModel;
@@ -26,12 +26,12 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
     @Override
     public void onBindViewHolder(@NonNull SuggestionsRecyclerViewHolder holder, int position) {
         ViewGroceryNameBinding binding = holder.binding;
-        binding.textViewSuggestion.setText(addNewGroceryMenuViewModel.getSuggestions().get(position));
+        binding.textViewSuggestion.setText(addNewGroceryMenuViewModel.getSuggestions().getValue().get(0));
     }
 
     @Override
     public int getItemCount() {
-        return addNewGroceryMenuViewModel.getSuggestions().size();
+        return addNewGroceryMenuViewModel.getSuggestions().getValue().size();
     }
 
     static class SuggestionsRecyclerViewHolder extends RecyclerView.ViewHolder {
