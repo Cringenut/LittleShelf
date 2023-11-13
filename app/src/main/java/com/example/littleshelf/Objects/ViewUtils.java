@@ -5,13 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.viewbinding.ViewBinding;
 
 import com.example.littleshelf.Activities.Base.BaseActivity;
 
 public class ViewUtils {
 
-    public static void disableChildren(ViewBinding binding) {
+    public static void disableChildren(@NonNull ViewBinding binding) {
         View rootView = binding.getRoot();
         if (rootView instanceof ViewGroup) {
             disableAllChildren((ViewGroup) rootView);
@@ -31,11 +32,15 @@ public class ViewUtils {
         }
     }
 
-    public static void enableChildren(ViewBinding binding) {
+    public static void enableChildren(@NonNull ViewBinding binding) {
         View rootView = binding.getRoot();
         if (rootView instanceof ViewGroup) {
             enableAllChildren((ViewGroup) rootView);
         }
+    }
+
+    public static void enableChildren(@NonNull ViewGroup viewGroup) {
+        enableAllChildren(viewGroup);
     }
 
     private static void enableAllChildren(ViewGroup viewGroup) {

@@ -1,12 +1,15 @@
 package com.example.littleshelf.Activities;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.littleshelf.Activities.Base.BaseActivity;
 import com.example.littleshelf.Objects.ViewUtils;
@@ -33,7 +36,7 @@ public class ShelfGroceriesActivity extends BaseActivity {
             AddNewGroceryMenuFragment addNewGroceryMenuFragment = new AddNewGroceryMenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .replace(binding.getRoot().getId(), addNewGroceryMenuFragment)
+                    .add(binding.getRoot().getId(), addNewGroceryMenuFragment)
                     .addToBackStack("Menu")
                     .commit();
 
@@ -60,9 +63,19 @@ public class ShelfGroceriesActivity extends BaseActivity {
         if (count == 0) {
             super.finish();
         } else {
-            if (count == 1) {
-                ViewUtils.enableChildren(binding);
+            int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+            String tag = backEntry.getName();
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+
+            if (fragment != null) {
+                View fragmentView = fragment.getView();
+                if (fragmentView instanceof ViewGroup) {
+                    ViewGroup fragmentViewGroup = (ViewGroup) fragmentView;
+                    ViewUtils.enableChildren(fragmentViewGroup);
+                }
             }
+
             getSupportFragmentManager().popBackStack();
         }
     }
