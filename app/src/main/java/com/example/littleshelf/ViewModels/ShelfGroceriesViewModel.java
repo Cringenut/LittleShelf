@@ -4,15 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.littleshelf.Repositories.AddNewGroceryRepository;
+import com.example.littleshelf.Repositories.NewGroceryNameSuggestionsRepository;
 
 import java.util.List;
 
 public class ShelfGroceriesViewModel extends ViewModel {
-    private final AddNewGroceryRepository repository;
+    private final NewGroceryNameSuggestionsRepository repository;
 
     public ShelfGroceriesViewModel() {
-        this.repository = new AddNewGroceryRepository();
+        this.repository = new NewGroceryNameSuggestionsRepository();
     }
 
     public LiveData<String> getGroceryName() {
