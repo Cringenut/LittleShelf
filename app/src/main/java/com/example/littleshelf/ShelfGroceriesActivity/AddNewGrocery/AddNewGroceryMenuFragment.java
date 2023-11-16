@@ -2,7 +2,6 @@ package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 
 
 import com.example.littleshelf.Objects.ViewUtils;
-import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
+import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.ButtonGroceryDataFieldBinding;
 import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
 
@@ -22,8 +21,8 @@ public class AddNewGroceryMenuFragment extends Fragment {
     private FragmentAddGroceryMenuBinding binding;
     private ButtonGroceryDataFieldBinding nameFieldBinding;
 
-    private final ShelfGroceriesViewModel addNewGroceryMenuViewModel =
-            new ShelfGroceriesViewModel();
+    private final AddNewGroceryViewModel addNewGroceryMenuViewModel =
+            new AddNewGroceryViewModel();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

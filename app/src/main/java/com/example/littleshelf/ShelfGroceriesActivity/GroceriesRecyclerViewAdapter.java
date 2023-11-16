@@ -31,7 +31,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     @Override
     public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
-        holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName());
+        holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName().getValue());
     }
 
     @Override

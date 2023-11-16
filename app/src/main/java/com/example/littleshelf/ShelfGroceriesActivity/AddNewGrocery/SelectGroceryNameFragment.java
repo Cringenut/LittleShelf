@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
+import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
 import java.util.List;
@@ -20,11 +20,11 @@ import java.util.List;
 public class SelectGroceryNameFragment extends Fragment {
     private FragmentSelectGroceryNameBinding binding;
 
-    public void setAddNewGroceryMenuViewModel(ShelfGroceriesViewModel addNewGroceryMenuViewModel) {
+    public void setAddNewGroceryMenuViewModel(AddNewGroceryViewModel addNewGroceryMenuViewModel) {
         this.addNewGroceryMenuViewModel = addNewGroceryMenuViewModel;
     }
 
-    ShelfGroceriesViewModel addNewGroceryMenuViewModel;
+    AddNewGroceryViewModel addNewGroceryMenuViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

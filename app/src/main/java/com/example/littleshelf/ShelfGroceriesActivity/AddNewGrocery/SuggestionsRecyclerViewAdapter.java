@@ -6,14 +6,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
+import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
 public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<SuggestionsRecyclerViewAdapter.SuggestionsRecyclerViewHolder> {
 
-    private final ShelfGroceriesViewModel addNewGroceryMenuViewModel;
+    private final AddNewGroceryViewModel addNewGroceryMenuViewModel;
 
-    public SuggestionsRecyclerViewAdapter(ShelfGroceriesViewModel addNewGroceryMenuViewModel) {
+    public SuggestionsRecyclerViewAdapter(AddNewGroceryViewModel addNewGroceryMenuViewModel) {
         this.addNewGroceryMenuViewModel = addNewGroceryMenuViewModel;
     }
 
