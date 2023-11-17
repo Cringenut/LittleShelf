@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public class Grocery {
 
-    private MutableLiveData<String> name;
+    private MutableLiveData<String> name = new MutableLiveData<>();
 
     public Grocery(GroceryBuilder builder) {
         this.name.setValue(builder.name);

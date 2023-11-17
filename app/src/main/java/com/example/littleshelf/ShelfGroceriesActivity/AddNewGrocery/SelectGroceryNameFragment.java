@@ -1,7 +1,9 @@
 package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +18,9 @@ import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
 import java.util.List;
+import java.util.Objects;
+
+import javax.security.auth.callback.Callback;
 
 public class SelectGroceryNameFragment extends Fragment {
     private FragmentSelectGroceryNameBinding binding;
@@ -31,9 +36,9 @@ public class SelectGroceryNameFragment extends Fragment {
         binding = FragmentSelectGroceryNameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(addNewGroceryMenuViewModel);
-        binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
+        //SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(addNewGroceryMenuViewModel);
+        //binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
 
         binding.searchBar.inputField.setText(addNewGroceryMenuViewModel.getGroceryName().getValue());
         binding.searchBar.inputField.addTextChangedListener(new TextWatcher() {
@@ -51,7 +56,15 @@ public class SelectGroceryNameFragment extends Fragment {
         addNewGroceryMenuViewModel.getSuggestions().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
-                suggestionsRecyclerViewAdapter.notifyItemChanged(0);
+                //suggestionsRecyclerViewAdapter.notifyItemChanged(0);
+            }
+        });
+
+        binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addNewGroceryMenuViewModel.setGroceryName("TestName");
+                ((Activity) requireContext()).onBackPressed();
             }
         });
 
