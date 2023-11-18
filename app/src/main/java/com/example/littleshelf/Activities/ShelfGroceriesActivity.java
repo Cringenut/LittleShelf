@@ -1,12 +1,10 @@
 package com.example.littleshelf.Activities;
-
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.littleshelf.Activities.Base.BaseActivity;
 import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
-import com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery.AddNewGroceryMenuFragment;
+import com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments.AddNewGroceryMenuFragment;
 import com.example.littleshelf.ShelfGroceriesActivity.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 

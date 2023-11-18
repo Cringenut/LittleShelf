@@ -1,4 +1,4 @@
-package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
+package com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments;
 
 import android.os.Bundle;
 
@@ -20,7 +20,6 @@ import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
 public class AddNewGroceryMenuFragment extends Fragment {
     private FragmentAddGroceryMenuBinding binding;
     private ButtonGroceryDataFieldBinding nameFieldBinding;
-
     private final AddNewGroceryViewModel addNewGroceryMenuViewModel =
             new AddNewGroceryViewModel();
 
@@ -37,6 +36,7 @@ public class AddNewGroceryMenuFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 nameFieldBinding.textFieldValue.setText(addNewGroceryMenuViewModel.getGroceryName().getValue());
+                addNewGroceryMenuViewModel.setOriginalName(addNewGroceryMenuViewModel.getGroceryName().getValue());
             }
         });
 

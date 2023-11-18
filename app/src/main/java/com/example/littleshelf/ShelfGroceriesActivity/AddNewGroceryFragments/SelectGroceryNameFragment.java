@@ -1,9 +1,8 @@
-package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
+package com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,19 +16,13 @@ import android.view.ViewGroup;
 import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
-import java.util.List;
-import java.util.Objects;
-
-import javax.security.auth.callback.Callback;
-
 public class SelectGroceryNameFragment extends Fragment {
+    private AddNewGroceryViewModel viewModel;
     private FragmentSelectGroceryNameBinding binding;
 
     public void setAddNewGroceryMenuViewModel(AddNewGroceryViewModel addNewGroceryMenuViewModel) {
         this.viewModel = addNewGroceryMenuViewModel;
     }
-
-    AddNewGroceryViewModel viewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +33,6 @@ public class SelectGroceryNameFragment extends Fragment {
         binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
 
-        binding.searchBar.inputField.setText(viewModel.getGroceryName().getValue());
         binding.searchBar.inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -51,18 +43,20 @@ public class SelectGroceryNameFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-        viewModel.getSuggestions().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> strings) {
-                suggestionsRecyclerViewAdapter.notifyItemChanged(0);
-            }
-        });
+        binding.searchBar.inputField.setText(viewModel.getGroceryName().getValue());
 
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setGroceryName("TestName");
+                viewModel.setGroceryName(suggestionsRecyclerViewAdapter.getSelectedName().getValue());
                 ((Activity) requireContext()).onBackPressed();
+            }
+        });
+
+        suggestionsRecyclerViewAdapter.getSelectedName().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.btnConfirm.setText(suggestionsRecyclerViewAdapter.getSelectedName().getValue());
             }
         });
 

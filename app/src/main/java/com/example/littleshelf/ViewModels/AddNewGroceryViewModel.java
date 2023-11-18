@@ -35,4 +35,8 @@ public class AddNewGroceryViewModel extends ViewModel {
         repository.setSuggestions(charSequence, i, i1, i2);
     }
 
+    public void setOriginalName(String name) {
+        repository.setOriginalName(name);
+    }
+
 }

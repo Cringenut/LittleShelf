@@ -9,7 +9,7 @@ import java.util.List;
 
 public class NewGroceryNameSuggestionsRepository {
     private final MutableLiveData<List<String>> suggestions = new MutableLiveData<>();
-    private final String originalName;
+    private String originalName;
 
     public NewGroceryNameSuggestionsRepository(String name) {
         this.suggestions.setValue(new ArrayList<>(Collections.singletonList(name)));
@@ -18,6 +18,10 @@ public class NewGroceryNameSuggestionsRepository {
 
     public MutableLiveData<List<String>> getSuggestions() {
         return suggestions;
+    }
+
+    public void setOriginalName(String name) {
+        this.originalName = name;
     }
 
     public void setSuggestions(CharSequence charSequence, int i, int i1, int i2) {

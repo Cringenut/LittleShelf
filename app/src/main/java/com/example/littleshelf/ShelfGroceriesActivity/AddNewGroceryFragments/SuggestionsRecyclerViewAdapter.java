@@ -1,4 +1,4 @@
-package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
+package com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,12 +20,16 @@ import java.util.Objects;
 public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<SuggestionsRecyclerViewAdapter.SuggestionsRecyclerViewHolder> {
 
     private final List<String> suggestions;
+    private MutableLiveData<String> selectedName;
 
     public SuggestionsRecyclerViewAdapter(LifecycleOwner owner, @NonNull AddNewGroceryViewModel addNewGroceryMenuViewModel) {
         this.suggestions = new ArrayList<>(Objects
                 .requireNonNull(addNewGroceryMenuViewModel
                         .getSuggestions()
                         .getValue()));
+
+        selectedName = new MutableLiveData<>();
+        selectedName.setValue(suggestions.get(0));
         addNewGroceryMenuViewModel.getSuggestions().observe(owner, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
@@ -47,11 +52,22 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
     public void onBindViewHolder(@NonNull SuggestionsRecyclerViewHolder holder, int position) {
         ViewGroceryNameBinding binding = holder.binding;
         binding.textViewSuggestion.setText(suggestions.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedName.setValue(suggestions.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return suggestions.size();
+    }
+
+    public MutableLiveData<String> getSelectedName() {
+        return selectedName;
     }
 
     static class SuggestionsRecyclerViewHolder extends RecyclerView.ViewHolder {
