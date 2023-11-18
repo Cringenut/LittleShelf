@@ -1,12 +1,12 @@
-package com.example.littleshelf.ViewModels;
+package com.example.littleshelf.AddNewGrocery.ViewModels;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.littleshelf.Models.GroceryModel;
+import com.example.littleshelf.AddNewGrocery.Models.GroceryModel;
+import com.example.littleshelf.AddNewGrocery.Repositories.NewGroceryNameSuggestionsRepository;
 import com.example.littleshelf.Objects.Grocery;
-import com.example.littleshelf.Repositories.NewGroceryNameSuggestionsRepository;
 
 import java.util.List;
 

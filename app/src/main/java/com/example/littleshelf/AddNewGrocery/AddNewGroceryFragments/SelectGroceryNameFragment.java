@@ -1,4 +1,4 @@
-package com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments;
+package com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
+import com.example.littleshelf.AddNewGrocery.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
 public class SelectGroceryNameFragment extends Fragment {

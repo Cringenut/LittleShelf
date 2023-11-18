@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.example.littleshelf.Activities.Base.BaseActivity;
 import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
-import com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments.AddNewGroceryMenuFragment;
-import com.example.littleshelf.ShelfGroceriesActivity.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments.AddNewGroceryMenuFragment;
+import com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
 import java.util.Objects;

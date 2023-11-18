@@ -1,4 +1,4 @@
-package com.example.littleshelf.Repositories;
+package com.example.littleshelf.AddNewGrocery.Repositories;
 
 import android.graphics.Paint;
 

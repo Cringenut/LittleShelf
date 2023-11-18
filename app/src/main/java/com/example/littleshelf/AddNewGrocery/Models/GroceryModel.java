@@ -1,4 +1,4 @@
-package com.example.littleshelf.Models;
+package com.example.littleshelf.AddNewGrocery.Models;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

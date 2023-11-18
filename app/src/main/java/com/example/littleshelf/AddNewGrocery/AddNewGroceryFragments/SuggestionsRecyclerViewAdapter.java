@@ -1,4 +1,4 @@
-package com.example.littleshelf.ShelfGroceriesActivity.AddNewGroceryFragments;
+package com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
+import com.example.littleshelf.AddNewGrocery.ViewModels.AddNewGroceryViewModel;
 import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
 import java.util.ArrayList;
