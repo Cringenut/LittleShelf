@@ -1,20 +1,19 @@
 package com.example.littleshelf.Repositories;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
+import android.graphics.Paint;
+
 import androidx.lifecycle.MutableLiveData;
-
-import com.example.littleshelf.Objects.Grocery;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class NewGroceryNameSuggestionsRepository {
     private final MutableLiveData<List<String>> suggestions = new MutableLiveData<>();
+    private final String originalName;
 
     public NewGroceryNameSuggestionsRepository(String name) {
-        suggestions.setValue(new ArrayList<>(Collections.singletonList(name)));
+        this.suggestions.setValue(new ArrayList<>(Collections.singletonList(name)));
+        this.originalName = name;
     }
 
     public MutableLiveData<List<String>> getSuggestions() {
@@ -23,7 +22,12 @@ public class NewGroceryNameSuggestionsRepository {
 
     public void setSuggestions(CharSequence charSequence, int i, int i1, int i2) {
         List<String> newSuggestions = new ArrayList<>();
-        newSuggestions.add(0, charSequence.toString());
+        if (i > 0) {
+            newSuggestions.add(0, charSequence.toString());
+        }
+        else {
+            newSuggestions.add(0, originalName);
+        }
 
         suggestions.setValue(newSuggestions);
     }

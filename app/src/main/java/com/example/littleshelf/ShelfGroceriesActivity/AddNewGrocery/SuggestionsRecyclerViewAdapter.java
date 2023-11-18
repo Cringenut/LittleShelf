@@ -1,9 +1,12 @@
 package com.example.littleshelf.ShelfGroceriesActivity.AddNewGrocery;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.ViewModels.AddNewGroceryViewModel;
@@ -17,11 +20,21 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
 
     private final List<String> suggestions;
 
-    public SuggestionsRecyclerViewAdapter(@NonNull AddNewGroceryViewModel addNewGroceryMenuViewModel) {
+    public SuggestionsRecyclerViewAdapter(LifecycleOwner owner, @NonNull AddNewGroceryViewModel addNewGroceryMenuViewModel) {
         this.suggestions = new ArrayList<>(Objects
                 .requireNonNull(addNewGroceryMenuViewModel
-                .getSuggestions()
-                .getValue()));
+                        .getSuggestions()
+                        .getValue()));
+        addNewGroceryMenuViewModel.getSuggestions().observe(owner, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                suggestions.clear();
+                suggestions.addAll(addNewGroceryMenuViewModel
+                        .getSuggestions()
+                        .getValue());
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @NonNull

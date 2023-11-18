@@ -36,25 +36,25 @@ public class SelectGroceryNameFragment extends Fragment {
         binding = FragmentSelectGroceryNameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(viewModel);
+        SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(this, viewModel);
         binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
 
         binding.searchBar.inputField.setText(viewModel.getGroceryName().getValue());
         binding.searchBar.inputField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 viewModel.setSuggestions(charSequence, i, i1, i2);
             }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {}
         });
         viewModel.getSuggestions().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
-                //suggestionsRecyclerViewAdapter.notifyItemChanged(0);
+                suggestionsRecyclerViewAdapter.notifyItemChanged(0);
             }
         });
 
