@@ -26,34 +26,32 @@ public class SelectGroceryNameFragment extends Fragment {
     private FragmentSelectGroceryNameBinding binding;
 
     public void setAddNewGroceryMenuViewModel(AddNewGroceryViewModel addNewGroceryMenuViewModel) {
-        this.addNewGroceryMenuViewModel = addNewGroceryMenuViewModel;
+        this.viewModel = addNewGroceryMenuViewModel;
     }
 
-    AddNewGroceryViewModel addNewGroceryMenuViewModel;
+    AddNewGroceryViewModel viewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSelectGroceryNameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        //SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(addNewGroceryMenuViewModel);
-        //binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
+        SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(viewModel);
+        binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
 
-        binding.searchBar.inputField.setText(addNewGroceryMenuViewModel.getGroceryName().getValue());
+        binding.searchBar.inputField.setText(viewModel.getGroceryName().getValue());
         binding.searchBar.inputField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                viewModel.setSuggestions(charSequence, i, i1, i2);
             }
-
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-        addNewGroceryMenuViewModel.getSuggestions().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+        viewModel.getSuggestions().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
                 //suggestionsRecyclerViewAdapter.notifyItemChanged(0);
@@ -63,7 +61,7 @@ public class SelectGroceryNameFragment extends Fragment {
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addNewGroceryMenuViewModel.setGroceryName("TestName");
+                viewModel.setGroceryName("TestName");
                 ((Activity) requireContext()).onBackPressed();
             }
         });

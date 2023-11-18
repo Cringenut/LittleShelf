@@ -15,8 +15,8 @@ public class AddNewGroceryViewModel extends ViewModel {
     private final GroceryModel model;
 
     public AddNewGroceryViewModel() {
-        this.repository = new NewGroceryNameSuggestionsRepository();
         this.model = new GroceryModel(new Grocery(new Grocery.GroceryBuilder("Grocery")));
+        this.repository = new NewGroceryNameSuggestionsRepository(model.getGroceryName().getValue());
     }
 
     public LiveData<String> getGroceryName() {
@@ -31,8 +31,8 @@ public class AddNewGroceryViewModel extends ViewModel {
         return repository.getSuggestions();
     }
 
-    public void changeSuggestions() {
-
+    public void setSuggestions(CharSequence charSequence, int i, int i1, int i2) {
+        repository.setSuggestions(charSequence, i, i1, i2);
     }
 
 }

@@ -7,10 +7,15 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.littleshelf.Objects.Grocery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NewGroceryNameSuggestionsRepository {
-    private final MutableLiveData<List<String>>  suggestions = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> suggestions = new MutableLiveData<>();
+
+    public NewGroceryNameSuggestionsRepository(String name) {
+        suggestions.setValue(new ArrayList<>(Collections.singletonList(name)));
+    }
 
     public MutableLiveData<List<String>> getSuggestions() {
         return suggestions;
