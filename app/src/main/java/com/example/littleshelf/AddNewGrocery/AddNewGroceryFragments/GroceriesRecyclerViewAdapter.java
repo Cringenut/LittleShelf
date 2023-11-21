@@ -1,4 +1,4 @@
-package com.example.littleshelf.ShelfGroceriesActivity;
+package com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.databinding.ViewGroceryBinding;
-import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +30,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     @Override
     public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
-        holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName());
+        holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName().getValue());
     }
 
     @Override

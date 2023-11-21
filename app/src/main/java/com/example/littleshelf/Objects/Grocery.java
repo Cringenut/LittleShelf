@@ -1,19 +1,23 @@
 package com.example.littleshelf.Objects;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 public class Grocery {
 
-    private String name;
+    private MutableLiveData<String> name = new MutableLiveData<>();
 
     public Grocery(GroceryBuilder builder) {
-        this.name = builder.name;
+        this.name.setValue(builder.name);
     }
 
-    public String getGroceryName() {
+    public LiveData<String> getGroceryName() {
         return name;
     }
 
+
     public void setGroceryName(String name) {
-        this.name = name;
+        this.name.setValue(name);
     }
 
     public static class GroceryBuilder {

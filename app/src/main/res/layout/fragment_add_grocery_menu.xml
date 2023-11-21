@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F30000"
     android:orientation="vertical"
-    tools:context=".ShelfGroceriesActivity.AddNewGrocery.AddNewGroceryMenuFragment">
+    tools:context=".AddNewGrocery.AddNewGroceryFragments.AddNewGroceryMenuFragment">
 
     <include layout="@layout/back_button_top_bar" />
 
