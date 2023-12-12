@@ -20,6 +20,7 @@ public class Grocery {
         this.name.setValue(name);
     }
 
+    // Builder in order to have only one constructor for Grocery
     public static class GroceryBuilder {
         private final String name;
 

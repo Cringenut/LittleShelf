@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.example.littleshelf.Activities.Base.BaseActivity;
 
+// ViewUtils is responsible for manipulations with View
 public class ViewUtils {
 
     public static void disableChildren(@NonNull ViewBinding binding) {

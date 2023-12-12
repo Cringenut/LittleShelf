@@ -1,4 +1,4 @@
-package com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments;
+package com.example.littleshelf.Fragments;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littleshelf.AddNewGrocery.ViewModels.AddNewGroceryViewModel;
+import com.example.littleshelf.ViewModels.AddGroceryViewModel;
 import com.example.littleshelf.databinding.ViewGroceryNameBinding;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class SuggestionsRecyclerViewAdapter extends RecyclerView.Adapter<Suggest
     private final List<String> suggestions;
     private MutableLiveData<String> selectedName;
 
-    public SuggestionsRecyclerViewAdapter(LifecycleOwner owner, @NonNull AddNewGroceryViewModel addNewGroceryMenuViewModel) {
+    public SuggestionsRecyclerViewAdapter(LifecycleOwner owner, @NonNull AddGroceryViewModel addNewGroceryMenuViewModel) {
         this.suggestions = new ArrayList<>(Objects
                 .requireNonNull(addNewGroceryMenuViewModel
                         .getSuggestions()

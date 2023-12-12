@@ -1,4 +1,4 @@
-package com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments;
+package com.example.littleshelf.Fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,14 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.AddNewGrocery.ViewModels.AddNewGroceryViewModel;
+import com.example.littleshelf.ViewModels.AddGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
+import java.util.Objects;
+
 public class SelectGroceryNameFragment extends Fragment {
-    private AddNewGroceryViewModel viewModel;
+    private AddGroceryViewModel viewModel;
     private FragmentSelectGroceryNameBinding binding;
 
-    public void setAddNewGroceryMenuViewModel(AddNewGroceryViewModel addNewGroceryMenuViewModel) {
+    public void setAddNewGroceryMenuViewModel(AddGroceryViewModel addNewGroceryMenuViewModel) {
         this.viewModel = addNewGroceryMenuViewModel;
     }
     @Override
@@ -29,10 +31,12 @@ public class SelectGroceryNameFragment extends Fragment {
         binding = FragmentSelectGroceryNameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        //
         SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(this, viewModel);
         binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
 
+        //
         binding.searchBar.inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -48,7 +52,7 @@ public class SelectGroceryNameFragment extends Fragment {
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setGroceryName(suggestionsRecyclerViewAdapter.getSelectedName().getValue());
+                viewModel.setGroceryName(Objects.requireNonNull(suggestionsRecyclerViewAdapter.getSelectedName().getValue()));
                 ((Activity) requireContext()).onBackPressed();
             }
         });

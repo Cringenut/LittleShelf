@@ -31,6 +31,7 @@ public class ButtonBack extends androidx.appcompat.widget.AppCompatButton implem
 
     @Override
     public void onClick(View v) {
+        // Imitate the clicking on back arrow
         ((Activity) getContext()).onBackPressed();
     }
 }

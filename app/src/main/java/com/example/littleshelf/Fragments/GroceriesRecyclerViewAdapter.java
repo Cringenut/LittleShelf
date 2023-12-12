@@ -1,4 +1,4 @@
-package com.example.littleshelf.AddNewGrocery.AddNewGroceryFragments;
+package com.example.littleshelf.Fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,6 +16,7 @@ import java.util.List;
 
 public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.GroceriesRecyclerViewHolder> {
 
+    // TEST LIST *REMOVE LATER*
     List<Grocery> testList = Arrays.asList(
             new Grocery.GroceryBuilder("Grocery")
                     .build(),
@@ -25,11 +26,14 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     @NonNull
     @Override
     public GroceriesRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new GroceriesRecyclerViewHolder(ViewGroceryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        // Create ViewHolder
+        return new GroceriesRecyclerViewHolder(ViewGroceryBinding
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
+        // Set values when created
         holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName().getValue());
     }
 
