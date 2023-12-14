@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littleshelf.Databases.LittleShelfDatabase;
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.databinding.ViewGroceryBinding;
 
@@ -34,7 +35,10 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     @Override
     public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
         // Set values when created
-        holder.binding.textViewGroceryName.setText(testList.get(position).getGroceryName().getValue());
+        holder.binding.textViewGroceryName.setText(testList
+                .get(position)
+                .getName()
+                .getValue());
     }
 
     @Override

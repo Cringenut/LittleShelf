@@ -14,7 +14,7 @@ public class GroceryModel {
     }
 
     public LiveData<String> getGroceryName() {
-        return grocery.getGroceryName();
+        return grocery.getName();
     }
 
     public void setGroceryName(String name) {
