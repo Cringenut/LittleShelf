@@ -1,12 +1,9 @@
 package com.example.littleshelf.Repositories;
 
 import android.content.Context;
-
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
-
 import com.example.littleshelf.Databases.Grocery.GroceryDao;
-import com.example.littleshelf.Databases.Grocery.GroceryDao_Impl;
 import com.example.littleshelf.Databases.LittleShelfDatabase;
 import com.example.littleshelf.Objects.Grocery;
 
@@ -18,7 +15,8 @@ public class GroceriesRepository {
     private final LiveData<List<Grocery>> allGroceries;
 
     public GroceriesRepository(Context context) {
-        groceryDao = new GroceryDao_Impl(LittleShelfDatabase.getInstance(context));
+        LittleShelfDatabase db = LittleShelfDatabase.getInstance(context);
+        groceryDao = db.groceryDao();
         this.allGroceries = groceryDao.getAllGroceries();
     }
 
@@ -36,5 +34,9 @@ public class GroceriesRepository {
     @WorkerThread
     void updateGrocery(Grocery grocery) {
         groceryDao.updateGrocery(grocery);
+    }
+
+    public LiveData<List<Grocery>> getAllGroceries() {
+        return allGroceries;
     }
 }

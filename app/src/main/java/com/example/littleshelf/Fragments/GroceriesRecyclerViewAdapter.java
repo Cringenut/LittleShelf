@@ -4,12 +4,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littleshelf.Databases.LittleShelfDatabase;
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.databinding.ViewGroceryBinding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,12 +18,16 @@ import java.util.List;
 
 public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.GroceriesRecyclerViewHolder> {
 
-    // TEST LIST *REMOVE LATER*
-    List<Grocery> testList = Arrays.asList(
-            new Grocery.GroceryBuilder("Grocery")
-                    .build(),
-            new Grocery.GroceryBuilder("NewGrocery")
-                    .build());
+    private List<Grocery> allGroceries;
+
+    public GroceriesRecyclerViewAdapter() {
+        this.allGroceries = new ArrayList<>();
+    }
+
+    public void setGroceries(List<Grocery> groceries) {
+        this.allGroceries = groceries;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -35,7 +40,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
     @Override
     public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
         // Set values when created
-        holder.binding.textViewGroceryName.setText(testList
+        holder.binding.textViewGroceryName.setText(allGroceries
                 .get(position)
                 .getName()
                 .getValue());
@@ -43,7 +48,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     @Override
     public int getItemCount() {
-        return testList.size();
+        return allGroceries.size();
     }
 
     static class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {

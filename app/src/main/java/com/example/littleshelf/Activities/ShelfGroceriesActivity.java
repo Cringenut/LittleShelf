@@ -17,6 +17,7 @@ import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Fragments.AddNewGroceryMenuFragment;
 import com.example.littleshelf.Fragments.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
 import java.util.List;
@@ -25,28 +26,23 @@ import java.util.Objects;
 public class ShelfGroceriesActivity extends BaseActivity {
 
     private ActivityShelfGroceriesBinding binding;
+    private ShelfGroceriesViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ShelfGroceriesViewModel(this);
         binding = ActivityShelfGroceriesBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
         initRecyclerView();
 
-        LittleShelfDatabase.getInstance(this).groceryDao().getAllGroceries().observe(this, new Observer<List<Grocery>>() {
-            @Override
-            public void onChanged(List<Grocery> groceries) {
-
-            }
-        });
-
         binding.btnAddGroceryMenu.setOnClickListener(v -> {
             AddNewGroceryMenuFragment addNewGroceryMenuFragment = new AddNewGroceryMenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .add(binding.getRoot().getId(), addNewGroceryMenuFragment, "Menu")
-                    .addToBackStack("Menu")
+                    .add(binding.getRoot().getId(), addNewGroceryMenuFragment, "AddGroceryMenu")
+                    .addToBackStack("AddGroceryMenu")
                     .commit();
 
             // Disable all activity children when fragment is created, so activity takes no input
@@ -64,6 +60,13 @@ public class ShelfGroceriesActivity extends BaseActivity {
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         // Create a line between them
         decoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.divider_line)));
+
+        viewModel.getAllGroceries().observe(this, new Observer<List<Grocery>>() {
+            @Override
+            public void onChanged(List<Grocery> groceries) {
+                adapter.setGroceries(groceries);
+            }
+        });
 
         // Setting all values to RecyclerView
         binding.groceriesRecyclerView.setLayoutManager(layoutManager);
