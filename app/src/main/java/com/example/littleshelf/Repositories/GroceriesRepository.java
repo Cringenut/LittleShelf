@@ -11,7 +11,6 @@ import java.util.List;
 
 public class GroceriesRepository {
     private final GroceryDao groceryDao;
-
     private final LiveData<List<Grocery>> allGroceries;
 
     public GroceriesRepository(Context context) {
@@ -22,17 +21,17 @@ public class GroceriesRepository {
 
 
     @WorkerThread
-    void insertGrocery(Grocery grocery) {
+    public void insertGrocery(Grocery grocery) {
         groceryDao.insertGrocery(grocery);
     }
 
     @WorkerThread
-    void deleteGrocery(Grocery grocery) {
+    public void deleteGrocery(Grocery grocery) {
         groceryDao.deleteGrocery(grocery);
     }
 
     @WorkerThread
-    void updateGrocery(Grocery grocery) {
+    public void updateGrocery(Grocery grocery) {
         groceryDao.updateGrocery(grocery);
     }
 

@@ -1,5 +1,6 @@
 package com.example.littleshelf.Fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,7 @@ public class AddNewGroceryMenuFragment extends Fragment {
     private FragmentAddGroceryMenuBinding binding;
     private ButtonGroceryDataFieldBinding nameFieldBinding;
     // Creating a ViewModel responsible for fragment on object initialization
-    private final AddGroceryViewModel addNewGroceryMenuViewModel = new AddGroceryViewModel();
+    private final AddGroceryViewModel viewModel = new AddGroceryViewModel(getContext());
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -35,12 +36,12 @@ public class AddNewGroceryMenuFragment extends Fragment {
         initNameField();
 
         // Set a new name value for NameField when new one is chosen
-        addNewGroceryMenuViewModel.getGroceryName().observe(getViewLifecycleOwner(), new Observer<String>() {
+        viewModel.getGroceryName().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                nameFieldBinding.textFieldValue.setText(addNewGroceryMenuViewModel.getGroceryName().getValue());
+                nameFieldBinding.textFieldValue.setText(viewModel.getGroceryName().getValue());
                 // Set a new Grocery name as original
-                addNewGroceryMenuViewModel.setOriginalName(addNewGroceryMenuViewModel.getGroceryName().getValue());
+                viewModel.setOriginalName(viewModel.getGroceryName().getValue());
             }
         });
 
@@ -49,7 +50,7 @@ public class AddNewGroceryMenuFragment extends Fragment {
             // Create a fragment
             SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
             // Take a ViewModel from here in order to manipulate data using it without creating a separate one
-            selectGroceryNameFragment.setAddNewGroceryMenuViewModel(addNewGroceryMenuViewModel);
+            selectGroceryNameFragment.setAddNewGroceryMenuViewModel(viewModel);
             // Begin transaction
             FragmentTransaction fragmentTransaction = requireActivity()
                     .getSupportFragmentManager()
@@ -63,12 +64,20 @@ public class AddNewGroceryMenuFragment extends Fragment {
             ViewUtils.disableChildren(binding);
         });
 
+        binding.confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.addGroceryToDatabase();
+                ((Activity) getContext()).onBackPressed();
+            }
+        });
+
         return view;
     }
 
     private void initNameField() {
         // Set values for NameField button
-        nameFieldBinding.textFieldValue.setText(addNewGroceryMenuViewModel.getGroceryName().getValue());
+        nameFieldBinding.textFieldValue.setText(viewModel.getGroceryName().getValue());
         nameFieldBinding.textFieldName.setText("Name:");
     }
 }

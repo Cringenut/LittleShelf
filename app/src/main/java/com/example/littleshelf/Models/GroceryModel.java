@@ -11,13 +11,20 @@ public class GroceryModel {
 
     public GroceryModel(Grocery grocery) {
         this.grocery = grocery;
+        setGroceryName(grocery.getName());
     }
 
+    public Grocery getGrocery() {
+        return grocery;
+    }
+
+    private MutableLiveData<String> groceryName = new MutableLiveData<>();
+
     public LiveData<String> getGroceryName() {
-        return grocery.getName();
+        return groceryName;
     }
 
     public void setGroceryName(String name) {
-        grocery.setGroceryName(name);
+        groceryName.setValue(name);
     }
 }

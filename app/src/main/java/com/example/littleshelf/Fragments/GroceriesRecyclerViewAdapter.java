@@ -42,8 +42,7 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         // Set values when created
         holder.binding.textViewGroceryName.setText(allGroceries
                 .get(position)
-                .getName()
-                .getValue());
+                .getName());
     }
 
     @Override

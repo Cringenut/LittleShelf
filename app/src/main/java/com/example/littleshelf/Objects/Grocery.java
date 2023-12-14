@@ -8,30 +8,26 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "grocery_table")
 public class Grocery {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "gid")
     public int gid;
 
     @ColumnInfo(name = "name")
-    private MutableLiveData<String> name = new MutableLiveData<>();
+    private String name = "";
 
     public Grocery() {
     }
 
-    public MutableLiveData<String> getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(MutableLiveData<String> name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setGroceryName(String name) {
-        this.name.setValue(name);
-    }
-
     public Grocery(GroceryBuilder builder) {
-        this.name.setValue(builder.name);
+        this.name = builder.name;
     }
 
     // Builder to have only one constructor for Grocery

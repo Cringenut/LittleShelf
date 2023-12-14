@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 import com.example.littleshelf.Databases.Grocery.GroceryDao;
 import com.example.littleshelf.Objects.Grocery;
 
-@Database(entities = {Grocery.class}, version = 2)
+@Database(entities = {Grocery.class}, version = 4)
 @TypeConverters(Converters.class)
 public abstract class LittleShelfDatabase extends RoomDatabase {
 
@@ -23,7 +23,7 @@ public abstract class LittleShelfDatabase extends RoomDatabase {
                     context.getApplicationContext(),
                     LittleShelfDatabase.class,
                     "little_shelf_database"
-            ).fallbackToDestructiveMigration().build();
+            ).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         }
         return instance;
     }
