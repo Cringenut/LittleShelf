@@ -1,4 +1,4 @@
-package com.example.littleshelf.Fragments;
+package com.example.littleshelf.Fragments.AddGrocery;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.littleshelf.Adapters.SuggestionsRecyclerViewAdapter;
 import com.example.littleshelf.ViewModels.AddGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 

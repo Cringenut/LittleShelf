@@ -1,4 +1,4 @@
-package com.example.littleshelf.Fragments;
+package com.example.littleshelf.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

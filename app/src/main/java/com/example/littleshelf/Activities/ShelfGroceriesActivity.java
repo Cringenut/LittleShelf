@@ -11,12 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.littleshelf.Activities.Base.BaseActivity;
-import com.example.littleshelf.Databases.LittleShelfDatabase;
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
-import com.example.littleshelf.Fragments.AddNewGroceryMenuFragment;
-import com.example.littleshelf.Fragments.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.Fragments.AddGrocery.AddGroceryMenuFragment;
+import com.example.littleshelf.Adapters.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
@@ -38,10 +37,10 @@ public class ShelfGroceriesActivity extends BaseActivity {
         initRecyclerView();
 
         binding.btnAddGroceryMenu.setOnClickListener(v -> {
-            AddNewGroceryMenuFragment addNewGroceryMenuFragment = new AddNewGroceryMenuFragment();
+            AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .add(binding.getRoot().getId(), addNewGroceryMenuFragment, "AddGroceryMenu")
+                    .add(binding.getRoot().getId(), addGroceryMenuFragment, "AddGroceryMenu")
                     .addToBackStack("AddGroceryMenu")
                     .commit();
 

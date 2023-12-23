@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.littleshelf.Objects.Grocery;
 
+import java.util.Date;
+
 public class GroceryModel {
 
     private Grocery grocery;
@@ -19,6 +21,7 @@ public class GroceryModel {
     }
 
     private MutableLiveData<String> groceryName = new MutableLiveData<>();
+    private MutableLiveData<Date> groceryExpirationDate = new MutableLiveData<>();
 
     public LiveData<String> getGroceryName() {
         return groceryName;
@@ -26,5 +29,13 @@ public class GroceryModel {
 
     public void setGroceryName(String name) {
         groceryName.setValue(name);
+    }
+
+    public LiveData<Date> getGroceryExpiration() {
+        return groceryExpirationDate;
+    }
+
+    public void setGroceryExpirationDate(Date date) {
+        groceryExpirationDate.setValue(date);
     }
 }

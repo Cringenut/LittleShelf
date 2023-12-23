@@ -11,6 +11,7 @@ import com.example.littleshelf.Repositories.GroceriesRepository;
 import com.example.littleshelf.Repositories.GroceryNameSuggestionsRepository;
 import com.example.littleshelf.Objects.Grocery;
 
+import java.util.Date;
 import java.util.List;
 
 public class AddGroceryViewModel extends ViewModel {
@@ -31,6 +32,14 @@ public class AddGroceryViewModel extends ViewModel {
 
     public void setGroceryName(@NonNull String name) {
         model.setGroceryName(name);
+    }
+
+    public LiveData<Date> getGroceryExpirationDate() {
+        return model.getGroceryExpiration();
+    }
+
+    public void setGroceryExpirationDate(@NonNull Date date) {
+        model.setGroceryExpirationDate(date);
     }
 
     public LiveData<List<String>> getSuggestions() {

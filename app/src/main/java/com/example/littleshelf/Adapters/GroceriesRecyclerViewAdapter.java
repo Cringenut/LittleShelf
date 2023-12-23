@@ -1,17 +1,15 @@
-package com.example.littleshelf.Fragments;
+package com.example.littleshelf.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.databinding.ViewGroceryBinding;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

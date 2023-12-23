@@ -9,8 +9,8 @@ import androidx.room.TypeConverters;
 import com.example.littleshelf.Databases.Grocery.GroceryDao;
 import com.example.littleshelf.Objects.Grocery;
 
-@Database(entities = {Grocery.class}, version = 4)
-@TypeConverters(Converters.class)
+@Database(entities = {Grocery.class}, version = 5)
+@TypeConverters({Converters.class})
 public abstract class LittleShelfDatabase extends RoomDatabase {
 
     private static LittleShelfDatabase instance;
@@ -20,10 +20,12 @@ public abstract class LittleShelfDatabase extends RoomDatabase {
     public static synchronized LittleShelfDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(
-                    context.getApplicationContext(),
-                    LittleShelfDatabase.class,
-                    "little_shelf_database"
-            ).allowMainThreadQueries().fallbackToDestructiveMigration().build();
+                            context.getApplicationContext(),
+                            LittleShelfDatabase.class,
+                            "little_shelf_database"
+                    ).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return instance;
     }
