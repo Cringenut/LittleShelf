@@ -20,7 +20,7 @@ import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
 
 import java.util.Date;
 
-public class AddGroceryMenuFragment extends Fragment {
+public class AddGroceryMenu extends Fragment {
     private FragmentAddGroceryMenuBinding binding;
     private ButtonGroceryDataFieldBinding nameFieldBinding;
     private ButtonGroceryDataFieldBinding expirationDateFieldBinding;
@@ -52,36 +52,13 @@ public class AddGroceryMenuFragment extends Fragment {
             }
         });
 
-        // Select the Grocery name when clicked
+        // Select Grocery name when clicked
         binding.btnNameField.btnField.setOnClickListener(v -> {
-            // Create a fragment
-            SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
-            // Take a ViewModel from here in order to manipulate data using it without creating a separate one
-            selectGroceryNameFragment.setAddNewGroceryMenuViewModel(viewModel);
-            // Begin transaction
-            FragmentTransaction fragmentTransaction = requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction();
-            // Add fragment to screen and BackStack
-            fragmentTransaction
-                    .add(binding.getRoot().getId(), selectGroceryNameFragment, "SelectName")
-                    .addToBackStack("SelectName")
-                    .commit();
-            //
-            ViewUtils.disableChildren(binding);
+            initSelectName();
         });
-
-        binding.btnNameField.btnField.setOnClickListener(v -> {
-            SelectGroceryNameFragment selectGroceryNameFragment = new SelectGroceryNameFragment();
-            selectGroceryNameFragment.setAddNewGroceryMenuViewModel(viewModel);
-            FragmentTransaction fragmentTransaction = requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction();
-            fragmentTransaction
-                    .add(binding.getRoot().getId(), selectGroceryNameFragment, "SelectName")
-                    .addToBackStack("SelectName")
-                    .commit();
-            ViewUtils.disableChildren(binding);
+        // Select Grocery expiration date when clicked
+        binding.btnDateField.btnField.setOnClickListener(v -> {
+            initSelectExpirationDate();
         });
 
         binding.confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +70,40 @@ public class AddGroceryMenuFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void initSelectName() {
+        // Create a fragment
+        SelectName selectName = new SelectName();
+        // Take a ViewModel from here in order to manipulate data using it without creating a separate one
+        selectName.setAddGroceryMenuViewModel(viewModel);
+        // Begin transaction
+        FragmentTransaction fragmentTransaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+        // Add fragment to screen and BackStack
+        fragmentTransaction
+                .add(binding.getRoot().getId(), selectName, "SelectName")
+                .addToBackStack("SelectName")
+                .commit();
+        ViewUtils.disableChildren(binding);
+    }
+
+    private void initSelectExpirationDate() {
+        // Create a fragment
+        SelectExpirationDate selectExpirationDate = new SelectExpirationDate();
+        // Take a ViewModel from here in order to manipulate data using it without creating a separate one
+        selectExpirationDate.setAddGroceryMenuViewModel(viewModel);
+        // Begin transaction
+        FragmentTransaction fragmentTransaction = requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction();
+        // Add fragment to screen and BackStack
+        fragmentTransaction
+                .add(binding.getRoot().getId(), selectExpirationDate, "SelectExpirationDate")
+                .addToBackStack("SelectExpirationDate")
+                .commit();
+        ViewUtils.disableChildren(binding);
     }
 
     private void initNameField() {

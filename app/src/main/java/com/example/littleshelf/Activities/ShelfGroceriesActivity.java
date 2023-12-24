@@ -14,7 +14,7 @@ import com.example.littleshelf.Activities.Base.BaseActivity;
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
-import com.example.littleshelf.Fragments.AddGrocery.AddGroceryMenuFragment;
+import com.example.littleshelf.Fragments.AddGrocery.AddGroceryMenu;
 import com.example.littleshelf.Adapters.GroceriesRecyclerViewAdapter;
 import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
@@ -37,10 +37,10 @@ public class ShelfGroceriesActivity extends BaseActivity {
         initRecyclerView();
 
         binding.btnAddGroceryMenu.setOnClickListener(v -> {
-            AddGroceryMenuFragment addGroceryMenuFragment = new AddGroceryMenuFragment();
+            AddGroceryMenu addGroceryMenu = new AddGroceryMenu();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction
-                    .add(binding.getRoot().getId(), addGroceryMenuFragment, "AddGroceryMenu")
+                    .add(binding.getRoot().getId(), addGroceryMenu, "AddGroceryMenu")
                     .addToBackStack("AddGroceryMenu")
                     .commit();
 

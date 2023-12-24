@@ -3,7 +3,7 @@ package com.example.littleshelf.Repositories;
 import android.content.Context;
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
-import com.example.littleshelf.Databases.Grocery.GroceryDao;
+import com.example.littleshelf.Databases.GroceryDao;
 import com.example.littleshelf.Databases.LittleShelfDatabase;
 import com.example.littleshelf.Objects.Grocery;
 
@@ -18,7 +18,6 @@ public class GroceriesRepository {
         groceryDao = db.groceryDao();
         this.allGroceries = groceryDao.getAllGroceries();
     }
-
 
     @WorkerThread
     public void insertGrocery(Grocery grocery) {

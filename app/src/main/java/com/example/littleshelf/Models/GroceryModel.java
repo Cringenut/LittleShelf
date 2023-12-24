@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class GroceryModel {
 
-    private Grocery grocery;
+    private final Grocery grocery;
 
     public GroceryModel(Grocery grocery) {
         this.grocery = grocery;

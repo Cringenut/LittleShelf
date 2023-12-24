@@ -1,11 +1,8 @@
 package com.example.littleshelf.ViewModels;
 
 import android.content.Context;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.littleshelf.Databases.Grocery.GroceryDao;
 import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.Repositories.GroceriesRepository;
 

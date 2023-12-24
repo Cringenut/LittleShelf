@@ -1,4 +1,4 @@
-package com.example.littleshelf.Databases.Grocery;
+package com.example.littleshelf.Databases;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

@@ -6,7 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.littleshelf.Databases.Grocery.GroceryDao;
+import com.example.littleshelf.Databases.GroceryDao;
 import com.example.littleshelf.Objects.Grocery;
 
 @Database(entities = {Grocery.class}, version = 5)

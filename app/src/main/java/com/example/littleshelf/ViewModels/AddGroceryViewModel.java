@@ -8,21 +8,21 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.littleshelf.Models.GroceryModel;
 import com.example.littleshelf.Repositories.GroceriesRepository;
-import com.example.littleshelf.Repositories.GroceryNameSuggestionsRepository;
+import com.example.littleshelf.Repositories.SuggestionsRepository;
 import com.example.littleshelf.Objects.Grocery;
 
 import java.util.Date;
 import java.util.List;
 
 public class AddGroceryViewModel extends ViewModel {
-    private final GroceryNameSuggestionsRepository suggestionsRepository;
+    private final SuggestionsRepository suggestionsRepository;
     private final GroceriesRepository groceriesRepository;
     private final GroceryModel model;
 
     public AddGroceryViewModel(Context context) {
         // Create model and repository for ViewModel
         this.model = new GroceryModel(new Grocery(new Grocery.GroceryBuilder("Grocery")));
-        this.suggestionsRepository = new GroceryNameSuggestionsRepository(model.getGroceryName().getValue());
+        this.suggestionsRepository = new SuggestionsRepository(model.getGroceryName().getValue());
         this.groceriesRepository = new GroceriesRepository(context);
     }
 

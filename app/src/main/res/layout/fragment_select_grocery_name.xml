@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.AddGrocery.SelectGroceryNameFragment">
+    tools:context=".Fragments.AddGrocery.SelectName">
 
     <include layout="@layout/back_button_top_bar" />
 

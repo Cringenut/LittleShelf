@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GroceryNameSuggestionsRepository {
+public class SuggestionsRepository {
     private final MutableLiveData<List<String>> suggestions = new MutableLiveData<>();
     private String originalName;
 
-    public GroceryNameSuggestionsRepository(String name) {
+    public SuggestionsRepository(String name) {
         // Set suggestions from current name of the Grocery (Later would be creating using suggestions fromm database)
         this.suggestions.setValue(new ArrayList<>(Collections.singletonList(name)));
         this.originalName = name;

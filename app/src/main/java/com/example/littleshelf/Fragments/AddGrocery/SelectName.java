@@ -19,11 +19,11 @@ import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
 import java.util.Objects;
 
-public class SelectGroceryNameFragment extends Fragment {
+public class SelectName extends Fragment {
     private AddGroceryViewModel viewModel;
     private FragmentSelectGroceryNameBinding binding;
 
-    public void setAddNewGroceryMenuViewModel(AddGroceryViewModel addNewGroceryMenuViewModel) {
+    public void setAddGroceryMenuViewModel(AddGroceryViewModel addNewGroceryMenuViewModel) {
         this.viewModel = addNewGroceryMenuViewModel;
     }
     @Override

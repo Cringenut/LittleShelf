@@ -8,15 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.R;
-import com.example.littleshelf.databinding.FragmentAddGroceryMenuBinding;
+import com.example.littleshelf.ViewModels.AddGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentCalendarBinding;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
 
-public class SelectGroceryExpirationDateFragment extends Fragment {
+public class SelectExpirationDate extends Fragment {
 
     private FragmentCalendarBinding binding;
+
+    private AddGroceryViewModel viewModel;
+
+    public void setAddGroceryMenuViewModel(AddGroceryViewModel addNewGroceryMenuViewModel) {
+        this.viewModel = addNewGroceryMenuViewModel;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
