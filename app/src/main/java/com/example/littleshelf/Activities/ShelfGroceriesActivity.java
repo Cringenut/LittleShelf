@@ -15,7 +15,7 @@ import com.example.littleshelf.Objects.Grocery;
 import com.example.littleshelf.Objects.ViewUtils;
 import com.example.littleshelf.R;
 import com.example.littleshelf.Fragments.AddGrocery.AddGroceryMenu;
-import com.example.littleshelf.Adapters.GroceriesRecyclerViewAdapter;
+import com.example.littleshelf.Adapters.GroceriesAdapter;
 import com.example.littleshelf.ViewModels.ShelfGroceriesViewModel;
 import com.example.littleshelf.databinding.ActivityShelfGroceriesBinding;
 
@@ -54,7 +54,7 @@ public class ShelfGroceriesActivity extends BaseActivity {
         // Use a linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         // Create an adapter
-        GroceriesRecyclerViewAdapter adapter = new GroceriesRecyclerViewAdapter();
+        GroceriesAdapter adapter = new GroceriesAdapter();
         // Decorator to separate items
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         // Create a line between them

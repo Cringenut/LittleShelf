@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.littleshelf.Adapters.SuggestionsRecyclerViewAdapter;
+import com.example.littleshelf.Adapters.SuggestionsAdapter;
 import com.example.littleshelf.ViewModels.AddGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentSelectGroceryNameBinding;
 
@@ -33,9 +33,9 @@ public class SelectName extends Fragment {
         View view = binding.getRoot();
 
         //
-        SuggestionsRecyclerViewAdapter suggestionsRecyclerViewAdapter = new SuggestionsRecyclerViewAdapter(this, viewModel);
+        SuggestionsAdapter suggestionsAdapter = new SuggestionsAdapter(this, viewModel);
         binding.suggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.suggestionsRecyclerView.setAdapter(suggestionsRecyclerViewAdapter);
+        binding.suggestionsRecyclerView.setAdapter(suggestionsAdapter);
 
         //
         binding.searchBar.inputField.addTextChangedListener(new TextWatcher() {
@@ -53,15 +53,15 @@ public class SelectName extends Fragment {
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setGroceryName(Objects.requireNonNull(suggestionsRecyclerViewAdapter.getSelectedName().getValue()));
+                viewModel.setGroceryName(Objects.requireNonNull(suggestionsAdapter.getSelectedName().getValue()));
                 ((Activity) requireContext()).onBackPressed();
             }
         });
 
-        suggestionsRecyclerViewAdapter.getSelectedName().observe(getViewLifecycleOwner(), new Observer<String>() {
+        suggestionsAdapter.getSelectedName().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                binding.btnConfirm.setText(suggestionsRecyclerViewAdapter.getSelectedName().getValue());
+                binding.btnConfirm.setText(suggestionsAdapter.getSelectedName().getValue());
             }
         });
 

@@ -14,11 +14,11 @@ import java.util.List;
 
 
 
-public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<GroceriesRecyclerViewAdapter.GroceriesRecyclerViewHolder> {
+public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.GroceriesHolder> {
 
     private List<Grocery> allGroceries;
 
-    public GroceriesRecyclerViewAdapter() {
+    public GroceriesAdapter() {
         this.allGroceries = new ArrayList<>();
     }
 
@@ -29,14 +29,14 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
 
     @NonNull
     @Override
-    public GroceriesRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GroceriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Create ViewHolder
-        return new GroceriesRecyclerViewHolder(ViewGroceryBinding
+        return new GroceriesHolder(ViewGroceryBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroceriesRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroceriesHolder holder, int position) {
         // Set values when created
         holder.binding.textViewGroceryName.setText(allGroceries
                 .get(position)
@@ -48,10 +48,10 @@ public class GroceriesRecyclerViewAdapter extends RecyclerView.Adapter<Groceries
         return allGroceries.size();
     }
 
-    static class GroceriesRecyclerViewHolder extends RecyclerView.ViewHolder {
+     class GroceriesHolder extends RecyclerView.ViewHolder {
         // Variables from grocery item view
         ViewGroceryBinding binding;
-        public GroceriesRecyclerViewHolder(@NonNull ViewGroceryBinding binding) {
+        public GroceriesHolder(@NonNull ViewGroceryBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

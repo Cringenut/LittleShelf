@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.littleshelf.ViewModels.AddGroceryViewModel;
 import com.example.littleshelf.databinding.FragmentCalendarBinding;
@@ -25,13 +26,23 @@ public class SelectExpirationDate extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Assuming your layout file is named fragment_select_grocery_expiration_date.xml
-        // Update this line with the correct binding class
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Your other code here (if any)
+        binding.CalendarMonthsRecyclerView.addOnScrollListener(new EndlessOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                addDataToList();
+            }
+        });
+
 
         return view;
     }
+
+    private void addDataToList() {
+        Toast.makeText(getActivity(), "ADD",
+                Toast.LENGTH_SHORT).show();
+    }
+
 }
