@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/MonthAndYearText"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
             android:gravity="center"

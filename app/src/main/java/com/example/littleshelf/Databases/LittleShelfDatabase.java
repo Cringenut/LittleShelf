@@ -5,8 +5,6 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-
-import com.example.littleshelf.Databases.GroceryDao;
 import com.example.littleshelf.Objects.Grocery;
 
 @Database(entities = {Grocery.class}, version = 5)
@@ -22,8 +20,8 @@ public abstract class LittleShelfDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(
                             context.getApplicationContext(),
                             LittleShelfDatabase.class,
-                            "little_shelf_database"
-                    ).allowMainThreadQueries()
+                            "little_shelf_database")
+                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();
         }
