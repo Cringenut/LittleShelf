@@ -1,17 +1,16 @@
 package com.example.littleshelf.Fragments.AddGrocery;
 
+import com.example.littleshelf.R;
 import android.os.Bundle;
-
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
-
 import com.example.littleshelf.Activities.ShelfGroceriesActivity;
 import com.example.littleshelf.Adapters.CalendarAdapter;
 import com.example.littleshelf.Adapters.GroceriesAdapter;
@@ -37,31 +36,50 @@ public class SelectExpirationDate extends Fragment {
 
         // Use a linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext());
-        // Create an adapter
-        CalendarAdapter adapter = new CalendarAdapter(5);
-
+        binding.CalendarMonthsRecyclerView.setLayoutManager(layoutManager);
         binding.CalendarMonthsRecyclerView.addOnScrollListener(new EndlessOnScrollListener() {
             @Override
             public void onLoadMore() {
                 addDataToList();
             }
         });
-        binding.CalendarMonthsRecyclerView.setLayoutManager(layoutManager);
-        binding.CalendarMonthsRecyclerView.setAdapter(adapter);
 
-
-
+        calculateStarterMonthsAmount();
         return view;
     }
 
     private void addDataToList() {
-        Toast.makeText(getActivity(), "ADD",
-                Toast.LENGTH_SHORT).show();
         CalendarAdapter adapter = ((CalendarAdapter)binding.CalendarMonthsRecyclerView.getAdapter());
         adapter.size += 2;
         for (int i = adapter.getItemCount() - 1; i < adapter.size; i++) {
             binding.CalendarMonthsRecyclerView.getAdapter().notifyItemInserted(i);
         }
+    }
+
+    private void calculateStarterMonthsAmount() {
+
+        binding.CalendarMonthsRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Ensure we only call this once
+                binding.CalendarMonthsRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                int recyclerViewHeight = binding.CalendarMonthsRecyclerView.getHeight();
+
+                // Inflate a single view_month item to measure its height
+                View viewMonth = LayoutInflater.from(binding.CalendarMonthsRecyclerView.getContext()).inflate(R.layout.view_calendar_month, null);
+                viewMonth.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                int itemHeight = viewMonth.getMeasuredHeight();
+
+                // Calculate the number of items that can fit
+                int numberOfItemsThatCanFit = recyclerViewHeight / itemHeight;
+
+                CalendarAdapter adapter = new CalendarAdapter(numberOfItemsThatCanFit + 5);
+                binding.CalendarMonthsRecyclerView.setAdapter(adapter);
+            }
+        });
+
+
     }
 
 }
