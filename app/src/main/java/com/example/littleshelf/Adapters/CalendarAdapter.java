@@ -1,10 +1,12 @@
 package com.example.littleshelf.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littleshelf.Fragments.AddGrocery.CalendarMonthView;
 import com.example.littleshelf.databinding.ViewCalendarMonthBinding;
 import com.example.littleshelf.databinding.ViewCalendarMonthBinding;
 
@@ -22,7 +24,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     @NonNull
     @Override
     public CalendarAdapter.CalendarHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CalendarHolder(ViewCalendarMonthBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new CalendarHolder(ViewCalendarMonthBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), parent.getContext());
     }
 
     @Override
@@ -47,11 +49,16 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     }
 
     static class CalendarHolder extends RecyclerView.ViewHolder {
-        // Variables from grocery item view
         ViewCalendarMonthBinding binding;
-        public CalendarHolder(@NonNull ViewCalendarMonthBinding binding) {
+        CalendarMonthView calendarMonthView;
+
+        public CalendarHolder(@NonNull ViewCalendarMonthBinding binding, Context context) {
             super(binding.getRoot());
             this.binding = binding;
+            this.calendarMonthView = new CalendarMonthView(context);
+
+            // Call testFunc() here if appropriate, or elsewhere in the adapter
+            this.calendarMonthView.populateMonthCells();
         }
     }
 }
